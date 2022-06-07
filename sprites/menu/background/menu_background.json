@@ -1,6 +1,0 @@
-{
-	// Menu background
-	"menu_background_0": { "File": "menu_background_orange.png", "Rect": "0,0,496,224", "Center": "248,0" },
-	"menu_background_1": { "File": "menu_background_sea.png", "Rect": "0,0,496,224", "Center": "248,0" },
-	"menu_background_2": { "File": "menu_background_cherry.png", "Rect": "0,0,496,224", "Center": "248,0" }
-}

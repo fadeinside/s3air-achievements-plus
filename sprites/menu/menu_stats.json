@@ -1,5 +1,0 @@
-{
-	// Panel background
-	"menu_statsPanel_coins": { "File": "menu_stats.png", "Rect": "1,1,119,16", "Center": "119,8" },
-	"menu_statsPanel_competition": { "File": "menu_stats.png", "Rect": "1,19,119,16", "Center": "119,8" }
-}
