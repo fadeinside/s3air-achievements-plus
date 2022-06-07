@@ -256,12 +256,6 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 		string text = "It looks like the list is empty."
 		string text1 = ""
 		
-		if (hideAchievementsListItems() == 0x02)
-		{
-			text = "Achievements are locked"
-			text1 = "because Debug Mode is active."
-		}
-		
 		py += 0x08
 		AchievementsPlus.TextManager.drawText(px, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
 		AchievementsPlus.TextManager.drawText(px, py + 0x08, text1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)

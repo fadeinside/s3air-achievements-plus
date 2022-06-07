@@ -49,15 +49,12 @@ function u8 getCompetitionGrandPrixTime(u8 parse)
 		return tempValue3
 }
 
-function u8 hideAchievementsListItems()
+function bool hideAchievementsListItems()
 {
-	if (Game.getSetting(SETTING_DEBUG_MODE))
-		return 0x02
-	
 	if (achievementsplus.achievements.totalButtons == 0x0000)
-		return 0x01
+		return true
 	
-	return 0x00
+	return false
 }
 
 function bool sort(u16 achievementID)
