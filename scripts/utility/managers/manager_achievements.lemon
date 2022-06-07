@@ -284,7 +284,7 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 	if (Game.getSetting(SETTING_DEBUG_MODE))
 		return false
 	
-	if (global.lock_on_state == 0x00 && global.active_saveslot != 0x00 && u8[global.active_saveslot] == 0x00)
+	if (global.lock_on_state == 0x00)
 		return true
 	
 	return false
