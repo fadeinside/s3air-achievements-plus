@@ -1,0 +1,53 @@
+constant array<u16> SONIC3AIR_GET_ACHIEVEMENTS_BUILDINIDS =
+{
+	0x0001, 0x0002, 0x0010, 0x0011, 0x0012, 0x0013, 0x0020, 0x0101,0x0301, 0x0501, 0x0502, 0x0601, 0x0701, 0x0801, 0x0c01, 0x1401, 0x1501, 0x1601
+}
+
+constant array<string> SONIC3AIR_GET_ACHIEVEMENTS_STARS =
+{
+	"10000", "11000", "11100", "11110", "11110", "11100", "11111", "11110", "11100", "11100", "11110", "11100", "11000", "11110", "11100", "11110", "11111", "11110", "11111", "11110"
+}
+
+constant array<string> SONIC3AIR_GET_ACHIEVEMENTS_DESCRIPTION =
+{
+	"Collect 300 rings without losing them.",
+	"Open another invincibility monitor while still being invincible from the last one.",
+	"Have 5 continues in one game.",
+	"Collect all 14 emeralds and transform to a Hyper form.",
+	"Reach a score of 1,000,000 points.",
+	"Defeat an underwater enemy by electrocution.",
+	"Beat the game with any character.",
+	"Complete a Blue Spheres stage with Perfect.",
+	"Reach the top of the Glowing Spheres bonus stage.",
+	"Win the Jackpot in the Slot Machines bonus stage.",
+	"Finish Angel Island Zone Act 1 in Time Attack in under 45 seconds.",
+	"Enter or collect 6 giant rings in Marble Garden Zone Act 1 in a single run without dying in between.",
+	"Collect all 50 rings in the snow boarding section of IceCap Zone Act 1.",
+	"Defeat the upper boss in IceCap Zone Act 1 with Knuckles (you may need a buddy for this).",
+	"Get through Launch Base Zone Act 2 without touching any water (requires A.I.R. level layouts).",
+	"Open 18 monitors in Mushroom Hill Zone Act 1 with Knuckles.",
+	"Free 35 animals in Flying Battery Zone Act 1 before the boss.",
+	"Fight the second boss in Sonic's Sky Sanctuary but pop at most one of the inflatable Mechas."
+}
+
+constant array<string> SONIC3AIR_GET_ACHIEVEMENTS_TITLE =
+{
+	"Attracted to shiny things",
+	"Double dose of stars",
+	"Old-fashioned life insurance",
+	"Going Hyper",
+	"Score millionaire",
+	"Electrofishing",
+	"Longplay",
+	"Tidied up the place",
+	"Is there an exit up there",
+	"Jackpot",
+	"Bursting through the jungle",
+	"Attracted to giant shiny things",
+	"Greedy snowboarder",
+	"Once see the sunrise",
+	"Fluffy fur must not get wet",
+	"Display smasher", 
+	"Squirrels on a plane",
+	"No touchy"
+}

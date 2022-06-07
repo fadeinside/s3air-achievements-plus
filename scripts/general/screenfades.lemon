@@ -1,0 +1,10 @@
+//? Modified FadeInFromWhite().
+//@ Original function taken from sonic3air_dev/scripts/general/screenfades.lemon
+function void AchievementsPlus.FadeInFromWhite()
+{
+	if (level.framecounter >= 0x15)
+		return
+	
+	// Call the original function
+	FadeInFromWhite()
+}

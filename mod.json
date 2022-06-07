@@ -1,0 +1,42 @@
+{
+	"Metadata":
+	{
+		"Name": "Achievements Plus",
+		"Author": "FadeInside" ,
+		"Description": "",
+		"URL": "https://github.com/fadeinside/s3air-achievements-plus/",
+		"ModVersion": "v1.0.01 (Beta)",
+		"GameVersion": "21.09.28.0"
+	},
+	"Settings":
+	{
+		"List":
+		[
+			{
+				"Category": "Menu appearance",
+				"InternalName": "SETTING_ACHIEVEPLUS_MENU_BACKGROUND",
+				"DisplayName": "Menu background:",
+				"Variable": "SETTING_ACHIEVEPLUS_MENU_BACKGROUND",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Origins \"Orange\" (Default)",
+					"1": "Origins \"Sea\"",
+					"2": "Origins \"Cherry\""
+				}
+			},
+			{
+				"Category": "Menu appearance",
+				"InternalName": "SETTING_ACHIEVEPLUS_COINS_HUD",
+				"DisplayName": "Show Coins in HUD:",
+				"Variable": "SETTING_ACHIEVEPLUS_COINS_HUD",
+				"DefaultValue": "1",
+				"Options":
+				{
+					"0": "Disable",
+					"1": "Enable (Default)"
+				}
+			} 
+		]
+	}
+}

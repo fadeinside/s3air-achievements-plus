@@ -1,0 +1,341 @@
+// The main function of updating the achievement toasts.
+function void AchievementsPlus.AchivementsManager.update()
+{
+	u16 startID = ACHIEVEMENTS_START_ID[0x01]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+		
+		bool tempValue1 = tempValue0 == (tempValue0 | FLAG_COMPLETE)
+		bool tempValue2 = tempValue0 != (tempValue0 | FLAG_TOAST_SHOWN)
+		
+		if (tempValue1 && tempValue2)
+		{
+			AchievementsPlus.AchivementsManager.showToast(A)
+		}
+	}
+}
+
+
+function void AchievementsPlus.AchivementsManager.showToast(u16 achievementID)
+{
+	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
+	
+	if (achievementsplus.toast.tempValue1 == 0x00 || achievementsplus.toast.tempValue1 == achievementID)
+	{
+		achievementsplus.toast.tempValue0 = tempValue0
+		achievementsplus.toast.tempValue1 = achievementID
+		AchievementsPlus.Menu.toast.update()
+	}
+	
+	u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementID)
+	bool tempValue2 = tempValue1 == (tempValue1 | FLAG_TOAST_SHOWN)
+	
+	if (tempValue2 && achievementsplus.toast.tempValue1 != achievementID)
+		return
+	
+	if (achievementsplus.toast.tempValue1 == achievementID && achievementsplus.toast.tempValue2 == 0x05)
+	{
+		u32 tempValue3 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+		
+		u32[tempValue3] |= FLAG_TOAST_SHOWN
+		System.savePersistentData(tempValue3, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
+		
+		achievementsplus.toast.tempValue0 = ""
+		achievementsplus.toast.tempValue1 = 0x00
+		achievementsplus.toast.tempValue2 = 0x00
+	}
+}
+
+
+// Returns data to be used in the achievement list renderer.
+function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 achievementID, u8 parse)
+{
+	// Parse:
+	// - 0x00 - Achievement title
+	// - 0x01 - Achievement stars
+	// - 0x02 - Achievement sub-title
+	// - 0x03 - Achievement description
+	// - 0x04 - Achievement icon
+	
+	// Sonic 3 A.I.R achievement pack
+	if (achievementID >= 0x0001 && achievementID <= 0x0012)
+	{
+		if (parse == 0x00)
+			return SONIC3AIR_GET_ACHIEVEMENTS_TITLE[(achievementID - 0x0001)]
+		else if (parse == 0x01)
+			return SONIC3AIR_GET_ACHIEVEMENTS_STARS[(achievementID - 0x0001)]
+		else if (parse == 0x02)
+			return "A.I.R. achievement"
+		else if (parse == 0x03)
+			return SONIC3AIR_GET_ACHIEVEMENTS_DESCRIPTION[(achievementID - 0x0001)]
+		else if (parse == 0x04)
+			return "menu_thumb_detailPanel_s3air"
+	}
+	
+	// Retroachievements.org achievement pack
+	if (achievementID >= 0x0018 && achievementID <= 0x004c)
+	{
+		if (parse == 0x00)
+			return RETROACHIEVEMENTS_GET_ACHIEVEMENTS_TITLE[(achievementID - 0x0018)]
+		else if (parse == 0x01)
+			return RETROACHIEVEMENTS_GET_ACHIEVEMENTS_STARS[(achievementID - 0x0018)]
+		else if (parse == 0x02)
+			return "retroachievements.org"
+		else if (parse == 0x03)
+			return RETROACHIEVEMENTS_GET_ACHIEVEMENTS_DESCRIPTION[(achievementID - 0x0018)]
+		else if (parse == 0x04)
+			return "menu_thumb_detailPanel_retro"
+	}
+	
+	// Failsave value
+	return ""
+}
+
+
+// Returns the Shared Memory address of the specified achievement.
+function u32 AchievementsPlus.AchivementsManager.getAchievementAddress(u16 achievementID)
+{
+	return achievementsplus.sharedMemory.achivementsAddress + u32(achievementID * 0x04)
+}
+
+
+// Loads data stored in Persistent Data into Shared Memory.
+function void AchievementsPlus.AchivementsManager.loadPersistentData()
+{
+	u16 startID = ACHIEVEMENTS_START_ID[0x00]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	// Load data for all Achievements IDs
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		System.loadPersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
+	}
+}
+
+
+// Adds a value to the Shared Memory value of the specified achievement.
+function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
+{
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
+		return
+	
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+	bool tempValue1 = (u32[tempValue0] + value) >= 65535
+	bool tempValue2 = (u32[tempValue0] + value) <= 0x00
+	
+	if (tempValue1 || tempValue2)
+	{
+		assert(false, "")
+		return
+	}
+	
+	u32[tempValue0] += value
+	
+	System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
+}
+
+
+// Returns the Shared Memory address value of the specified achievement.
+function u32 AchievementsPlus.AchivementsManager.getAchievementValue(u16 achievementID)
+{
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+	return u32[tempValue0]
+}
+
+
+// Sets the status to complete for the specified achievement.
+function void AchievementsPlus.AchivementsManager.setAchievementComplete(u16 achievementID)
+{
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
+		return
+	
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+	u32[tempValue0] |= FLAG_COMPLETE
+	
+	System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
+}
+
+
+// Returns true when the specified achievement has a status of completed.
+function bool AchievementsPlus.AchivementsManager.isAchievementComplete(u16 achievementID)
+{
+	// Sonic 3 A.I.R achievements have it's own system of achievements
+	if (AchievementsPlus.AchivementsManager.isAIRAchievement(achievementID))
+	{
+		return Game.isAchievementComplete(SONIC3AIR_GET_ACHIEVEMENTS_BUILDINIDS[achievementID - 0x0001])
+	}
+	
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementID)
+	u32 tempValue1 = tempValue0 | FLAG_COMPLETE
+	
+	if (tempValue0 == tempValue1)
+		return true
+	
+	return false
+}
+
+
+// Returns the total number of completed/all achievements by the specified achievement ID range.
+function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnComplete)
+{
+	u16 tempValue0	// Total number of achievements
+	u16 tempValue1	// Total number of completed achievements
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		if (sort(A))
+		{
+			++tempValue0
+			if (AchievementsPlus.AchivementsManager.isAchievementComplete(A))
+				++tempValue1
+		}
+	}
+	
+	if (returnComplete)
+		return tempValue1
+	
+	return tempValue0
+}
+
+
+// Returns the total number of claimed/non claimed achievements by the specified achievement ID range.
+function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 startID, u16 lastID)
+{
+	u16 tempValue0	// Total number of claimed achievements
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		if (sort(A))
+		{
+			u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+			
+			bool tempValue2 = tempValue1 != (tempValue1 | FLAG_REWARD_CLAIMED)
+			bool tempValue3 = AchievementsPlus.AchivementsManager.isAchievementComplete(A)
+			
+			if (tempValue2 && tempValue3)
+				++tempValue0
+		}
+	}
+	
+	return tempValue0
+}
+
+
+// Converts and returns the number of stars for the specified achievement as a decimal number.
+function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementID)
+{
+	u8 tempValue0	// Total number of stars
+	
+	for (u8 A = 0x00; A < 0x05; ++A)
+	{
+		string tempValue1 = getStringFromHash(substring(AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x01) + "00000", A, 0x01))
+		
+		if (tempValue1 != "1")
+			break
+		
+		tempValue0 += 0x01
+	}
+	
+	return tempValue0
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Returns the start ID for the selected tabs category.
+constant array<u16> ACHIEVEMENTS_START_ID =
+{
+	// 0x0000 must be empty
+	0x0001,	// Start ID for Sonic 3 A.I.R achievements
+	0x0018,	// Start ID for retroachievements.org achievements
+	0x004d	// Start ID for Community achievements
+}
+
+
+// Returns the end ID for the selected tabs category.
+constant array<u16> ACHIEVEMENTS_LAST_ID =
+{
+	0x0012,	// Last ID for Sonic 3 A.I.R achievements (0x0013 ... 0x0017 free space, in case Eukaryot adds new achievements to AIR.)
+	0x004c,	// Last ID for retroachievements.org achievements
+	0x0400	// Last ID for Community achievements
+}
+
+
+// Returns true if the specified achievement ID is in the Sonic 3 A.I.R category.
+function bool AchievementsPlus.AchivementsManager.isAIRAchievement(u16 achievementID)
+{
+	if (achievementID >= ACHIEVEMENTS_START_ID[0x00] && achievementID <= ACHIEVEMENTS_LAST_ID[0x00])
+		return true
+	
+	return false
+}
+
+
+// Returns false if achievements cannot be received.
+function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
+{
+	if (Game.getSetting(SETTING_DEBUG_MODE))
+		return false
+	
+	if (global.lock_on_state == 0x00 && global.active_saveslot != 0x00 && u8[global.active_saveslot] == 0x00)
+		return true
+	
+	return false
+}
+
+
+// Sets the start and end ID for the list of achievements in the menu specifically for the selected tabs category.
+function void AchievementsPlus.AchivementsManager.setupForAchievementsList()
+{
+	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[achievementsplus.achievements.tabselected]
+	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[achievementsplus.achievements.tabselected]
+}
+
+
+// Sets the selected achievement data from the list to temporary variables.
+function void AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
+{
+	achievementsplus.infoPanel.tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x00)
+	
+	achievementsplus.infoPanel.tempValue1 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x01)
+	
+	achievementsplus.infoPanel.tempValue2 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x02)
+	
+	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
+	
+	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
+	
+	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+	
+	AchievementsPlus.AchievementsManaget.setupForCoinRewards()
+}
+
+
+// Sets the reward for the selected achievement from the list.
+function void AchievementsPlus.AchievementsManaget.setupForCoinRewards()
+{
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)
+	u32 tempValue1 = tempValue0 | FLAG_REWARD_CLAIMED	// Reward claimed
+	
+	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected) + 0x01
+	s32 tempValue3 = (((0x05 * tempValue2) / 0x02) * (tempValue2 / 0x02)) + 0x05
+	
+	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
+	
+	if (tempValue0 == tempValue1 || !tempValue4 || achievementsplus.achievements.totalButtons == 0x00)
+	{
+		achievementsplus.coinRewards.tempValue0 = 0x00
+		achievementsplus.coinRewards.tempValue1 = tempValue3
+		return
+	}
+	
+	achievementsplus.coinRewards.tempValue0 = tempValue3
+	achievementsplus.coinRewards.tempValue1 = tempValue3
+} 

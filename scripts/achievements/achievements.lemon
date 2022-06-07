@@ -1,0 +1,389 @@
+//@ Function taken from sonic3air_dev/scripts/general/saveslots.lemon
+//# address-hook(0x00c434) end(0x00c4d0)
+function void SaveGameOnLevelFinished()
+{
+	if (global.zone == 0x00)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_AIZ)
+	else if (global.zone == 0x01)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_HCZ)
+	else if (global.zone == 0x02)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_MGZ)
+	else if (global.zone == 0x03)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_CNZ)
+	
+	else if (global.zone == 0x05)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_ICZ)
+	else if (global.zone == 0x06)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_LBZ)
+	else if (global.zone == 0x07)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_MHZ)
+	
+	else if (global.zone == 0x04)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_FBZ)
+	
+	else if (global.zone == 0x08)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_SZ)
+	else if (global.zone == 0x09 || global.zone_act == 0x1600)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_LRZ)
+	else if (global.zone == 0x0a && global.characters < CHARS_KNUCKLES_ALONE)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_SSZ)
+	else if (global.zone == 0x0b)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_DEZ)
+	
+	// Call the base function
+	base.SaveGameOnLevelFinished()
+}
+
+//@ Function taken from sonic3air_dev/scripts/maingame/outro/outro_knuckles.lemon
+//# address-hook(0x05e6c0) end(0x05e6f6)
+function void fn05e6c0()
+{
+	if (objA0.base_state == 0x02)
+	{
+		if (outro.ending_type == 0x02)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_KNUX)
+		else
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_KNUX)
+	}
+	
+	// Call the base function
+	base.fn05e6c0()
+}
+
+//@ Function taken from sonic3air_dev/scripts/maingame/outro/outro_sonic_tails.lemon
+//# address-hook(0x05d86a) end(0x05d896)
+function void fn05d86a()
+{
+	if (objA0.base_state == 0x02)
+	{
+		if (isMainCharacter(CHARACTER_SONIC))
+		{
+			if (outro.ending_type == 0x02)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_SONIC)
+			else
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_SONIC)
+		}
+		
+		else if (isMainCharacter(CHARACTER_TAILS))
+		{
+			if (outro.ending_type == 0x02)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_TAILS)
+			else
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_TAILS)
+		}
+	}
+	
+	// Call the base function
+	base.fn05d86a()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/11_hpz/hpz_cutscene.lemon
+//# address-hook(0x0643f2) end(0x064420)
+function void fn0643f2()
+{
+	if (global.characters == CHARS_SONIC_AND_TAILS)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_HPZ)
+	
+	// Call the base function
+	base.fn0643f2()
+}
+
+//@ Function taken from sonic3air_dev/scripts/maingame/hud/levelresults.lemon
+//# address-hook(0x02dad0) end(0x02dada)
+function void LevelResults.Update()
+{
+	if (objA0.base_state == 0x02)
+	{
+		if (global.zone == 0x00 && timer.minutes < 0x02)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_AIZ1_IN_LESS_THAN_2_MIN)
+		
+		else if (global.zone_act == 0x0601 && ring_counter >= 100)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LBZ2_WITH_100_RINGS)
+		
+		else if (global.zone_act == 0x0700 && timer.minutes < 0x03 && u8[0xffffb000 + 0x2b] == (char.bonus.ANY_SHIELD | char.bonus.SHIELD_BUBBLE))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_MHZ_LESS_THAN_3_MIN_BUBBLE_SHIELD)
+		
+		else if (global.zone_act == 0x0801 && u8[0xffffb000 + 0x2b] == (char.bonus.ANY_SHIELD | char.bonus.SHIELD_FIRE))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_SZ2_WITH_FIRE_SHIELD)
+		
+		else if ((global.zone_act == 0x0901 || global.zone_act == 0x1600) && global.characters < CHARS_KNUCKLES_ALONE && u8[0xffffb000 + 0x2b] == (char.bonus.ANY_SHIELD | char.bonus.SHIELD_LIGHTNING))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LRZ2_WITH_ELECTRIC_SHIELD)
+		
+		if (results.time_bonus == 10000)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_JUST_IN_TIME)
+		if (ring_counter >= 400)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_400_RINGS_AND_FINISH)
+	}
+	
+	// Call the base function
+	base.LevelResults.Update()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x009b62) end(0x009d1c)
+function void fn009b62()
+{
+	if (bluespheres.rings_remaining == 0x00)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_PERFECT)
+	
+	// Call the base function
+	base.fn009b62()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bs_results.lemon
+//# address-hook(0x02e3b8) end(0x02e3c2)
+function void fn02e3b8()
+{
+	if (objA0.base_state == 0x00)
+	{
+		if (!CHEAT_ONE_BLUE_SPHERE)
+		{
+			if (u8[0xffffffb0] == 0x01)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_FIRST_CHAOS_EMERALD)
+			else if (u8[0xffffffb0] == 0x07)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_ALL_CHAOS_EMERALDS)
+			else if (u8[0xffffffb1] == 0x07)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_ALL_SUPER_EMERALDS)
+		}
+	}
+	
+	// Call the base function
+	base.fn02e3b8()
+}
+
+//@ Function taken from sonic3air_dev/scripts/maingame/hud/hud.lemon
+//# address-hook(0x00db44) end(0x00dbb2)
+function void RenderHUD()
+{
+	if (ring_counter >= 100 && global.zone_act == 0x0c00)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_DDZ_HAVE_100_RINGS)
+	
+	if (ring_counter >= 100)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_100_RINGS)
+	if (ring_counter >= 200)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_200_RINGS)
+	
+	// Call the base function
+	base.RenderHUD()
+}
+
+//@ Function taken from sonic3air_dev/scripts/maingame/character/character.lemon
+function void gainExtraLife()
+{
+	// Call the base function
+	base.gainExtraLife()
+	
+	if (lives_counter >= 10)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_10_LIVES)
+	if (lives_counter >= 20)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_20_LIVES)
+}
+
+//@ Function taken from sonic3air_dev/scripts/menus/competition_menus.lemon
+//# address-hook(0x00b9a6) end(0x00b9c6)
+function void fn00b9a6()
+{
+	if (competition_mode.mode != 0x00)
+	{
+		if (competition_mode.stage == 0x00 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 30))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_ALZ)
+			
+		if (competition_mode.stage == 0x01 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 50))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_BPZ)
+			
+		if (competition_mode.stage == 0x02 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 45))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_CGZ)
+			
+		if (competition_mode.stage == 0x03 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 40))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_DPZ)
+			
+		if (competition_mode.stage == 0x04 && getCompetitionMatchRaceTime(0x00) < 0x01)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_EMZ)
+	}
+	
+	if (competition_mode.mode == 0x00)
+	{
+		if (getCompetitionGrandPrixTime(0x00) < 0x04 && u32[0xffffee98] != 0x00)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_GRAND_PRIX)
+	}
+	
+	// Call the base function
+	base.fn00b9a6()
+}
+
+//@ Function taken from sonic3air_dev/scripts/standalone/gamecallbacks.lemon
+function void Standalone.onMonitorOpened()
+{
+	if (global.zone_act == 0x0001)
+	{
+		if (objA0.subtype2c == 0x01 && objA0.position.x.u16 == 7080 && objA0.position.y.u16 == 515)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_A_LIFE)
+	}
+	
+	// Call the base function
+	base.Standalone.onMonitorOpened()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/bonus_sm/level_slotmachine.lemon
+//# address-hook(0x04c7d4) end(0x04c7de)
+function void fn04c7d4()
+{
+	if (D2.u16 == 0x00)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_THE_JACKPOT)
+	
+	// Call the base function
+	base.fn04c7d4()
+}
+
+//@ Function taken from sonic3air_dev/scripts/objects/bonus_gs/gs_energybeam.lemon
+//# address-hook(0x049fe4) end(0x04a078)
+function void fn049fe4()
+{
+	if (s16[0xffffb000 + 0x14] < -0x20)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_IM_OUTTA_HERE)
+	
+	// Call the base function
+	base.fn049fe4()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/level_camera.lemon
+//# address-hook(0x01c38a) end(0x01c3f4)
+function void UpdateCameraBoundsInLevel()
+{
+	if (global.zone == 0x07 && s16[0xffffb000 + 0x14] < -0x20)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_KING_OF_THE_HILL)
+	
+	if (global.zone_act == 0x0501 && (s16[0xffffb000 + 0x14] >= 855 && s16[0xffffb000 + 0x14] <= 1110) && (s16[0xffffb000 + 0x10] >= 16265 && s16[0xffffb000 + 0x10] <= 16501))
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_ICE_CAP_TREASURE)
+	
+	if (global.zone_act == 0x0100 && (s16[0xffffb000 + 0x14] >= 780 && s16[0xffffb000 + 0x14] <= 915) && (s16[0xffffb000 + 0x10] >= 9570 && s16[0xffffb000 + 0x10] <= 10060))
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HYDROPOLIS_TREASURE)
+	
+	// Call the base function
+	base.UpdateCameraBoundsInLevel()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x00972e) end(0x0098ae)
+function void fn00972e()
+{
+	if (global.next_bluespheres != 0x00)
+	{
+		// Call the base function
+		base.fn00972e()
+		return
+	}
+	
+	A1 = 0xfffff100
+	D0.u16 = ((bluespheres.position.x + 0x80) >> 0x08) & 0x1f
+	D1.u16 = ((bluespheres.position.y + 0x80) >> 0x08) & 0x1f
+	D1.u16 <<= 0x05
+	D1.u8 |= D0.u8
+	A1 += D1.s16
+	D2.u8 = u8[A1]
+	
+	// achievementsplus.going_forward.tempValue0:
+	// - 0x00 - Initialization
+	// - 0x05 - Conditions are met (Achievement can be received)
+	// - 0x10 - Conditions violated (Achievement cannot be received)
+	// - 0x15 - All conditions are successfully met (Achievement received)
+	
+	if (achievementsplus.going_forward.tempValue0 == 0x05 && bluespheres.going_forward != 0x00)
+		achievementsplus.going_forward.tempValue0 = 0x10
+	
+	if (D2.u8 == 0x03)
+	{
+		if (u8[0xffffe42b] == 0x00)
+		{
+			u16[0xffffe44e] = D1.u16
+			u8[0xffffe42b] = 0x01
+			
+			if (bluespheres.going_forward == 0x00)
+				bluespheres.going_forward = 0x01
+			else
+				bluespheres.going_forward = 0x00
+			
+			if (achievementsplus.going_forward.tempValue0 == 0x00)
+				achievementsplus.going_forward.tempValue0 |= 0x05
+			
+			playSound(0xaa)
+		}
+	}
+	else
+	{
+		if (D2.u8 == 0x02 && achievementsplus.going_forward.tempValue0 == 0x00)
+			achievementsplus.going_forward.tempValue0 = 0x0a
+		
+		if (D2.u8 == 0x04 && achievementsplus.going_forward.tempValue0 & 0x05 && bluespheres.rings_remaining == 0x01)
+		{
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_DO_THE_MJ)
+			achievementsplus.going_forward.tempValue0 |= 0x10
+		}
+		
+		// Call the base function
+		base.fn00972e()
+	}
+}
+
+//@ Function taken from sonic3air_dev/scripts/objects/bonus_gm/gm_unknown.lemon
+//# address-hook(0x060ece) end(0x060f28)
+function void fn060ece()
+{
+	D0.u16 = objA0.velocity.y + 0x10
+	if (D0.u16 <= 0x0200)
+	{
+		objA0.velocity.y = D0.u16
+	}
+
+	UpdateMovementStraightSimple()
+	A1 = 0xffff0000 + u16[A0 + 0x46]
+	D0.u16 = objA1.position.y.u16
+	if (D0.u16 > objA0.position.y.u16)
+	{
+		objA0.position.y.u16 = D0.u16
+	}
+	else
+	{
+		D0.u16 += 0x10
+		if (D0.u16 <= objA0.position.y.u16)
+		{
+			fn0610e0()
+			if (!_equal())
+			{
+				if (objA0.subtype2c >= 0x05 && objA0.subtype2c <= 0x07)	// Fire shield, Bubble shield, and Electric shield
+				{
+					++achievementsplus.gm_shield_counter.tempValue0
+					if (achievementsplus.gm_shield_counter.tempValue0 == 0x05)
+						AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_TOO_MUCH_GUM)
+				}
+				
+				UnloadObject()
+				return
+			}
+		}
+	}
+
+	D0.u16 = camera.position.y.u16 + 0x0240
+	if (D0.u16 >= objA0.position.y.u16)
+	{
+		Object.AnimationProgressByLocalA1()
+		DrawObject()
+	}
+	else
+	{
+		UnloadObject()
+	}
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x009ea0) end(0x009eba)
+function void fn009ea0()
+{
+	achievementsplus.going_forward.tempValue0 = 0x00
+	
+	if (CHEAT_ONE_BLUE_SPHERE)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_CHEATER_THE_CHEETAH)
+	
+	// Call the base function
+	base.fn009ea0()
+}

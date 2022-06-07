@@ -1,0 +1,10 @@
+{
+	// Large button
+	"menu_button_large_selected": { "File": "menu_buttons.png", "Rect": "1,1,230,17", "Center": "0,0" },
+	"menu_button_large": { "File": "menu_buttons.png", "Rect": "1,19,230,17", "Center": "0,0" },
+	"menu_button_large_craked": { "File": "menu_buttons.png", "Rect": "1,37,230,17", "Center": "0,0" },
+	"menu_button_large_selectedTint": { "File": "menu_buttons.png", "Rect": "1,55,230,17", "Center": "0,0" },
+	
+	// Arrow icon
+	"menu_button_icon_arrow": { "File": "menu_buttons.png", "Rect": "232,1,13,17", "Center": "0,0" }
+}

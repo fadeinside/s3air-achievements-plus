@@ -1,0 +1,10 @@
+{
+	// Hot-keys (A ... Y)
+	"menu_hotkey_A": { "File": "menu_hotkeys.png", "Rect": "1,1,60,12", "Center": "6,6" },
+	"menu_hotkey_B": { "File": "menu_hotkeys.png", "Rect": "1,14,60,12", "Center": "6,6" },
+	"menu_hotkey_X": { "File": "menu_hotkeys.png", "Rect": "1,27,60,12", "Center": "6,6" },
+	"menu_hotkey_Y": { "File": "menu_hotkeys.png", "Rect": "1,40,60,12", "Center": "6,6" },
+	
+	// Start hot-key
+	"menu_hotkey_Start": { "File": "menu_hotkeys.png", "Rect": "1,53,75,12", "Center": "6,6" }
+}

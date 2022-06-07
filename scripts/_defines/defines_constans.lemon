@@ -1,0 +1,29 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Text manager
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Fonts
+constant u8 FONT_OXYTINY	= 0x00
+constant u8 FONT_OXYSMALL	= 0x02
+constant u8 FONT_SMALLFONT	= 0x04
+
+// Text formating
+constant u8 FORMAT_NONE	= 0x00
+constant u8 FORMAT_UPPERCASE	= 0x10
+constant u8 FORMAT_LOWERCASE	= 0x15
+
+// Text alignment
+constant u8 ALIGN_LEFT	= 0x00
+constant u8 ALIGN_CENTER	= 0x10
+constant u8 ALIGN_RIGHT	= 0x15
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Achievements and Rewards
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Achievements flags
+constant u32 FLAG_COMPLETE	= 0xa00000
+constant u32 FLAG_TOAST_SHOWN	= 0xf00000
+
+// Rewards flags
+constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000

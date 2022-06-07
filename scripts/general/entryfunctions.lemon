@@ -1,0 +1,17 @@
+//@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
+function void EntryFunctions.dataSelect()
+{
+	AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
+	
+	// Call the base function
+	base.EntryFunctions.dataSelect()
+}
+
+function void AchievementsPlus.EntryFunctions.Menu.achievements()
+{
+	EntryFunctions.sharedInit()
+	System.setupCallFrame("GameModeControlLoop", "@EntryPoint")
+	System.setupCallFrame("AchievementsPlus.Menu.achievements.setup")
+	
+	global.game_mode = 0x9a
+}

@@ -1,0 +1,6 @@
+// Loads stored PersistentData into memory
+function void AchievementsPlus.SharedMemory.loadPersistendData()
+{
+	AchievementsPlus.RewardsManager.loadPersistendData()
+	AchievementsPlus.AchivementsManager.loadPersistentData()
+}

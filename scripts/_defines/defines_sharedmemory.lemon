@@ -1,0 +1,6 @@
+// Coins
+define u32 achievementsplus.sharedMemory.coinsAddress	= 0x851300
+define u32 achievementsplus.sharedMemory.coinsSaved	= u32[achievementsplus.sharedMemory.coinsAddress]
+
+// Achievements
+define u32 achievementsplus.sharedMemory.achivementsAddress	= 0x851304

@@ -1,0 +1,67 @@
+//@ Function taken from sonic3air_dev/scripts/general/update_general.lemon
+//# address-hook(0x000494) end(0x0004c4)
+function void GameModeControlLoop()
+{
+#if !STANDALONE
+	call 0x00043a
+	global.lock_on_state = D1.u16
+
+	call 0x000558
+	call 0x00111a
+	call 0x0012ce
+	call 0x0010ae
+#endif
+
+	InitSaveSlots()
+	global.game_mode = 0x00
+
+	while (true)
+	{
+	@EntryPoint:
+	
+	#if GAMEAPP
+		Game.setUnderwaterAudioEffect(0x00)
+	#endif
+	
+		if (GameModeControlLoop.callCustomModes())
+		{
+			GameModeControlLoop.callCustomModes()
+		}
+		else
+		{
+		#if STANDALONE
+			if (global.game_mode & 0x03 || (global.game_mode & 0x7f) > 0x50)
+			{
+				assert(false, stringformat("Invalid game mode: 0x%02x", global.game_mode))
+				global.game_mode = 0x00
+			}
+		#endif
+			
+			D0.u16 = global.game_mode & 0x7c
+			A0 = u32[0x0004c6 + D0.u16]
+			call A0
+			
+		#if STANDALONE
+			Game.endSkippableCutscene()
+		#endif
+		}
+	}
+}
+
+// The function returns true when there is a function for the custom value of global.game_mode that it calls.
+function bool GameModeControlLoop.callCustomModes()
+{
+	// Achievements Plus custom modes
+	// Custom targets:
+	// global.game_mode = 0x9a	->	Achievements Plus: Achievements menu
+	if (global.game_mode == 0x9a)
+	{
+		AchievementsPlus.Menu.achievements.setup()
+		return true
+	}
+	
+	if (Mods.isModActive("Blue Sphere Time Attack"))
+		return base.GameModeControlLoop.callCustomModes()
+	else
+		return false 
+}

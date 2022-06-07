@@ -1,0 +1,29 @@
+//# script-feature-level(2)
+
+#if STANDALONE
+
+#if GAMEAPP
+
+// Defines
+include _defines/?
+
+// Utility
+include utility/?
+include utility/achievements/?
+include utility/managers/?
+
+// Achievements
+include achievements/?
+
+// Menus
+include menus/?
+
+// General
+include general/?
+
+// Main game
+include maingame/?
+
+#endif
+
+#endif

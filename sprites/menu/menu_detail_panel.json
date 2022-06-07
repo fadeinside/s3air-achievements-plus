@@ -1,0 +1,7 @@
+{
+	// Panel background
+	"menu_detailPanel_background": { "File": "menu_detail_panel.png", "Rect": "1,1,197,143", "Center": "152,0" },
+	
+	// Claim button
+	"menu_detailPanel_buttonclaim": { "File": "menu_detail_panel.png", "Rect": "1,145,143,20", "Center": "0,0" } 
+}

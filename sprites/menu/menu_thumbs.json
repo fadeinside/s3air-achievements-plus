@@ -1,0 +1,12 @@
+{
+	// Detail panel thumbs
+	"menu_thumb_detailPanel_s3air": { "File": "menu_thumbs.png", "Rect": "1,1,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_retro": { "File": "menu_thumbs.png", "Rect": "67,1,64,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_community": { "File": "menu_thumbs.png", "Rect": "133,1,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_not_provided": { "File": "menu_thumbs.png", "Rect": "133,26,65,24", "Center": "0,0" },
+	
+	// Tabs panel thumbs
+	"menu_thumb_tabsPanel_s3air": { "File": "menu_thumbs.png", "Rect": "1,26,34,26", "Center": "17,13" },
+	"menu_thumb_tabsPanel_retro": { "File": "menu_thumbs.png", "Rect": "36,26,34,26", "Center": "17,13" },
+	"menu_thumb_tabsPanel_community": { "File": "menu_thumbs.png", "Rect": "71,26,34,26", "Center": "17,13" }
+}

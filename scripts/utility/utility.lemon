@@ -1,0 +1,68 @@
+//@ Function taken from sonic3air_dev/scripts/menus/dataselect.lemon
+//# address-hook(0x00d1fa) end(0x00d30a)
+function void fn00d1fa()
+{
+	s16 px = 12
+	s16 py = 12
+	
+	u16 tempValue0 = achievementsplus.tabsPanel.tempValue6 + achievementsplus.tabsPanel.tempValue7 + achievementsplus.tabsPanel.tempValue8
+	
+	if (tempValue0 > 0x00)
+	{
+		Renderer.drawCustomSprite("menu_icon_originsCoin_small", px, py - 0x01, 0x00, SPRITE_FLAG_PRIO, 0xfffe)
+		Renderer.drawCustomSprite("menu_icon_glow", px, py - 0x01, 0x00, SPRITE_FLAG_PRIO, 0xfffe, 0x00, global.framecounter & 0x04 ? 0x00 : 255)
+		Renderer.drawCustomSprite("menu_icon_glow", px, py - 0x01, 0x00, SPRITE_FLAG_PRIO, 0xfffe)
+		px += 16
+	}
+	
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("X", "Achievements", px, py, 0xfffe)
+	
+	// Call the base function
+	base.fn00d1fa()
+}
+
+//@ Function taken from sonic3air_dev/scripts/menus/dataselect.lemon
+//# address-hook(0x00d7c0) end(0x00d7e6)
+function void fn00d7c0()
+{
+	if (Input.buttonDown(BUTTON_B))
+	{
+		// Go to Achievements menu
+		achievementsplus.game_mode.tempValue0 = 0x4c
+		global.game_mode = 0x9a
+	}
+	
+	// Call the base function
+	base.fn00d7c0()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/bonus_gm/level_gumballmachine.lemon
+//# address-hook(0x23ef58) end(0x23ef9e)
+function void InitLevelTiles.BonusGM()
+{
+	achievementsplus.gm_shield_counter.tempValue0 = 0x00
+	
+	// Call the base function
+	base.InitLevelTiles.BonusGM()
+}
+
+//@ Function taken from sonic3air_dev/scripts/standalone/standalone.lemon
+function void waitForNextFrame()
+{
+	AchievementsPlus.AchivementsManager.update()
+	
+	// - Debuging character position
+	//debugLog(stringformat("X: %d, Y: %d", s16[0xffffb000 + 0x10], s16[0xffffb000 + 0x14]))
+	
+	// Call the base function
+	base.waitForNextFrame()
+}
+
+//@ Function taken from sonic3air_dev/scripts/standalone/enginecallbacks.lemon
+function void Init()
+{
+	AchievementsPlus.SharedMemory.loadPersistendData()
+	
+	// Call the base function
+	base.Init()
+}

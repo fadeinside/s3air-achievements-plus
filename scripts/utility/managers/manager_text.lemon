@@ -1,0 +1,546 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Text with limit (No align, no formating)
+// - Used in AchievementsPlus.Menu.achievements.items.achievementsDetail()
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawTextWithLimit() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, s8 spacing, s32 limit, u16 renderQueue)
+{
+	AchievementsPlus.TextManager.drawTextWithLimit(px, py, text, font, spacing, 0xffffffff, limit, renderQueue)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, s8 spacing, u32 tintColor, s32 limit, u16 renderQueue)
+{
+	s32 textWidth
+	
+	for (s32 A = 0x00; A < strlen(text); ++A)
+	{
+		string character = getStringFromHash(substring(text, A, 0x01))
+		
+		if (character == " " && (textWidth + px) >= limit - 0x16)
+			character = "^"
+		
+		if (character == "^")
+		{
+			textWidth = 0x00
+			py += AchievementsPlus.TextManager.getTextWidth("   ", font, FORMAT_NONE, 0x00)
+		}
+		
+		if (character != "^")
+		{
+			AchievementsPlus.TextManager.renderCharacter(px, py, character, font, tintColor, renderQueue, textWidth)
+			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
+		}
+	}
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Achievement button
+// - Used in AchievementsPlus.Menu.achievements.items.achievementsList()
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawAchievementButton() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawAchievementButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue, u8 selected, u8 target)
+{
+	u32 tintColor = achievementsplus.coinRewards.tempValue2 ? 0xb0b0b0ff : 0xffffffff
+	AchievementsPlus.TextManager.drawAchievementButton(px, py, text, font, format, alignment, spacing, tintColor, renderQueue, selected, target)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawAchievementButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u16 renderQueue, u16 selected, u16 target)
+{
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	
+	if (selected == target)
+		py -= 0x01
+	
+	AchievementsPlus.TextManager.basic((px - align) + 30, py + 0x08, text, font, format, spacing, tintColor, renderQueue)
+	
+	if ((target == achievementsplus.achievements.nextButton || target == achievementsplus.achievements.preButton) && selected != target)
+	{
+		if (achievementsplus.buttons.tempValue0 != 0x00)
+			achievementsplus.buttons.tempValue0 -= 12
+		
+		Renderer.drawCustomSprite("menu_button_large_selected", px - 0x05, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		if (getScreenWidth() > 400)
+			Renderer.drawCustomSprite("menu_button_large_selected", px - 0x05, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+	}
+	
+	if (selected == target)
+	{
+		AchievementsPlus.TextManager.basic((px - align) + 31, py + 0x09, text, font, format, spacing, 0x000000ff, renderQueue)
+		
+		py += 0x01
+		
+		if (achievementsplus.buttons.tempValue1 != 0x06)
+			++achievementsplus.buttons.tempValue1
+		
+		Renderer.drawCustomSprite("menu_button_icon_arrow", px + 208 + achievementsplus.buttons.tempValue1, py, 0x00, 0x00, renderQueue)
+		Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, 0x00, renderQueue, 0x00, u8(achievementsplus.tabsPanel.tempValue9) * 15)
+		Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, 0x00, renderQueue)
+		
+		if (getScreenWidth() > 400)
+		{
+			Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, u8(achievementsplus.tabsPanel.tempValue9) * 15)
+			Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
+		}
+	}
+	else
+	{
+		Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, 0x00, renderQueue)
+		if (getScreenWidth() > 400)
+			Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
+	}
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Text with alignment and outline
+// - UNSTABLE, so just call the normal text renderer
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawTextWithOutline() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue)
+{
+	if (true)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, text, font, format, alignment, spacing, 0xffffffff, renderQueue)
+		return
+	}
+	
+	AchievementsPlus.TextManager.drawTextWithOutline(px, py, text, font, format, alignment, spacing, 0xffffffff, 0x000000ff, renderQueue)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u32 outlineColor, u16 renderQueue)
+{
+	if (true)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, text, font, format, alignment, spacing, outlineColor, renderQueue)
+		return
+	}
+	
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	
+	px -= align
+	AchievementsPlus.TextManager.basic(px, py, text, font, format, spacing, tintColor, renderQueue)
+	
+	AchievementsPlus.TextManager.basic(px - 0x01, py - 0x01, text, font, format, spacing, outlineColor, renderQueue)
+	AchievementsPlus.TextManager.basic(px + 0x01, py - 0x01, text, font, format, spacing, outlineColor, renderQueue)
+	
+	AchievementsPlus.TextManager.basic(px - 0x01, py + 0x01, text, font, format, spacing, outlineColor, renderQueue)
+	AchievementsPlus.TextManager.basic(px + 0x01, py + 0x01, text, font, format, spacing, outlineColor, renderQueue)
+	
+	AchievementsPlus.TextManager.basic(px - 0x01, py, text, font, format, spacing, outlineColor, renderQueue)
+	AchievementsPlus.TextManager.basic(px + 0x01, py, text, font, format, spacing, outlineColor, renderQueue)
+	
+	AchievementsPlus.TextManager.basic(px, py - 0x01, text, font, format, spacing, outlineColor, renderQueue)
+	AchievementsPlus.TextManager.basic(px, py + 0x01, text, font, format, spacing, outlineColor, renderQueue)
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Text with alignment and shadow
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawTextWithShadow() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawTextWithShadow(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue)
+{
+	AchievementsPlus.TextManager.drawTextWithShadow(px, py, text, font, format, alignment, spacing, 0xffffffff, 0x000000ff, renderQueue)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawTextWithShadow(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u32 shadowColor, u16 renderQueue)
+{
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	
+	px -= align
+	AchievementsPlus.TextManager.basic(px, py, text, font, format, spacing, tintColor, renderQueue)
+	
+	AchievementsPlus.TextManager.basic(px + 0x01, py + 0x01, text, font, format, spacing, shadowColor, renderQueue)
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Text with alignment
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawText() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawText(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue)
+{
+	AchievementsPlus.TextManager.drawText(px, py, text, font, format, alignment, spacing, 0xffffffff, renderQueue)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawText(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u16 renderQueue)
+{
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	
+	AchievementsPlus.TextManager.basic(px - align, py, text, font, format, spacing, tintColor, renderQueue)
+}
+
+// - - - - - - - - - - - - - - - - - - - //
+// Basic manager code
+// - - - - - - - - - - - - - - - - - - - //
+
+// The basic code for rendering text.
+function void AchievementsPlus.TextManager.basic(s16 px, s16 py, string text, u8 font, u8 format, s8 spacing, u32 tintColor, u16 renderQueue)
+{
+	s32 textWidth
+	
+	for (s32 A = 0x00; A < strlen(text); ++A)
+	{
+		string character = getStringFromHash(substring(text, A, 0x01))
+		
+		if (character == "^")
+		{
+			textWidth = 0x00
+			py += AchievementsPlus.TextManager.getTextWidth("   ", font, format, 0x00)
+		}
+		
+		// Formating:
+		// - 0x00 - None
+		// - 0x10 - Upper case
+		// - 0x15 - Lower case
+		
+		if (format == FORMAT_UPPERCASE || font == FONT_SMALLFONT)
+		{
+			if (character == "a")
+				character = "A"
+			else if (character == "b")
+				character = "B"
+			else if (character == "c")
+				character = "C"
+			else if (character == "d")
+				character = "D"
+			else if (character == "e")
+				character = "E"
+			else if (character == "f")
+				character = "F"
+			else if (character == "g")
+				character = "G"
+			else if (character == "h")
+				character = "H"
+			else if (character == "i")
+				character = "I"
+			else if (character == "j")
+				character = "J"
+			else if (character == "k")
+				character = "K"
+			else if (character == "l")
+				character = "L"
+			else if (character == "m")
+				character = "M"
+			else if (character == "n")
+				character = "N"
+			else if (character == "o")
+				character = "O"
+			else if (character == "p")
+				character = "P"
+			else if (character == "q")
+				character = "Q"
+			else if (character == "r")
+				character = "R"
+			else if (character == "s")
+				character = "S"
+			else if (character == "t")
+				character = "T"
+			else if (character == "u")
+				character = "U"
+			else if (character == "v")
+				character = "V"
+			else if (character == "w")
+				character = "W"
+			else if (character == "x")
+				character = "X"
+			else if (character == "y")
+				character = "Y"
+			else if (character == "z")
+				character = "Z"
+		}
+		else if (format == FORMAT_LOWERCASE)
+		{
+			if (character == "A")
+				character = "a"
+			else if (character == "B")
+				character = "b"
+			else if (character == "C")
+				character = "c"
+			else if (character == "D")
+				character = "d"
+			else if (character == "E")
+				character = "e"
+			else if (character == "F")
+				character = "f"
+			else if (character == "G")
+				character = "g"
+			else if (character == "H")
+				character = "h"
+			else if (character == "I")
+				character = "i"
+			else if (character == "J")
+				character = "j"
+			else if (character == "K")
+				character = "k"
+			else if (character == "L")
+				character = "l"
+			else if (character == "M")
+				character = "m"
+			else if (character == "N")
+				character = "n"
+			else if (character == "O")
+				character = "o"
+			else if (character == "P")
+				character = "p"
+			else if (character == "Q")
+				character = "q"
+			else if (character == "R")
+				character = "r"
+			else if (character == "S")
+				character = "s"
+			else if (character == "T")
+				character = "t"
+			else if (character == "U")
+				character = "u"
+			else if (character == "V")
+				character = "v"
+			else if (character == "W")
+				character = "w"
+			else if (character == "X")
+				character = "x"
+			else if (character == "Y")
+				character = "y"
+			else if (character == "Z")
+				character = "z"
+		}
+		
+		if (character != "^")
+		{
+			AchievementsPlus.TextManager.renderCharacter(px, py, character, font, tintColor, renderQueue, textWidth)
+			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
+		}
+	}
+}
+
+// Single character rendering function. Some optimizations are also used here to fasted rendering.
+function void AchievementsPlus.TextManager.renderCharacter(s16 px, s16 py, string character, u8 font, u32 tintColor, u16 renderQueue, s32 textWidth)
+{
+	if ((px + textWidth) >= getScreenWidth() || (px + textWidth) <= -0x12)
+		return
+	if (py >= getScreenHeight() || py <= 0x00)
+		return
+	
+	string key = AchievementsPlus.TextManager.getFont(font) + "." + character
+	
+	if (Renderer.hasCustomSprite(key))
+		Renderer.drawCustomSpriteTinted(key, px + textWidth, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, tintColor, 0x10000)
+}
+
+// Returns the total width of the entire text.
+function s32 AchievementsPlus.TextManager.getTextWidth(string text, u8 font, u8 format, u8 spacing)
+{
+	s32 textWidth
+	
+	for (s32 A = 0x00; A < strlen(text); ++A)
+	{
+		string character = getStringFromHash(substring(text, A, 0x01))
+		
+		if (character == "^")
+			 textWidth = 0x00
+		
+		// Formating:
+		// - 0x00 - None
+		// - 0x10 - Upper case
+		// - 0x15 - Lower case
+		
+		if (format == FORMAT_UPPERCASE || font == FONT_SMALLFONT)
+		{
+			if (character == "a")
+				character = "A"
+			else if (character == "b")
+				character = "B"
+			else if (character == "c")
+				character = "C"
+			else if (character == "d")
+				character = "D"
+			else if (character == "e")
+				character = "E"
+			else if (character == "f")
+				character = "F"
+			else if (character == "g")
+				character = "G"
+			else if (character == "h")
+				character = "H"
+			else if (character == "i")
+				character = "I"
+			else if (character == "j")
+				character = "J"
+			else if (character == "k")
+				character = "K"
+			else if (character == "l")
+				character = "L"
+			else if (character == "m")
+				character = "M"
+			else if (character == "n")
+				character = "N"
+			else if (character == "o")
+				character = "O"
+			else if (character == "p")
+				character = "P"
+			else if (character == "q")
+				character = "Q"
+			else if (character == "r")
+				character = "R"
+			else if (character == "s")
+				character = "S"
+			else if (character == "t")
+				character = "T"
+			else if (character == "u")
+				character = "U"
+			else if (character == "v")
+				character = "V"
+			else if (character == "w")
+				character = "W"
+			else if (character == "x")
+				character = "X"
+			else if (character == "y")
+				character = "Y"
+			else if (character == "z")
+				character = "Z"
+		}
+		else if (format == FORMAT_LOWERCASE)
+		{
+			if (character == "A")
+				character = "a"
+			else if (character == "B")
+				character = "b"
+			else if (character == "C")
+				character = "c"
+			else if (character == "D")
+				character = "d"
+			else if (character == "E")
+				character = "e"
+			else if (character == "F")
+				character = "f"
+			else if (character == "G")
+				character = "g"
+			else if (character == "H")
+				character = "h"
+			else if (character == "I")
+				character = "i"
+			else if (character == "J")
+				character = "j"
+			else if (character == "K")
+				character = "k"
+			else if (character == "L")
+				character = "l"
+			else if (character == "M")
+				character = "m"
+			else if (character == "N")
+				character = "n"
+			else if (character == "O")
+				character = "o"
+			else if (character == "P")
+				character = "p"
+			else if (character == "Q")
+				character = "q"
+			else if (character == "R")
+				character = "r"
+			else if (character == "S")
+				character = "s"
+			else if (character == "T")
+				character = "t"
+			else if (character == "U")
+				character = "u"
+			else if (character == "V")
+				character = "v"
+			else if (character == "W")
+				character = "w"
+			else if (character == "X")
+				character = "x"
+			else if (character == "Y")
+				character = "y"
+			else if (character == "Z")
+				character = "z"
+		}
+		
+		string key = AchievementsPlus.TextManager.getFont(font) + "." + character
+		
+		if (Renderer.hasCustomSprite(key))
+			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
+	}
+	
+	// Return the value
+	return textWidth
+}
+
+// Returns the font name.
+function string AchievementsPlus.TextManager.getFont(u8 font)
+{
+	if (font == FONT_OXYTINY)
+		return "oxyfont_tiny"
+	if (font == FONT_OXYSMALL)
+		return "oxyfont_small"
+	if (font == FONT_SMALLFONT)
+		return "smallfont"
+	
+	// Failsave value
+	return ""
+}
+
+// Returns the width of the character of the specified parameters.
+function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
+{
+	if (font == FONT_OXYTINY)
+	{
+		if (char == "!" || char == "'" || char == "." || char == ":" || char == "|" || char == "I" || char == "i" || char == "l")
+			return 0x01
+		else if (char == "(" || char == ")" || char == "," || char == ";" || char == "[" || char == "]" || char == "`" || char == "1")
+			return 0x02
+		else if (char == " " || char == "\"" || char == "$" || char == "*" || char == "+" || char == "-" || char == "<" || char == "=" || char == ">" || char == "^" || char == "{" || char == "}" || char == "j" || char == "t")
+			return 0x03
+		else if (char == "#" || char == "@" || char == "M" || char == "O" || char == "Q" || char == "T" || char == "V" || char == "W" || char == "X" || char == "Y" || char == "U" || char == "m" || char == "v" || char == "w" || char == "x")
+			return 0x05
+		else
+			return 0x04
+	}
+	
+	if (font == FONT_OXYSMALL)
+	{
+		if (char == "'")
+			return 0x01
+		else if (char == "!" || char == "." || char == ":" || char == "|" || char == "I" || char == "i" || char == "l")
+			return 0x02
+		else if (char == "\"" || char == "(" || char == ")" || char == "," || char == "-" || char == ";" || char == "[" || char == "]" || char == "`" || char == "1")
+			return 0x03
+		else if (char == " " || char == "+" || char == "<" || char == "=" || char == ">" || char == "?" || char == "_" || char == "{" || char == "}" || char == "j" || char == "t")
+			return 0x04
+		else if (char == "~" || char == "O" || char == "Q" || char == "T" || char == "Y")
+			return 0x06
+		if (char == "@" || char == "M" || char == "V" || char == "W" || char == "m" || char == "w")
+			return 0x07
+		else
+			return 0x05
+	}
+	
+	if (font == FONT_SMALLFONT)
+	{
+		if (char == "." || char == "I" || char == ":")
+			return 0x01
+		else if (char == " ")
+			return 0x02
+		else if (char == "M" || char == "W")
+			return 0x05
+		else if (char == "/")
+			return 0x07
+		else
+			return 0x03
+	}
+	
+	// Failsave value
+	return 0x00
+}
+
+// - Text Manager v3.0

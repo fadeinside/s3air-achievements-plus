@@ -1,0 +1,62 @@
+// The main function of updating the toast
+function void AchievementsPlus.Menu.toast.update()
+{
+	// Slide in
+	if (achievementsplus.toast.tempValue2 == 0x00)
+	{
+		++achievementsplus.toast.tempValue3
+		if (achievementsplus.toast.tempValue3 >= 27)
+			achievementsplus.toast.tempValue2 = 0x01
+	}
+	
+	// Waiting
+	if (achievementsplus.toast.tempValue2 == 0x01)
+	{
+		++achievementsplus.toast.tempValue4
+		if (achievementsplus.toast.tempValue4 >= 120)
+			achievementsplus.toast.tempValue2 = 0x02
+	}
+	
+	// Slide out
+	if (achievementsplus.toast.tempValue2 == 0x02)
+	{
+		--achievementsplus.toast.tempValue3
+		if (achievementsplus.toast.tempValue3 <= 0x00)
+			achievementsplus.toast.tempValue2 = 0x03
+	}
+	
+	// Additional waiting
+	if (achievementsplus.toast.tempValue2 == 0x03)
+	{
+		++achievementsplus.toast.tempValue4
+		if (achievementsplus.toast.tempValue4 >= 30)
+			achievementsplus.toast.tempValue2 = 0x04
+	}
+	
+	// Reset vars
+	if (achievementsplus.toast.tempValue2 == 0x04)
+	{
+		achievementsplus.toast.tempValue3 = 0x00
+		achievementsplus.toast.tempValue4 = 0x00
+		
+		achievementsplus.toast.tempValue2 = 0x05
+	}
+	
+	// Overlay render
+	AchievementsPlus.Menu.toast.overlay()
+}
+
+
+function void AchievementsPlus.Menu.toast.overlay()
+{
+	s16 px = (getScreenWidth() + 190) - (achievementsplus.toast.tempValue3 * 0x07)
+	s16 py = 18
+	
+	Renderer.drawCustomSprite("menu_icon_status_completed15x", px - 20, py + 0x09, 0x00, SPRITE_FLAG_PRIO, 0xffff)
+	
+	AchievementsPlus.Menu.achievements.items.achievementsRating(px - 85, py + 19, achievementsplus.toast.tempValue1, 0xffff)
+	AchievementsPlus.TextManager.drawText(px - 40, py + 0x08, achievementsplus.toast.tempValue0, FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffff)
+	
+	Renderer.drawCustomSprite("menu_button_large_craked", px + 60, py, 0x00, SPRITE_FLAG_PRIO | SPRITE_FLAG_FLIP_X, 0xffff)
+	Renderer.drawCustomSprite("menu_button_large_craked", px + 110, py + 0x09, 0x00, SPRITE_FLAG_PRIO | SPRITE_FLAG_FLIP_X, 0xffff)
+}

@@ -1,0 +1,328 @@
+function void AchievementsPlus.Menu.achievements.items()
+{
+	constant array<string> CATEGORY =
+	{
+		"Sonic 3 A.I.R", "retroachievements.org", "Community"
+	}
+
+	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "ACHIEVEMENTS / " + CATEGORY[achievementsplus.achievements.tabselected], FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x0041aaff, 0xffffffff, 0xf000)
+	
+	s16 px = getScreenExtend() - 40
+	s16 py = 46
+	
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel(px, py)
+	
+	AchievementsPlus.Menu.achievements.items.tabsPanel(px, py)
+	AchievementsPlus.Menu.achievements.items.userStats(px, py)
+	
+	AchievementsPlus.Menu.achievements.items.listPanel(px, py)
+	AchievementsPlus.Menu.achievements.items.infoPanel(px, py)
+	
+	AchievementsPlus.Menu.achievements.items.scrollbar(px, py)
+}
+
+function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 py)
+{
+	px = 12
+	py = getScreenHeight() - 12
+	
+	if (achievementsplus.coinRewards.tempValue0 != 0x00)
+	{
+		AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("Start", "Claim reward", px, py, 0xf000)
+		px += 74
+		px += 0x04
+	}
+	
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", "Back", px, py, 0xf000)
+}
+
+function void AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey(string key, string text, s16 px, s16 py, u16 renderQueue)
+{
+	Renderer.drawCustomSprite("menu_hotkey_" + key, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	
+	if (key == "Start")
+		px += 15
+	
+	AchievementsPlus.TextManager.drawText(px + 0x08, py - 0x01, text, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, renderQueue + 0x01)
+	
+}
+
+function void AchievementsPlus.Menu.achievements.items.tabsPanel(s16 px, s16 py)
+{
+	px = 106
+	py = 33
+	
+	if (achievementsplus.tabsPanel.tempValue9 <= 0x10 && !achievementsplus.tabsPanel.tempValue10)
+	{
+		++achievementsplus.tabsPanel.tempValue9
+		if (achievementsplus.tabsPanel.tempValue9 == 0x10)
+			achievementsplus.tabsPanel.tempValue10 |= 0x10
+	}
+	else
+	{
+		--achievementsplus.tabsPanel.tempValue9
+		if (achievementsplus.tabsPanel.tempValue9 == 0x00)
+			achievementsplus.tabsPanel.tempValue10 = 0x00
+	}
+	
+	Renderer.drawCustomSprite("menu_tabsPanel_control_arrow", px - 36 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
+	Renderer.drawCustomSprite("menu_tabsPanel_control_arrow", px + 36 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, SPRITE_FLAG_FLIP_X, 0xf001)
+	
+	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_s3air", px - 36, py, 0xf001, achievementsplus.achievements.tabselected, 0x00, achievementsplus.tabsPanel.tempValue0, achievementsplus.tabsPanel.tempValue3, achievementsplus.tabsPanel.tempValue6)
+	
+	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_retro", px, py, 0xf001, achievementsplus.achievements.tabselected, 0x01, achievementsplus.tabsPanel.tempValue1, achievementsplus.tabsPanel.tempValue4, achievementsplus.tabsPanel.tempValue7)
+	
+	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_community", px + 36, py, 0xf001, achievementsplus.achievements.tabselected, 0x02, achievementsplus.tabsPanel.tempValue2, achievementsplus.tabsPanel.tempValue5, achievementsplus.tabsPanel.tempValue8)
+	
+	Renderer.drawCustomSprite("menu_tabsPanel_background", px, py, 0x00, 0x00, 0xf000)
+}
+
+function void AchievementsPlus.Menu.achievements.items.tabs.drawTab(string icon, s16 px, s16 py, u16 renderQueue, u8 selected, u8 target, u16 totalCompleted, u16 totalAchievements, u16 totalNonClaimed)
+{
+	if (totalNonClaimed > 0x00)
+	{
+		Renderer.drawCustomSprite("menu_icon_originsCoin_small", px - 12, py - 10, 0x00, 0x00, renderQueue + 0x01)
+		Renderer.drawCustomSprite("menu_icon_glow", px - 12, py - 10, 0x00, 0x00, renderQueue + 0x01)
+	}
+	
+	py -= 0x02
+	
+	if (Renderer.hasCustomSprite(icon))
+		Renderer.drawCustomSprite(icon, px, py, 0x00, 0x00, renderQueue)
+	
+	renderQueue += 0x01
+	if (selected == target && !achievementsplus.achievements.sortNeedUpdate)
+	{
+		Renderer.drawCustomSprite("menu_tabsPanel_tab_selected", px, py, 0x00, 0x00, renderQueue)
+		renderQueue += 0x01
+		Renderer.drawCustomSprite("menu_tabsPanel_tab_selected_arrow", px, py + 11, 0x00, 0x00, renderQueue) 
+	}
+	else
+	{
+		Renderer.drawCustomSprite("menu_tabsPanel_tab", px, py, 0x00, 0x00, renderQueue)
+	}
+	
+	py += 0x08
+	renderQueue += 0x01
+	AchievementsPlus.TextManager.drawTextWithShadow(px, py, stringformat("%d/%d", totalCompleted, totalAchievements), FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, renderQueue)
+}
+
+function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
+{
+	px = getScreenWidth() - (getScreenExtend() - 40)
+	py = 0x00
+	
+	py += 18
+	{
+		s16 posX = px - 56
+		Renderer.drawCustomSprite("menu_icon_originsCoin", posX, py, 0x00, 0x00, 0xf000)
+		
+		posX += 12
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Coins", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x02, 0xfadd00ff, 0x000000ff, 0xf000)
+		posX += 0x03
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py + 0x04, stringformat("x %d", achievementsplus.sharedMemory.coinsSaved), FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
+	}
+	
+	Renderer.drawCustomSprite("menu_statsPanel_coins", px, py, 0x00, 0x00, 0xf000)
+	if (getScreenWidth() > 400) // It just eliminates the spaces for 400+ game size
+		Renderer.drawCustomSprite("menu_statsPanel_competition", px, py, 0x00, SPRITE_FLAG_FLIP_X, 0xf000)
+	
+	py += 18
+	{
+		s16 posX = px - 56
+		posX += 12
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x01, stringformat("%d/%d", System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected)), System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected + 0x03))), FONT_OXYSMALL, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
+		
+		posX -= 56
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Completion:", FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xfadd00ff, 0x000000ff, 0xf000)
+	}
+	
+	Renderer.drawCustomSprite("menu_statsPanel_competition", px, py, 0x00, 0x00, 0xf000)
+	if (getScreenWidth() > 400) // It just eliminates the spaces for 400+ game size
+		Renderer.drawCustomSprite("menu_statsPanel_competition", px, py, 0x00, SPRITE_FLAG_FLIP_X, 0xf000)
+}
+
+function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
+{
+	if (hideAchievementsListItems())
+		return
+	
+	px += 232
+	
+	s16 scrollOffset
+	if (achievementsplus.achievements.currentButtonScroll >= 0x07)
+		scrollOffset = (143 / achievementsplus.achievements.totalButtons) * (achievementsplus.achievements.currentButtonScroll - 0x06)
+	
+	if (achievementsplus.achievements.totalButtons > 0x00)
+		Renderer.drawCustomSprite("menu_scrollbar_icon", px, 52 + scrollOffset, 0x00, 0x00, 0xf000)
+	Renderer.drawCustomSprite("menu_scrollbar_background", px, py, 0x00, 0x00, 0xf000)
+}
+
+function void AchievementsPlus.Menu.achievements.items.achievementsRating(s16 px, s16 py, u16 achievementID, u16 renderQueue)
+{
+	u8 totalStars = AchievementsPlus.AchivementsManager.getDecimalStars(achievementID)
+	
+	for (u8 A = 0x00; A < totalStars; ++A)
+	{
+		Renderer.drawCustomSprite("menu_icon_star", px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+		
+		// Offset for the net star
+		px += 0x0a
+	}
+	
+	for (u8 A = totalStars; A < 0x05; ++A)
+	{
+		Renderer.drawCustomSprite("menu_icon_star_outline", px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+		
+		// Offset for the next star
+		px += 0x0a
+	}
+}
+
+function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
+{
+	if (hideAchievementsListItems())
+		return
+	
+	px = getScreenWidth() - (getScreenExtend() - 40) - 0x06
+	py += 0x06
+	
+	// Draw background
+	Renderer.drawCustomSprite("menu_detailPanel_background", px, py, 0x00, 0x00, 0xf000)
+	
+	// Achievement thumb
+	py += 0x04
+	string achievementThumb = "menu_thumb_detailPanel_not_provided"
+	if (Renderer.hasCustomSprite(achievementsplus.infoPanel.tempValue4))
+		achievementThumb = achievementsplus.infoPanel.tempValue4
+	Renderer.drawCustomSprite(achievementThumb, px - 148, py, 0x00, 0x00, 0xf001)
+	
+	// Achievement status icon
+	py += 0x04
+	string achievementStatus = achievementsplus.infoPanel.tempValue5 ? "menu_icon_status_completed20x" : "menu_icon_status_noncompleted20x"
+	Renderer.drawCustomSprite(achievementStatus, px - 28, py, 0x00, 0x00, 0xf001)
+	
+	// Achievement stars
+	px -= 77
+	py += 12
+	if (achievementsplus.infoPanel.tempValue0 != "")
+		AchievementsPlus.Menu.achievements.items.achievementsRating(px, py, achievementsplus.achievements.buttonselected, 0xf001)
+	
+	// Achievement title
+	py += 20
+	AchievementsPlus.TextManager.drawTextWithOutline(px, py, achievementsplus.infoPanel.tempValue0, FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_CENTER, 0x01, 0xffffffff, 0x0041aaff, 0xf001)
+	
+	// Achievement sub-title
+	px -= 71
+	py += 10
+	if (achievementsplus.infoPanel.tempValue2 != "")
+	{
+		py += 10
+		AchievementsPlus.TextManager.drawText(px, py, achievementsplus.infoPanel.tempValue2, FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x0d2664ff, 0xf001)
+	}
+	
+	// Achievement description
+	py += 18
+	AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.infoPanel.tempValue3, FONT_OXYTINY, 0x01, 0x0d2664ff, getScreenWidth() - (getScreenExtend() - 40), 0xf001)
+	
+	// Claim button
+	py += 34
+	AchievementsPlus.TextManager.drawText(px, py, "Claim Reward:", FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x0d2664ff, 0xf001)
+	
+	Renderer.drawCustomSprite("menu_icon_originsCoin_small", px + 119, py, 0x00, 0x00, 0xf002)
+	
+	s32 tempValue0 = achievementsplus.coinRewards.tempValue0 == 0x00 ? achievementsplus.coinRewards.tempValue1 : achievementsplus.coinRewards.tempValue0
+	AchievementsPlus.TextManager.drawText(px + 127, py, stringformat("x%d", tempValue0), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x0d2664ff, 0xf002)
+	
+	py += 0x06
+	u32 tintColor = achievementsplus.infoPanel.tempValue5 ? 0xfc992eff : 0xb0b0b0ff
+	Renderer.drawCustomSpriteTinted("menu_detailPanel_buttonclaim", px, py, 0x00, 0x00, 0xf001, 0x00, tintColor, 0x10000)
+	
+	py += 10
+	px += 71
+	string tempValue1 = !achievementsplus.infoPanel.tempValue5 ? "Unavailable" : (achievementsplus.coinRewards.tempValue0 == 0x00 ? "Claimed!" : "Press START to Claim")
+	if (achievementsplus.coinRewards.tempValue2)
+		tempValue1 = stringformat("Claiming %d..", achievementsplus.coinRewards.tempValue0)
+	AchievementsPlus.TextManager.drawTextWithShadow(px, py, tempValue1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xf002)
+}
+
+function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
+{
+	if (hideAchievementsListItems())
+	{
+		px = getScreenWidth() / 0x02
+		py = getScreenHeight() / 0x02
+		
+		string text = "It looks like the list is empty."
+		string text1 = ""
+		
+		if (hideAchievementsListItems() == 0x02)
+		{
+			text = "Achievements are locked"
+			text1 = "because Debug Mode is active."
+		}
+		
+		py += 0x08
+		AchievementsPlus.TextManager.drawText(px, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
+		AchievementsPlus.TextManager.drawText(px, py + 0x08, text1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
+		return
+	}
+	
+	if (achievementsplus.achievements.currentButtonScroll >= 0x07)
+	{
+		for (u16 A = 0x00; A <= achievementsplus.achievements.currentButtonScroll - 0x07; ++A)
+			py -= 18
+	}
+	
+	py += 0x06
+	
+	// Main render loop
+	for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+	{
+		if (sort(A))
+		{
+			if (!(py > 178 || py < 52))
+			{
+				AchievementsPlus.TextManager.drawAchievementButton(px, py, AchievementsPlus.AchivementsManager.getAchievementDetail(A, 0x00), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, achievementsplus.achievements.buttonselected, A)
+				
+				if (achievementsplus.achievements.buttonselected == A)
+					py -= 0x01
+				
+				u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+				
+				bool tempValue1 = AchievementsPlus.AchivementsManager.isAIRAchievement(A) ? AchievementsPlus.AchivementsManager.isAchievementComplete(A) : tempValue0 == (tempValue0 | FLAG_COMPLETE)
+				bool tempValue2 = tempValue0 != (tempValue0 | FLAG_REWARD_CLAIMED)
+				
+				if (tempValue1 && tempValue2)
+				{
+					Renderer.drawCustomSprite("menu_icon_originsCoin_small", px + 14, py + 0x08, 0x00, 0x00, 0xf002)
+					Renderer.drawCustomSprite("menu_icon_glow", px + 14, py + 0x08, 0x00, 0x00, 0xf002, 0x00, u8(achievementsplus.tabsPanel.tempValue9) * 15)
+					Renderer.drawCustomSprite("menu_icon_glow", px + 14, py + 0x08, 0x00, 0x00, 0xf002)
+				}
+				
+				s16 posX = px + 153
+				s16 posY = py + 0x08
+				
+				AchievementsPlus.Menu.achievements.items.achievementsRating(posX, posY, A, 0xf001)
+				posY += 0x01
+				posX += 57
+				string achievementStatus = tempValue1 ? "menu_icon_status_completed15x" : "menu_icon_status_noncompleted15x"
+				Renderer.drawCustomSprite(achievementStatus, posX, posY, 0x00, 0x00, 0xf001)
+				
+				if (achievementsplus.achievements.buttonselected == A)
+					py += 0x01
+			}
+		
+			// Offset for the next item
+			py += 18
+		}
+	}
+}
+
+function void AchievementsPlus.Menu.achievements.background()
+{
+	Renderer.drawCustomSprite("menu_background_tape", -0x07 + (level.framecounter % 0x07), 46, 0x00, 0x00, 0xf000)
+	//Renderer.drawCustomSprite("menu_background_tape", 0x00, 46, 0x00, 0x00, 0xf000)
+	
+	Renderer.drawCustomSprite(stringformat("menu_background_%d", SETTING_ACHIEVEPLUS_MENU_BACKGROUND), getScreenWidth() / 0x02, 0x00, 0x00, 0x00, 0xf000)
+}
