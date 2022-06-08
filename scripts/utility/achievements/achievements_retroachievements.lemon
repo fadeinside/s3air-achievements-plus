@@ -159,7 +159,7 @@ constant array<string> RETROACHIEVEMENTS_GET_ACHIEVEMENTS_TITLE =
 	"King of the Hill",
 	"Do the M.J.",
 	"Too Much Gum",
-	"", // "Deathless Egg Zone", - UNFINISHED!
+	"Deathless Egg Zone",
 	"Ice Cap's Treasure",
 	"Just In Time",
 	"", // "Right Base Zone", - UNFINISHED!

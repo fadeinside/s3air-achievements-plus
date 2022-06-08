@@ -113,6 +113,9 @@ function void LevelResults.Update()
 			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_JUST_IN_TIME)
 		if (ring_counter >= 400)
 			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_400_RINGS_AND_FINISH)
+		
+		if (global.zone_act == 0x0b00 && !achievementsplus.deathless_dez.tempValue0) 
+			achievementsplus.deathless_dez.tempValue0 |= 0x10
 	}
 	
 	// Call the base function
@@ -284,7 +287,7 @@ function void fn00972e()
 	
 	// achievementsplus.going_forward.tempValue0:
 	// - 0x00 - Initialization
-	// - 0x05 - Conditions are met (Achievement can be received)
+	// - 0x05 - Conditions are met (Achievement cannot be received)
 	// - 0x10 - Conditions violated (Achievement cannot be received)
 	// - 0x15 - All conditions are successfully met (Achievement received)
 	
@@ -373,6 +376,36 @@ function void fn060ece()
 	{
 		UnloadObject()
 	}
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/13_dez/level_dez.lemon
+//# address-hook(0x059352) end(0x059358)
+function void InitLevelTiles.DEZ1()
+{
+	achievementsplus.deathless_dez.tempValue0 = 0x00
+	
+	// Call the base function
+	base.InitLevelTiles.DEZ1()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/13_dez/level_dez_boss.lemon
+//# address-hook(0x05a3b4) end(0x05a47c)
+function void InitLevelTiles.DEZBossAct()
+{
+	// achievementsplus.deathless_dez.tempValue0:
+	// - 0x00 - Initialization
+	// - 0x05 - Conditions violated (Achievement cannot be received)
+	// - 0x10 - DEZ 1 Act has passed and conditions are met (Achievement can be received)
+	// - 0x15 - All conditions are successfully met (Achievement received)
+	
+	if (achievementsplus.deathless_dez.tempValue0 & 0x10)
+	{
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_DEATHLESS_EGG_ZONE)
+		achievementsplus.deathless_dez.tempValue0 |= 0x05
+	}
+	
+	// Call the base function
+	base.InitLevelTiles.DEZBossAct()
 }
 
 //@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
