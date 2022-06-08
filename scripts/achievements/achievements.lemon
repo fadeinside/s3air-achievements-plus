@@ -287,7 +287,7 @@ function void fn00972e()
 	
 	// achievementsplus.going_forward.tempValue0:
 	// - 0x00 - Initialization
-	// - 0x05 - Conditions are met (Achievement cannot be received)
+	// - 0x05 - Conditions are met (Achievement can be received)
 	// - 0x10 - Conditions violated (Achievement cannot be received)
 	// - 0x15 - All conditions are successfully met (Achievement received)
 	

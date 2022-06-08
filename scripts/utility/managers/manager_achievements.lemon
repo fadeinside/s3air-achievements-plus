@@ -281,8 +281,14 @@ function bool AchievementsPlus.AchivementsManager.isAIRAchievement(u16 achieveme
 // Returns false if achievements cannot be received.
 function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 {
-	if (Game.getSetting(SETTING_DEBUG_MODE))
-		return false
+	if (competition_mode.active || global.game_mode == 0x44 || global.game_mode == 0x50)
+		return true
+	
+	if (false)
+	{
+		if (Game.getSetting(SETTING_DEBUG_MODE))
+			return false
+	}
 	
 	if (global.lock_on_state == 0x00)
 		return true

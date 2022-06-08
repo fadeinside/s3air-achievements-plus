@@ -93,6 +93,9 @@ function void waitForNextFrame()
 	// - Debuging character position
 	//debugLog(stringformat("X: %d, Y: %d", s16[0xffffb000 + 0x10], s16[0xffffb000 + 0x14]))
 	
+	// - Debuging achievements enable
+	//debugLog(stringformat("Achievements enable: %d", AchievementsPlus.AchivementsManager.isAchievementsEnabled()))
+	
 	// Call the base function
 	base.waitForNextFrame()
 }
