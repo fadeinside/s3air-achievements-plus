@@ -48,26 +48,31 @@
 	
 	// ----- MENU ICONS ----- //
 	
-	// Coin icon
-	"menu_icon_originsCoin": { "File": "menu/menu_icons.png", "Rect": "1,1,16,16", "Center": "8,8" },
-	// Coin icon small
-	"menu_icon_originsCoin_small": { "File": "menu/menu_icons.png", "Rect": "26,11,11,11", "Center": "5,5" },
-	
-	// Glow
-	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "1,18,17,17", "Center": "8,8" }, 
-	
-	// Stars icon
-	"menu_icon_star": { "File": "menu/menu_icons.png", "Rect": "18,1,9,9", "Center": "4,4" },
-	// Star icon outline
-	"menu_icon_star_outline": { "File": "menu/menu_icons.png", "Rect": "28,1,9,9", "Center": "4,4" },
-	
 	// Achievement status icon small
-	"menu_icon_status_noncompleted15x": { "File": "menu/menu_icons.png", "Rect": "38,1,15,15", "Center": "8,8" },
-	"menu_icon_status_completed15x": { "File": "menu/menu_icons.png", "Rect": "54,1,15,15", "Center": "8,8" },
+	"menu_icon_status_noncompleted15x": { "File": "menu/menu_icons.png", "Rect": "1,1,15,15", "Center": "8,8" },
+	"menu_icon_status_completed15x": { "File": "menu/menu_icons.png", "Rect": "17,1,15,15", "Center": "8,8" },
 	
 	// Achievement status icon large
-	"menu_icon_status_noncompleted20x": { "File": "menu/menu_icons.png", "Rect": "38,17,20,20", "Center": "0,0" },
-	"menu_icon_status_completed20x": { "File": "menu/menu_icons.png", "Rect": "59,17,20,20", "Center": "0,0" },
+	"menu_icon_status_noncompleted20x": { "File": "menu/menu_icons.png", "Rect": "1,17,20,20", "Center": "0,0" },
+	"menu_icon_status_completed20x": { "File": "menu/menu_icons.png", "Rect": "22,17,20,20", "Center": "0,0" },
+	
+	// Star icon outline
+	"menu_icon_star_outline": { "File": "menu/menu_icons.png", "Rect": "33,1,9,9", "Center": "4,4" },
+	
+	// Stars icon
+	"menu_icon_star1": { "File": "menu/menu_icons.png", "Rect": "43,1,9,9", "Center": "4,4" },
+	"menu_icon_star2": { "File": "menu/menu_icons.png", "Rect": "53,1,9,9", "Center": "4,4" },
+	"menu_icon_star3": { "File": "menu/menu_icons.png", "Rect": "63,1,9,9", "Center": "4,4" },
+	"menu_icon_star4": { "File": "menu/menu_icons.png", "Rect": "73,1,9,9", "Center": "4,4" },
+	"menu_icon_star5": { "File": "menu/menu_icons.png", "Rect": "83,1,9,9", "Center": "4,4" }, 
+	
+	// Coin icon
+	"menu_icon_originsCoin": { "File": "menu/menu_icons.png", "Rect": "93,1,16,16", "Center": "8,8" },
+	// Coin icon small
+	"menu_icon_originsCoin_small": { "File": "menu/menu_icons.png", "Rect": "110,1,11,11", "Center": "5,5" },
+	
+	// Glow
+	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "93,18,17,17", "Center": "8,8" }, 
 	
 	
 	
@@ -94,15 +99,19 @@
 	// Panel background
 	"menu_tabsPanel_background": { "File": "menu/menu_tabs.png", "Rect": "1,1,142,33", "Center": "71,16" }, 
 	
-	// Tab button
-	"menu_tabsPanel_tab": { "File": "menu/menu_tabs.png", "Rect": "1,35,34,26", "Center": "17,13" },
-	"menu_tabsPanel_tab_selected": { "File": "menu/menu_tabs.png", "Rect": "36,35,34,26", "Center": "17,13" },
+	// Tab large button
+	"menu_tabsPanel_tabLarge": { "File": "menu/menu_tabs.png", "Rect": "1,35,52,26", "Center": "26,13" },
+	"menu_tabsPanel_tabLarge_selected": { "File": "menu/menu_tabs.png", "Rect": "1,62,52,26", "Center": "26,13" },
 	
-	// Tab arrow
-	"menu_tabsPanel_tab_selected_arrow": { "File": "menu/menu_tabs.png", "Rect": "71,51,14,9", "Center": "7,0" },
+	// Tab button
+	"menu_tabsPanel_tab": { "File": "menu/menu_tabs.png", "Rect": "54,35,34,26", "Center": "17,13" },
+	"menu_tabsPanel_tab_selected": { "File": "menu/menu_tabs.png", "Rect": "54,62,34,26", "Center": "17,13" },
 	
 	// Tab control arrow
-	"menu_tabsPanel_control_arrow": { "File": "menu/menu_tabs.png", "Rect": "71,35,35,15", "Center": "58,8" },
+	"menu_tabsPanel_control_arrow": { "File": "menu/menu_tabs.png", "Rect": "89,35,35,15", "Center": "58,8" },
+	
+	// Tab arrow
+	"menu_tabsPanel_tab_selected_arrow": { "File": "menu/menu_tabs.png", "Rect": "125,35,14,9", "Center": "7,0" },
 	
 	
 	
@@ -113,16 +122,21 @@
 	
 	
 	
-	// ----- MENU STATS PANEL ----- //
+	// ----- MENU THUMBS ----- //
 	
 	// Detail panel thumbs
-	"menu_thumb_detailPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "1,1,65,24", "Center": "0,0" },
-	"menu_thumb_detailPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "67,1,64,24", "Center": "0,0" },
-	"menu_thumb_detailPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "133,1,65,24", "Center": "0,0" },
-	"menu_thumb_detailPanel_not_provided": { "File": "menu/menu_thumbs.png", "Rect": "133,26,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "89,1,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "155,1,64,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "89,26,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_not_provided": { "File": "menu/menu_thumbs.png", "Rect": "155,26,65,24", "Center": "0,0" },
 	
 	// Tabs panel thumbs
-	"menu_thumb_tabsPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "1,26,34,26", "Center": "17,13" },
-	"menu_thumb_tabsPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "36,26,34,26", "Center": "17,13" },
-	"menu_thumb_tabsPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "71,26,34,26", "Center": "17,13" }
+	"menu_thumb_tabsPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "54,1,34,26", "Center": "17,13" },
+	"menu_thumb_tabsPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "54,28,34,26", "Center": "17,13" },
+	"menu_thumb_tabsPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "54,55,34,26", "Center": "17,13" },
+	
+	// Tabs panel thumbs large
+	"menu_thumb_tabsPanel_s3airLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,1,52,26", "Center": "26,13" },
+	"menu_thumb_tabsPanel_retroLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,28,52,26", "Center": "26,13" },
+	"menu_thumb_tabsPanel_communityLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" }	// Unused actually
 }

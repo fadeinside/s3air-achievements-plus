@@ -19,6 +19,7 @@ function void AchievementsPlus.AchivementsManager.update()
 }
 
 
+// The function shows a toast to the currently completed achievement.
 function void AchievementsPlus.AchivementsManager.showToast(u16 achievementID)
 {
 	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
@@ -142,8 +143,7 @@ function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achiev
 // Returns the Shared Memory address value of the specified achievement.
 function u32 AchievementsPlus.AchivementsManager.getAchievementValue(u16 achievementID)
 {
-	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
-	return u32[tempValue0]
+	return u32[achievementsplus.sharedMemory.achivementsAddress + u32(achievementID * 0x04)]
 }
 
 
@@ -330,8 +330,8 @@ function void AchievementsPlus.AchievementsManaget.setupForCoinRewards()
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)
 	u32 tempValue1 = tempValue0 | FLAG_REWARD_CLAIMED	// Reward claimed
 	
-	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected) + 0x01
-	s32 tempValue3 = (((0x05 * tempValue2) / 0x02) * (tempValue2 / 0x02)) + 0x05
+	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
+	s32 tempValue3 = tempValue2 * 12 / 0x03
 	
 	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
 	

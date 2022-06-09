@@ -1,3 +1,4 @@
+// Основная функция меню.
 function void AchievementsPlus.Menu.achievements.setup()
 {
 	// Screen fades

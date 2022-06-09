@@ -122,7 +122,7 @@ function void RenderHUD()
 			
 			for (u32 value = achievementsplus.sharedMemory.coinsSaved;;)
 			{
-				HUD.drawSmallDigit(value % 10, px + 0x28, py + 0x08, renderQueue)
+				HUD.drawSmallDigit(value % 10, px + 0x2c, py + 0x08, renderQueue)
 				px -= 0x08
 				value /= 10
 				
