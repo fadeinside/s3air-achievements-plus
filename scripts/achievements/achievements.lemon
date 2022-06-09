@@ -41,7 +41,10 @@ function void fn05e6c0()
 	if (objA0.base_state == 0x02)
 	{
 		if (outro.ending_type == 0x02)
+		{
 			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_KNUX)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_KNUX)
+		}
 		else
 			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_KNUX)
 	}
@@ -59,7 +62,10 @@ function void fn05d86a()
 		if (isMainCharacter(CHARACTER_SONIC))
 		{
 			if (outro.ending_type == 0x02)
+			{
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_SONIC)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_SONIC)
+			}
 			else
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_SONIC)
 		}
@@ -67,7 +73,10 @@ function void fn05d86a()
 		else if (isMainCharacter(CHARACTER_TAILS))
 		{
 			if (outro.ending_type == 0x02)
+			{
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_HYPER_TAILS)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_TAILS)
+			}
 			else
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_LONGPLAY_TAILS)
 		}
