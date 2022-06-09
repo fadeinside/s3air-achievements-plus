@@ -125,6 +125,23 @@ function void LevelResults.Update()
 		
 		if (global.zone_act == 0x0b00 && !achievementsplus.deathless_dez.tempValue0) 
 			achievementsplus.deathless_dez.tempValue0 |= 0x10
+		
+		if (global.zone == 0x06)
+		{
+			// achievementsplus.right_lbz.tempValue0:
+			// - 0x00 - Initialization / Conditions are met (Achievement can be received)
+			// - 0x05 - Conditions violated (Achievement cannot be received)
+			// - 0x10 - All conditions are successfully met (Achievement can be received)
+			
+			if (!achievementsplus.right_lbz.tempValue0)
+			{
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_RIGHT_BASE_ZONE)
+				achievementsplus.right_lbz.tempValue0 |= 0x10
+			}
+			
+			if (global.zone_act == 0x0600 && achievementsplus.right_lbz.tempValue0)
+				achievementsplus.right_lbz.tempValue0 = 0x00
+		}
 	}
 	
 	// Call the base function
@@ -271,6 +288,12 @@ function void UpdateCameraBoundsInLevel()
 	if (global.zone_act == 0x0100 && (s16[0xffffb000 + 0x14] >= 780 && s16[0xffffb000 + 0x14] <= 915) && (s16[0xffffb000 + 0x10] >= 9570 && s16[0xffffb000 + 0x10] <= 10060))
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HYDROPOLIS_TREASURE)
 	
+	if (global.zone == 0x06)
+	{
+		if (control.pad1.pressed & (CONTROL_LEFT))
+			achievementsplus.right_lbz.tempValue0 |= 0x05
+	}
+	
 	// Call the base function
 	base.UpdateCameraBoundsInLevel()
 }
@@ -385,16 +408,6 @@ function void fn060ece()
 	{
 		UnloadObject()
 	}
-}
-
-//@ Function taken from sonic3air_dev/scripts/level/13_dez/level_dez.lemon
-//# address-hook(0x059352) end(0x059358)
-function void InitLevelTiles.DEZ1()
-{
-	achievementsplus.deathless_dez.tempValue0 = 0x00
-	
-	// Call the base function
-	base.InitLevelTiles.DEZ1()
 }
 
 //@ Function taken from sonic3air_dev/scripts/level/13_dez/level_dez_boss.lemon

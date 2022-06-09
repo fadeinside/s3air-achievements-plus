@@ -162,7 +162,7 @@ constant array<string> RETROACHIEVEMENTS_GET_ACHIEVEMENTS_TITLE =
 	"Deathless Egg Zone",
 	"Ice Cap's Treasure",
 	"Just In Time",
-	"", // "Right Base Zone", - UNFINISHED!
+	"Right Base Zone",
 	"Sonic the Ringhog",
 	"Hydrocity's Treasure",
 	"", // "Can't Touch This", - UNFINISHED!

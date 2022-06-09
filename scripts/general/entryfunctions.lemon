@@ -7,6 +7,24 @@ function void EntryFunctions.dataSelect()
 	base.EntryFunctions.dataSelect()
 }
 
+//@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
+function void EntryFunctions.levelSelect()
+{
+	achievementsplus.level_select.tempValue0 |= 0x01
+	
+	// Call the base function
+	base.EntryFunctions.levelSelect()
+}
+
+//@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
+function void EntryFunctions.mainMenuBG()
+{
+	achievementsplus.level_select.tempValue0 = 0x00
+	
+	// Call the base function
+	base.EntryFunctions.mainMenuBG()
+}
+
 function void AchievementsPlus.EntryFunctions.Menu.achievements()
 {
 	EntryFunctions.sharedInit()

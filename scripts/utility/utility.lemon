@@ -85,6 +85,26 @@ function void InitLevelTiles.DEZ1()
 	base.InitLevelTiles.DEZ1()
 }
 
+//@ Function taken from sonic3air_dev/scripts/level/06_lbz/level_lbz.lemon
+//# address-hook(0x053e96) end(0x053f1e)
+function void InitLevelTiles.LBZ1()
+{
+	achievementsplus.right_lbz.tempValue0 = 0x00
+	
+	// Call the base function
+	base.InitLevelTiles.LBZ1()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/06_lbz/level_lbz.lemon
+//# address-hook(0x054348) end(0x054368)
+function void InitLevelTiles.LBZ2()
+{
+	achievementsplus.right_lbz.tempValue0 = 0x00
+	
+	// Call the base function
+	base.InitLevelTiles.LBZ2()
+}
+
 //@ Function taken from sonic3air_dev/scripts/standalone/standalone.lemon
 function void waitForNextFrame()
 {
