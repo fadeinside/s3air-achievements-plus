@@ -44,6 +44,7 @@ global u8 achievementsplus.going_forward.tempValue0	// Check fn00972e() for deta
 global u8 achievementsplus.gm_shield_counter.tempValue0	// Sets the number of changed shields in the Gumball Machine. Check fn060ece() for details
 global u8 achievementsplus.deathless_dez.tempValue0	// Check InitLevelTiles.DEZBossAct() for details
 global u8 achievementsplus.right_lbz.tempValue0	// Check LevelResults.Update() for details
+global u8 achievementsplus.without_hurt_mgz.tempValue0	// Check LevelResults.Update() for details
 
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast

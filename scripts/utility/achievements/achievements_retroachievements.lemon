@@ -165,6 +165,6 @@ constant array<string> RETROACHIEVEMENTS_GET_ACHIEVEMENTS_TITLE =
 	"Right Base Zone",
 	"Sonic the Ringhog",
 	"Hydrocity's Treasure",
-	"", // "Can't Touch This", - UNFINISHED!
+	"Can't Touch This",
 	"Cheater the Cheetah"
 }

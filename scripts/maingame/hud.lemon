@@ -120,6 +120,9 @@ function void RenderHUD()
 			HUD.drawSprite(coinsSprite, px, py, renderQueue)
 			++renderQueue
 			
+			if (achievementsplus.sharedMemory.coinsSaved > 999)
+				px += 0x08
+			
 			for (u32 value = achievementsplus.sharedMemory.coinsSaved;;)
 			{
 				HUD.drawSmallDigit(value % 10, px + 0x2c, py + 0x08, renderQueue)

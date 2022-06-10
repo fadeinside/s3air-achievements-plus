@@ -126,21 +126,31 @@ function void LevelResults.Update()
 		if (global.zone_act == 0x0b00 && !achievementsplus.deathless_dez.tempValue0) 
 			achievementsplus.deathless_dez.tempValue0 |= 0x10
 		
-		if (global.zone == 0x06)
+		else if (global.zone == 0x06)
 		{
 			// achievementsplus.right_lbz.tempValue0:
 			// - 0x00 - Initialization / Conditions are met (Achievement can be received)
 			// - 0x05 - Conditions violated (Achievement cannot be received)
-			// - 0x10 - All conditions are successfully met (Achievement can be received)
+			// - 0x10 - All conditions are successfully met (Achievement received)
 			
 			if (!achievementsplus.right_lbz.tempValue0)
 			{
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_RIGHT_BASE_ZONE)
 				achievementsplus.right_lbz.tempValue0 |= 0x10
 			}
-			
-			if (global.zone_act == 0x0600 && achievementsplus.right_lbz.tempValue0)
+			else if (global.zone_act == 0x0600)
 				achievementsplus.right_lbz.tempValue0 = 0x00
+		}
+		
+		else if (global.zone_act == 0x0200 && !achievementsplus.without_hurt_mgz.tempValue0)
+		{
+			// achievementsplus.without_hurt_mgz.tempValue0:
+			// - 0x00 - Initialization / Conditions are met (Achievement can be received)
+			// - 0x05 - Conditions violated (Achievement cannot be received)
+			// - 0x10 - All conditions are successfully met (Achievement received)
+			
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_CANT_TOUCH_THIS)
+			achievementsplus.without_hurt_mgz.tempValue0 |= 0x10
 		}
 	}
 	

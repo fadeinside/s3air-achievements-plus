@@ -64,3 +64,12 @@ function bool sort(u16 achievementID)
 	
 	return false
 }
+
+function void AchievementsPlus.resetVars()
+{
+	achievementsplus.going_forward.tempValue0 = 0x00
+	achievementsplus.gm_shield_counter.tempValue0 = 0x00
+	achievementsplus.deathless_dez.tempValue0 = 0x00
+	achievementsplus.right_lbz.tempValue0 = 0x00
+	achievementsplus.without_hurt_mgz.tempValue0 = 0x00
+}

@@ -1,6 +1,7 @@
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.dataSelect()
 {
+	AchievementsPlus.resetVars()
 	AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
 	
 	// Call the base function
@@ -10,6 +11,7 @@ function void EntryFunctions.dataSelect()
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.levelSelect()
 {
+	AchievementsPlus.resetVars()
 	achievementsplus.level_select.tempValue0 |= 0x01
 	
 	// Call the base function
@@ -17,8 +19,19 @@ function void EntryFunctions.levelSelect()
 }
 
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
+function void EntryFunctions.actSelect()
+{
+	AchievementsPlus.resetVars()
+	achievementsplus.level_select.tempValue0 |= 0x01
+	
+	// Call the base function
+	base.EntryFunctions.actSelect()
+} 
+
+//@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.mainMenuBG()
 {
+	AchievementsPlus.resetVars()
 	achievementsplus.level_select.tempValue0 = 0x00
 	
 	// Call the base function

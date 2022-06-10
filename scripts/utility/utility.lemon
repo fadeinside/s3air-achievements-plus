@@ -69,17 +69,36 @@ function void Character.updateBonusEffects()
 			if ((char.bonus_effect & char.bonus.ANY_SHIELD) || super.active.tails || super.active)
 				achievementsplus.deathless_dez.tempValue0 |= 0x05
 		}
+		else if (global.zone_act == 0x0200)
+		{
+			if ((char.bonus_effect & char.bonus.ANY_SHIELD) || super.active.tails || super.active)
+				achievementsplus.without_hurt_mgz.tempValue0 |= 0x05
+		}
 	}
 	
 	// Call the base function
 	base.Character.updateBonusEffects()
 }
 
+//@ Function taken from sonic3air_dev/scripts/maingame/character/character.lemon
+function void Character.GettingHurt()
+{
+	if (A0 == 0xffffb000)
+	{
+		if (global.zone_act == 0x0200)
+			achievementsplus.without_hurt_mgz.tempValue0 |= 0x05
+	}
+	
+	// Call the base function
+	base.Character.GettingHurt()
+}
+
 //@ Function taken from sonic3air_dev/scripts/level/13_dez/level_dez.lemon
 //# address-hook(0x059352) end(0x059358)
 function void InitLevelTiles.DEZ1()
 {
-	achievementsplus.deathless_dez.tempValue0 = 0x00
+	if (level.restart == 0x01)
+		achievementsplus.deathless_dez.tempValue0 = 0x00
 	
 	// Call the base function
 	base.InitLevelTiles.DEZ1()
@@ -89,7 +108,8 @@ function void InitLevelTiles.DEZ1()
 //# address-hook(0x053e96) end(0x053f1e)
 function void InitLevelTiles.LBZ1()
 {
-	achievementsplus.right_lbz.tempValue0 = 0x00
+	if (level.restart == 0x01)
+		achievementsplus.right_lbz.tempValue0 = 0x00
 	
 	// Call the base function
 	base.InitLevelTiles.LBZ1()
@@ -99,10 +119,22 @@ function void InitLevelTiles.LBZ1()
 //# address-hook(0x054348) end(0x054368)
 function void InitLevelTiles.LBZ2()
 {
-	achievementsplus.right_lbz.tempValue0 = 0x00
+	if (level.restart == 0x01)
+		achievementsplus.right_lbz.tempValue0 = 0x00
 	
 	// Call the base function
 	base.InitLevelTiles.LBZ2()
+}
+
+//@ Function taken from sonic3air_dev/scripts/level/03_mgz/level_mgz.lemon
+//# address-hook(0x051118) end(0x051120)
+function void InitLevelTiles.MGZ1()
+{
+	if (level.restart == 0x01)
+		achievementsplus.without_hurt_mgz.tempValue0 = 0x00
+	
+	// Call the base function
+	base.InitLevelTiles.MGZ1()
 }
 
 //@ Function taken from sonic3air_dev/scripts/standalone/standalone.lemon

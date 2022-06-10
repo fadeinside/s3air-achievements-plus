@@ -285,7 +285,7 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 	if (competition_mode.active || global.game_mode == 0x44 || global.game_mode == 0x50)
 		return true
 	
-	if (true)
+	if (false)
 	{
 		// Degug mode active
 		if (Game.getSetting(SETTING_DEBUG_MODE))
@@ -338,7 +338,7 @@ function void AchievementsPlus.AchievementsManaget.setupForCoinRewards()
 	u32 tempValue1 = tempValue0 | FLAG_REWARD_CLAIMED	// Reward claimed
 	
 	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
-	s32 tempValue3 = tempValue2 * 12 / 0x03
+	s32 tempValue3 = tempValue2 * 12 / 0x03 + (!tempValue2 ? 0x02 : 0x00)
 	
 	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
 	
