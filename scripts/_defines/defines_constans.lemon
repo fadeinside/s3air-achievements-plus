@@ -27,3 +27,14 @@ constant u32 FLAG_TOAST_SHOWN	= 0xf00000
 
 // Rewards flags
 constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Popups
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Achievements options
+constant u8 POPUP_ACHIEVEMENTS_OPTIONS	= 0x10
+constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x11
+
+// Debug mode is enabled
+constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15

@@ -140,6 +140,7 @@ function void InitLevelTiles.MGZ1()
 //@ Function taken from sonic3air_dev/scripts/standalone/standalone.lemon
 function void waitForNextFrame()
 {
+	AchievementsPlus.Menu.popup.update()
 	AchievementsPlus.AchivementsManager.update()
 	
 	// - Debuging character position

@@ -4,6 +4,12 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	if (achievementsplus.coinRewards.tempValue2)
 		return
 	
+	// Open options menu (popup)
+	if (Input.buttonDown(BUTTON_X))
+	{
+		AchievementsPlus.Menu.popup.show(POPUP_ACHIEVEMENTS_OPTIONS, "Options")
+	}
+	
 	// Back to main menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
@@ -43,6 +49,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	if (hideAchievementsListItems())
 		return
 	
+	// Claim reward
 	if (control.pad1.pressed & CONTROL_START)
 	{
 		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)

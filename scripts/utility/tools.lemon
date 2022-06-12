@@ -73,3 +73,24 @@ function void AchievementsPlus.resetVars()
 	achievementsplus.right_lbz.tempValue0 = 0x00
 	achievementsplus.without_hurt_mgz.tempValue0 = 0x00
 }
+
+//@ Original function taken from sonic3air_dev/scripts/standalone/standalone.lemon
+function void AchievementsPlus.waitForNextFrame()
+{
+	// V-Int
+	VInt.InnerUpdate()
+	
+	// Apply global tint color for screen fades
+	Renderer.setGlobalComponentTint(globalComponentTintColorR, globalComponentTintColorG, globalComponentTintColorB, globalComponentAddedColorR, globalComponentAddedColorG, globalComponentAddedColorB)
+	
+	// Enough for this frame
+	yieldExecution()
+
+	// Start of the next frame: Update controllers
+	{
+		control.pad1.state = Input.getController(0x00)
+		control.pad1.pressed = control.pad1.state & ~Input.getControllerPrevious(0x00)
+		control.pad2.state = Input.getController(0x01)
+		control.pad2.pressed = control.pad2.state & ~Input.getControllerPrevious(0x01)
+	}
+}

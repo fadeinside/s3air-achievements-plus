@@ -118,6 +118,32 @@ function void AchievementsPlus.AchivementsManager.loadPersistentData()
 }
 
 
+// Clean data stored in Persistent Data into Shared Memory.
+function void AchievementsPlus.AchivementsManager.cleanPersistentData(u16 startID, u16 lastID, bool permanent)
+{
+	// Clean data for all Achievements IDs
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		u32 tempValue1 = u32[tempValue0]
+		
+		if (tempValue1 != 0x00)
+		{
+			bool tempValue2 = tempValue1 == (tempValue1 | FLAG_REWARD_CLAIMED)
+			u32[tempValue0] = 0x00
+			
+			if (!permanent && tempValue2)
+				u32[tempValue0] |= FLAG_REWARD_CLAIMED
+			
+			if (AchievementsPlus.AchivementsManager.isAIRAchievement(A) && tempValue2)
+				u32[tempValue0] |= FLAG_REWARD_CLAIMED
+			
+			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
+		}
+	}
+}
+
+
 // Adds a value to the Shared Memory value of the specified achievement.
 function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
 {

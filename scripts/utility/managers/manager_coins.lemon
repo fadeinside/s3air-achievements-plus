@@ -88,3 +88,11 @@ function void AchievementsPlus.RewardsManager.loadPersistendData()
 {
 	System.loadPersistentData(achievementsplus.sharedMemory.coinsAddress, "AchievementsPlus_CoinsSaved", 0x04)
 }
+
+
+// Clean data stored in Persistent Data into Shared Memory
+function void AchievementsPlus.RewardsManager.cleanPersistendData()
+{
+	achievementsplus.sharedMemory.coinsSaved = 0x00
+	System.savePersistentData(achievementsplus.sharedMemory.coinsAddress, "AchievementsPlus_CoinsSaved", 0x04)
+}

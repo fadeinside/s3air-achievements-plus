@@ -1,6 +1,8 @@
 {
 	// ----- MENU BACKGROUND ----- //
 	
+	// Black background
+	"menu_background_5": { "File": "menu/background/menu_background_black.png", "Rect": "0,0,496,224", "Center": "248,0" },
 	// Orange background
 	"menu_background_0": { "File": "menu/background/menu_background_orange.png", "Rect": "0,0,496,224", "Center": "248,0" },
 	// Cyan background
@@ -73,6 +75,13 @@
 	
 	// Glow
 	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "93,18,17,17", "Center": "8,8" }, 
+	
+	
+	
+	// ----- MENU POPUP PANEL ----- //
+	
+	// Popup background
+	"menu_popup_background": { "File": "menu/menu_popup.png", "Rect": "0,0,273,128", "Center": "135,63" },
 	
 	
 	

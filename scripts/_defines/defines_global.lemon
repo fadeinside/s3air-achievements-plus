@@ -46,6 +46,15 @@ global u8 achievementsplus.deathless_dez.tempValue0	// Check InitLevelTiles.DEZB
 global u8 achievementsplus.right_lbz.tempValue0	// Check LevelResults.Update() for details
 global u8 achievementsplus.without_hurt_mgz.tempValue0	// Check LevelResults.Update() for details
 
+// Popup stuff
+global string achievementsplus.popupMenu.tempValue0	// Sets the title for popup
+global u8 achievementsplus.popupMenu.tempValue1	// Sets the ID for popup menu
+global s32 achievementsplus.popupMenu.tempValue2	// Used to animate popup menu
+global s32 achievementsplus.popupMenu.tempValue3	// Used to animate popup menu
+global bool achievementsplus.popupMenu.tempValue4	// Sets true when popup is shown
+global u8 achievementsplus.popupMenu.tempValue5	// Currently selected button in Popup menu 
+global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel button in Popup menu 
+
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast
 global u16 achievementsplus.toast.tempValue1	// Sets the ID of the achievement of the currently shown toast
