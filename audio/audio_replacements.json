@@ -1,4 +1,5 @@
 {
-	// Menu woosh
+	// Achievements menu music
+	// - Source: Sonic Mania Plus
 	"SaveSelect": { "File": "music/SaveSelect.ogg", "LoopStart": 131290, "Type": "Music" }
 }

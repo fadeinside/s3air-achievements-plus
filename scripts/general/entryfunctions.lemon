@@ -1,8 +1,11 @@
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.dataSelect()
 {
-	AchievementsPlus.resetVars()
 	AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
+	achievementsplus.level_select.tempValue0 = 0x00
+	
+	// Call the Init function
+	System.setupCallFrame("AchievementsPlus.Init", "@EntryPoint")
 	
 	// Call the base function
 	base.EntryFunctions.dataSelect()
@@ -11,8 +14,10 @@ function void EntryFunctions.dataSelect()
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.levelSelect()
 {
-	AchievementsPlus.resetVars()
 	achievementsplus.level_select.tempValue0 |= 0x01
+	
+	// Call the Init function
+	System.setupCallFrame("AchievementsPlus.Init", "@EntryPoint")
 	
 	// Call the base function
 	base.EntryFunctions.levelSelect()
@@ -21,8 +26,10 @@ function void EntryFunctions.levelSelect()
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.actSelect()
 {
-	AchievementsPlus.resetVars()
 	achievementsplus.level_select.tempValue0 |= 0x01
+	
+	// Call the Init function
+	System.setupCallFrame("AchievementsPlus.Init", "@EntryPoint")
 	
 	// Call the base function
 	base.EntryFunctions.actSelect()
@@ -31,8 +38,10 @@ function void EntryFunctions.actSelect()
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.mainMenuBG()
 {
-	AchievementsPlus.resetVars()
 	achievementsplus.level_select.tempValue0 = 0x00
+	
+	// Call the Init function
+	System.setupCallFrame("AchievementsPlus.Init", "@EntryPoint")
 	
 	// Call the base function
 	base.EntryFunctions.mainMenuBG()

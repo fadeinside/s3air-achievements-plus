@@ -91,6 +91,7 @@
 	"menu_scrollbar_background": { "File": "menu/menu_scrollbar.png", "Rect": "1,1,3,155", "Center": "0,0" },
 	// Scrollbar icon
 	"menu_scrollbar_icon": { "File": "menu/menu_scrollbar.png", "Rect": "5,1,3,53", "Center": "0,0" },
+	"menu_scrollbar_icon_s3air": { "File": "menu/menu_scrollbar.png", "Rect": "9,1,3,72", "Center": "0,0" },
 	
 	
 	

@@ -57,6 +57,7 @@ global s32 achievementsplus.popupMenu.tempValue3	// Used to animate popup menu
 global bool achievementsplus.popupMenu.tempValue4	// Sets true when popup is shown
 global u8 achievementsplus.popupMenu.tempValue5	// Currently selected button in Popup menu 
 global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel button in Popup menu 
+global u16 achievementsplus.popupMenu.tempValue7	// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
 
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast

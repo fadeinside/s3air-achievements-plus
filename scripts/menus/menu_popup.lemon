@@ -8,6 +8,9 @@ function void AchievementsPlus.Menu.popup.setup()
 	achievementsplus.popupMenu.tempValue5 = 0x00
 	achievementsplus.popupMenu.tempValue6 = 0x00
 	
+	// Re-enable active display
+	VDP.Config.setActiveDisplay(true)
+	
 	// Main loop
 	while (achievementsplus.popupMenu.tempValue4)
 	{

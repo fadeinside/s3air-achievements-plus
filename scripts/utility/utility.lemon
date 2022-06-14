@@ -1,3 +1,32 @@
+//@ Function taken from sonic3air_dev/scripts/menus/levelselect.lemon
+//# address-hook(0x007a74) end(0x007d20)
+//# translated(0x007d64) end(0x007d6a)
+function void LevelSelect()
+{
+	global.zone_act = 0x00
+	FadeOutScreenBlocking()
+
+#if !STANDALONE
+	set_status_register(0x2700)
+#endif
+
+	LevelSelect.init()
+	RenderSprites()	// Added
+	
+	Menu.FadeInAfterInit()
+	
+	// Perform main update now
+	bool running = true
+	while (running)
+	{
+		global.frame_state = 0x16
+		waitForNextFrame()
+	@EntryPoint:
+		
+		running = LevelSelect.innerUpdate()
+	}
+}
+
 //@ Function taken from sonic3air_dev/scripts/menus/dataselect.lemon
 //# address-hook(0x00d1fa) end(0x00d30a)
 function void fn00d1fa()
@@ -156,7 +185,7 @@ function void waitForNextFrame()
 //@ Function taken from sonic3air_dev/scripts/standalone/enginecallbacks.lemon
 function void Init()
 {
-	AchievementsPlus.SharedMemory.loadPersistendData()
+	AchievementsPlus.Init()
 	
 	// Call the base function
 	base.Init()

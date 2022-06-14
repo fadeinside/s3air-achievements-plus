@@ -38,3 +38,6 @@ constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x11
 
 // Debug mode is enabled
 constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15
+
+// Game loaded via Level select
+constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18

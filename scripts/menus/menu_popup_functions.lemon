@@ -18,6 +18,10 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 	py += 50
 	
 	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("Start", "OK", px, py, 0xf0f0)
+	
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
+		return
+	
 	px += 74	// Sprite width
 	px += 0x04	// Addition space
 	
@@ -57,13 +61,26 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 		AchievementsPlus.TextManager.drawText(px, py, "This action cannot be undone!", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
 	}
 	
-	// Content for the Debug enabled menu (Unfinished)
+	// Content for the Debug enabled menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "text 1", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
-		py += 16
-		AchievementsPlus.TextManager.drawText(px, py, "text 1!", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
+		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "until you disable the Debug mode", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "in the settings of Sonic 3 A.I.R.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
 		py += 24
+		
+		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xf0f0)
+	}
+	
+	// Content for the Game via Level select menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "in game via Level or Act select.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xf0f0)
+		py += 38
 		
 		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xf0f0)
 	}
@@ -103,7 +120,7 @@ function void AchievementsPlus.Menu.popup.background()
 	// In other cases, just a black background
 	else
 	{
-		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, 0x00, 0xf000)
+		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xf000)
 	}
 	
 	// Jump-scare animation for background popup

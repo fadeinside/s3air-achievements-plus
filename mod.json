@@ -36,7 +36,19 @@
 					"0": "Disable",
 					"1": "Enable (Default)"
 				}
-			} 
+			},
+			{
+				"Category": "Menu appearance",
+				"InternalName": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
+				"DisplayName": "Show Warning messages:",
+				"Variable": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
+				"DefaultValue": "1",
+				"Options":
+				{
+					"0": "Disable",
+					"1": "Enable (Default)"
+				}
+			}  
 		]
 	}
 }

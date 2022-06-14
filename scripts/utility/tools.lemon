@@ -77,6 +77,8 @@ function void AchievementsPlus.resetVars()
 //@ Original function taken from sonic3air_dev/scripts/standalone/standalone.lemon
 function void AchievementsPlus.waitForNextFrame()
 {
+	AchievementsPlus.AchivementsManager.update()
+	
 	// V-Int
 	VInt.InnerUpdate()
 	
@@ -92,5 +94,23 @@ function void AchievementsPlus.waitForNextFrame()
 		control.pad1.pressed = control.pad1.state & ~Input.getControllerPrevious(0x00)
 		control.pad2.state = Input.getController(0x01)
 		control.pad2.pressed = control.pad2.state & ~Input.getControllerPrevious(0x01)
+	}
+}
+
+function void AchievementsPlus.Init()
+{
+	AchievementsPlus.SharedMemory.loadPersistendData()
+	
+@EntryPoint:
+	AchievementsPlus.resetVars()
+	AchievementsPlus.Menu.popup.close()
+	
+	if (!AchievementsPlus.AchivementsManager.isAchievementsEnabled() && SETTING_ACHIEVEPLUS_WARNING_MESSAGES)
+	{
+		 if (achievementsplus.level_select.tempValue0 & 0x01 && !(achievementsplus.popupMenu.tempValue7 & 0x100))
+			AchievementsPlus.Menu.popup.show(POPUP_VIA_LEVEL_SELECT, "Woah... Wait!")
+		
+		else if (Game.getSetting(SETTING_DEBUG_MODE) && !(achievementsplus.popupMenu.tempValue7 & 0x1000))
+			AchievementsPlus.Menu.popup.show(POPUP_DEBUG_MODE_ENABLED, "Debug mode is enabled...")
 	}
 }
