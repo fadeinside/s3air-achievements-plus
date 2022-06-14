@@ -1,8 +1,11 @@
 // Menus buttons
-global u16 achievementsplus.buttons.setup	// Sets the number of buttons in the menu
-global s16 achievementsplus.buttons.scrollTimer	// Timer before moving on to the next item in the list
 global u8 achievementsplus.buttons.tempValue0	// Used in the animation of the trace of the achievement button
 global u8 achievementsplus.buttons.tempValue1	// Used in the animation of the achievement button arrow
+
+// Scrolling stuff	
+global u16 achievementsplus.scrollList.tempValue0	// Sets the current scroll position in a sorted achievements list 
+global u16 achievementsplus.scrollList.tempValue1	// Sets the current offset limit of the selected button (achieevement) in a sorted achievements list 
+global u8 achievementsplus.scrollList.tempValue2	// Timer before moving on to the next button (achievement) in a sorted achievements list 
 
 // Achievements
 global s16 achievementsplus.achievements.buttonselected	// The currently active button in the Achievements menu
@@ -74,4 +77,3 @@ global u16 achievementsplus.achievements.lastButton	// Sets the ID of the last b
 global u16 achievementsplus.achievements.nextButton	// Sets the ID of the next button (next achievement) in a sorted achievements list
 global u16 achievementsplus.achievements.preButton	// Sets the ID of the previous button (previous achievement) in a sorted achievements list
 global u16 achievementsplus.achievements.totalButtons	// Sets the total number of available buttons (achievements) in a sorted achievements list
-global u16 achievementsplus.achievements.currentButtonScroll	// Sets the current scroll position in a sorted achievements list

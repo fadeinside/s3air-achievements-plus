@@ -209,12 +209,9 @@ function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
 	
 	px += 232
 	
-	s16 scrollOffset
-	if (achievementsplus.achievements.currentButtonScroll >= 0x07)
-		scrollOffset = (143 / achievementsplus.achievements.totalButtons) * (achievementsplus.achievements.currentButtonScroll - 0x06)
+	s16 tempValue0 = (achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1) * (143 / achievementsplus.achievements.totalButtons)
 	
-	if (achievementsplus.achievements.totalButtons > 0x00)
-		Renderer.drawCustomSprite("menu_scrollbar_icon", px, 52 + scrollOffset, 0x00, 0x00, 0xf000)
+	Renderer.drawCustomSprite("menu_scrollbar_icon", px, 52 + tempValue0, 0x00, 0x00, 0xf000)
 	Renderer.drawCustomSprite("menu_scrollbar_background", px, py, 0x00, 0x00, 0xf000)
 }
 
@@ -330,11 +327,8 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 	}
 	
 	// Scrolling list
-	if (achievementsplus.achievements.currentButtonScroll >= 0x07)
-	{
-		for (u16 A = 0x00; A <= achievementsplus.achievements.currentButtonScroll - 0x07; ++A)
-			py -= 18
-	}
+	for (u16 A = 0x00; A < achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1; ++A)
+		py -= 18
 	
 	py += 0x06
 	

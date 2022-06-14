@@ -1,6 +1,7 @@
 // The main function is control management in the menu.
 function void AchievementsPlus.Menu.achievements.updateControl()
 {
+	// Do not execute the next code if claiming is performed
 	if (achievementsplus.coinRewards.tempValue2)
 		return
 	
@@ -18,36 +19,9 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		else
 			Game.returnToMainMenu()
 		
+		// Reset previous gamemode
 		achievementsplus.game_mode.tempValue0 = 0x00
 	}
-	
-	// Tab's selection
-	u8 maxTabs = achievementsplus.tabsPanel.tempValue5 > 0x00 ? 0x02 : 0x01
-	if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
-	{
-		playSound(0x5b)
-		
-		if (control.pad1.pressed & CONTROL_LEFT)
-		{
-			if (achievementsplus.achievements.tabselected != 0x00)
-				--achievementsplus.achievements.tabselected
-			else
-				achievementsplus.achievements.tabselected = maxTabs
-		}
-		
-		if (control.pad1.pressed & CONTROL_RIGHT)
-		{
-			if (achievementsplus.achievements.tabselected < maxTabs)
-				++achievementsplus.achievements.tabselected
-			else
-				achievementsplus.achievements.tabselected = 0x00
-		}
-		
-		achievementsplus.achievements.sortNeedUpdate = true
-	}
-	
-	if (hideAchievementsListItems())
-		return
 	
 	// Claim reward
 	if (control.pad1.pressed & CONTROL_START)
@@ -61,30 +35,62 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 			achievementsplus.coinRewards.tempValue2 |= 0x01
 	}
 	
-	// Simple implementation of fast scrolling
-	if (control.pad1.state & (CONTROL_UP | CONTROL_DOWN))
+	// Do not execute the next code if the list is empty
+	if (hideAchievementsListItems())
+		return
+	
+	// Tab's selection
+	u8 maxTabs = achievementsplus.tabsPanel.tempValue5 > 0x00 ? 0x02 : 0x01
+	if (control.pad1.pressed == CONTROL_LEFT || control.pad1.pressed == CONTROL_RIGHT) 
 	{
-		++achievementsplus.buttons.scrollTimer
-		if (achievementsplus.buttons.scrollTimer >= 30)
+		playSound(0x5b)
+		
+		if (control.pad1.pressed == CONTROL_LEFT)
+		{
+			if (achievementsplus.achievements.tabselected != 0x00)
+				--achievementsplus.achievements.tabselected
+			else
+				achievementsplus.achievements.tabselected = maxTabs
+		}
+		
+		else if (control.pad1.pressed == CONTROL_RIGHT)
+		{
+			if (achievementsplus.achievements.tabselected < maxTabs)
+				++achievementsplus.achievements.tabselected
+			else
+				achievementsplus.achievements.tabselected = 0x00
+		}
+		
+		// Update sorting data
+		achievementsplus.achievements.sortNeedUpdate = true
+	}
+	
+	// Simple implementation of fast scrolling
+	if (control.pad1.state & CONTROL_DPAD)
+	{
+		++achievementsplus.scrollList.tempValue2
+		if (achievementsplus.scrollList.tempValue2 >= 30)
 		{
 			control.pad1.pressed = control.pad1.state
-			achievementsplus.buttons.scrollTimer = 24
+			achievementsplus.scrollList.tempValue2 = 24
 		}
 	}
 	else
 	{
-		achievementsplus.buttons.scrollTimer = 0x00
+		achievementsplus.scrollList.tempValue2 = 0x00
 	}
 	
-	// Select an achievement from a sorted list
-	if ((control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN)) && achievementsplus.achievements.totalButtons > 0x01)
+	// Select an button (achievement) in a sorted list
+	if ((control.pad1.pressed == CONTROL_UP || control.pad1.pressed & CONTROL_DOWN) && achievementsplus.achievements.totalButtons > 0x01)
 	{
 		playSound(0x5b)
 		
-		if (control.pad1.pressed & CONTROL_UP)
+		if (control.pad1.pressed == CONTROL_UP)
 		{
+			// The currently selected button (achievement) is not the first in the sorted list
 			if (achievementsplus.achievements.buttonselected != achievementsplus.achievements.firstButton)
 			{
+				// Define the previous button (achievement) in the sorted list
 				for (u16 A = achievementsplus.achievements.buttonselected; A >= achievementsplus.listPanel.tempValue0; --A)
 				{
 					if (sort(A) && achievementsplus.achievements.buttonselected > A)
@@ -95,10 +101,18 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 				}
 			}
 			
+			// The currently selected button (achievement) is more than the first in the sorted list
 			if (achievementsplus.achievements.buttonselected > achievementsplus.achievements.firstButton)
 			{
-				--achievementsplus.achievements.currentButtonScroll
+				// Things for scrolling
+				--achievementsplus.scrollList.tempValue0
+				if (achievementsplus.scrollList.tempValue1 != 0x00)
+					--achievementsplus.scrollList.tempValue1
+				
+				// Set the previous button as the current one
 				achievementsplus.achievements.buttonselected = achievementsplus.achievements.preButton
+				
+				// Define the next button (achievement) in the sorted list
 				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 				{
 					if (sort(A) && achievementsplus.achievements.buttonselected < A)
@@ -108,54 +122,65 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 					}
 				}
 			}
+			// The currently selected button (achievement) is the first button
 			else
 			{
-				achievementsplus.achievements.currentButtonScroll = achievementsplus.achievements.totalButtons - 0x01
+				// Things for scrolling
+				achievementsplus.scrollList.tempValue0 = achievementsplus.achievements.totalButtons - 0x01
+				achievementsplus.scrollList.tempValue1 = min(achievementsplus.achievements.totalButtons - 0x01, 0x07)
 				
+				// Set positions for buttons
 				achievementsplus.achievements.preButton = achievementsplus.achievements.firstButton
-				achievementsplus.achievements.nextButton = achievementsplus.achievements.firstButton
-				achievementsplus.achievements.buttonselected = achievementsplus.buttons.setup
+				achievementsplus.achievements.nextButton = achievementsplus.achievements.lastButton
+				achievementsplus.achievements.buttonselected = achievementsplus.achievements.lastButton
 			}
 		}
 		
-		if (control.pad1.pressed & CONTROL_DOWN)
+		else if (control.pad1.pressed & CONTROL_DOWN)
 		{
+			// Set the previous button as the current one
 			achievementsplus.achievements.preButton = achievementsplus.achievements.buttonselected
 			
-			if (achievementsplus.achievements.buttonselected < achievementsplus.buttons.setup)
+			// The currently selected button (achievement) is not the last one in the sorted list
+			if (achievementsplus.achievements.buttonselected < achievementsplus.achievements.lastButton)
 			{
-				if (achievementsplus.achievements.buttonselected == achievementsplus.achievements.lastButton)
+				// Things for scrolling
+				++achievementsplus.scrollList.tempValue0
+				if (achievementsplus.scrollList.tempValue1 != min(achievementsplus.achievements.totalButtons - 0x01, 0x07))
+					++achievementsplus.scrollList.tempValue1
+				
+				// Define the next button (achievement) in the sorted list
+				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 				{
-					achievementsplus.achievements.currentButtonScroll = achievementsplus.achievements.totalButtons
-					achievementsplus.achievements.buttonselected = achievementsplus.buttons.setup
-				}
-				else
-				{
-					++achievementsplus.achievements.currentButtonScroll
-					for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+					if (sort(A) && achievementsplus.achievements.buttonselected < A)
 					{
-						if (sort(A) && achievementsplus.achievements.buttonselected < A)
-						{
-							achievementsplus.achievements.nextButton = A
-							achievementsplus.achievements.buttonselected = A
-							break
-						}
+						achievementsplus.achievements.nextButton = A
+						achievementsplus.achievements.buttonselected = A
+						break
 					}
 				}
 			}
+			// The currently selected button (achievement) is the last button
 			else
 			{
-				achievementsplus.achievements.currentButtonScroll = 0x00
+				// Things for scrolling
+				achievementsplus.scrollList.tempValue0 = 0x00
+				achievementsplus.scrollList.tempValue1 = 0x00
+				
+				// Set positions for buttons
+				achievementsplus.achievements.preButton = achievementsplus.achievements.lastButton
+				achievementsplus.achievements.nextButton = achievementsplus.achievements.firstButton
 				achievementsplus.achievements.buttonselected = achievementsplus.achievements.firstButton
 			}
 		}
 		
+		// Reset some animations for buttons
 		achievementsplus.buttons.tempValue0 = 192
 		achievementsplus.buttons.tempValue1 = 0x00
+		
+		// Setup content for Detail panel
 		AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
 	}
-	
-	//debugLog(stringformat("Current : %d. Sorted :: First : %d, Last : %d, Next : %d, Back : %d , Total : %d, Scroll : %d", achievementsplus.achievements.buttonselected, achievementsplus.achievements.firstButton, achievementsplus.achievements.lastButton, achievementsplus.achievements.nextButton, achievementsplus.achievements.preButton, achievementsplus.achievements.totalButtons, achievementsplus.achievements.currentButtonScroll))
 }
 
 
@@ -227,9 +252,9 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		{
 			if (sort(A))
 			{
-				achievementsplus.buttons.setup = A
+				achievementsplus.scrollList.tempValue0 = 0x00
+				achievementsplus.scrollList.tempValue1 = 0x00
 				
-				achievementsplus.achievements.currentButtonScroll = 0x00
 				achievementsplus.achievements.buttonselected = achievementsplus.achievements.firstButton
 				
 				achievementsplus.achievements.lastButton = A
@@ -251,9 +276,9 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 	else
 	{
 		// Reset all values if the list is empty
-		achievementsplus.buttons.setup = 0x00
+		achievementsplus.scrollList.tempValue0 = 0x00
+		achievementsplus.scrollList.tempValue1 = 0x00
 		
-		achievementsplus.achievements.currentButtonScroll = 0x00
 		achievementsplus.achievements.buttonselected = 0x00
 		
 		achievementsplus.achievements.firstButton = 0x00
@@ -265,6 +290,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		achievementsplus.coinRewards.tempValue0 = 0x00
 	}
 	
+	// Setup content for Detail panel
 	AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
 	
 	// After all these steps, reset the sort update if it is active
