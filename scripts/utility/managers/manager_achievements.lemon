@@ -118,36 +118,10 @@ function void AchievementsPlus.AchivementsManager.loadPersistentData()
 }
 
 
-// Clean data stored in Persistent Data into Shared Memory.
-function void AchievementsPlus.AchivementsManager.cleanPersistentData(u16 startID, u16 lastID, bool permanent)
-{
-	// Clean data for all Achievements IDs
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
-		u32 tempValue1 = u32[tempValue0]
-		
-		if (tempValue1 != 0x00)
-		{
-			bool tempValue2 = tempValue1 == (tempValue1 | FLAG_REWARD_CLAIMED)
-			u32[tempValue0] = 0x00
-			
-			if (!permanent && tempValue2)
-				u32[tempValue0] |= FLAG_REWARD_CLAIMED
-			
-			if (AchievementsPlus.AchivementsManager.isAIRAchievement(A) && tempValue2)
-				u32[tempValue0] |= FLAG_REWARD_CLAIMED
-			
-			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
-		}
-	}
-}
-
-
 // Adds a value to the Shared Memory value of the specified achievement.
 function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
 {
-	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled() || !sortAchievements(achievementID))
 		return
 	
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
@@ -156,7 +130,7 @@ function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achiev
 	
 	if (tempValue1 || tempValue2)
 	{
-		assert(false, "")
+		assert(false, "(205) An unexpected error has occurred. Read the documentation for using Achievements data.")
 		return
 	}
 	
@@ -176,7 +150,7 @@ function u32 AchievementsPlus.AchivementsManager.getAchievementValue(u16 achieve
 // Sets the status to complete for the specified achievement.
 function void AchievementsPlus.AchivementsManager.setAchievementComplete(u16 achievementID)
 {
-	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled() || !sortAchievements(achievementID))
 		return
 	
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
@@ -205,6 +179,32 @@ function bool AchievementsPlus.AchivementsManager.isAchievementComplete(u16 achi
 }
 
 
+// Clean data stored in Persistent Data into Shared Memory.
+function void AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(u16 startID, u16 lastID, bool permanent)
+{
+	// Clean data for all Achievements IDs
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		u32 tempValue1 = u32[tempValue0]
+		
+		if (tempValue1 != 0x00)
+		{
+			bool tempValue2 = tempValue1 == (tempValue1 | FLAG_REWARD_CLAIMED)
+			u32[tempValue0] = 0x00
+			
+			if (!permanent && tempValue2)
+				u32[tempValue0] |= FLAG_REWARD_CLAIMED
+			
+			if (AchievementsPlus.AchivementsManager.isAIRAchievement(A) && tempValue2)
+				u32[tempValue0] |= FLAG_REWARD_CLAIMED
+			
+			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
+		}
+	}
+}
+
+
 // Returns the total number of completed/all achievements by the specified achievement ID range.
 function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnComplete)
 {
@@ -213,7 +213,7 @@ function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16
 	
 	for (u16 A = startID; A <= lastID; ++A)
 	{
-		if (sort(A))
+		if (sortAchievementsList(A))
 		{
 			++tempValue0
 			if (AchievementsPlus.AchivementsManager.isAchievementComplete(A))
@@ -235,7 +235,7 @@ function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 s
 	
 	for (u16 A = startID; A <= lastID; ++A)
 	{
-		if (sort(A))
+		if (sortAchievementsList(A))
 		{
 			u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
 			
@@ -316,7 +316,7 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 		// Game loaded from Level select
 		if (achievementsplus.level_select.tempValue0 & 0x01)
 			return false
-		
+	
 		// Debug mode active
 		if (Game.getSetting(SETTING_DEBUG_MODE))
 			return false

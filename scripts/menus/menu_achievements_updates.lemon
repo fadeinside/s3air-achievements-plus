@@ -93,7 +93,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 				// Define the previous button (achievement) in the sorted list
 				for (u16 A = achievementsplus.achievements.buttonselected; A >= achievementsplus.listPanel.tempValue0; --A)
 				{
-					if (sort(A) && achievementsplus.achievements.buttonselected > A)
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected > A)
 					{
 						achievementsplus.achievements.preButton = A
 						break
@@ -115,7 +115,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 				// Define the next button (achievement) in the sorted list
 				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 				{
-					if (sort(A) && achievementsplus.achievements.buttonselected < A)
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected < A)
 					{
 						achievementsplus.achievements.nextButton = A
 						break
@@ -152,7 +152,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 				// Define the next button (achievement) in the sorted list
 				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 				{
-					if (sort(A) && achievementsplus.achievements.buttonselected < A)
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected < A)
 					{
 						achievementsplus.achievements.nextButton = A
 						achievementsplus.achievements.buttonselected = A
@@ -227,7 +227,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 	// Define the number of available buttons (achievements) in sorted achievements
 	for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 	{
-		if (sort(A))
+		if (sortAchievementsList(A))
 			++achievementsplus.achievements.totalButtons
 		
 		if (A >= achievementsplus.listPanel.tempValue1)
@@ -240,7 +240,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		// Define the first button (first achievement) in the sorted achievements
 		for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 		{
-			if (sort(A))
+			if (sortAchievementsList(A))
 			{
 				achievementsplus.achievements.firstButton = A
 				break
@@ -250,7 +250,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		// Define the last button (last achievement) in the sorted achievements and the rest of the dependent
 		for (u16 A = achievementsplus.listPanel.tempValue1; A >= achievementsplus.listPanel.tempValue0; --A)
 		{
-			if (sort(A))
+			if (sortAchievementsList(A))
 			{
 				achievementsplus.scrollList.tempValue0 = 0x00
 				achievementsplus.scrollList.tempValue1 = 0x00
@@ -266,7 +266,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		// Define the next button (next achievement) in the sorted achievements
 		for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 		{
-			if (sort(A))
+			if (sortAchievementsList(A))
 			{
 				achievementsplus.achievements.nextButton = A
 				break

@@ -5,7 +5,24 @@ constant array<u16> SONIC3AIR_GET_ACHIEVEMENTS_BUILDINIDS =
 
 constant array<string> SONIC3AIR_GET_ACHIEVEMENTS_STARS =
 {
-	"10000", "11000", "11100", "11110", "11110", "11100", "11111", "11110", "11100", "11100", "11110", "11100", "11000", "11110", "11100", "11110", "11111", "11110", "11111", "11110"
+	"10000", // "Attracted to shiny things"
+	"11100", // "Double dose of stars"
+	"11100", // "Old-fashioned life insurance"
+	"11110", // "Going Hyper"
+	"11111", // "Score millionaire"
+	"11100", // "Electrofishing"
+	"11111", // "Longplay"
+	"11000", // "Tidied up the place"
+	"11100", // "Is there an exit up there"
+	"11111", // "Jackpot"
+	"11110", // "Bursting through the jungle"
+	"11100", // "Attracted to giant shiny things"
+	"11100", // "Greedy snowboarder"
+	"11110", // "Once see the sunrise"
+	"11110", // "Fluffy fur must not get wet"
+	"11111", // "Display smasher" 
+	"11100", // "Squirrels on a plane"
+	"11110" // "No touchy"
 }
 
 constant array<string> SONIC3AIR_GET_ACHIEVEMENTS_DESCRIPTION =

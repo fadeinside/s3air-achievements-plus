@@ -57,9 +57,24 @@ function bool hideAchievementsListItems()
 	return false
 }
 
-function bool sort(u16 achievementID)
+function bool sortAchievementsList(u16 achievementID)
 {
-	if (AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00) != "")
+	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
+	
+	if (tempValue0 == "@Hidden" || tempValue0 == "@Secret")
+		return false
+	
+	if (tempValue0 != "")
+		return true
+	
+	return false
+}
+
+function bool sortAchievements(u16 achievementID)
+{
+	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
+	
+	if (tempValue0 != "")
 		return true
 	
 	return false

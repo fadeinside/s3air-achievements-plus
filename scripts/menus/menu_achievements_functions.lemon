@@ -209,7 +209,7 @@ function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
 	
 	px += 232
 	
-	s16 tempValue0 = (achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1) * (143 / achievementsplus.achievements.totalButtons)
+	u16 tempValue0 = (achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1) * (143 / achievementsplus.achievements.totalButtons)
 	
 	if (achievementsplus.achievements.tabselected == 0x00 && achievementsplus.scrollList.tempValue0 > 0x07)
 		tempValue0 += 0x01
@@ -340,7 +340,7 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 	// Main render loop
 	for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
 	{
-		if (sort(A))
+		if (sortAchievementsList(A))
 		{
 			if (!(py > 178 || py < 52))
 			{

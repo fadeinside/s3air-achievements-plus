@@ -289,6 +289,19 @@ function void fn049fe4()
 //# address-hook(0x01c38a) end(0x01c3f4)
 function void UpdateCameraBoundsInLevel()
 {
+	s16 playerX = s16[0xffffb000 + 0x10]
+	s16 playerY = s16[0xffffb000 + 0x14]
+		
+	if (global.zone == 0x07 && playerY < -0x20)
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_KING_OF_THE_HILL)
+	
+	if (global.zone_act == 0x0501 && (playerY >= 56 && playerY <= 1064) && (playerX >= 16300 && playerX <= 16468))
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_ICE_CAP_TREASURE)
+	
+	if (global.zone_act == 0x0100 && (playerY >= 800 && playerY <= 896) && (playerX >= 9584 && playerX <= 10040))
+		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HYDROPOLIS_TREASURE)
+	
+	/*
 	if (global.zone == 0x07 && s16[0xffffb000 + 0x14] < -0x20)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_KING_OF_THE_HILL)
 	
@@ -297,7 +310,7 @@ function void UpdateCameraBoundsInLevel()
 	
 	if (global.zone_act == 0x0100 && (s16[0xffffb000 + 0x14] >= 780 && s16[0xffffb000 + 0x14] <= 915) && (s16[0xffffb000 + 0x10] >= 9570 && s16[0xffffb000 + 0x10] <= 10060))
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HYDROPOLIS_TREASURE)
-	
+	*/
 	if (global.zone == 0x06)
 	{
 		if (control.pad1.pressed & (CONTROL_LEFT))
