@@ -16,6 +16,21 @@ function void AchievementsPlus.Menu.achievements.items()
 	AchievementsPlus.Menu.achievements.items.tabsPanel(px, py)
 	AchievementsPlus.Menu.achievements.items.userStats(px, py)
 	
+	if (hideAchievementsListItems())
+	{
+		// Text that will be visible if the list is empty
+		px = getScreenWidth() / 0x02
+		py = getScreenHeight() / 0x02
+		
+		string text = "It looks like the list is empty."
+		string text1 = ""
+		
+		py += 0x08
+		AchievementsPlus.TextManager.drawText(px, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
+		AchievementsPlus.TextManager.drawText(px, py + 0x08, text1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
+		return
+	}
+	
 	AchievementsPlus.Menu.achievements.items.listPanel(px, py)
 	AchievementsPlus.Menu.achievements.items.infoPanel(px, py)
 	
@@ -136,7 +151,8 @@ function void AchievementsPlus.Menu.achievements.items.tabs.drawTab(string icon,
 	
 	// Progress tab
 	py += 0x08
-	AchievementsPlus.TextManager.drawTextWithShadow(px, py, stringformat("%d/%d", totalCompleted, totalAchievements), FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, renderQueue + 0x01)
+	string tempValue1 = totalCompleted == totalAchievements ? "100%" : stringformat("%d/%d", totalCompleted, totalAchievements)
+	AchievementsPlus.TextManager.drawTextWithShadow(px, py, tempValue1, FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, renderQueue + 0x01)
 	
 	// Coins icon if the reward in one of the achievements of the selected tab is not claimed
 	if (totalNonClaimed > 0x00)
@@ -186,7 +202,7 @@ function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
 		posX += 12
 		u16 tempValue0 = System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected))
 		u16 tempValue1 = System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected + 0x03))
-		string tempValue2 = stringformat("%d/%d", tempValue0, tempValue1)
+		string tempValue2 = tempValue0 == tempValue1 ? " 100%" : stringformat("%d/%d", tempValue0, tempValue1)
 		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x01, tempValue2, FONT_OXYSMALL, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
 		
 		// Text "Competition"
@@ -204,9 +220,6 @@ function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
 // The function draws a scrollbar based on the position of the selected button in the list.
 function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
 {
-	if (hideAchievementsListItems())
-		return
-	
 	px += 232
 	
 	u16 tempValue0 = (achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1) * (143 / achievementsplus.achievements.totalButtons)
@@ -222,7 +235,7 @@ function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
 
 
 // The function renders the rating of the specified achievement.
-function void AchievementsPlus.Menu.achievements.items.achievementsRating(s16 px, s16 py, u16 achievementID, u16 renderQueue)
+function void AchievementsPlus.Menu.achievements.items.drawRating(s16 px, s16 py, u16 achievementID, u16 renderQueue)
 {
 	u8 tempValue0 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementID)
 	
@@ -230,7 +243,7 @@ function void AchievementsPlus.Menu.achievements.items.achievementsRating(s16 px
 	{
 		Renderer.drawCustomSprite(stringformat("menu_icon_star%d", A + 0x01), px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 		
-		// Offset for the net star
+		// Offset for the next star
 		px += 0x0a
 	}
 	
@@ -247,9 +260,6 @@ function void AchievementsPlus.Menu.achievements.items.achievementsRating(s16 px
 // The main function of rendering the achievement details panel.
 function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 {
-	if (hideAchievementsListItems())
-		return
-	
 	px = getScreenWidth() - (getScreenExtend() - 40) - 0x06
 	py += 0x06
 	
@@ -272,7 +282,7 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	px -= 77
 	py += 12
 	if (achievementsplus.infoPanel.tempValue0 != "")
-		AchievementsPlus.Menu.achievements.items.achievementsRating(px, py, achievementsplus.achievements.buttonselected, 0xf001)
+		AchievementsPlus.Menu.achievements.items.drawRating(px, py, achievementsplus.achievements.buttonselected, 0xf001)
 	
 	// Achievement title
 	py += 20
@@ -316,21 +326,6 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 // The main function of rendering the list of achievements.
 function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 {
-	// Text that will be visible if the list is empty
-	if (hideAchievementsListItems())
-	{
-		px = getScreenWidth() / 0x02
-		py = getScreenHeight() / 0x02
-		
-		string text = "It looks like the list is empty."
-		string text1 = ""
-		
-		py += 0x08
-		AchievementsPlus.TextManager.drawText(px, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
-		AchievementsPlus.TextManager.drawText(px, py + 0x08, text1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x0d2664ff, 0xf001)
-		return
-	}
-	
 	// Scrolling list
 	for (u16 A = 0x00; A < achievementsplus.scrollList.tempValue0 - achievementsplus.scrollList.tempValue1; ++A)
 		py -= 18
@@ -370,7 +365,7 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 				// Achievement rating
 				s16 posX = px + 153
 				s16 posY = py + 0x08
-				AchievementsPlus.Menu.achievements.items.achievementsRating(posX, posY, A, 0xf001)
+				AchievementsPlus.Menu.achievements.items.drawRating(posX, posY, A, 0xf001)
 				
 				// Achievement status
 				posY += 0x01

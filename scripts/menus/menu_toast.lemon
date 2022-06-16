@@ -57,7 +57,7 @@ function void AchievementsPlus.Menu.toast.overlay()
 	Renderer.drawCustomSprite("menu_icon_status_completed15x", px - 20, py + 0x09, 0x00, SPRITE_FLAG_PRIO, 0xffff)
 	
 	// Achievement rating
-	AchievementsPlus.Menu.achievements.items.achievementsRating(px - 85, py + 19, achievementsplus.toast.tempValue1, 0xffff)
+	AchievementsPlus.Menu.achievements.items.drawRating(px - 85, py + 19, achievementsplus.toast.tempValue1, 0xffff)
 	
 	// Achievement title
 	AchievementsPlus.TextManager.drawText(px - 40, py + 0x08, achievementsplus.toast.tempValue0, FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffff)

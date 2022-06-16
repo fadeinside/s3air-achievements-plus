@@ -35,13 +35,9 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 			achievementsplus.coinRewards.tempValue2 |= 0x01
 	}
 	
-	// Do not execute the next code if the list is empty
-	if (hideAchievementsListItems())
-		return
-	
 	// Tab's selection
 	u8 maxTabs = achievementsplus.tabsPanel.tempValue5 > 0x00 ? 0x02 : 0x01
-	if (control.pad1.pressed == CONTROL_LEFT || control.pad1.pressed == CONTROL_RIGHT) 
+	if (control.pad1.pressed == CONTROL_LEFT || control.pad1.pressed == CONTROL_RIGHT)
 	{
 		playSound(0x5b)
 		
@@ -64,6 +60,10 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		// Update sorting data
 		achievementsplus.achievements.sortNeedUpdate = true
 	}
+	
+	// Do not execute the next code if the list is empty
+	if (hideAchievementsListItems())
+		return
 	
 	// Simple implementation of fast scrolling
 	if (control.pad1.state & CONTROL_DPAD)
@@ -179,7 +179,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		achievementsplus.buttons.tempValue1 = 0x00
 		
 		// Setup content for Detail panel
-		AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
+		AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
 	}
 }
 
@@ -290,10 +290,13 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 		achievementsplus.coinRewards.tempValue0 = 0x00
 	}
 	
-	// Setup content for Detail panel
-	AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
+	// Reset some animations for buttons
+	achievementsplus.buttons.tempValue0 = 192
+	achievementsplus.buttons.tempValue1 = 0x00
 	
-	// After all these steps, reset the sort update if it is active
-	if (achievementsplus.achievements.sortNeedUpdate)
-		achievementsplus.achievements.sortNeedUpdate = false
+	// Setup content for Detail panel
+	AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
+	
+	// After all these steps, reset the sort update
+	achievementsplus.achievements.sortNeedUpdate = false
 }

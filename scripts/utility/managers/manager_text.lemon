@@ -533,7 +533,7 @@ function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
 			return 0x02
 		else if (char == "M" || char == "W")
 			return 0x05
-		else if (char == "/")
+		else if (char == "/" || char == "%")
 			return 0x07
 		else
 			return 0x03

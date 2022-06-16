@@ -106,7 +106,7 @@ function void AchievementsPlus.Menu.popup.updateControl()
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
 	{
 		// Close popup
-		if (control.pad1.pressed & CONTROL_START)
+		if (control.pad1.pressed & (CONTROL_START | CONTROL_B))
 		{
 			AchievementsPlus.Menu.popup.close()
 			achievementsplus.popupMenu.tempValue7 |= 0x100
@@ -145,6 +145,20 @@ function void AchievementsPlus.Menu.popup.updateControl()
 }
 
 
+// Shows popup warnings about Debug mode enabled or Game via Level select.
+function void AchievementsPlus.Menu.popup.updateWarnings()
+{
+	if (!AchievementsPlus.AchivementsManager.isAchievementsEnabled() && SETTING_ACHIEVEPLUS_WARNING_MESSAGES)
+	{
+		 if (achievementsplus.level_select.tempValue0 & 0x01 && !(achievementsplus.popupMenu.tempValue7 & 0x100))
+			AchievementsPlus.Menu.popup.show(POPUP_VIA_LEVEL_SELECT, "Woah... Wait!")
+		
+		else if (Game.getSetting(SETTING_DEBUG_MODE) && !(achievementsplus.popupMenu.tempValue7 & 0x1000))
+			AchievementsPlus.Menu.popup.show(POPUP_DEBUG_MODE_ENABLED, "Debug mode is enabled...")
+	}
+}
+
+
 // The main function of the update.
 function void AchievementsPlus.Menu.popup.update()
 {
@@ -168,6 +182,7 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 	achievementsplus.popupMenu.tempValue0 = title
 	achievementsplus.popupMenu.tempValue1 = id
 	
+	Audio.playAudio("Resume", AudioContext.CONTEXT_SOUND)
 	achievementsplus.popupMenu.tempValue4 = 0x01
 }
 
@@ -175,6 +190,7 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 // The function resets some variables and closes popup.
 function void AchievementsPlus.Menu.popup.close()
 {
+	Audio.playAudio("BackButton", AudioContext.CONTEXT_SOUND)
 	achievementsplus.popupMenu.tempValue4 = 0x00
 	
 	//achievementsplus.popupMenu.tempValue0 = ""

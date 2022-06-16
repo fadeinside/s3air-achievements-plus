@@ -1,5 +1,17 @@
 {
+	// ----- MUSIC ----- //
+	
 	// Achievements menu music
 	// - Source: Sonic Mania Plus
-	"SaveSelect": { "File": "music/SaveSelect.ogg", "LoopStart": 131290, "Type": "Music" }
+	"SaveSelect": { "File": "music/SaveSelect.ogg", "LoopStart": 131290, "Type": "Music" },
+	
+	// - Source: Sonic 1 / Sonic 2 (2013)
+	"MainMenu": { "File": "music/MainMenu.ogg", "LoopStart": 131290, "Type": "Music" },
+	
+	
+	// ----- SOUNDS ----- //
+	
+	// - Source: Sonic 1 / Sonic 2 (2013)
+	"BackButton": { "File": "sfx/BackButton.ogg", "Type": "Sound" },
+	"Resume": { "File": "sfx/Resume.ogg", "Type": "Sound" }
 }

@@ -80,6 +80,13 @@ function bool sortAchievements(u16 achievementID)
 	return false
 }
 
+// Overload function from Sonic 3: D.A. Garden Edition.
+function void loadupCustomMenu()
+{
+	// Call the base function
+	base.loadupCustomMenu()
+}
+
 function void AchievementsPlus.resetVars()
 {
 	achievementsplus.going_forward.tempValue0 = 0x00
@@ -115,17 +122,9 @@ function void AchievementsPlus.waitForNextFrame()
 function void AchievementsPlus.Init()
 {
 	AchievementsPlus.SharedMemory.loadPersistendData()
+	AchievementsPlus.AchivementsManager.setToastShowFlag()
 	
 @EntryPoint:
 	AchievementsPlus.resetVars()
-	AchievementsPlus.Menu.popup.close()
-	
-	if (!AchievementsPlus.AchivementsManager.isAchievementsEnabled() && SETTING_ACHIEVEPLUS_WARNING_MESSAGES)
-	{
-		 if (achievementsplus.level_select.tempValue0 & 0x01 && !(achievementsplus.popupMenu.tempValue7 & 0x100))
-			AchievementsPlus.Menu.popup.show(POPUP_VIA_LEVEL_SELECT, "Woah... Wait!")
-		
-		else if (Game.getSetting(SETTING_DEBUG_MODE) && !(achievementsplus.popupMenu.tempValue7 & 0x1000))
-			AchievementsPlus.Menu.popup.show(POPUP_DEBUG_MODE_ENABLED, "Debug mode is enabled...")
-	}
+	achievementsplus.popupMenu.tempValue4 = 0x00
 }

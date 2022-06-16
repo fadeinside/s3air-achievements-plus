@@ -32,7 +32,7 @@ function void AchievementsPlus.RewardsManager.update()
 	{
 		playSound(0xb0)
 		
-		AchievementsPlus.AchievementsManaget.setupForCoinRewards()	// Override reward for current achievement
+		AchievementsPlus.RewardsManager.setupForCoinRewards()	// Override reward for current achievement
 		AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()	// Override the total number of achievements for which you need to take the reward
 		
 		achievementsplus.coinRewards.tempValue2 = 0x00
@@ -44,6 +44,7 @@ function void AchievementsPlus.RewardsManager.update()
 function void AchievementsPlus.RewardsManager.addCoins(u32 value)
 {
 	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
+	
 	bool tempValue1 = (tempValue0 + value) >= 65535
 	bool tempValue2 = (tempValue0 + value) <= 0x00
 	
@@ -62,6 +63,7 @@ function void AchievementsPlus.RewardsManager.addCoins(u32 value)
 function void AchievementsPlus.RewardsManager.paidCoins(u32 value)
 {
 	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
+	
 	bool tempValue1 = (tempValue0 - value) >= 65535
 	bool tempValue2 = (tempValue0 - value) <= 0x00
 	
@@ -94,5 +96,33 @@ function void AchievementsPlus.RewardsManager.loadPersistendData()
 function void AchievementsPlus.RewardsManager.cleanPersistendData()
 {
 	achievementsplus.sharedMemory.coinsSaved = 0x00
-	System.savePersistentData(achievementsplus.sharedMemory.coinsAddress, "AchievementsPlus_CoinsSaved", 0x04)
+	AchievementsPlus.RewardsManager.savePersistendData()
 }
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Sets the reward for the selected achievement from the list.
+function void AchievementsPlus.RewardsManager.setupForCoinRewards()
+{
+	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)
+	u32 tempValue1 = tempValue0 | FLAG_REWARD_CLAIMED	// Reward claimed
+	
+	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
+	s32 tempValue3 = (!tempValue2 ? 0x02 : 0x00) + tempValue2 * 12 / 0x03
+	
+	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
+	
+	if (tempValue0 == tempValue1 || !tempValue4 || achievementsplus.achievements.totalButtons == 0x00)
+	{
+		achievementsplus.coinRewards.tempValue0 = 0x00
+		achievementsplus.coinRewards.tempValue1 = tempValue3
+		return
+	}
+	
+	achievementsplus.coinRewards.tempValue0 = tempValue3
+	achievementsplus.coinRewards.tempValue1 = tempValue3
+} 

@@ -18,11 +18,11 @@ function void GameModeControlLoop()
 	while (true)
 	{
 	@EntryPoint:
-	
+		
 	#if GAMEAPP
 		Game.setUnderwaterAudioEffect(0x00)
 	#endif
-	
+		
 		if (GameModeControlLoop.callCustomModes())
 		{
 			GameModeControlLoop.callCustomModes()
@@ -40,11 +40,11 @@ function void GameModeControlLoop()
 			D0.u16 = global.game_mode & 0x7c
 			A0 = u32[0x0004c6 + D0.u16]
 			call A0
-			
-		#if STANDALONE
-			Game.endSkippableCutscene()
-		#endif
 		}
+		
+	#if STANDALONE
+		Game.endSkippableCutscene()
+	#endif
 	}
 }
 
@@ -60,8 +60,19 @@ function bool GameModeControlLoop.callCustomModes()
 		return true
 	}
 	
+	// Sonic 3: D.A. Garden Edition custom modes
+	// Custom targets:
+	// global.game_mode = 0x54	->	Sonic 3: D.A. Garden Edition: Main menu
+	// global.game_mode = 0x58	->	Sonic 3: D.A. Garden Edition: Challenge menu
+	if (Mods.isModActive("Sonic 3: D.A. Garden Edition") && ((global.game_mode & 0x7f) == 0x54 || (global.game_mode & 0x7f) == 0x58))
+	{
+		loadupCustomMenu()
+		return true
+	}
+	
+	// Blue Sphere Time Attack custom modes
 	if (Mods.isModActive("Blue Sphere Time Attack"))
 		return base.GameModeControlLoop.callCustomModes()
-	else
-		return false 
+	
+	return false
 }

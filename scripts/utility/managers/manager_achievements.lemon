@@ -270,6 +270,29 @@ function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementI
 }
 
 
+// Sets the flag of showing toast for all completed achievements that have not yet shown their toasts.
+function void AchievementsPlus.AchivementsManager.setToastShowFlag()
+{
+	u16 startID = ACHIEVEMENTS_START_ID[0x00]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+		
+		bool tempValue2 = tempValue1 == (tempValue1 | FLAG_COMPLETE)
+		bool tempValue3 = tempValue1 == (tempValue1 | FLAG_TOAST_SHOWN)
+		
+		if (tempValue2 && !tempValue3)
+		{
+			u32[tempValue0] |= FLAG_TOAST_SHOWN
+			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
+		}
+	}
+}
+
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Support tools
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -339,42 +362,14 @@ function void AchievementsPlus.AchivementsManager.setupForAchievementsList()
 
 
 // Sets the selected achievement data from the list to temporary variables.
-function void AchievementsPlus.AchievementsManaget.setupForAchievementsDetail()
+function void AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
 {
 	achievementsplus.infoPanel.tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x00)
-	
 	achievementsplus.infoPanel.tempValue1 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x01)
-	
 	achievementsplus.infoPanel.tempValue2 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x02)
-	
 	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
-	
 	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
-	
 	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
 	
-	AchievementsPlus.AchievementsManaget.setupForCoinRewards()
+	AchievementsPlus.RewardsManager.setupForCoinRewards()
 }
-
-
-// Sets the reward for the selected achievement from the list.
-function void AchievementsPlus.AchievementsManaget.setupForCoinRewards()
-{
-	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)
-	u32 tempValue1 = tempValue0 | FLAG_REWARD_CLAIMED	// Reward claimed
-	
-	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
-	s32 tempValue3 = (!tempValue2 ? 0x02 : 0x00) + tempValue2 * 12 / 0x03
-	
-	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
-	
-	if (tempValue0 == tempValue1 || !tempValue4 || achievementsplus.achievements.totalButtons == 0x00)
-	{
-		achievementsplus.coinRewards.tempValue0 = 0x00
-		achievementsplus.coinRewards.tempValue1 = tempValue3
-		return
-	}
-	
-	achievementsplus.coinRewards.tempValue0 = tempValue3
-	achievementsplus.coinRewards.tempValue1 = tempValue3
-} 
