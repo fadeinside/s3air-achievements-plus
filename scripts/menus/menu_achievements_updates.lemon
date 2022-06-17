@@ -5,11 +5,6 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	if (achievementsplus.coinRewards.tempValue2)
 		return
 	
-	if (Input.buttonPressed(BUTTON_Y))
-	{
-		AchievementsPlus.AchivementsManager.setAchievementComplete(achievementsplus.achievements.buttonselected)
-	}
-	
 	// Open options menu (popup)
 	if (Input.buttonDown(BUTTON_X))
 	{
