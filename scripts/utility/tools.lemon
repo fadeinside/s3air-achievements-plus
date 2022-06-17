@@ -87,6 +87,13 @@ function void loadupCustomMenu()
 	base.loadupCustomMenu()
 }
 
+// Overload function from Save Zone Act.
+function void SaveZoneAct.SaveIcon.show()
+{
+	// Call the base function
+	base.SaveZoneAct.SaveIcon.show()
+}
+
 function void AchievementsPlus.resetVars()
 {
 	achievementsplus.going_forward.tempValue0 = 0x00
@@ -121,6 +128,8 @@ function void AchievementsPlus.waitForNextFrame()
 
 function void AchievementsPlus.Init()
 {
+	AchievementsPlus.ManagerVersion.update()
+	
 	AchievementsPlus.SharedMemory.loadPersistendData()
 	AchievementsPlus.AchivementsManager.setToastShowFlag()
 	

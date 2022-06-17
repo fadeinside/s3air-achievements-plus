@@ -1,0 +1,31 @@
+// This file was not auto-generated kek.
+
+declare function void AchievementsPlus.RewardsManager.addCoins(u16 value)
+
+declare function void AchievementsPlus.RewardsManager.paidCoins(u16 value)
+
+declare function void AchievementsPlus.RewardsManager.loadPersistendData()
+
+declare function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 achievementID, u8 parse)
+
+declare function u32 AchievementsPlus.AchivementsManager.getAchievementAddress(u16 achievementID)
+
+declare function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
+
+declare function u32 AchievementsPlus.AchivementsManager.getAchievementValue(u16 achievementID)
+
+declare function void AchievementsPlus.AchivementsManager.setAchievementComplete(u16 achievementID)
+
+declare function bool AchievementsPlus.AchivementsManager.isAchievementComplete(u16 achievementID)
+
+declare function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
+
+declare function bool AchievementsPlus.AchivementsManager.isAIRAchievement(u16 achievementID)
+
+declare function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnCompleted)
+
+declare function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 startID, u16 lastID)
+
+declare function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementID)
+
+declare function void AchievementsPlus.AchivementsManager.loadPersistentData()

@@ -5,3 +5,6 @@ MODS LINKS
 
  -> "Accurate Sonic 2 HUD" by mcginnis03 (panoramhusky), check gamebanana.com page: 
 	https://gamebanana.com/skins/173571
+
+ -> "Save Zone Act" by Fadeinside, check github.com page: 
+	https://github.com/fadeinside/s3air-save-zone-act

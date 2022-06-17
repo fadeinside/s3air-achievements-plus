@@ -42,7 +42,9 @@ function void EntryFunctions.actSelect()
 function void EntryFunctions.mainMenuBG()
 {
 	achievementsplus.level_select.tempValue0 = 0x00
-	AchievementsPlus.resetVars()
+	
+	// Call the Init function
+	System.setupCallFrame("AchievementsPlus.Init", "@EntryPoint")
 	
 	// Call the base function
 	base.EntryFunctions.mainMenuBG()

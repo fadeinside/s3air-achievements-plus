@@ -1,56 +1,3 @@
-// The main function of updating the achievement toasts.
-function void AchievementsPlus.AchivementsManager.update()
-{
-	u16 startID = ACHIEVEMENTS_START_ID[0x01]
-	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
-	
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
-		
-		bool tempValue1 = tempValue0 == (tempValue0 | FLAG_COMPLETE)
-		bool tempValue2 = tempValue0 != (tempValue0 | FLAG_TOAST_SHOWN)
-		
-		if (tempValue1 && tempValue2)
-		{
-			AchievementsPlus.AchivementsManager.showToast(A)
-		}
-	}
-}
-
-
-// The function shows a toast to the currently completed achievement.
-function void AchievementsPlus.AchivementsManager.showToast(u16 achievementID)
-{
-	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
-	
-	if (achievementsplus.toast.tempValue1 == 0x00 || achievementsplus.toast.tempValue1 == achievementID)
-	{
-		achievementsplus.toast.tempValue0 = tempValue0
-		achievementsplus.toast.tempValue1 = achievementID
-		AchievementsPlus.Menu.toast.update()
-	}
-	
-	u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementID)
-	bool tempValue2 = tempValue1 == (tempValue1 | FLAG_TOAST_SHOWN)
-	
-	if (tempValue2 && achievementsplus.toast.tempValue1 != achievementID)
-		return
-	
-	if (achievementsplus.toast.tempValue1 == achievementID && achievementsplus.toast.tempValue2 == 0x05)
-	{
-		u32 tempValue3 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
-		
-		u32[tempValue3] |= FLAG_TOAST_SHOWN
-		System.savePersistentData(tempValue3, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
-		
-		achievementsplus.toast.tempValue0 = ""
-		achievementsplus.toast.tempValue1 = 0x00
-		achievementsplus.toast.tempValue2 = 0x00
-	}
-}
-
-
 // Returns data to be used in the achievement list renderer.
 function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 achievementID, u8 parse)
 {
@@ -96,27 +43,79 @@ function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 ach
 }
 
 
-// Returns the Shared Memory address of the specified achievement.
-function u32 AchievementsPlus.AchivementsManager.getAchievementAddress(u16 achievementID)
+// The main function of updating the achievement toasts.
+function void AchievementsPlus.AchivementsManager.update()
 {
-	return achievementsplus.sharedMemory.achivementsAddress + u32(achievementID * 0x04)
+	u16 startID = ACHIEVEMENTS_START_ID[0x01]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+		
+		bool tempValue1 = tempValue0 == (tempValue0 | FLAG_COMPLETE)
+		bool tempValue2 = tempValue0 != (tempValue0 | FLAG_TOAST_SHOWN)
+		
+		if (tempValue1 && tempValue2)
+		{
+			AchievementsPlus.AchivementsManager.showToast(A)
+		}
+	}
+}
+
+
+// The function shows a toast to the currently completed achievement.
+function void AchievementsPlus.AchivementsManager.showToast(u16 achievementID)
+{
+	string tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x00)
+	
+	if (achievementsplus.toast.tempValue1 == 0x00 || achievementsplus.toast.tempValue1 == achievementID)
+	{
+		achievementsplus.toast.tempValue0 = tempValue0
+		achievementsplus.toast.tempValue1 = achievementID
+		AchievementsPlus.Menu.toast.update()
+	}
+	
+	u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementID)
+	bool tempValue2 = tempValue1 == (tempValue1 | FLAG_TOAST_SHOWN)
+	
+	if (tempValue2 && achievementsplus.toast.tempValue1 != achievementID)
+		return
+	
+	if (achievementsplus.toast.tempValue1 == achievementID && achievementsplus.toast.tempValue2 == 0x05)
+	{
+		u32 tempValue3 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+		
+		u32[tempValue3] |= FLAG_TOAST_SHOWN
+		AchievementsPlus.AchivementsManager.savePersistentData()
+		
+		achievementsplus.toast.tempValue0 = ""
+		achievementsplus.toast.tempValue1 = 0x00
+		achievementsplus.toast.tempValue2 = 0x00
+	}
+}
+
+// Saves data stored in Shared Memory into Persistent Data.
+function void AchievementsPlus.AchivementsManager.savePersistentData()
+{
+	SRAM.save(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
+	System.savePersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
 }
 
 
 // Loads data stored in Persistent Data into Shared Memory.
 function void AchievementsPlus.AchivementsManager.loadPersistentData()
 {
-	u16 startID = ACHIEVEMENTS_START_ID[0x00]
-	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
-	
-	// Load data for all Achievements IDs
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
-		System.loadPersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
-	}
+	SRAM.load(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
+	System.loadPersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
 }
 
+
+// Returns the Shared Memory address of the specified achievement.
+function u32 AchievementsPlus.AchivementsManager.getAchievementAddress(u16 achievementID)
+{
+	return achievementsplus.sharedMemory.achivementsAddress + u32(achievementID * 0x04)
+}
 
 // Adds a value to the Shared Memory value of the specified achievement.
 function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
@@ -125,6 +124,7 @@ function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achiev
 		return
 	
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
+	
 	bool tempValue1 = (u32[tempValue0] + value) >= 65535
 	bool tempValue2 = (u32[tempValue0] + value) <= 0x00
 	
@@ -135,8 +135,7 @@ function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achiev
 	}
 	
 	u32[tempValue0] += value
-	
-	System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
+	AchievementsPlus.AchivementsManager.savePersistentData()
 }
 
 
@@ -156,7 +155,8 @@ function void AchievementsPlus.AchivementsManager.setAchievementComplete(u16 ach
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
 	u32[tempValue0] |= FLAG_COMPLETE
 	
-	System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", achievementID), 0x04)
+	AchievementsPlus.AchivementsManager.savePersistentData()
+	SaveZoneAct.SaveIcon.show()
 }
 
 
@@ -176,120 +176,6 @@ function bool AchievementsPlus.AchivementsManager.isAchievementComplete(u16 achi
 		return true
 	
 	return false
-}
-
-
-// Clean data stored in Persistent Data into Shared Memory.
-function void AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(u16 startID, u16 lastID, bool permanent)
-{
-	// Clean data for all Achievements IDs
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
-		u32 tempValue1 = u32[tempValue0]
-		
-		if (tempValue1 != 0x00)
-		{
-			bool tempValue2 = tempValue1 == (tempValue1 | FLAG_REWARD_CLAIMED)
-			u32[tempValue0] = 0x00
-			
-			if (!permanent && tempValue2)
-				u32[tempValue0] |= FLAG_REWARD_CLAIMED
-			
-			if (AchievementsPlus.AchivementsManager.isAIRAchievement(A) && tempValue2)
-				u32[tempValue0] |= FLAG_REWARD_CLAIMED
-			
-			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
-		}
-	}
-}
-
-
-// Returns the total number of completed/all achievements by the specified achievement ID range.
-function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnComplete)
-{
-	u16 tempValue0	// Total number of achievements
-	u16 tempValue1	// Total number of completed achievements
-	
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		if (sortAchievementsList(A))
-		{
-			++tempValue0
-			if (AchievementsPlus.AchivementsManager.isAchievementComplete(A))
-				++tempValue1
-		}
-	}
-	
-	if (returnComplete)
-		return tempValue1
-	
-	return tempValue0
-}
-
-
-// Returns the total number of claimed/non claimed achievements by the specified achievement ID range.
-function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 startID, u16 lastID)
-{
-	u16 tempValue0	// Total number of claimed achievements
-	
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		if (sortAchievementsList(A))
-		{
-			u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
-			
-			bool tempValue2 = tempValue1 != (tempValue1 | FLAG_REWARD_CLAIMED)
-			bool tempValue3 = AchievementsPlus.AchivementsManager.isAchievementComplete(A)
-			
-			if (tempValue2 && tempValue3)
-				++tempValue0
-		}
-	}
-	
-	return tempValue0
-}
-
-
-// Converts and returns the number of stars for the specified achievement as a decimal number.
-function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementID)
-{
-	u8 tempValue0	// Total number of stars
-	
-	for (u8 A = 0x00; A < 0x05; ++A)
-	{
-		string tempValue1 = getStringFromHash(substring(AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x01) + "00000", A, 0x01))
-		
-		if (tempValue1 != "1")
-			break
-		
-		tempValue0 += 0x01
-	}
-	
-	return tempValue0
-}
-
-
-// Sets the flag of showing toast for all completed achievements that have not yet shown their toasts.
-function void AchievementsPlus.AchivementsManager.setToastShowFlag()
-{
-	u16 startID = ACHIEVEMENTS_START_ID[0x00]
-	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
-	
-	for (u16 A = startID; A <= lastID; ++A)
-	{
-		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
-		u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
-		
-		bool tempValue2 = tempValue1 == (tempValue1 | FLAG_COMPLETE)
-		bool tempValue3 = tempValue1 == (tempValue1 | FLAG_TOAST_SHOWN)
-		
-		if (tempValue2 && !tempValue3)
-		{
-			u32[tempValue0] |= FLAG_TOAST_SHOWN
-			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
-		}
-	}
 }
 
 
@@ -353,23 +239,122 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 }
 
 
-// Sets the start and end ID for the list of achievements in the menu specifically for the selected tabs category.
-function void AchievementsPlus.AchivementsManager.setupForAchievementsList()
+// Clean data stored in Shared Memory and saved into Persistent Data.
+function void AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(u16 startID, u16 lastID, bool cleanClaim)
 {
-	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[achievementsplus.achievements.tabselected]
-	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[achievementsplus.achievements.tabselected]
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		u32 tempValue1 = u32[tempValue0]
+		
+		if (tempValue1 != 0x00)
+		{
+			bool tempValue2 = tempValue1 == (tempValue1 | FLAG_REWARD_CLAIMED)
+			u32[tempValue0] = 0x00
+			
+			bool tempValue3 = !cleanClaim && tempValue2
+			bool tempValue4 = AchievementsPlus.AchivementsManager.isAIRAchievement(A) && tempValue2
+			
+			if (tempValue3 || tempValue4)
+				u32[tempValue0] |= FLAG_REWARD_CLAIMED
+		}
+	}
+	
+	AchievementsPlus.AchivementsManager.savePersistentData()
 }
 
 
-// Sets the selected achievement data from the list to temporary variables.
-function void AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
+// Returns the total number of completed/all achievements by the specified achievement ID range.
+function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnCompleted)
 {
-	achievementsplus.infoPanel.tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x00)
-	achievementsplus.infoPanel.tempValue1 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x01)
-	achievementsplus.infoPanel.tempValue2 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x02)
-	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
-	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
-	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+	u16 tempValue0	// Total number of achievements
+	u16 tempValue1	// Total number of completed achievements
 	
-	AchievementsPlus.RewardsManager.setupForCoinRewards()
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		if (sortAchievementsList(A))
+		{
+			++tempValue0
+			if (AchievementsPlus.AchivementsManager.isAchievementComplete(A))
+				++tempValue1
+		}
+	}
+	
+	if (returnCompleted)
+		return tempValue1
+	
+	return tempValue0
+}
+
+
+// Returns the total number of claimed/non claimed achievements by the specified achievement ID range.
+function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 startID, u16 lastID)
+{
+	u16 tempValue0	// Total number of claimed achievements
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		if (sortAchievementsList(A))
+		{
+			u32 tempValue1 = AchievementsPlus.AchivementsManager.getAchievementValue(A)
+			
+			bool tempValue2 = tempValue1 != (tempValue1 | FLAG_REWARD_CLAIMED)
+			bool tempValue3 = AchievementsPlus.AchivementsManager.isAchievementComplete(A)
+			
+			if (tempValue2 && tempValue3)
+				++tempValue0
+		}
+	}
+	
+	return tempValue0
+}
+
+
+// Converts and returns the number of stars for the specified achievement as a decimal number.
+function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementID)
+{
+	u8 tempValue0	// Total number of stars
+	
+	for (u8 A = 0x00; A < 0x05; ++A)
+	{
+		string tempValue1 = getStringFromHash(substring(AchievementsPlus.AchivementsManager.getAchievementDetail(achievementID, 0x01) + "00000", A, 0x01))
+		
+		if (tempValue1 != "1")
+			break
+		
+		tempValue0 += 0x01
+	}
+	
+	return tempValue0
+}
+
+
+// Sets the flag of showing toast for all completed achievements that have not yet shown their toasts.
+function void AchievementsPlus.AchivementsManager.setToastShowFlag()
+{
+	u16 startID = ACHIEVEMENTS_START_ID[0x01]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		u32 tempValue1 = u32[tempValue0]
+		
+		bool tempValue2 = tempValue1 == (tempValue1 | FLAG_COMPLETE)
+		bool tempValue3 = tempValue1 != (tempValue1 | FLAG_TOAST_SHOWN)
+		
+		if (tempValue2 && tempValue3)
+		{
+			u32[tempValue0] |= FLAG_TOAST_SHOWN
+		}
+	}
+	
+	// Reset toast stuff
+	achievementsplus.toast.tempValue0 = ""
+	achievementsplus.toast.tempValue1 = 0x00
+	achievementsplus.toast.tempValue2 = 0x00
+	achievementsplus.toast.tempValue3 = 0x00
+	achievementsplus.toast.tempValue4 = 0x00
+	
+	AchievementsPlus.AchivementsManager.savePersistentData()
 }

@@ -5,6 +5,11 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	if (achievementsplus.coinRewards.tempValue2)
 		return
 	
+	if (Input.buttonPressed(BUTTON_Y))
+	{
+		AchievementsPlus.AchivementsManager.setAchievementComplete(achievementsplus.achievements.buttonselected)
+	}
+	
 	// Open options menu (popup)
 	if (Input.buttonDown(BUTTON_X))
 	{
@@ -179,39 +184,8 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		achievementsplus.buttons.tempValue1 = 0x00
 		
 		// Setup content for Detail panel
-		AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
+		AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
 	}
-}
-
-
-// The function sets the number of completed and all achievements for each tab. Called every time you enter the menu and change the tab.
-function void AchievementsPlus.Menu.achievements.setupTabs()
-{
-	// Define the number of completed/all achievements in the first tab
-	achievementsplus.tabsPanel.tempValue0 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], true)
-	achievementsplus.tabsPanel.tempValue3 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], false)
-	
-	// Define the number of completed/all achievements in the second tab
-	achievementsplus.tabsPanel.tempValue1 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], true)
-	achievementsplus.tabsPanel.tempValue4 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], false)
-	
-	// Define the number of completed/all achievements in the third tab
-	achievementsplus.tabsPanel.tempValue2 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], true)
-	achievementsplus.tabsPanel.tempValue5 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
-}
-
-
-// The function sets the number of non claimed achievement rewards for each tab.
-function void AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
-{
-	// Define the number of achievements from which you need to take the reward in the first tab
-	achievementsplus.tabsPanel.tempValue6 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00])
-	
-	// Define the number of achievements from which you need to take the reward in the second tab
-	achievementsplus.tabsPanel.tempValue7 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01])
-	
-	// Define the number of achievements from which you need to take the reward in the third tab
-	achievementsplus.tabsPanel.tempValue8 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02])
 }
 
 
@@ -219,7 +193,7 @@ function void AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
 function void AchievementsPlus.Menu.achievements.updateSort()
 {
 	achievementsplus.achievements.totalButtons = 0x00
-	AchievementsPlus.AchivementsManager.setupForAchievementsList()
+	AchievementsPlus.Menu.achievements.setupForAchievementsList()
 	
 	AchievementsPlus.Menu.achievements.setupTabs()
 	AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
@@ -291,12 +265,69 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 	}
 	
 	// Reset some animations for buttons
-	achievementsplus.buttons.tempValue0 = 192
 	achievementsplus.buttons.tempValue1 = 0x00
 	
 	// Setup content for Detail panel
-	AchievementsPlus.AchievementsManager.setupForAchievementsDetail()
+	AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
 	
 	// After all these steps, reset the sort update
 	achievementsplus.achievements.sortNeedUpdate = false
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Sets the start and end ID for the list of achievements in the menu specifically for the selected tabs category.
+function void AchievementsPlus.Menu.achievements.setupForAchievementsList()
+{
+	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[achievementsplus.achievements.tabselected]
+	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[achievementsplus.achievements.tabselected]
+}
+
+
+// Sets the selected achievement data from the list to temporary variables.
+function void AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
+{
+	achievementsplus.infoPanel.tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x00)
+	achievementsplus.infoPanel.tempValue1 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x01)
+	achievementsplus.infoPanel.tempValue2 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x02)
+	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
+	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
+	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+	
+	AchievementsPlus.RewardsManager.setupForCoinRewards()
+}
+
+
+// The function sets the number of completed and all achievements for each tab. Called every time you enter the menu and change the tab.
+function void AchievementsPlus.Menu.achievements.setupTabs()
+{
+	// Define the number of completed/all achievements in the first tab
+	achievementsplus.tabsPanel.tempValue0 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], true)
+	achievementsplus.tabsPanel.tempValue3 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], false)
+	
+	// Define the number of completed/all achievements in the second tab
+	achievementsplus.tabsPanel.tempValue1 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], true)
+	achievementsplus.tabsPanel.tempValue4 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], false)
+	
+	// Define the number of completed/all achievements in the third tab
+	achievementsplus.tabsPanel.tempValue2 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], true)
+	achievementsplus.tabsPanel.tempValue5 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
+}
+
+
+// The function sets the number of non claimed achievement rewards for each tab.
+function void AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
+{
+	// Define the number of achievements from which you need to take the reward in the first tab
+	achievementsplus.tabsPanel.tempValue6 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00])
+	
+	// Define the number of achievements from which you need to take the reward in the second tab
+	achievementsplus.tabsPanel.tempValue7 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01])
+	
+	// Define the number of achievements from which you need to take the reward in the third tab
+	achievementsplus.tabsPanel.tempValue8 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02])
 }

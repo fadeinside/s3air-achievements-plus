@@ -1,3 +1,7 @@
+// Version
+define u32 achievementsplus.sharedMemory.versionAddress	= 0x8512fc
+define u32 achievementsplus.sharedMemory.versionUsed	= u32[achievementsplus.sharedMemory.versionAddress]
+
 // Coins
 define u32 achievementsplus.sharedMemory.coinsAddress	= 0x851300
 define u32 achievementsplus.sharedMemory.coinsSaved	= u32[achievementsplus.sharedMemory.coinsAddress]

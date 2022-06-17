@@ -17,6 +17,7 @@ constant u8 ALIGN_LEFT	= 0x00
 constant u8 ALIGN_CENTER	= 0x10
 constant u8 ALIGN_RIGHT	= 0x15
 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Achievements and Rewards
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -27,6 +28,7 @@ constant u32 FLAG_TOAST_SHOWN	= 0xf00000
 
 // Rewards flags
 constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Popups
@@ -41,3 +43,10 @@ constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15
 
 // Game loaded via Level select
 constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Mod
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22061700

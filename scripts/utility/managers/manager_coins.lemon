@@ -11,7 +11,7 @@ function void AchievementsPlus.RewardsManager.update()
 	{
 		u32 tempValue3 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementsplus.achievements.buttonselected)
 		u32[tempValue3] |= FLAG_REWARD_CLAIMED
-		System.savePersistentData(tempValue3, stringformat("AchievementsPlus_Achievement_ID_%d", achievementsplus.achievements.buttonselected), 0x04)
+		AchievementsPlus.AchivementsManager.savePersistentData()
 	}
 	
 	if (achievementsplus.coinRewards.tempValue0 != 0x00)
@@ -40,47 +40,10 @@ function void AchievementsPlus.RewardsManager.update()
 }
 
 
-// Adds the specified Coins value to Shared Memory and stores the new value in Persistent Data.
-function void AchievementsPlus.RewardsManager.addCoins(u32 value)
-{
-	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
-	
-	bool tempValue1 = (tempValue0 + value) >= 65535
-	bool tempValue2 = (tempValue0 + value) <= 0x00
-	
-	if (tempValue1 || tempValue2)
-	{
-		assert(false, "(200) An unexpected error has occurred. Read the documentation for using Coins.")
-		return
-	}
-	
-	achievementsplus.sharedMemory.coinsSaved += value
-	AchievementsPlus.RewardsManager.savePersistendData()
-}
-
-
-// Pays the specified Coins value from Shared Memory and stores the new value in Persistent Data.
-function void AchievementsPlus.RewardsManager.paidCoins(u32 value)
-{
-	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
-	
-	bool tempValue1 = (tempValue0 - value) >= 65535
-	bool tempValue2 = (tempValue0 - value) <= 0x00
-	
-	if (tempValue1 || tempValue2)
-	{
-		assert(false, "(201) An unexpected error has occurred. Read the documentation for using Coins.")
-		return
-	}
-	
-	achievementsplus.sharedMemory.coinsSaved -= value
-	AchievementsPlus.RewardsManager.savePersistendData()
-}
-
-
 // Loads data stored in Persistent Data into Shared Memory.
 function void AchievementsPlus.RewardsManager.savePersistendData()
 {
+	SRAM.save(achievementsplus.sharedMemory.coinsAddress, 0x0ffc, 0x04)
 	System.savePersistentData(achievementsplus.sharedMemory.coinsAddress, "AchievementsPlus_CoinsSaved", 0x04)
 }
 
@@ -88,8 +51,54 @@ function void AchievementsPlus.RewardsManager.savePersistendData()
 // Loads data stored in Persistent Data into Shared Memory
 function void AchievementsPlus.RewardsManager.loadPersistendData()
 {
+	SRAM.load(achievementsplus.sharedMemory.coinsAddress, 0x0ffc, 0x04)
 	System.loadPersistentData(achievementsplus.sharedMemory.coinsAddress, "AchievementsPlus_CoinsSaved", 0x04)
 }
+
+
+// Adds the specified Coins value to Shared Memory and stores the new value in Persistent Data.
+function void AchievementsPlus.RewardsManager.addCoins(u16 value)
+{
+	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
+	u16 tempValue1 = abs(value)
+	
+	bool tempValue2 = (tempValue0 + tempValue1) >= 65535
+	bool tempValue3 = (tempValue0 + tempValue1) <= 0x00
+	
+	if (tempValue2 || tempValue3)
+	{
+		assert(false, "(200) An unexpected error has occurred. Read the documentation for using Coins.")
+		return
+	}
+	
+	achievementsplus.sharedMemory.coinsSaved += tempValue1
+	AchievementsPlus.RewardsManager.savePersistendData()
+}
+
+
+// Pays the specified Coins value from Shared Memory and stores the new value in Persistent Data.
+function void AchievementsPlus.RewardsManager.paidCoins(u16 value)
+{
+	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
+	u16 tempValue1 = abs(value)
+	
+	bool tempValue2 = (tempValue0 - tempValue1) >= 65535
+	bool tempValue3 = (tempValue0 - tempValue1) <= 0x00
+	
+	if (tempValue2 || tempValue3)
+	{
+		assert(false, "(201) An unexpected error has occurred. Read the documentation for using Coins.")
+		return
+	}
+	
+	achievementsplus.sharedMemory.coinsSaved -= tempValue1
+	AchievementsPlus.RewardsManager.savePersistendData()
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
 // Clean data stored in Persistent Data into Shared Memory
@@ -98,11 +107,6 @@ function void AchievementsPlus.RewardsManager.cleanPersistendData()
 	achievementsplus.sharedMemory.coinsSaved = 0x00
 	AchievementsPlus.RewardsManager.savePersistendData()
 }
-
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-// Support tools
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
 // Sets the reward for the selected achievement from the list.

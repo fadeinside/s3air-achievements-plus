@@ -1,0 +1,72 @@
+// The main function of updating the version of the mod.
+function void AchievementsPlus.ManagerVersion.update()
+{
+	// Load the latest version you are using
+	AchievementsPlus.ManagerVersion.loadVersion()
+	
+	// Migrate beta data to a new save system
+	if (achievementsplus.sharedMemory.versionUsed < 0x22061700)
+	{
+		AchievementsPlus.ManagerVersion.transferBetaDataToNewSaveSystem()
+		return
+	}
+	
+	// Just update the latest version if the mod has a higher
+	if (achievementsplus.sharedMemory.versionUsed < ACHIEVEMENTS_PLUS_VERSION)
+	{
+		AchievementsPlus.ManagerVersion.updateVersion()
+	}
+}
+
+// The function loads and transfers beta data to the new saving system.
+function void AchievementsPlus.ManagerVersion.transferBetaDataToNewSaveSystem()
+{
+	u16 startID = ACHIEVEMENTS_START_ID[0x00]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	
+	// Load old data for all Achievements IDs
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		System.loadPersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04)
+	}
+	
+	// Save all loaded data to Persistent Data
+	AchievementsPlus.AchivementsManager.savePersistentData()
+	
+	// Now reset all old data
+	for (u16 A = startID; A <= lastID; ++A)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(A)
+		if (System.loadPersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x04) != 0x00)
+		{
+			System.savePersistentData(tempValue0, stringformat("AchievementsPlus_Achievement_ID_%d", A), 0x00)
+		}
+	}
+	
+	// And update used version
+	AchievementsPlus.ManagerVersion.updateVersion()
+}
+
+
+// Saves data stored in Shared Memory into SRAM.
+function void AchievementsPlus.ManagerVersion.saveVersion()
+{
+	SRAM.save(achievementsplus.sharedMemory.versionAddress, 0x0ff8, 0x04)
+}
+
+
+// Loads data stored in SRAM into Shared Memory
+function void AchievementsPlus.ManagerVersion.loadVersion()
+{
+	SRAM.load(achievementsplus.sharedMemory.versionAddress, 0x0ff8, 0x04)
+	//Log = achievementsplus.sharedMemory.versionUsed
+}
+
+
+// Updates the Shared Memory value and saves it in SRAM
+function void AchievementsPlus.ManagerVersion.updateVersion()
+{
+	achievementsplus.sharedMemory.versionUsed = ACHIEVEMENTS_PLUS_VERSION
+	AchievementsPlus.ManagerVersion.saveVersion()
+}

@@ -212,9 +212,9 @@ function void gainExtraLife()
 	// Call the base function
 	base.gainExtraLife()
 	
-	if (lives_counter >= 10)
+	if (lives_counter == 10)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_10_LIVES)
-	if (lives_counter >= 20)
+	if (lives_counter == 20)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_20_LIVES)
 }
 
