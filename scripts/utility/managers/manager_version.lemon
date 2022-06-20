@@ -21,6 +21,9 @@ function void AchievementsPlus.ManagerVersion.update()
 // The function loads and transfers beta data to the new saving system.
 function void AchievementsPlus.ManagerVersion.transferBetaDataToNewSaveSystem()
 {
+	// Load data for Coins
+	AchievementsPlus.RewardsManager.loadPersistendData()
+	
 	u16 startID = ACHIEVEMENTS_START_ID[0x00]
 	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
 	
