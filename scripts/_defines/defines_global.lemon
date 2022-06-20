@@ -1,6 +1,7 @@
 // Menus buttons
 global u8 achievementsplus.buttons.tempValue0	// Used in the animation of the trace of the achievement button
 global u8 achievementsplus.buttons.tempValue1	// Used in the animation of the achievement button arrow
+global u8 achievementsplus.buttons.tempValue2	// Used in the animation of the trace of the achievement button
 
 // Scrolling stuff	
 global u16 achievementsplus.scrollList.tempValue0	// Sets the current scroll position in a sorted achievements list 

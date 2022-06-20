@@ -12,6 +12,9 @@ include utility/?
 include utility/achievements/?
 include utility/managers/?
 
+// Main game
+include maingame/?
+
 // Achievements
 include achievements/?
 
@@ -20,9 +23,6 @@ include menus/?
 
 // General
 include general/?
-
-// Main game
-include maingame/?
 
 #endif
 

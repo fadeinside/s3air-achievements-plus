@@ -35,6 +35,9 @@ function void AchievementsPlus.Menu.achievements.items()
 	AchievementsPlus.Menu.achievements.items.infoPanel(px, py)
 	
 	AchievementsPlus.Menu.achievements.items.scrollbar(px, py)
+	
+	string tempValue8 = stringformat("v%x Pre-release", ACHIEVEMENTS_PLUS_VERSION)
+	AchievementsPlus.TextManager.drawText(getScreenWidth() - 12, getScreenHeight() - 10, tempValue8, FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffffff80, 0xf000)
 }
 
 

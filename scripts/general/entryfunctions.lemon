@@ -12,6 +12,7 @@ function void EntryFunctions.dataSelect()
 	base.EntryFunctions.dataSelect()
 }
 
+
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.levelSelect()
 {
@@ -24,6 +25,7 @@ function void EntryFunctions.levelSelect()
 	// Call the base function
 	base.EntryFunctions.levelSelect()
 }
+
 
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.actSelect()
@@ -38,6 +40,7 @@ function void EntryFunctions.actSelect()
 	base.EntryFunctions.actSelect()
 } 
 
+
 //@ Function taken from sonic3air_dev/scripts/standalone/entryfunctions.lemon
 function void EntryFunctions.mainMenuBG()
 {
@@ -49,6 +52,7 @@ function void EntryFunctions.mainMenuBG()
 	// Call the base function
 	base.EntryFunctions.mainMenuBG()
 }
+
 
 function void AchievementsPlus.EntryFunctions.Menu.achievements()
 {

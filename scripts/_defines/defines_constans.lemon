@@ -49,4 +49,4 @@ constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22061700
+constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22062100

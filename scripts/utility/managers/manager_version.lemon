@@ -33,6 +33,7 @@ function void AchievementsPlus.ManagerVersion.transferBetaDataToNewSaveSystem()
 	
 	// Save all loaded data to Persistent Data
 	AchievementsPlus.AchivementsManager.savePersistentData()
+	AchievementsPlus.RewardsManager.savePersistendData()
 	
 	// Now reset all old data
 	for (u16 A = startID; A <= lastID; ++A)

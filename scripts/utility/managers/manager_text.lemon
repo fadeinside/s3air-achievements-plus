@@ -61,7 +61,7 @@ function void AchievementsPlus.TextManager.drawAchievementButton(s16 px, s16 py,
 	if ((target == achievementsplus.achievements.nextButton || target == achievementsplus.achievements.preButton) && selected != target)
 	{
 		if (achievementsplus.buttons.tempValue0 != 0x00)
-			achievementsplus.buttons.tempValue0 -= 12
+			achievementsplus.buttons.tempValue0 -= 0x08
 		
 		Renderer.drawCustomSprite("menu_button_large_selected", px - 0x05, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
 		if (getScreenWidth() > 400)
@@ -78,21 +78,27 @@ function void AchievementsPlus.TextManager.drawAchievementButton(s16 px, s16 py,
 			++achievementsplus.buttons.tempValue1
 		
 		Renderer.drawCustomSprite("menu_button_icon_arrow", px + 208 + achievementsplus.buttons.tempValue1, py, 0x00, 0x00, renderQueue)
-		Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, 0x00, renderQueue, 0x00, u8(achievementsplus.tabsPanel.tempValue9) * 15)
-		Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, 0x00, renderQueue)
+		
+		if (achievementsplus.buttons.tempValue2 != 0x00)
+			achievementsplus.buttons.tempValue2 -= 0x08
+		
+		u8 tintAlpha = max(u8(achievementsplus.tabsPanel.tempValue9) * 15 - achievementsplus.buttons.tempValue2, 0x00)
+		
+		if (achievementsplus.buttons.tempValue2 == 0x00)
+			Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, 0x00, renderQueue, 0x00, tintAlpha)
+		Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, 0x00, renderQueue, 0x00, 255 - achievementsplus.buttons.tempValue2)
 		
 		if (getScreenWidth() > 400)
 		{
-			Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, u8(achievementsplus.tabsPanel.tempValue9) * 15)
-			Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
+			if (achievementsplus.buttons.tempValue2 == 0x00)
+				Renderer.drawCustomSprite("menu_button_large_selectedTint", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, tintAlpha)
+			Renderer.drawCustomSprite("menu_button_large_selected", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, 255 - achievementsplus.buttons.tempValue2)
 		}
 	}
-	else
-	{
-		Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, 0x00, renderQueue)
-		if (getScreenWidth() > 400)
-			Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
-	}
+	
+	Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, 0x00, renderQueue)
+	if (getScreenWidth() > 400)
+		Renderer.drawCustomSprite("menu_button_large", px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //

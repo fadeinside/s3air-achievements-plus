@@ -175,8 +175,9 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		}
 		
 		// Reset some animations for buttons
-		achievementsplus.buttons.tempValue0 = 192
+		achievementsplus.buttons.tempValue0 = 144
 		achievementsplus.buttons.tempValue1 = 0x00
+		achievementsplus.buttons.tempValue2 = 144
 		
 		// Setup content for Detail panel
 		AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
@@ -261,6 +262,7 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 	
 	// Reset some animations for buttons
 	achievementsplus.buttons.tempValue1 = 0x00
+	achievementsplus.buttons.tempValue2 = 144
 	
 	// Setup content for Detail panel
 	AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
