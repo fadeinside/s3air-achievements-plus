@@ -27,7 +27,7 @@ function void SaveGameOnLevelFinished()
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_LRZ)
 	else if (global.zone == 0x0a && global.characters < CHARS_KNUCKLES_ALONE)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_SSZ)
-	else if (global.zone == 0x0b)
+	else if (global.zone == 0x0b || global.zone_act == 0x1700)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPLETE_DEZ)
 	
 	// Call the base function
