@@ -1,5 +1,4 @@
 // Settings
-global u8 SETTING_ACHIEVEPLUS_MENU_BACKGROUND	// Sets the menu background (0x00 - Origins "Orange", 0x01 - Origins "Sea", 0x02 - Origins "Cherry")
 global u8 SETTING_ACHIEVEPLUS_COINS_HUD	// If set, instead of lives in hud will be shown Coins
 
 global u8 SETTING_ACHIEVEPLUS_WARNING_MESSAGES	// If set, then when Debug mode or Game via Level select is enabled, a notification will be displayed about disabled achievements

@@ -57,7 +57,7 @@ function void AchievementsPlus.RewardsManager.loadPersistendData()
 
 
 // Adds the specified Coins value to Shared Memory and stores the new value in Persistent Data.
-function void AchievementsPlus.RewardsManager.addCoins(u16 value)
+function bool AchievementsPlus.RewardsManager.addCoins(u16 value)
 {
 	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
 	u16 tempValue1 = abs(value)
@@ -68,16 +68,17 @@ function void AchievementsPlus.RewardsManager.addCoins(u16 value)
 	if (tempValue2 || tempValue3)
 	{
 		assert(false, "(200) An unexpected error has occurred. Read the documentation for using Coins.")
-		return
+		return false
 	}
 	
 	achievementsplus.sharedMemory.coinsSaved += tempValue1
 	AchievementsPlus.RewardsManager.savePersistendData()
+	return true
 }
 
 
 // Pays the specified Coins value from Shared Memory and stores the new value in Persistent Data.
-function void AchievementsPlus.RewardsManager.paidCoins(u16 value)
+function bool AchievementsPlus.RewardsManager.paidCoins(u16 value)
 {
 	u32 tempValue0 = achievementsplus.sharedMemory.coinsSaved
 	u16 tempValue1 = abs(value)
@@ -87,12 +88,15 @@ function void AchievementsPlus.RewardsManager.paidCoins(u16 value)
 	
 	if (tempValue2 || tempValue3)
 	{
-		assert(false, "(201) An unexpected error has occurred. Read the documentation for using Coins.")
-		return
+		//assert(false, "(201) An unexpected error has occurred. Read the documentation for using Coins.")
+		achievementsplus.popupMenu.tempValue8 = abs(tempValue0 - tempValue1)
+		AchievementsPlus.Menu.popup.show(POPUP_NOT_ENOUGH_COINS, "Purchase unsuccessful (201)")
+		return false
 	}
 	
 	achievementsplus.sharedMemory.coinsSaved -= tempValue1
 	AchievementsPlus.RewardsManager.savePersistendData()
+	return true
 }
 
 

@@ -1,0 +1,353 @@
+// The main function is control management in the menu.
+function void AchievementsPlus.Menu.achievements.updateControl()
+{
+	// Do not execute the next code if claiming is performed
+	if (achievementsplus.coinRewards.tempValue2)
+		return
+	
+	// Open options menu (popup)
+	if (Input.buttonDown(BUTTON_X))
+	{
+		AchievementsPlus.Menu.popup.show(POPUP_ACHIEVEMENTS_OPTIONS, "Options")
+	}
+	
+	// Back to main menu
+	if (control.pad1.pressed & CONTROL_B)
+	{
+		if (achievementsplus.game_mode.tempValue0)
+			global.game_mode = achievementsplus.game_mode.tempValue0
+		else
+			Game.returnToMainMenu()
+		
+		// Reset previous gamemode
+		achievementsplus.game_mode.tempValue0 = 0x00
+	}
+	
+	// Claim reward
+	if (control.pad1.pressed & CONTROL_START)
+	{
+		u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementValue(achievementsplus.achievements.buttonselected)
+		
+		bool tempValue1 = tempValue0 != (tempValue0 | FLAG_REWARD_CLAIMED)
+		bool tempValue2 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+		
+		if (tempValue1 && tempValue2)
+			achievementsplus.coinRewards.tempValue2 |= 0x01
+	}
+	
+	// Tab's selection
+	u8 maxTabs = achievementsplus.tabsPanel.tempValue5 > 0x00 ? 0x02 : 0x01
+	if (control.pad1.pressed == CONTROL_LEFT || control.pad1.pressed == CONTROL_RIGHT)
+	{
+		playSound(0x5b)
+		achievementsplus.tabsPanel.tempValue13 = achievementsplus.achievements.tabselected
+		
+		achievementsplus.tabsPanel.tempValue11 = 0x00
+		achievementsplus.tabsPanel.tempValue12 = 255
+		
+		if (control.pad1.pressed == CONTROL_LEFT)
+		{
+			if (achievementsplus.achievements.tabselected != 0x00)
+				--achievementsplus.achievements.tabselected
+			else
+				achievementsplus.achievements.tabselected = maxTabs
+		}
+		
+		else if (control.pad1.pressed == CONTROL_RIGHT)
+		{
+			if (achievementsplus.achievements.tabselected < maxTabs)
+				++achievementsplus.achievements.tabselected
+			else
+				achievementsplus.achievements.tabselected = 0x00
+		}
+		
+		// Update sorting data
+		achievementsplus.achievements.sortNeedUpdate = true
+	}
+	
+	// Do not execute the next code if the list is empty
+	if (hideAchievementsListItems())
+		return
+	
+	// Simple implementation of fast scrolling
+	if (control.pad1.state & CONTROL_DPAD)
+	{
+		++achievementsplus.scrollList.tempValue2
+		if (achievementsplus.scrollList.tempValue2 >= 30)
+		{
+			control.pad1.pressed = control.pad1.state
+			
+			// Reset some animations for buttons
+			achievementsplus.buttons.tempValue0 = 136
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 136
+			achievementsplus.buttons.tempValue3 = 0x00
+		
+			achievementsplus.scrollList.tempValue2 = 24
+		}
+	}
+	else
+	{
+		achievementsplus.scrollList.tempValue2 = 0x00
+	}
+	
+	// Select an button (achievement) in a sorted list
+	if ((control.pad1.pressed == CONTROL_UP || control.pad1.pressed & CONTROL_DOWN) && achievementsplus.achievements.totalButtons > 0x01)
+	{
+		playSound(0x5b)
+		
+		if (control.pad1.pressed == CONTROL_UP)
+		{
+			// The currently selected button (achievement) is not the first in the sorted list
+			if (achievementsplus.achievements.buttonselected != achievementsplus.achievements.firstButton)
+			{
+				// Define the previous button (achievement) in the sorted list
+				for (u16 A = achievementsplus.achievements.buttonselected; A >= achievementsplus.listPanel.tempValue0; --A)
+				{
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected > A)
+					{
+						achievementsplus.achievements.preButton = A
+						break
+					}
+				}
+			}
+			
+			// The currently selected button (achievement) is more than the first in the sorted list
+			if (achievementsplus.achievements.buttonselected > achievementsplus.achievements.firstButton)
+			{
+				// Things for scrolling
+				--achievementsplus.scrollList.tempValue0
+				if (achievementsplus.scrollList.tempValue1 != 0x00)
+					--achievementsplus.scrollList.tempValue1
+				
+				// Set the previous button as the current one
+				achievementsplus.achievements.buttonselected = achievementsplus.achievements.preButton
+				
+				// Define the next button (achievement) in the sorted list
+				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+				{
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected < A)
+					{
+						achievementsplus.achievements.nextButton = A
+						break
+					}
+				}
+			}
+			// The currently selected button (achievement) is the first button
+			else
+			{
+				// Things for scrolling
+				achievementsplus.scrollList.tempValue0 = achievementsplus.achievements.totalButtons - 0x01
+				achievementsplus.scrollList.tempValue1 = min(achievementsplus.achievements.totalButtons - 0x01, 0x07)
+				
+				// Set positions for buttons
+				achievementsplus.achievements.preButton = achievementsplus.achievements.firstButton
+				achievementsplus.achievements.nextButton = achievementsplus.achievements.lastButton
+				achievementsplus.achievements.buttonselected = achievementsplus.achievements.lastButton
+			}
+		}
+		
+		else if (control.pad1.pressed & CONTROL_DOWN)
+		{
+			// Set the previous button as the current one
+			achievementsplus.achievements.preButton = achievementsplus.achievements.buttonselected
+			
+			// The currently selected button (achievement) is not the last one in the sorted list
+			if (achievementsplus.achievements.buttonselected < achievementsplus.achievements.lastButton)
+			{
+				// Things for scrolling
+				++achievementsplus.scrollList.tempValue0
+				if (achievementsplus.scrollList.tempValue1 != min(achievementsplus.achievements.totalButtons - 0x01, 0x07))
+					++achievementsplus.scrollList.tempValue1
+				
+				// Define the next button (achievement) in the sorted list
+				for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+				{
+					if (sortAchievementsList(A) && achievementsplus.achievements.buttonselected < A)
+					{
+						achievementsplus.achievements.nextButton = A
+						achievementsplus.achievements.buttonselected = A
+						break
+					}
+				}
+			}
+			// The currently selected button (achievement) is the last button
+			else
+			{
+				// Things for scrolling
+				achievementsplus.scrollList.tempValue0 = 0x00
+				achievementsplus.scrollList.tempValue1 = 0x00
+				
+				// Set positions for buttons
+				achievementsplus.achievements.preButton = achievementsplus.achievements.lastButton
+				achievementsplus.achievements.nextButton = achievementsplus.achievements.firstButton
+				achievementsplus.achievements.buttonselected = achievementsplus.achievements.firstButton
+			}
+		}
+		
+		// Reset some animations for buttons
+		if (achievementsplus.scrollList.tempValue2 < 24)
+		{
+			achievementsplus.buttons.tempValue0 = 255
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 0x00
+			achievementsplus.buttons.tempValue3 = 0x00
+		} 
+		
+		// Setup content for Detail panel
+		AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
+	}
+}
+
+
+// The function updates the sorting of achievements in the list. Called every time a tab is changed and when you enter the achievement menu.
+function void AchievementsPlus.Menu.achievements.updateSort()
+{
+	achievementsplus.achievements.totalButtons = 0x00
+	AchievementsPlus.Menu.achievements.setupForAchievementsList()
+	
+	AchievementsPlus.Menu.achievements.setupTabs()
+	AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
+	
+	// Define the number of available buttons (achievements) in sorted achievements
+	for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+	{
+		if (sortAchievementsList(A))
+			++achievementsplus.achievements.totalButtons
+		
+		if (A >= achievementsplus.listPanel.tempValue1)
+			break
+	}
+	
+	// If there are buttons (achievements) available
+	if (achievementsplus.achievements.totalButtons > 0x00)
+	{
+		// Define the first button (first achievement) in the sorted achievements
+		for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+		{
+			if (sortAchievementsList(A))
+			{
+				achievementsplus.achievements.firstButton = A
+				break
+			}
+		}
+		
+		// Define the last button (last achievement) in the sorted achievements and the rest of the dependent
+		for (u16 A = achievementsplus.listPanel.tempValue1; A >= achievementsplus.listPanel.tempValue0; --A)
+		{
+			if (sortAchievementsList(A))
+			{
+				achievementsplus.scrollList.tempValue0 = 0x00
+				achievementsplus.scrollList.tempValue1 = 0x00
+				
+				achievementsplus.achievements.buttonselected = achievementsplus.achievements.firstButton
+				
+				achievementsplus.achievements.lastButton = A
+				achievementsplus.achievements.preButton = A
+				break
+			}
+		}
+		
+		// Define the next button (next achievement) in the sorted achievements
+		for (u16 A = achievementsplus.listPanel.tempValue0; A <= achievementsplus.listPanel.tempValue1; ++A)
+		{
+			if (sortAchievementsList(A))
+			{
+				achievementsplus.achievements.nextButton = A
+				break
+			}
+		}
+	}
+	else
+	{
+		// Reset all values if the list is empty
+		achievementsplus.scrollList.tempValue0 = 0x00
+		achievementsplus.scrollList.tempValue1 = 0x00
+		
+		achievementsplus.achievements.buttonselected = 0x00
+		
+		achievementsplus.achievements.firstButton = 0x00
+		achievementsplus.achievements.lastButton = 0x00
+		achievementsplus.achievements.nextButton = 0x00
+		achievementsplus.achievements.preButton = 0x00
+		achievementsplus.achievements.totalButtons = 0x00
+		
+		achievementsplus.coinRewards.tempValue0 = 0x00
+	}
+	
+	// Reset some animations for buttons
+	achievementsplus.buttons.tempValue0 = 0x00
+	achievementsplus.buttons.tempValue1 = 0x04
+	achievementsplus.buttons.tempValue2 = 255
+	achievementsplus.buttons.tempValue3 = 0x00
+	
+	if (achievementsplus.tabsPanel.tempValue12 == 0x00)
+	{
+		achievementsplus.tabsPanel.tempValue11 = 255
+		achievementsplus.tabsPanel.tempValue12 = 0x00
+	}
+	
+	// Setup content for Detail panel
+	AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
+	
+	// After all these steps, reset the sort update
+	achievementsplus.achievements.sortNeedUpdate = false
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Sets the start and end ID for the list of achievements in the menu specifically for the selected tabs category.
+function void AchievementsPlus.Menu.achievements.setupForAchievementsList()
+{
+	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[achievementsplus.achievements.tabselected]
+	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[achievementsplus.achievements.tabselected]
+}
+
+
+// Sets the selected achievement data from the list to temporary variables.
+function void AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
+{
+	achievementsplus.infoPanel.tempValue0 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x00)
+	achievementsplus.infoPanel.tempValue1 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x01)
+	achievementsplus.infoPanel.tempValue2 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x02)
+	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
+	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
+	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+	
+	AchievementsPlus.RewardsManager.setupForCoinRewards()
+}
+
+
+// The function sets the number of completed and all achievements for each tab. Called every time you enter the menu and change the tab.
+function void AchievementsPlus.Menu.achievements.setupTabs()
+{
+	// Define the number of completed/all achievements in the first tab
+	achievementsplus.tabsPanel.tempValue0 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], true)
+	achievementsplus.tabsPanel.tempValue3 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00], false)
+	
+	// Define the number of completed/all achievements in the second tab
+	achievementsplus.tabsPanel.tempValue1 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], true)
+	achievementsplus.tabsPanel.tempValue4 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], false)
+	
+	// Define the number of completed/all achievements in the third tab
+	achievementsplus.tabsPanel.tempValue2 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], true)
+	achievementsplus.tabsPanel.tempValue5 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
+}
+
+
+// The function sets the number of non claimed achievement rewards for each tab.
+function void AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
+{
+	// Define the number of achievements from which you need to take the reward in the first tab
+	achievementsplus.tabsPanel.tempValue6 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x00])
+	
+	// Define the number of achievements from which you need to take the reward in the second tab
+	achievementsplus.tabsPanel.tempValue7 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01])
+	
+	// Define the number of achievements from which you need to take the reward in the third tab
+	achievementsplus.tabsPanel.tempValue8 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02])
+}

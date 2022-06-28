@@ -44,9 +44,15 @@ constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15
 // Game loaded via Level select
 constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18
 
+// Wall unlock
+constant u8 POPUP_WALL_UNLOCK	= 0x20
+
+// Not Enough Coins
+constant u8 POPUP_NOT_ENOUGH_COINS	= 0x35
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22062100
+constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22062900

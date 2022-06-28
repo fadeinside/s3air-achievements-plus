@@ -3,5 +3,5 @@
 	
 	// Coin icon
 	"hud_icon_originsCoin": { "File": "hud/hud_coins_sprites.png", "Rect": "1,1,54,16", "Center": "0,0" },
-	"hud_icon_originsCoin_s2": { "File": "hud/hud_coins_sprites.png", "Rect": "1,18,54,16", "Center": "0,0" } 
+	"hud_icon_originsCoin_s2": { "File": "hud/hud_coins_sprites.png", "Rect": "1,18,54,16", "Center": "0,0" }
 }

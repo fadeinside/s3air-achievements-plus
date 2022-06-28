@@ -1,6 +1,7 @@
 // Loads stored PersistentData into memory
 function void AchievementsPlus.SharedMemory.loadPersistendData()
 {
+	AchievementsPlus.WallManager.loadPersistentData()
 	AchievementsPlus.RewardsManager.loadPersistendData()
 	AchievementsPlus.AchivementsManager.loadPersistentData()
 }

@@ -1,6 +1,15 @@
 // The main function of updating the version of the mod.
 function void AchievementsPlus.ManagerVersion.update()
 {
+	u32 tempValue0 = ACHIEVEMENTS_PLUS_VERSION
+	u8 tempValue1 = tempValue0 / 0x1000000
+	u8 tempValue2 = (tempValue0 / 0x10000) - tempValue1 * 0x10000
+	u8 tempValue3 = (tempValue0 / 0x100) - (tempValue1 * 0x10000) - tempValue2 * 0x100
+	u8 tempValue4 = u8(tempValue0)
+	
+	achievementsplus.version.tempValue0 = stringformat("v%02x.%02x.%02x.%x", tempValue1, tempValue2, tempValue3, tempValue4)
+	achievementsplus.version.tempValue1 = "PRE RELEASE"
+	
 	// Load the latest version you are using
 	AchievementsPlus.ManagerVersion.loadVersion()
 	
@@ -64,7 +73,6 @@ function void AchievementsPlus.ManagerVersion.saveVersion()
 function void AchievementsPlus.ManagerVersion.loadVersion()
 {
 	SRAM.load(achievementsplus.sharedMemory.versionAddress, 0x0ff8, 0x04)
-	//Log = achievementsplus.sharedMemory.versionUsed
 }
 
 

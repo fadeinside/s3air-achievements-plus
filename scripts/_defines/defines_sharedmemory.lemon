@@ -8,3 +8,9 @@ define u32 achievementsplus.sharedMemory.coinsSaved	= u32[achievementsplus.share
 
 // Achievements
 define u32 achievementsplus.sharedMemory.achivementsAddress	= 0x851304
+
+// Walls
+define u32 achievementsplus.sharedMemory.wallsAddress	= 0x8510fb
+// - 0x8510fb ... 0x8511fa	->	Data of all wall
+// - 0x8511fb 					->	Coins for unlocked nearest wall
+// - 0x8511fc 					->	Nearest wall ID

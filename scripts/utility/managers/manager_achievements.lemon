@@ -117,10 +117,17 @@ function u32 AchievementsPlus.AchivementsManager.getAchievementAddress(u16 achie
 	return achievementsplus.sharedMemory.achivementsAddress + u32(achievementID * 0x04)
 }
 
+
 // Adds a value to the Shared Memory value of the specified achievement.
 function void AchievementsPlus.AchivementsManager.addAchievementValue(u16 achievementID, u16 value)
 {
-	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled() || !sortAchievements(achievementID))
+	if (!sortAchievements(achievementID))
+	{
+		System.writeDisplayLine(stringformat("Unknown achievement (%04d)", achievementID))
+		return
+	}
+	
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
 		return
 	
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
@@ -149,7 +156,13 @@ function u32 AchievementsPlus.AchivementsManager.getAchievementValue(u16 achieve
 // Sets the status to complete for the specified achievement.
 function void AchievementsPlus.AchivementsManager.setAchievementComplete(u16 achievementID)
 {
-	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled() || !sortAchievements(achievementID))
+	if (!sortAchievements(achievementID))
+	{
+		System.writeDisplayLine(stringformat("Unknown achievement (%04d)", achievementID))
+		return
+	}
+	
+	if (AchievementsPlus.AchivementsManager.isAchievementComplete(achievementID) || !AchievementsPlus.AchivementsManager.isAchievementsEnabled())
 		return
 	
 	u32 tempValue0 = AchievementsPlus.AchivementsManager.getAchievementAddress(achievementID)
@@ -216,6 +229,14 @@ function bool AchievementsPlus.AchivementsManager.isAIRAchievement(u16 achieveme
 // Returns false if achievements cannot be received.
 function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 {
+	// Rolling Demo
+	if (global.game_mode == 0x08)
+		return false
+	
+	// Special stages or Blue Sphere game
+	if (global.game_mode == 0x34 || bluespheres.minigame_mode)
+		return true
+	
 	// Competition mode enabled
 	if (competition_mode.active || global.game_mode == 0x38 || global.game_mode == 0x44 || global.game_mode == 0x50)
 		return true

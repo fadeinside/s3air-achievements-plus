@@ -1,0 +1,40 @@
+// The main function of the menu.
+function void AchievementsPlus.Menu.popup.setup()
+{
+	// Global variables setup
+	achievementsplus.popupMenu.tempValue2 = 0x00
+	achievementsplus.popupMenu.tempValue3 = 0x00
+	
+	achievementsplus.popupMenu.tempValue5 = 0x00
+	achievementsplus.popupMenu.tempValue6 = 0x00
+	
+	// Re-enable active display
+	VDP.Config.setActiveDisplay(true)
+	
+	// Main loop
+	while (true)
+	{
+		// Clear sprites every frame
+		AchievementsPlus.waitForNextFrame()
+		RenderSprites()
+		
+		// Update control
+		AchievementsPlus.Menu.popup.updateControl()
+		
+		// Screen items
+		AchievementsPlus.Menu.popup.items()
+		AchievementsPlus.Menu.popup.background()
+		
+		if (global.game_mode == 0x0c)
+		{
+			AchievementsPlus.GameObjectsUpdate()
+		}
+		
+		// Screen fades
+		AchievementsPlus.FadeInFromWhite()
+		
+		// End the current loop if the mode don't match
+		if (achievementsplus.popupMenu.tempValue4 == 0x00)
+			break
+	}
+}

@@ -1,0 +1,31 @@
+//# address-hook(0x2000aa)
+function void AchievementsPlus.Objects.WallUnlocked.update()
+{
+	DrawObject()
+	
+	if (debug_mode.state)
+		debugDrawRect(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 - objA0.hitbox_extends.y, objA0.hitbox_extends.x * 0x02, objA0.hitbox_extends.y * 0x02)
+}
+
+
+// Spawn the wall with the specified parameters
+function void AchievementsPlus.Objects.WallUnlocked.spawn(u16 px, u16 py, u16 width, u16 height, u8 wallID, u8 paidValue)
+{
+	if (allocDynamicObjectStd())
+	{
+		objA1.update_address = 0x2000aa
+		objA1.render_flags = (render_flag.WORLD | render_flag.VISIBLE)
+		
+		objA1.hitbox_extends.x = min(width, 255)
+		objA1.hitbox_extends.y = min(height, 255)
+		
+		objA1.box_size.x = min(width, 255)
+		objA1.box_size.y = min(height, 255)
+		
+		objA1.position.x.u16 = px
+		objA1.position.y.u16 = py
+		
+		objA1.value3a = paidValue
+		objA1.value3b = wallID
+	}
+}

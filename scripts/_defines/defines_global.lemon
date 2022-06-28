@@ -1,7 +1,8 @@
 // Menus buttons
 global u8 achievementsplus.buttons.tempValue0	// Used in the animation of the trace of the achievement button
-global u8 achievementsplus.buttons.tempValue1	// Used in the animation of the achievement button arrow
+global s8 achievementsplus.buttons.tempValue1	// Used in the animation of the achievement button arrow
 global u8 achievementsplus.buttons.tempValue2	// Used in the animation of the trace of the achievement button
+global s8 achievementsplus.buttons.tempValue3	// Used in the animation of the achievement button arrow
 
 // Scrolling stuff	
 global u16 achievementsplus.scrollList.tempValue0	// Sets the current scroll position in a sorted achievements list 
@@ -27,6 +28,10 @@ global u16 achievementsplus.tabsPanel.tempValue8	// Total number of achievements
 global u16 achievementsplus.tabsPanel.tempValue9	// Limit for arrow control keys animation
 global u8 achievementsplus.tabsPanel.tempValue10	// Used in arrow control keys animation
 
+global u8 achievementsplus.tabsPanel.tempValue11	// Used in the animation of the trace of the tab button
+global u8 achievementsplus.tabsPanel.tempValue12	// Used in the animation of the trace of the tab button
+global u8 achievementsplus.tabsPanel.tempValue13	// Sets the ID of the previous button
+
 // List panel
 global u16 achievementsplus.listPanel.tempValue0	// Sets the start ID for the category of achievements in the menu
 global u16 achievementsplus.listPanel.tempValue1	// Sets the last ID for the category of achievements in the menu
@@ -38,6 +43,7 @@ global string achievementsplus.infoPanel.tempValue2	// Achievement sub-title for
 global string achievementsplus.infoPanel.tempValue3	// Achievement description for the current selected Achievement ID
 global string achievementsplus.infoPanel.tempValue4	// Achievement thumbnail for the current selected Achievement ID
 global bool achievementsplus.infoPanel.tempValue5	// Sets true when the current selected Achievement ID is complete
+global u8 achievementsplus.infoPanel.tempValue6	// Used for sparkles animation
 
 // Game stuff
 global u8 achievementsplus.game_mode.tempValue0	// Sets the previous mode ID when navigating to the achievements menu
@@ -50,6 +56,10 @@ global u8 achievementsplus.deathless_dez.tempValue0	// Check InitLevelTiles.DEZB
 global u8 achievementsplus.right_lbz.tempValue0	// Check LevelResults.Update() for details
 global u8 achievementsplus.without_hurt_mgz.tempValue0	// Check LevelResults.Update() for details
 
+// Version
+global string achievementsplus.version.tempValue0	// Sets the version of the mod in string format
+global string achievementsplus.version.tempValue1	// Sets the development status in string format
+
 // Popup stuff
 global string achievementsplus.popupMenu.tempValue0	// Sets the title for popup
 global u8 achievementsplus.popupMenu.tempValue1	// Sets the ID for popup menu
@@ -59,6 +69,7 @@ global bool achievementsplus.popupMenu.tempValue4	// Sets true when popup is sho
 global u8 achievementsplus.popupMenu.tempValue5	// Currently selected button in Popup menu 
 global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel button in Popup menu 
 global u16 achievementsplus.popupMenu.tempValue7	// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
+global u16 achievementsplus.popupMenu.tempValue8	// Sets the required Coins difference to purchase an item
 
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast

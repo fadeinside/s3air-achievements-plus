@@ -1,0 +1,8 @@
+{
+	// ----- WALL OBJECTS ----- //
+	
+	// Locked wall
+	"game_object_lockedWall": { "File": "game/objects_wall.png", "Rect": "1,1,16,16", "Center": "0,0" },
+	// Unlocked wall
+	"game_object_unlockedWall": { "File": "game/objects_wall.png", "Rect": "18,1,16,16", "Center": "0,0" }
+}

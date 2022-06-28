@@ -1,3 +1,10 @@
+SPECIAL THANKS
+
+ -> Thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code.
+
+ -> Thanks to everyone who joined the beta testing and followed the thread on the Sonic 3 A.I.R Community server in Discord.
+
+
 MODS LINKS
 
  -> "Sonic 3: D.A. Garden Edition" by Thorn_SRetro, check gamebanana.com page: 

@@ -1,8 +1,8 @@
 // This file was not auto-generated kek.
 
-declare function void AchievementsPlus.RewardsManager.addCoins(u16 value)
+declare function bool AchievementsPlus.RewardsManager.addCoins(u16 value)
 
-declare function void AchievementsPlus.RewardsManager.paidCoins(u16 value)
+declare function bool AchievementsPlus.RewardsManager.paidCoins(u16 value)
 
 declare function void AchievementsPlus.RewardsManager.loadPersistendData()
 
@@ -29,3 +29,9 @@ declare function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRan
 declare function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementID)
 
 declare function void AchievementsPlus.AchivementsManager.loadPersistentData()
+
+declare function void AchievementsPlus.WallManager.addPurchaseWall(u16 px, u16 py, u8 width, u8 height, u8 wallID, u8 paidValue)
+
+declare function void AchievementsPlus.WallManager.addSessionWall(u16 px, u16 py, u8 width, u8 height, u8 wallID, u8 paidValue)
+
+declare function void AchievementsPlus.WallManager.loadPersistentData()

@@ -58,6 +58,19 @@
 	"menu_icon_status_noncompleted20x": { "File": "menu/menu_icons.png", "Rect": "1,17,20,20", "Center": "0,0" },
 	"menu_icon_status_completed20x": { "File": "menu/menu_icons.png", "Rect": "22,17,20,20", "Center": "0,0" },
 	
+	// Achievement status sparkles icons
+	"menu_icon_sparkles_0": { "File": "menu/menu_icons.png", "Rect": "1,38,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_1": { "File": "menu/menu_icons.png", "Rect": "22,38,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_2": { "File": "menu/menu_icons.png", "Rect": "43,38,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_3": { "File": "menu/menu_icons.png", "Rect": "64,38,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_4": { "File": "menu/menu_icons.png", "Rect": "85,38,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_5": { "File": "menu/menu_icons.png", "Rect": "1,59,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_6": { "File": "menu/menu_icons.png", "Rect": "22,59,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_7": { "File": "menu/menu_icons.png", "Rect": "43,59,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_8": { "File": "menu/menu_icons.png", "Rect": "64,59,20,20", "Center": "0,0" },
+	"menu_icon_sparkles_9": { "File": "menu/menu_icons.png", "Rect": "85,59,20,20", "Center": "0,0" },
+	
+	
 	// Star icon outline
 	"menu_icon_star_outline": { "File": "menu/menu_icons.png", "Rect": "33,1,9,9", "Center": "4,4" },
 	

@@ -12,6 +12,10 @@ include utility/?
 include utility/achievements/?
 include utility/managers/?
 
+// Objects
+include objects/?
+include objects/general_walls/?
+
 // Main game
 include maingame/?
 
@@ -20,6 +24,8 @@ include achievements/?
 
 // Menus
 include menus/?
+include menus/menu_achievements/?
+include menus/menu_popup/?
 
 // General
 include general/?

@@ -1,3 +1,29 @@
+function void AchievementsPlus.GameObjectsUpdate()
+{
+	AchievementsPlus.GameObjectsUpdate_renderOnly()
+}
+
+function void AchievementsPlus.GameObjectsUpdate_renderOnly()
+{
+	A0 = 0xffffb000
+	if (competition_mode.active == 0x00 && u8[A0 + 0x05] >= 0x06 && u8[A0 + 0x05] != 0x0c)
+	{
+		D7 = 0x03
+		updateGameObjectLoopRenderOnly()
+		
+		D7 = 0x59
+		updateGameObjectLoopRenderOnly()
+		
+		D7 = 0x0f
+		updateGameObjectLoopRenderOnly()
+	}
+	else
+	{
+		D7 = 0x6d
+		updateGameObjectLoopRenderOnly()
+	}
+}
+
 function u8 getCompetitionMatchRaceTime(u8 parse)
 {
 	// Parse:

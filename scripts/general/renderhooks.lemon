@@ -1,0 +1,48 @@
+//@ Function taken from sonic3air_dev/scripts/standalone/rendering/renderhooks.lemon
+function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
+{
+	if (objA0.update_address == 0x20009a || objA0.update_address == 0x2000aa)
+	{
+		// objA0.update_address:
+		// - 0x20009a	-> Locked wall
+		// - 0x2000aa	-> Unlocked wall
+		
+		Renderer.addSpriteMaskWorld(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 - 0x10 - objA0.hitbox_extends.y, u16(0x10 + objA0.hitbox_extends.x * 0x02), 0x10, 0x9001, SPRITE_FLAG_PRIO)	// Top mask
+		//debugDrawRect(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 - 0x10 - objA0.hitbox_extends.y, u16(0x10 + objA0.hitbox_extends.x * 0x02), 0x10)
+		
+		Renderer.addSpriteMaskWorld(objA0.position.x.u16 + objA0.hitbox_extends.x, objA0.position.y.u16 - objA0.hitbox_extends.y, 0x10, u16(0x1f + objA0.hitbox_extends.y * 0x02), 0x9001, SPRITE_FLAG_PRIO)	// Right mask
+		//debugDrawRect(objA0.position.x.u16 + objA0.hitbox_extends.x, objA0.position.y.u16 - objA0.hitbox_extends.y, 0x10, u16(0x1f + objA0.hitbox_extends.y * 0x02))
+		
+		Renderer.addSpriteMaskWorld(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 + objA0.hitbox_extends.y, u16(objA0.hitbox_extends.x * 0x02), 0x1f, 0x9001, SPRITE_FLAG_PRIO)	// Bottom mask
+		//debugDrawRect(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 + objA0.hitbox_extends.y, u16(objA0.hitbox_extends.x * 0x02), 0x1f)
+		
+		string tempValue0 = objA0.update_address == 0x20009a ? "game_object_lockedWall" : "game_object_unlockedWall"	// Define a wall sprite
+		u8 tempValue1 = ((level.framecounter >> 0x01) % 0x10)	// Move animation
+		u8 tempValue2 = objA0.update_address == 0x20009a ? 0x80 : 0x50	// Transparency
+		
+		for (u16 A = 0x00; A < u16(objA0.box_size.x * 0x02); A += 0x10)
+		{
+			for (u16 B = 0x00; B < u16(0x10 + objA0.box_size.y * 0x02); B += 0x10)
+			{
+				Renderer.drawCustomSprite(tempValue0, (px - objA0.box_size.x) + A, ((py - objA0.box_size.y - 0x0f) + B) + tempValue1, 0x00, SPRITE_FLAG_PRIO, 0x9000, 0x00, tempValue2)
+			}
+		}
+		
+		if (objA0.update_address == 0x20009a)
+		{
+			py -= 10
+			Renderer.drawCustomSprite("menu_icon_originsCoin_small", px, py, 0x00, SPRITE_FLAG_PRIO, 0xffff)
+			Renderer.drawCustomSprite("menu_icon_glow", px, py, 0x00, SPRITE_FLAG_PRIO, 0xffff)
+			
+			py += 10
+			AchievementsPlus.TextManager.drawTextWithShadow(px, py, stringformat("Paid %d Coins", objA0.value3a), FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xffff)
+			py += 0x08
+			AchievementsPlus.TextManager.drawTextWithShadow(px, py, "to unlock this way.", FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xffff)
+		}
+		
+		return true
+	}
+	
+	// Return the base function
+	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+}

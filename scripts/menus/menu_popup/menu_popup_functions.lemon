@@ -1,0 +1,167 @@
+// The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
+function void AchievementsPlus.Menu.popup.items()
+{
+	s16 px = getScreenWidth() / 0x02
+	s16 py = getScreenHeight() / 0x02
+	
+	AchievementsPlus.Menu.popup.items.hotkeysPanel(px, py)
+	
+	AchievementsPlus.Menu.popup.items.title(px, py)
+	AchievementsPlus.Menu.popup.items.content(px, py)
+}
+
+
+// The main function of rendering the hot-keys panel.
+function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
+{
+	px -= 110
+	py += 50
+	
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("Start", "OK", px, py, 0xffff)
+	
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT || achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
+		return
+	
+	px += 74	// Sprite width
+	px += 0x04	// Addition space
+	
+	string tempValue0 = achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED ? "Main menu" : (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE ? "Cancel" : "Close")
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", tempValue0, px, py, 0xffff)
+}
+
+
+// The main function of rendering the title.
+function void AchievementsPlus.Menu.popup.items.title(s16 px, s16 py)
+{
+	py -= 50
+	AchievementsPlus.TextManager.drawTextWithOutline(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_CENTER, 0x01, 0xffffffff, 0x0041aaff, 0xffff)
+}
+
+
+// The function renders popup content based on the current ID.
+function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
+{
+	py -= 32
+	
+	// Content for options menu
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENTS_OPTIONS)
+	{
+		string tempValue0 = achievementsplus.popupMenu.tempValue6 == 0x00 ? "All achievements" : (achievementsplus.popupMenu.tempValue6 == 0x01 ? "Retro only" : "Community only")
+		AchievementsPlus.Menu.popup.items.content.drawOption(px, py, "Delete achievements data", tempValue0, true, 0xffff, achievementsplus.popupMenu.tempValue5, 0x00)
+		py += 16
+		
+		AchievementsPlus.Menu.popup.items.content.drawOption(px, py, "Delete all data", "", false, 0xffff, achievementsplus.popupMenu.tempValue5, 0x01)
+	}
+	
+	// Content for the confirmation menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You are sure?", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		py += 16
+		AchievementsPlus.TextManager.drawText(px, py, "This action cannot be undone!", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+	}
+	
+	// Content for the Debug enabled menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "until you disable the Debug mode", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "in the settings of Sonic 3 A.I.R.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 24
+		
+		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+	}
+	
+	// Content for the Game via Level select menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "in game via Level or Act select.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 38
+		
+		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+	}
+	
+	// Content for the Wall unlock menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You're going to buy a this wall", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "to unlock a new path.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		
+		py += 24
+		AchievementsPlus.TextManager.drawText(px, py, stringformat("You will have lose %d Coins", u8[achievementsplus.sharedMemory.wallsAddress + 0x100]), FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+	}
+	
+	// Content for the Not Enough Coins menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "You don't have enough Coins", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "to afford this item.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		
+		py += 24
+		AchievementsPlus.TextManager.drawText(px, py, stringformat("You need (+%d) more Coins.", achievementsplus.popupMenu.tempValue8), FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		py += 14
+		AchievementsPlus.TextManager.drawText(px, py, "Press START to go back", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+	}
+}
+
+
+// Support option rendering function.
+function void AchievementsPlus.Menu.popup.items.content.drawOption(s16 px, s16 py, string text, string option, bool carousel, u16 renderQueue, u8 selected, u8 target)
+{
+	u32 tempValue0 = selected == target ? 0x0041aaff : 0x000000ff
+	
+	AchievementsPlus.TextManager.drawText(px - 110, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, tempValue0, renderQueue)
+	
+	if (carousel)
+	{
+		AchievementsPlus.TextManager.drawText(px + 110, py, "< " + option + " >", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, tempValue0, renderQueue)
+	}
+	else
+	{
+		AchievementsPlus.TextManager.drawText(px + 110, py, ">", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, tempValue0, renderQueue)
+	}
+}
+
+
+// The function draws the background for the menu.
+function void AchievementsPlus.Menu.popup.background()
+{
+	// Jump-scare animation for background popup
+	{
+		if (achievementsplus.popupMenu.tempValue2 < 0x4700 && !achievementsplus.popupMenu.tempValue3)
+			achievementsplus.popupMenu.tempValue2 += 0x700
+		else
+		{
+			achievementsplus.popupMenu.tempValue3 |= 0x01
+			if (achievementsplus.popupMenu.tempValue2 > 0x3400 && achievementsplus.popupMenu.tempValue3 == 0x01)
+				achievementsplus.popupMenu.tempValue2 -= 0x1b3
+			else
+				achievementsplus.popupMenu.tempValue3 |= 0x02
+		}
+	}
+	
+	Renderer.drawCustomSpriteTinted("menu_popup_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2)) 
+	
+	// Render achievement menu items in the background for popup menu
+	if (global.game_mode == 0x9a)
+	{
+		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0x70)
+		
+		AchievementsPlus.Menu.achievements.items()
+		AchievementsPlus.Menu.achievements.background()
+	}
+	// In other cases, just a black background
+	else
+	{
+		u8 alpha = global.game_mode == 0x0c ? 0x70 : 255
+		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, alpha)
+	}
+}

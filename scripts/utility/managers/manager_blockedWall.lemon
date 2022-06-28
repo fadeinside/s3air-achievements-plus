@@ -1,0 +1,30 @@
+// Saves data stored in Shared Memory into Persistent Data.
+function void AchievementsPlus.WallManager.savePersistentData()
+{
+	SRAM.save(achievementsplus.sharedMemory.wallsAddress, 0x0ef8, 255)
+	System.savePersistentData(achievementsplus.sharedMemory.wallsAddress, "AchievementsPlus_WallsData", 255)
+}
+
+
+// Loads data stored in Persistent Data into Shared Memory.
+function void AchievementsPlus.WallManager.loadPersistentData()
+{
+	SRAM.load(achievementsplus.sharedMemory.wallsAddress, 0x0ef8, 255)
+	System.loadPersistentData(achievementsplus.sharedMemory.wallsAddress, "AchievementsPlus_WallsData", 255)
+}
+
+
+// Function call the spawn of the purchase wall with the specified parameters.
+function void AchievementsPlus.WallManager.addPurchaseWall(u16 px, u16 py, u8 width, u8 height, u8 wallID, u8 paidValue)
+{
+	u8[achievementsplus.sharedMemory.wallsAddress + wallID] |= 0x01
+	AchievementsPlus.Objects.WallLocked.spawn(px, py, width, height, wallID, paidValue)
+}
+
+
+// Function call the spawn of the session wall with the specified parameters.
+function void AchievementsPlus.WallManager.addSessionWall(u16 px, u16 py, u8 width, u8 height, u8 wallID, u8 paidValue)
+{
+	u8[achievementsplus.sharedMemory.wallsAddress + wallID] = 0x00
+	AchievementsPlus.Objects.WallLocked.spawn(px, py, width, height, wallID, paidValue)
+}

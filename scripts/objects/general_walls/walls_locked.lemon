@@ -1,0 +1,57 @@
+//# address-hook(0x20009a)
+function void AchievementsPlus.Objects.WallLocked.update()
+{
+	A1 = 0xffffb000
+	D1 = objA0.box_size.x + 0x0a
+	D2 = objA0.box_size.y
+	D3.u16 = objA0.box_size.y + 0x01
+	D4.u16 = objA0.position.x.u16
+	CheckCharacterOnClimbableObject()
+	
+	if ((objA0.flags2a == 0x08 || objA0.flags2a == 0x20) && (objA0.render_flags & render_flag.VISIBLE))
+	{
+		u8[achievementsplus.sharedMemory.wallsAddress + 0x100] = objA0.value3a	// Sets to address Coins value for unlocking
+		u8[achievementsplus.sharedMemory.wallsAddress + 0x101] = objA0.value3b	// Sets the ID of the wall at which the player stands
+		
+		if (Input.buttonPressed(BUTTON_Y) && (u8[achievementsplus.sharedMemory.wallsAddress + objA0.value3b] < 0xff) && !debug_mode.state)
+			AchievementsPlus.Menu.popup.show(POPUP_WALL_UNLOCK, "Unlock this wall?")
+	}
+	
+	DrawObject()
+	
+	if (u8[achievementsplus.sharedMemory.wallsAddress + objA0.value3b] == 0xff)
+	{
+		u8[0xffffb000 + 0x2a] &= ~char.flag.ON_OBJECT
+		u8[0xffffb04a + 0x2a] &= ~char.flag.ON_OBJECT
+		
+		AchievementsPlus.Objects.WallUnlocked.spawn(objA0.position.x.u16, objA0.position.y.u16,objA0.hitbox_extends.x, objA0.hitbox_extends.y, objA0.value3b, objA0.value3a)
+		
+		UnloadObject()
+	}
+	
+	if (debug_mode.state)
+		debugDrawRect(objA0.position.x.u16 - objA0.hitbox_extends.x, objA0.position.y.u16 - objA0.hitbox_extends.y, objA0.hitbox_extends.x * 0x02, objA0.hitbox_extends.y * 0x02)
+}
+
+
+// Spawn the wall with the specified parameters
+function void AchievementsPlus.Objects.WallLocked.spawn(u16 px, u16 py, u16 width, u16 height, u8 wallID, u8 paidValue)
+{
+	if (allocDynamicObjectStd())
+	{
+		objA1.update_address = 0x20009a
+		objA1.render_flags = (render_flag.WORLD | render_flag.VISIBLE)
+		
+		objA1.hitbox_extends.x = min(width, 255)
+		objA1.hitbox_extends.y = min(height, 255)
+		
+		objA1.box_size.x = min(width, 255)
+		objA1.box_size.y = min(height, 255)
+		
+		objA1.position.x.u16 = px
+		objA1.position.y.u16 = py
+		
+		objA1.value3a = paidValue
+		objA1.value3b = wallID
+	}
+}
