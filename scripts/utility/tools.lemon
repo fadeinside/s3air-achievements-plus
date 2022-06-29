@@ -117,7 +117,8 @@ function void loadupCustomMenu()
 function void SaveZoneAct.SaveIcon.show()
 {
 	// Call the base function
-	base.SaveZoneAct.SaveIcon.show()
+	if (Mods.isModActive("Save the Second Act of Current Zone"))
+		base.SaveZoneAct.SaveIcon.show()
 }
 
 function void AchievementsPlus.resetVars()
