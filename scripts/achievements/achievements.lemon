@@ -177,12 +177,12 @@ function void fn02e3b8()
 	{
 		if (!CHEAT_ONE_BLUE_SPHERE)
 		{
-			if (u8[0xffffffb0] == 0x01)
+			if (u8[0xffffffb1] == 0x07)
+				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_ALL_SUPER_EMERALDS)
+			else if (u8[0xffffffb0] == 0x01)
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_FIRST_CHAOS_EMERALD)
 			else if (u8[0xffffffb0] == 0x07)
 				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_ALL_CHAOS_EMERALDS)
-			else if (u8[0xffffffb1] == 0x07)
-				AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_GET_ALL_SUPER_EMERALDS)
 		}
 	}
 	
@@ -214,7 +214,7 @@ function void gainExtraLife()
 	
 	if (lives_counter == 10)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_10_LIVES)
-	if (lives_counter == 20)
+	else if (lives_counter == 20)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HAVE_20_LIVES)
 }
 
