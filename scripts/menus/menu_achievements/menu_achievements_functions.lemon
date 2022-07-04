@@ -1,12 +1,7 @@
 // The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
 function void AchievementsPlus.Menu.achievements.items()
 {
-	constant array<string> TITLE_CATEGORY =
-	{
-		"Sonic 3 A.I.R", "retroachievements.org", "Community"
-	}
-
-	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "ACHIEVEMENTS / " + TITLE_CATEGORY[achievementsplus.achievements.tabselected], FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "Achievements", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
 	
 	s16 px = getScreenExtend() - 40
 	s16 py = 46
@@ -366,7 +361,7 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 			if (!(py > 178 || py < 52))
 			{
 				// Achievement button
-				AchievementsPlus.TextManager.drawAchievementButton(px, py, AchievementsPlus.AchivementsManager.getAchievementDetail(A, 0x00), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, achievementsplus.achievements.buttonselected, A)
+				AchievementsPlus.TextManager.drawLeftMenuButton(px, py, AchievementsPlus.AchivementsManager.getAchievementDetail(A, 0x00), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, "large", achievementsplus.achievements.buttonselected, A)
 				
 				// Lift the next items when the button is selected
 				if (achievementsplus.achievements.buttonselected == A)

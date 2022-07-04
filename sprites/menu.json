@@ -9,6 +9,8 @@
 	"menu_background_1": { "File": "menu/background/menu_background_sea.png", "Rect": "0,0,496,224", "Center": "248,0" },
 	// Pink background
 	"menu_background_2": { "File": "menu/background/menu_background_cherry.png", "Rect": "0,0,496,224", "Center": "248,0" },
+	// Space background
+	"menu_background_3": { "File": "menu/background/menu_background_space.png", "Rect": "0,0,496,224", "Center": "248,0" },
 	
 	
 	
@@ -20,8 +22,19 @@
 	"menu_button_large_craked": { "File": "menu/menu_buttons.png", "Rect": "1,37,230,17", "Center": "0,0" },
 	"menu_button_large_selectedTint": { "File": "menu/menu_buttons.png", "Rect": "1,55,230,17", "Center": "0,0" },
 	
+	// Another button
+	"menu_button_another_selected": { "File": "menu/menu_buttons.png", "Rect": "1,73,118,17", "Center": "0,0" },
+	"menu_button_another": { "File": "menu/menu_buttons.png", "Rect": "1,91,118,17", "Center": "0,0" },
+	"menu_button_another_selectedTint": { "File": "menu/menu_buttons.png", "Rect": "1,109,118,17", "Center": "0,0" },
+	"menu_button_another_unactive": { "File": "menu/menu_buttons.png", "Rect": "1,127,118,17", "Center": "0,0" },
+	
+	// Carusel
+	"menu_button_carusel_selected": { "File": "menu/menu_buttons.png", "Rect": "1,145,118,17", "Center": "0,0" },
+	"menu_button_carusel": { "File": "menu/menu_buttons.png", "Rect": "1,163,118,17", "Center": "0,0" },
+	
 	// Arrow icon
 	"menu_button_icon_arrow": { "File": "menu/menu_buttons.png", "Rect": "232,1,13,17", "Center": "0,0" },
+	"menu_button_icon_arrow_unactive": { "File": "menu/menu_buttons.png", "Rect": "232,19,13,17", "Center": "0,0" },
 	
 	
 	
@@ -32,6 +45,9 @@
 	
 	// Claim button
 	"menu_detailPanel_buttonclaim": { "File": "menu/menu_detail_panel.png", "Rect": "1,145,143,20", "Center": "0,0" },
+	
+	// Options description
+	"menu_detailPanel_optionsDescription": { "File": "menu/menu_detail_panel_options.png", "Rect": "0,0,275,14", "Center": "0,0" },
 	
 	
 	

@@ -1,0 +1,184 @@
+// The main function is control management in the menu.
+function void AchievementsPlus.Menu.options.updateControl()
+{
+	// Back to achievements menu
+	if (control.pad1.pressed & CONTROL_B)
+	{
+		if (achievementsplus.options.tempValue2)
+		{
+			// Reset some animations for buttons
+			achievementsplus.buttons.tempValue0 = 0x00
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 0x00
+			achievementsplus.buttons.tempValue3 = 0x00
+			
+			achievementsplus.options.tempValue1 = 0xa0
+			achievementsplus.options.tempValue2 = false
+		}
+		else
+			global.game_mode = 0x9a
+	}
+	
+	//debugLog(stringformat("%d, %d, %d", achievementsplus.options.tempValue0, achievementsplus.options.tempValue1, achievementsplus.options.tempValue3))
+	
+	// Simple implementation of fast scrolling
+	if (control.pad1.state & CONTROL_DPAD)
+	{
+		// Setup buttons for the carousel
+		achievementsplus.options.tempValue5 = 0x00
+		if (achievementsplus.options.tempValue1 == 0x00)
+			achievementsplus.options.tempValue5 = 0x02
+		
+		++achievementsplus.scrollList.tempValue2
+		if (achievementsplus.scrollList.tempValue2 >= 30)
+		{
+			control.pad1.pressed = control.pad1.state
+			
+			// Reset some animations for buttons
+			achievementsplus.buttons.tempValue0 = 136
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 136
+			achievementsplus.buttons.tempValue3 = 0x00
+			
+			achievementsplus.scrollList.tempValue2 = 24
+		}
+	}
+	else
+	{
+		achievementsplus.scrollList.tempValue2 = 0x00
+	}
+	
+	if (control.pad1.pressed & CONTROL_START)
+	{
+		// Go to detail panel control
+		if (!achievementsplus.options.tempValue2)
+		{
+			achievementsplus.options.tempValue2 = true
+			
+			achievementsplus.options.tempValue1 = 0x00
+			achievementsplus.options.tempValue4 = 0x00
+			
+			// Setup datail panel total buttons
+			if (achievementsplus.options.tempValue0 == 0x00)
+				achievementsplus.options.tempValue4 = 0x01
+			
+			// Reset some animations for buttons
+			achievementsplus.buttons.tempValue0 = 0x00
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 0x00
+			achievementsplus.buttons.tempValue3 = 0x00
+			
+			achievementsplus.scrollList.tempValue2 = 24
+			
+			// Finish the function on this
+			return
+		}
+		
+		if (achievementsplus.options.tempValue0 == 0x00)
+		{
+			if (achievementsplus.options.tempValue1 == 0x00 || achievementsplus.options.tempValue1 == 0x01)
+				AchievementsPlus.Menu.popup.show(POPUP_OPTIONS_YOU_ARE_SURE, "One moment...")
+		}
+	}
+	
+	// Detail panel is active 
+	if (achievementsplus.options.tempValue2)
+	{
+		// Button selection
+		if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN) && achievementsplus.options.tempValue4 > 0x00)
+		{
+			playSound(0x5b)
+			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
+			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
+			
+			if (control.pad1.pressed & CONTROL_UP)
+			{
+				if (achievementsplus.options.tempValue1 != 0x00)
+					--achievementsplus.options.tempValue1
+				else
+					achievementsplus.options.tempValue1 = achievementsplus.options.tempValue4
+			}
+			
+			else if (control.pad1.pressed & CONTROL_DOWN)
+			{
+				if (achievementsplus.options.tempValue1 < achievementsplus.options.tempValue4)
+					++achievementsplus.options.tempValue1
+				else
+					achievementsplus.options.tempValue1 = 0x00
+			}
+			
+			// Reset some animations for buttons
+			if (achievementsplus.scrollList.tempValue2 < 24)
+			{
+				achievementsplus.buttons.tempValue0 = 255
+				achievementsplus.buttons.tempValue1 = 0x04
+				achievementsplus.buttons.tempValue2 = 0x00
+				achievementsplus.buttons.tempValue3 = 0x00
+			} 
+		}
+		
+		// Carusel selection
+		if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.options.tempValue5 > 0x00)
+		{
+			playSound(0x5b)
+			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
+			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
+			
+			if (control.pad1.pressed & CONTROL_LEFT)
+			{
+				if (achievementsplus.options.tempValue3 != 0x00)
+					--achievementsplus.options.tempValue3
+				else
+					achievementsplus.options.tempValue3 = achievementsplus.options.tempValue5
+			}
+			
+			else if (control.pad1.pressed & CONTROL_RIGHT)
+			{
+				if (achievementsplus.options.tempValue3 < achievementsplus.options.tempValue5)
+					++achievementsplus.options.tempValue3
+				else
+					achievementsplus.options.tempValue3 = 0x00
+			}
+			
+			// Reset some animations for buttons
+			if (achievementsplus.scrollList.tempValue2 < 24)
+				achievementsplus.buttons.tempValue2 = 0x00
+		}
+		
+		// Finish the function on this
+		return
+	}
+	
+	// Button selection
+	if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN))
+	{
+		playSound(0x5b)
+		achievementsplus.achievements.preButton = achievementsplus.options.tempValue0
+		achievementsplus.achievements.nextButton = achievementsplus.options.tempValue0
+		
+		if (control.pad1.pressed & CONTROL_UP)
+		{
+			if (achievementsplus.options.tempValue0 != 0x00)
+				--achievementsplus.options.tempValue0
+			else
+				achievementsplus.options.tempValue0 = achievementsplus.achievements.totalButtons
+		}
+		
+		else if (control.pad1.pressed & CONTROL_DOWN)
+		{
+			if (achievementsplus.options.tempValue0 < achievementsplus.achievements.totalButtons)
+				++achievementsplus.options.tempValue0
+			else
+				achievementsplus.options.tempValue0 = 0x00
+		}
+		
+		// Reset some animations for buttons
+		if (achievementsplus.scrollList.tempValue2 < 24)
+		{
+			achievementsplus.buttons.tempValue0 = 255
+			achievementsplus.buttons.tempValue1 = 0x04
+			achievementsplus.buttons.tempValue2 = 0x00
+			achievementsplus.buttons.tempValue3 = 0x00
+		} 
+	}
+}

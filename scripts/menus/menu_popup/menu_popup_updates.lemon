@@ -1,90 +1,28 @@
 // The main function is control management in the menu.
 function void AchievementsPlus.Menu.popup.updateControl()
 {
-	// Controls in the Options menu
-	if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENTS_OPTIONS)
+	// Control for the confirmation menu
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
 	{
 		// Close popup
 		if (control.pad1.pressed & CONTROL_B)
 			AchievementsPlus.Menu.popup.close()
-		
-		// Go to confirmation menu
-		if (control.pad1.pressed & CONTROL_START)
-		{
-			playSound(0x63)
-			AchievementsPlus.Menu.popup.show(POPUP_OPTIONS_YOU_ARE_SURE, "One moment...")
-		}
-		
-		// Select a button in the menu
-		if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN))
-		{
-			playSound(0x5b)
-			if (control.pad1.pressed & CONTROL_UP)
-			{
-				if (achievementsplus.popupMenu.tempValue5 != 0x00)
-					--achievementsplus.popupMenu.tempValue5
-				else
-					achievementsplus.popupMenu.tempValue5 = 0x01
-			}
-			else if (control.pad1.pressed & CONTROL_DOWN)
-			{
-				if (achievementsplus.popupMenu.tempValue5 < 0x01)
-					++achievementsplus.popupMenu.tempValue5
-				else
-					achievementsplus.popupMenu.tempValue5 = 0x00
-			}
-		}  
-		
-		// A carousel is available for the first button
-		if (achievementsplus.popupMenu.tempValue5 == 0x00)
-		{
-			// Select a carousel button in the menu
-			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
-			{
-				playSound(0x5b)
-				if (control.pad1.pressed & CONTROL_LEFT)
-				{
-					if (achievementsplus.popupMenu.tempValue6 != 0x00)
-						--achievementsplus.popupMenu.tempValue6
-					else
-						achievementsplus.popupMenu.tempValue6 = 0x02
-				}
-				else if (control.pad1.pressed & CONTROL_RIGHT)
-				{
-					if (achievementsplus.popupMenu.tempValue6 < 0x02)
-						++achievementsplus.popupMenu.tempValue6
-					else
-						achievementsplus.popupMenu.tempValue6 = 0x00
-				}
-			} 
-		}
-		
-		// Finish the function on this
-		return
-	}
-	
-	// Control for the confirmation menu
-	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
-	{
-		// Close popup (Actually, back to the Options menu)
-		if (control.pad1.pressed & CONTROL_B)
-			AchievementsPlus.Menu.popup.show(POPUP_ACHIEVEMENTS_OPTIONS, "Options")
 		
 		// Perform an action
 		if (control.pad1.pressed & CONTROL_START)
 		{
 			playSound(0x63)
 			
-			if (achievementsplus.popupMenu.tempValue5 == 0x00)
+			if (achievementsplus.options.tempValue1 == 0x00)
 			{
-				if (achievementsplus.popupMenu.tempValue6 == 0x00)
+				if (achievementsplus.options.tempValue3 == 0x00)
 					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x02], false)
-				else if (achievementsplus.popupMenu.tempValue6 == 0x01)
+				else if (achievementsplus.options.tempValue3 == 0x01)
 					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], false)
-				else if (achievementsplus.popupMenu.tempValue6 == 0x02)
+				else if (achievementsplus.options.tempValue3 == 0x02)
 					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
 			}
-			else if (achievementsplus.popupMenu.tempValue5 == 0x01)
+			else if (achievementsplus.options.tempValue1 == 0x01)
 			{
 				AchievementsPlus.RewardsManager.cleanPersistendData()
 				AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x02], true)
@@ -163,6 +101,7 @@ function void AchievementsPlus.Menu.popup.updateControl()
 					AchievementsPlus.WallManager.savePersistentData()
 				}
 				
+				// Close popup
 				AchievementsPlus.Menu.popup.close()
 			}
 		}

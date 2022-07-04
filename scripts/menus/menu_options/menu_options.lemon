@@ -1,0 +1,54 @@
+// The main function of the menu.
+function void AchievementsPlus.Menu.options.setup()
+{
+	// Screen fades
+	FadeOutScreenBlocking()
+	
+	// Global variables setup
+	level.framecounter = 0x00
+	achievementsplus.options.tempValue0 = 0x00
+	achievementsplus.options.tempValue1 = 0xa0
+	achievementsplus.achievements.totalButtons = 0x01
+	
+	achievementsplus.achievements.preButton = 0x00
+	achievementsplus.achievements.nextButton = 0x00
+	
+	// Play music
+	Audio.playAudio("music_OriginsMainMenuOST", AudioContext.CONTEXT_MUSIC)
+	
+	// Clear some VRAM stuff
+	VDP.fillVRAMbyDMA(0x00, 0x0000, 0x40)
+	VDP.fillVRAMbyDMA(0x00, 0xc000, 0x2000)
+	VDP.fillVRAMbyDMA(0x00, 0xe000, 0x2000)
+	
+	// Load Persistent Data
+	AchievementsPlus.SharedMemory.loadPersistendData()
+	
+	// Main loop
+	while (true)
+	{
+		// Clear sprites every frame
+		waitForNextFrame()
+		Renderer.resetSprites()
+		
+		// Update control
+		AchievementsPlus.Menu.options.updateControl()
+		
+		// Screen items
+		AchievementsPlus.Menu.options.items()
+		AchievementsPlus.Menu.options.background()
+		
+		// Screen fades
+		AchievementsPlus.FadeInFromWhite()
+		
+		// Start counting arrival frames in the menu
+		++level.framecounter
+		
+		// End the current loop if the mode don't match
+		if (global.game_mode != 0x9b)
+		{
+			achievementsplus.options.tempValue2 = 0x00
+			break
+		}
+	}
+}

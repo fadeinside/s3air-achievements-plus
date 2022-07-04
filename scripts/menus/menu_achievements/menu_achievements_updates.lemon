@@ -5,11 +5,9 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	if (achievementsplus.coinRewards.tempValue2)
 		return
 	
-	// Open options menu (popup)
+	// Open options menu
 	if (Input.buttonDown(BUTTON_X))
-	{
-		AchievementsPlus.Menu.popup.show(POPUP_ACHIEVEMENTS_OPTIONS, "Options")
-	}
+		global.game_mode = 0x9b
 	
 	// Back to main menu
 	if (control.pad1.pressed & CONTROL_B)
@@ -82,7 +80,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 			achievementsplus.buttons.tempValue1 = 0x04
 			achievementsplus.buttons.tempValue2 = 136
 			achievementsplus.buttons.tempValue3 = 0x00
-		
+			
 			achievementsplus.scrollList.tempValue2 = 24
 		}
 	}
@@ -192,7 +190,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 			achievementsplus.buttons.tempValue1 = 0x04
 			achievementsplus.buttons.tempValue2 = 0x00
 			achievementsplus.buttons.tempValue3 = 0x00
-		} 
+		}
 		
 		// Setup content for Detail panel
 		AchievementsPlus.Menu.achievements.setupForAchievementsDetail()

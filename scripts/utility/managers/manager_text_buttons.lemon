@@ -1,0 +1,192 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Center menu button
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawCenterMenuButton() function without configurable tint color and carusel.
+function void AchievementsPlus.TextManager.drawCenterMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, u8 alignment2, s8 spacing, u32 tintColor, u16 renderQueue, u16 selected, u16 target)
+{
+	AchievementsPlus.TextManager.drawCenterMenuButton(px, py, text, font, format, alignment, alignment2, spacing, tintColor, renderQueue, selected, target, "")
+}
+
+// Simplified AchievementsPlus.TextManager.drawCenterMenuButton() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawCenterMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, u8 alignment2, s8 spacing, u32 tintColor, u16 renderQueue, u16 selected, u16 target, string carusel)
+{
+	AchievementsPlus.TextManager.drawCenterMenuButton(px, py, text, font, format, alignment, alignment2, spacing, tintColor, renderQueue, selected, target, carusel)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawCenterMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, u8 alignment2, s8 spacing, u32 tintColor, u16 renderQueue, u16 selected, u16 target, string carusel)
+{
+	string key = "another"
+	string keyButton = "menu_button_" + key
+	
+	string keySelected = keyButton + "_selected"
+	string keySelectedTint = keyButton + "_selectedTint"
+	
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 textWidth2 = AchievementsPlus.TextManager.getTextWidth(carusel, font, format, spacing)
+	s32 align = carusel ? 100 : ((alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00))
+	
+	px -= (alignment2 == ALIGN_LEFT) ? 118 : ((alignment2 == ALIGN_CENTER) ? 0x00  : -118)
+	
+	if (selected == target)
+		py -= 0x01
+	
+	AchievementsPlus.TextManager.basic((px - align), py + 0x08, text, font, format, spacing, tintColor, renderQueue)
+	
+	if (carusel != "")
+	{
+		AchievementsPlus.TextManager.basic((px - textWidth2 / 0x02 + 54), py + 0x09, carusel, font, format, spacing, tintColor, renderQueue)
+		if (selected != target)
+			Renderer.drawCustomSprite("menu_button_carusel", px, py, 0x00, 0x00, renderQueue)
+	}
+	
+	if ((target == achievementsplus.achievements.nextButton || target == achievementsplus.achievements.preButton) && (global.game_mode == 0x9b ? achievementsplus.options.tempValue2 : true) && selected != target)
+	{
+		Renderer.drawCustomSprite("menu_button_icon_arrow", px + 102, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		Renderer.drawCustomSprite("menu_button_icon_arrow", px - 102, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+	}
+	
+	if (selected == target)
+	{
+		AchievementsPlus.TextManager.basic((px - align) + 0x01, py + 0x09, text, font, format, spacing, 0x000000ff, renderQueue)
+		
+		py += 0x01
+		
+		// Arrow animation
+		{
+			if (achievementsplus.buttons.tempValue1 > -0x03 && !achievementsplus.buttons.tempValue3)
+			{
+				--achievementsplus.buttons.tempValue1
+				if (achievementsplus.buttons.tempValue1 == -0x03)
+					achievementsplus.buttons.tempValue3 = 0x01
+			}
+			else if (achievementsplus.buttons.tempValue1 < 0x00 && achievementsplus.buttons.tempValue3)
+				++achievementsplus.buttons.tempValue1
+		}
+		
+		Renderer.drawCustomSprite("menu_button_icon_arrow", px + 103 + achievementsplus.buttons.tempValue1, py, 0x00, 0x00, renderQueue, 0x00, min(u16(achievementsplus.buttons.tempValue2) + 32, 255))
+		Renderer.drawCustomSprite("menu_button_icon_arrow", px - 103 - achievementsplus.buttons.tempValue1, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, min(u16(achievementsplus.buttons.tempValue2) + 32, 255))
+		
+		// Trace animation
+		{
+			if (achievementsplus.buttons.tempValue2 < 255)
+				achievementsplus.buttons.tempValue2 += 17
+			
+			if (achievementsplus.buttons.tempValue0 > 0x00 && achievementsplus.buttons.tempValue2 > 102)
+				achievementsplus.buttons.tempValue0 -= 17
+		}
+		
+		if (carusel != "")
+		{
+			AchievementsPlus.TextManager.basic((px - textWidth2 / 0x02 + 54) + 0x01, py + 0x09, carusel, font, format, spacing, 0x000000ff, renderQueue)
+			Renderer.drawCustomSprite("menu_button_carusel_selected", px, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue2)
+		}
+		
+		u8 tintAlpha = max(s16(u16(achievementsplus.tabsPanel.tempValue9) * 15 - achievementsplus.buttons.tempValue0), 0x00)
+		
+		Renderer.drawCustomSprite(keySelectedTint, px, py, 0x00, 0x00, renderQueue, 0x00, tintAlpha)
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue2)
+		
+		Renderer.drawCustomSprite(keySelectedTint, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, tintAlpha)
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, achievementsplus.buttons.tempValue2)
+	}
+	
+	Renderer.drawCustomSprite(keyButton, px, py, 0x00, 0x00, renderQueue)
+	Renderer.drawCustomSprite(keyButton, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Left menu button
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Simplified AchievementsPlus.TextManager.drawLeftMenuButton() function without configurable tint color.
+function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue, string key, u8 selected, u8 target)
+{
+	u32 tintColor = (achievementsplus.coinRewards.tempValue2 && selected == target) ? 0xb0b0b0ff : 0xffffffff
+	AchievementsPlus.TextManager.drawLeftMenuButton(px, py, text, font, format, alignment, spacing, tintColor, renderQueue, key, selected, target)
+}
+
+// The full text rendering code
+function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u16 renderQueue, string key, u16 selected, u16 target)
+{
+	string keyButton = "menu_button_" + key
+	
+	string keyArrow = "menu_button_icon_arrow"
+	string keySelected = keyButton + "_selected"
+	string keySelectedTint = keyButton + "_selectedTint"
+	
+	if (achievementsplus.options.tempValue2)
+	{
+		keyArrow = "menu_button_icon_arrow_unactive"
+		keySelected = keyButton + "_unactive"
+		keySelectedTint = keyButton + "_unactive" 
+	}
+	
+	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
+	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	
+	if (selected == target)
+		py -= 0x01
+	
+	AchievementsPlus.TextManager.basic((px - align) + 30, py + 0x08, text, font, format, spacing, tintColor, renderQueue)
+	
+	if ((target == achievementsplus.achievements.nextButton || target == achievementsplus.achievements.preButton) && selected != target && !achievementsplus.options.tempValue2)
+	{
+		Renderer.drawCustomSprite(keyArrow, px + ((key == "another") ? 102 : 214), py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+		if (getScreenWidth() > 400)
+			Renderer.drawCustomSprite(keySelected, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, achievementsplus.buttons.tempValue0)
+	}
+	
+	if (selected == target)
+	{
+		AchievementsPlus.TextManager.basic((px - align) + 31, py + 0x09, text, font, format, spacing, 0x000000ff, renderQueue)
+		
+		py += 0x01
+		
+		// Arrow animation
+		if (!achievementsplus.options.tempValue2)
+		{
+			if (achievementsplus.buttons.tempValue1 > -0x03 && !achievementsplus.buttons.tempValue3)
+			{
+				--achievementsplus.buttons.tempValue1
+				if (achievementsplus.buttons.tempValue1 == -0x03)
+					achievementsplus.buttons.tempValue3 = 0x01
+			}
+			else if (achievementsplus.buttons.tempValue1 < 0x00 && achievementsplus.buttons.tempValue3)
+				++achievementsplus.buttons.tempValue1
+		}
+		
+		Renderer.drawCustomSprite(keyArrow, px + ((key == "another") ? 103 : 215) + (achievementsplus.options.tempValue2 ? 0x00 : achievementsplus.buttons.tempValue1), py, 0x00, 0x00, renderQueue, 0x00, (achievementsplus.options.tempValue2 ? 255 : min(u16(achievementsplus.buttons.tempValue2) + 32, 255)))
+		
+		// Trace animation
+		if (!achievementsplus.options.tempValue2)
+		{
+			if (achievementsplus.buttons.tempValue2 < 255)
+				achievementsplus.buttons.tempValue2 += 17
+			
+			if (achievementsplus.buttons.tempValue0 > 0x00 && achievementsplus.buttons.tempValue2 > 102)
+				achievementsplus.buttons.tempValue0 -= 17
+		}
+		
+		u8 tintAlpha = max(s16(u16(achievementsplus.tabsPanel.tempValue9) * 15 - achievementsplus.buttons.tempValue0), 0x00)
+		
+		Renderer.drawCustomSprite(keySelectedTint, px, py, 0x00, 0x00, renderQueue, 0x00, tintAlpha)
+		Renderer.drawCustomSprite(keySelected, px, py, 0x00, 0x00, renderQueue, 0x00, (achievementsplus.options.tempValue2 ? 255 : achievementsplus.buttons.tempValue2))
+		
+		if (getScreenWidth() > 400)
+		{
+			Renderer.drawCustomSprite(keySelectedTint, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, tintAlpha)
+			Renderer.drawCustomSprite(keySelected, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue, 0x00, (achievementsplus.options.tempValue2 ? 255 : achievementsplus.buttons.tempValue2))
+		}
+	}
+	
+	Renderer.drawCustomSprite(keyButton, px, py, 0x00, 0x00, renderQueue)
+	if (getScreenWidth() > 400)
+		Renderer.drawCustomSprite(keyButton, px, py, 0x00, SPRITE_FLAG_FLIP_X, renderQueue)
+}

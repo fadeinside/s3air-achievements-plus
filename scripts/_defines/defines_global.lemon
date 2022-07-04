@@ -10,8 +10,16 @@ global u16 achievementsplus.scrollList.tempValue1	// Sets the current offset lim
 global u8 achievementsplus.scrollList.tempValue2	// Timer before moving on to the next button (achievement) in a sorted achievements list 
 
 // Achievements
-global s16 achievementsplus.achievements.buttonselected	// The currently active button in the Achievements menu
+global u16 achievementsplus.achievements.buttonselected	// The currently active button in the Achievements menu
 global u8 achievementsplus.achievements.tabselected	// The currently active tab in the Achievements menu
+
+// Options
+global u16 achievementsplus.options.tempValue0	// The currently active button in the Options menu (List)
+global u16 achievementsplus.options.tempValue1	// The currently active button in the Options menu (Content)
+global u8 achievementsplus.options.tempValue2	// Set when the detail block is currently active
+global u16 achievementsplus.options.tempValue3	// The currently active carusel button in the Options menu (Content)
+global u16 achievementsplus.options.tempValue4	// Sets total buttons for the detail panel in the Options menu
+global u16 achievementsplus.options.tempValue5	// Sets total carusel buttons for the detail panel in the Options menu
 
 // Tabs panel
 global u16 achievementsplus.tabsPanel.tempValue0	// Total number of completed achievements in the first tab (Sonic 3 A.I.R achievements)

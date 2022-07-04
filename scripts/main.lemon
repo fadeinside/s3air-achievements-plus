@@ -25,6 +25,7 @@ include achievements/?
 // Menus
 include menus/?
 include menus/menu_achievements/?
+include menus/menu_options/?
 include menus/menu_popup/?
 
 // General

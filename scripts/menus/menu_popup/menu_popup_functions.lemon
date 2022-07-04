@@ -158,6 +158,14 @@ function void AchievementsPlus.Menu.popup.background()
 		AchievementsPlus.Menu.achievements.items()
 		AchievementsPlus.Menu.achievements.background()
 	}
+	// Render options menu items in the background for popup menu
+	else if (global.game_mode == 0x9b)
+	{
+		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0x70)
+		
+		AchievementsPlus.Menu.options.items()
+		AchievementsPlus.Menu.options.background()
+	}
 	// In other cases, just a black background
 	else
 	{

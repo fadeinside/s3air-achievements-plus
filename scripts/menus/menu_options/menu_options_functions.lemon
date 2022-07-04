@@ -1,0 +1,132 @@
+// The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
+function void AchievementsPlus.Menu.options.items()
+{
+	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "OPTIONS", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	
+	s16 px = getScreenExtend() - 40
+	s16 py = 46
+	
+	AchievementsPlus.Menu.options.items.hotkeysPanel(px, py)
+	
+	AchievementsPlus.Menu.options.items.listPanel(px, py)
+	AchievementsPlus.Menu.options.items.infoPanel(px, py)
+	
+	// Ping-pong animation for control arrows
+	// - Also used for animations of other items in the menu.
+	{
+		if (achievementsplus.tabsPanel.tempValue9 <= 0x10 && !achievementsplus.tabsPanel.tempValue10)
+		{
+			++achievementsplus.tabsPanel.tempValue9
+			if (achievementsplus.tabsPanel.tempValue9 == 0x10)
+				achievementsplus.tabsPanel.tempValue10 |= 0x10
+		}
+		else
+		{
+			--achievementsplus.tabsPanel.tempValue9
+			if (achievementsplus.tabsPanel.tempValue9 == 0x00)
+				achievementsplus.tabsPanel.tempValue10 = 0x00
+		}
+	}
+}
+
+
+// The main function of rendering the hot-keys panel.
+function void AchievementsPlus.Menu.options.items.hotkeysPanel(s16 px, s16 py)
+{
+	px = 12
+	py = getScreenHeight() - 12
+	
+	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", "Back", px, py, 0xf000)
+}
+
+
+// The main function of rendering the options details panel
+function void AchievementsPlus.Menu.options.items.infoPanel(s16 px, s16 py)
+{
+	px += 125
+	py /= 0x02
+	
+	{
+		s16 posX = px + 12
+		s16 posY = py + 12 + 0x03
+		
+		AchievementsPlus.Menu.options.items.infoPanel.content(posX, posY)
+	}
+	
+	if (!achievementsplus.options.tempValue2)
+		Renderer.drawCustomSpriteTinted("menu_background_tape", px, py, 0x00, 0x00, 0xf002, 0x00, 0x00000060, 0x10000)
+	
+	Renderer.drawCustomSprite("menu_background_tape", px, py, 0x00, 0x00, 0xf000)
+	py += 155 + 0x03
+	
+	constant array<string> OPTIONS_DESCRIPTION =
+	{
+		"Manage your saved data.", "Everyone who was involved in the development."
+	}
+	
+	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
+	Renderer.drawCustomSprite("menu_detailPanel_optionsDescription", px, py, 0x00, 0x00, 0xf000)
+}
+
+
+function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 py)
+{
+	// Content for My Data menu
+	if (achievementsplus.options.tempValue0 == 0x00)
+	{
+		AchievementsPlus.TextManager.drawText(px, py, "Data management", FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x002964ff, 0xf000)
+		py += 18
+		
+		u16 tempValue0 = 0x08 + (getScreenExtend() - 40) / 0x02
+		
+		string tempValue1 = achievementsplus.options.tempValue3 == 0x00 ? "All achievements" : (achievementsplus.options.tempValue3 == 0x01 ? "Retro only" : "Community only")
+		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete achievements data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_RIGHT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x00, tempValue1)
+		py += 18
+		
+		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete all saved data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_RIGHT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x01)
+		py += 18
+	}
+	
+	// Content for Credits menu
+	if (achievementsplus.options.tempValue0 == 0x01)
+	{
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "SPECIAL THANKS", FONT_OXYTINY, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+		py += 20
+		
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code.", FONT_OXYTINY, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+		py += 18 + 0x08
+		
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thanks to everyone who joined the beta testing and followed the thread on the Sonic 3 A.I.R Community server in Discord.", FONT_OXYTINY, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+		py += 18 + 0x08 * 0x02
+		
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thank you for downloading and using this mod!", FONT_OXYTINY, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+	}
+}
+
+
+// The main function of rendering the items list of options menu.
+function void AchievementsPlus.Menu.options.items.listPanel(s16 px, s16 py)
+{
+	py -= 18
+	
+	constant array<string> OPTIONS_ITEMS =
+	{
+		"My Data", "Credits"
+	}
+	
+	// Main render loop
+	for (u16 A = 0x00; A <= achievementsplus.achievements.totalButtons; ++A)
+	{
+		AchievementsPlus.TextManager.drawLeftMenuButton(px, py, OPTIONS_ITEMS[A], FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, "another", achievementsplus.options.tempValue0, A)
+		
+		// Offset for the next item
+		py += 18
+	}
+}
+
+
+// The function draws the background for the menu.
+function void AchievementsPlus.Menu.options.background()
+{
+	Renderer.drawCustomSprite("menu_background_3", getScreenWidth() / 0x02, 0x00, 0x00, 0x00, 0xf000)
+}

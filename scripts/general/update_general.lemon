@@ -54,9 +54,14 @@ function bool GameModeControlLoop.callCustomModes()
 	// Achievements Plus custom modes
 	// Custom targets:
 	// global.game_mode = 0x9a	->	Achievements Plus: Achievements menu
-	if (global.game_mode == 0x9a)
+	// global.game_mode = 0x9b	->	Achievements Plus: Options menu
+	if (global.game_mode >= 0x9a && global.game_mode <= 0x9b)
 	{
-		AchievementsPlus.Menu.achievements.setup()
+		if (global.game_mode == 0x9a)
+			AchievementsPlus.Menu.achievements.setup()
+		if (global.game_mode == 0x9b)
+			AchievementsPlus.Menu.options.setup()
+		
 		return true
 	}
 	
