@@ -64,10 +64,6 @@ global u8 achievementsplus.deathless_dez.tempValue0	// Check InitLevelTiles.DEZB
 global u8 achievementsplus.right_lbz.tempValue0	// Check LevelResults.Update() for details
 global u8 achievementsplus.without_hurt_mgz.tempValue0	// Check LevelResults.Update() for details
 
-// Version
-global string achievementsplus.version.tempValue0	// Sets the version of the mod in string format
-global string achievementsplus.version.tempValue1	// Sets the development status in string format
-
 // Popup stuff
 global string achievementsplus.popupMenu.tempValue0	// Sets the title for popup
 global u8 achievementsplus.popupMenu.tempValue1	// Sets the ID for popup menu

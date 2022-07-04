@@ -443,15 +443,33 @@ function void InitLevelTiles.DEZBossAct()
 	base.InitLevelTiles.DEZBossAct()
 }
 
-//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
-//# address-hook(0x009ea0) end(0x009eba)
-function void fn009ea0()
+//@ Function taken from sonic3air_dev/scripts/objects/01_aiz/aiz_zipline.lemon
+//# address-hook(0x02219e) end(0x0221e0)
+function void fn02219e()
 {
-	achievementsplus.going_forward.tempValue0 = 0x00
-	
-	if (CHEAT_ONE_BLUE_SPHERE)
+	if (A1 != 0xffffb000 || D0.u8 == 0x00)
+		return
+
+	D1 = u8[A0 + 0x25]
+	if (D0.u8 == u8[0x0221e2 + D1.s16])
+	{
+		++u8[A0 + 0x25]
+		D1.u8 = u8[0x0221e3 + D1.s16]
+		if (D1.u8 != 0x00)
+			return
+
+	#if STANDALONE
+		u8[0x02219e] = 0x14
+	#else
+		levelselect.unlocked = 0x01
+		pausecheats.unlocked = 0x01
+	#endif
+		
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_CHEATER_THE_CHEETAH)
-	
-	// Call the base function
-	base.fn009ea0()
+
+		D1.u16 = D0.u16
+		playSound(SFX_RING)
+		D0.u16 = D1.u16
+	}
+	u8[A0 + 0x25] = 0x00
 }

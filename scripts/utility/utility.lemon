@@ -65,6 +65,16 @@ function void fn00d7c0()
 	base.fn00d7c0()
 }
 
+//@ Function taken from sonic3air_dev/scripts/level/special/bluespheres.lemon
+//# address-hook(0x009ea0) end(0x009eba)
+function void fn009ea0()
+{
+	achievementsplus.going_forward.tempValue0 = 0x00
+	
+	// Call the base function
+	base.fn009ea0()
+}
+
 //@ Function taken from sonic3air_dev/scripts/level/bonus_gm/level_gumballmachine.lemon
 //# address-hook(0x23ef58) end(0x23ef9e)
 function void InitLevelTiles.BonusGM()

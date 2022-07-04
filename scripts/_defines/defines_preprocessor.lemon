@@ -1,4 +1,4 @@
 // Pre-processor defines
 // - Read Oxygen Handbook for details
 
-#define ACHIEVEMENTS_PLUS_ACTIVE	= 0x22062900
+#define ACHIEVEMENTS_PLUS_ACTIVE	= 0x22070400

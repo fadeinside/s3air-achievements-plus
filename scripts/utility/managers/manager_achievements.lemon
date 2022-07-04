@@ -241,7 +241,7 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 	if (competition_mode.active || global.game_mode == 0x38 || global.game_mode == 0x44 || global.game_mode == 0x50)
 		return true
 	
-	if (true)	// Allow completion of achievements in Debug mode and Level select
+	if (true)	// Forbid completion of achievements in Debug mode and Level select
 	{
 		// Game loaded from Level select
 		if (achievementsplus.level_select.tempValue0 & 0x01)
