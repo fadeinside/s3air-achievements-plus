@@ -1,4 +1,5 @@
 // Settings
-global u8 SETTING_ACHIEVEPLUS_COINS_HUD	// If set, instead of lives in hud will be shown Coins
+global u8 SETTING_ACHIEVEPLUS_RENDER_METHOD	// 
 
+global u8 SETTING_ACHIEVEPLUS_COINS_HUD	// If set, instead of lives in hud will be shown Coins
 global u8 SETTING_ACHIEVEPLUS_WARNING_MESSAGES	// If set, then when Debug mode or Game via Level select is enabled, a notification will be displayed about disabled achievements

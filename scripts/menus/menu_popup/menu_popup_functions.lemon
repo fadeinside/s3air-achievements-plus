@@ -17,16 +17,18 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 	px -= 110
 	py += 50
 	
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("Start", "OK", px, py, 0xffff)
+	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "OK", px, py, 0xffff)
+	tempValue0
+	px += tempValue0
 	
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT || achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
 		return
 	
-	px += 74	// Sprite width
-	px += 0x04	// Addition space
+	string tempValue1= achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED ? "Main menu" : (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE ? "Cancel" : "Close")
 	
-	string tempValue0 = achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED ? "Main menu" : (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE ? "Cancel" : "Close")
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", tempValue0, px, py, 0xffff)
+	u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", tempValue1, px, py, 0xffff)
+	tempValue2
+	px += tempValue2
 }
 
 

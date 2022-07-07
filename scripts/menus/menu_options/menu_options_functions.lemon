@@ -1,7 +1,7 @@
 // The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
 function void AchievementsPlus.Menu.options.items()
 {
-	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "OPTIONS", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "OPTIONS", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
 	
 	s16 px = getScreenExtend() - 40
 	s16 py = 46
@@ -10,6 +10,8 @@ function void AchievementsPlus.Menu.options.items()
 	
 	AchievementsPlus.Menu.options.items.listPanel(px, py)
 	AchievementsPlus.Menu.options.items.infoPanel(px, py)
+	
+	AchievementsPlus.Menu.achievements.items.build(px, py)
 	
 	// Ping-pong animation for control arrows
 	// - Also used for animations of other items in the menu.
@@ -33,10 +35,19 @@ function void AchievementsPlus.Menu.options.items()
 // The main function of rendering the hot-keys panel.
 function void AchievementsPlus.Menu.options.items.hotkeysPanel(s16 px, s16 py)
 {
-	px = 12
+	px = 16
 	py = getScreenHeight() - 12
 	
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", "Back", px, py, 0xf000)
+	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("B", !achievementsplus.options.tempValue2 ? "Back to achievements menu" : "Category selection", px, py, 0xf000)
+	tempValue0
+	px += tempValue0
+	
+	if (!achievementsplus.options.tempValue2 || achievementsplus.options.tempValue1 != 0xa0)
+	{
+		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("Start", !achievementsplus.options.tempValue2 ? "Go to category" : "Select", px, py, 0xf000)
+		tempValue1
+		px += tempValue1
+	}
 }
 
 

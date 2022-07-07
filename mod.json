@@ -5,13 +5,25 @@
 		"Author": "FadeInside" ,
 		"Description": "New achievements to complete, Rewards for completing, and, Your achievements made by the Community. Dilute your gray days in the game with a new experience of exploring achievements!\nAny mod that provides Community achievements should be installed above.",
 		"URL": "https://github.com/fadeinside/s3air-achievements-plus/",
-		"ModVersion": "v1.0 (Pre-release 04.07.2022)",
-		"GameVersion": "22.05.15.0"
+		"ModVersion": "v1.0 (Pre-release 2022.07.07)",
+		"GameVersion": "v22.05.15.0"
 	},
 	"Settings":
 	{
 		"List":
 		[
+		{
+				"Category": "Rendering",
+				"InternalName": "SETTING_ACHIEVEPLUS_RENDER_METHOD",
+				"DisplayName": "Render mode:",
+				"Variable": "SETTING_ACHIEVEPLUS_RENDER_METHOD",
+				"DefaultValue": "1",
+				"Options":
+				{
+					"0": "Software",
+					"1": "OpenGL (Default)"
+				}
+			},
 			{
 				"Category": "Menu appearance",
 				"InternalName": "SETTING_ACHIEVEPLUS_COINS_HUD",

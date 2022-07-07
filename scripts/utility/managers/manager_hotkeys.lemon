@@ -1,0 +1,32 @@
+// Main hot-keys rendering function.
+function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text, s16 px, s16 py, u16 renderQueue)
+{
+	// The "menu_hotkey_Start" sprite is larger than the rest, so additional offset is required to render the text
+	u16 tempValue0 = (key == "Start") ? 15 : 0x00
+	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, renderQueue)
+	
+	// Draw hot-key
+	Renderer.drawCustomSprite("menu_hotkey_" + key, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	
+	u16 tempValue1 = tempValue0 ? 21 : 0x07
+	s32 tempValue2 = AchievementsPlus.TextManager.getTextWidth(text, FONT_SMALLFONT, FORMAT_NONE, 0x01) + 0x05
+	
+	// Draw background
+	if (SETTING_ACHIEVEPLUS_RENDER_METHOD)
+	{
+		Renderer.drawCustomSpriteWithTransform("menu_hotkey_background_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0xffffffff, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
+		
+		px += tempValue2
+		Renderer.drawCustomSprite("menu_hotkey_background_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+		
+		// Return hot-key width
+		return tempValue2 + 0x08 + tempValue1 + 0x08
+	}
+	else
+	{
+		Renderer.drawCustomSprite("menu_hotkey_background", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+		
+		// Return hot-key width
+		return 60 + max((tempValue2 + 0x08) - 60, 0x00) + tempValue0 + 0x08
+	}
+}

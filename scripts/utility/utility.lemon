@@ -31,7 +31,7 @@ function void LevelSelect()
 //# address-hook(0x00d1fa) end(0x00d30a)
 function void fn00d1fa()
 {
-	s16 px = 12
+	s16 px = 16
 	s16 py = 12
 	
 	u16 tempValue0 = achievementsplus.tabsPanel.tempValue6 + achievementsplus.tabsPanel.tempValue7 + achievementsplus.tabsPanel.tempValue8
@@ -44,7 +44,9 @@ function void fn00d1fa()
 		px += 16
 	}
 	
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("X", "Achievements", px, py, 0xfffe)
+	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("X", "Achievements", px, py, 0xfffe)
+	tempValue1
+	px += tempValue1
 	
 	// Call the base function
 	base.fn00d1fa()

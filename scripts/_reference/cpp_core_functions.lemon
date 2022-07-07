@@ -20,8 +20,6 @@ declare function bool AchievementsPlus.AchivementsManager.isAchievementComplete(
 
 declare function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 
-declare function bool AchievementsPlus.AchivementsManager.isAIRAchievement(u16 achievementID)
-
 declare function u16 AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(u16 startID, u16 lastID, bool returnCompleted)
 
 declare function u16 AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(u16 startID, u16 lastID)

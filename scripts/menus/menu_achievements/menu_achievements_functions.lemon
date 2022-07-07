@@ -1,7 +1,7 @@
 // The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
 function void AchievementsPlus.Menu.achievements.items()
 {
-	AchievementsPlus.TextManager.drawTextWithOutline(12, 10, "Achievements", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "Achievements", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
 	
 	s16 px = getScreenExtend() - 40
 	s16 py = 46
@@ -10,6 +10,8 @@ function void AchievementsPlus.Menu.achievements.items()
 	
 	AchievementsPlus.Menu.achievements.items.tabsPanel(px, py)
 	AchievementsPlus.Menu.achievements.items.userStats(px, py)
+	
+	AchievementsPlus.Menu.achievements.items.build(px, py)
 	
 	if (hideAchievementsListItems())
 	{
@@ -22,46 +24,45 @@ function void AchievementsPlus.Menu.achievements.items()
 		return
 	}
 	
-	AchievementsPlus.Menu.achievements.items.listPanel(px, py)
-	AchievementsPlus.Menu.achievements.items.infoPanel(px, py)
-	
 	AchievementsPlus.Menu.achievements.items.scrollbar(px, py)
 	
-	string tempValue8 = stringformat("%s %s", ACHIEVEMENTS_PLUS_VERSION_STRING, ACHIEVEMENTS_PLUS_VERSION_BUILD)
-	AchievementsPlus.TextManager.drawText(getScreenWidth() - 12, getScreenHeight() - 10, tempValue8, FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffffff80, 0xf000)
+	AchievementsPlus.Menu.achievements.items.listPanel(px, py)
+	AchievementsPlus.Menu.achievements.items.infoPanel(px, py)
+}
+
+
+// The main function of rendering build info.
+function void AchievementsPlus.Menu.achievements.items.build(s16 px, s16 py)
+{
+	px = getScreenWidth() - 0x04
+	py = getScreenHeight() - 0x05
+	
+	string tempValue0 = stringformat("%s %s", ACHIEVEMENTS_PLUS_BUILD_STRING, ACHIEVEMENTS_PLUS_BUILD_VARIANT)
+	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffffff80, 0xf000) 
 }
 
 
 // The main function of rendering the hot-keys panel.
 function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 py)
 {
-	px = 12
+	px = 16
 	py = getScreenHeight() - 12
 	
 	// Define if an claiming reward is available for the selected achievement
 	if (achievementsplus.coinRewards.tempValue0 != 0x00)
 	{
-		AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("Start", "Claim reward", px, py, 0xf000)
-		px += 74	// Sprite width
-		px += 0x04	// Addition space
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Claim reward", px, py, 0xf000)
+		tempValue0
+		px += tempValue0
 	}
 	
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("B", "Back", px, py, 0xf000)
-	px += 60	// Sprite width
-	px += 0x04	// Addition space
+	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Back", px, py, 0xf000)
+	tempValue1
+	px += tempValue1
 	
-	AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey("A", "Options", px, py, 0xf000)
-}
-
-
-// Support hot-keys rendering function.
-function void AchievementsPlus.Menu.achievements.items.hotkeysPanel.drawHotkey(string key, string text, s16 px, s16 py, u16 renderQueue)
-{
-	// The "menu_hotkey_Start" sprite is larger than the rest, so additional offset is required to render the text
-	u16 tempValue0 = (key == "Start") ? 15 : 0x00
-	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, renderQueue)
-	
-	Renderer.drawCustomSprite("menu_hotkey_" + key, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("A", "Options", px, py, 0xf000)
+	tempValue2
+	px += tempValue2
 }
 
 

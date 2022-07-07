@@ -12,7 +12,7 @@ function void AchievementsPlus.ManagerVersion.update()
 	}
 	
 	// Just update the latest version if the mod has a higher
-	if (achievementsplus.sharedMemory.versionUsed < ACHIEVEMENTS_PLUS_VERSION)
+	if (achievementsplus.sharedMemory.versionUsed < ACHIEVEMENTS_PLUS_BUILD_NUMBER)
 	{
 		AchievementsPlus.ManagerVersion.updateVersion()
 	}
@@ -70,6 +70,6 @@ function void AchievementsPlus.ManagerVersion.loadVersion()
 // Updates the Shared Memory value and saves it in SRAM
 function void AchievementsPlus.ManagerVersion.updateVersion()
 {
-	achievementsplus.sharedMemory.versionUsed = ACHIEVEMENTS_PLUS_VERSION
+	achievementsplus.sharedMemory.versionUsed = ACHIEVEMENTS_PLUS_BUILD_NUMBER
 	AchievementsPlus.ManagerVersion.saveVersion()
 }

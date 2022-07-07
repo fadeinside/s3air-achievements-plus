@@ -55,6 +55,6 @@ constant u8 POPUP_NOT_ENOUGH_COINS	= 0x35
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_VERSION	= 0x22070400
-constant string ACHIEVEMENTS_PLUS_VERSION_STRING	= "v22.07.04.0"
-constant string ACHIEVEMENTS_PLUS_VERSION_BUILD	= "PRE RELEASE"
+constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER	= 0x22070700
+constant string ACHIEVEMENTS_PLUS_BUILD_STRING	= "v22.07.07.0"
+constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "PRE RELEASE"
