@@ -24,7 +24,7 @@ function void AchievementsPlus.Objects.WallLocked.update()
 		u8[0xffffb000 + 0x2a] &= ~char.flag.ON_OBJECT
 		u8[0xffffb04a + 0x2a] &= ~char.flag.ON_OBJECT
 		
-		AchievementsPlus.Objects.WallUnlocked.spawn(objA0.position.x.u16, objA0.position.y.u16,objA0.hitbox_extends.x, objA0.hitbox_extends.y, objA0.value3b, objA0.value3a)
+		AchievementsPlus.Objects.WallUnlocked.spawn(objA0.position.x.u16, objA0.position.y.u16, objA0.hitbox_extends.x * 0x02, objA0.hitbox_extends.y * 0x02, objA0.value3b, objA0.value3a)
 		
 		UnloadObject()
 	}
