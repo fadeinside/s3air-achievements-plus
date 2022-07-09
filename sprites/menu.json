@@ -42,9 +42,6 @@
 	// Claim button
 	"menu_detailPanel_buttonclaim": { "File": "menu/menu_detail_panel.png", "Rect": "1,145,143,20", "Center": "0,0" },
 	
-	// Options description
-	"menu_detailPanel_optionsDescription": { "File": "menu/menu_detail_panel_options.png", "Rect": "0,0,275,14", "Center": "0,0" },
-	
 	
 	
 	// ----- MENU HOT-KEYS ----- //
@@ -121,7 +118,10 @@
 	// ----- MENU POPUP PANEL ----- //
 	
 	// Popup background
-	"menu_popup_background": { "File": "menu/menu_popup.png", "Rect": "0,0,273,128", "Center": "135,63" },
+	"menu_popup_background": { "File": "menu/menu_popups.png", "Rect": "1,1,273,128", "Center": "135,63" },
+	
+	// Popup small background
+	"menu_popupSmall_background": { "File": "menu/menu_popups.png", "Rect": "1,130,205,82", "Center": "102,41" },
 	
 	
 	
@@ -168,7 +168,10 @@
 	// ----- MENU TAPE BACKGROUND ----- //
 	
 	// Background tape
-	"menu_background_tape": { "File": "menu/menu_tape.png", "Rect": "0,0,492,155", "Center": "0,0" },
+	"menu_background_tape": { "File": "menu/menu_tapes.png", "Rect": "1,1,498,155", "Center": "0,0" },
+	
+	// Blue tape
+	"menu_background_tapeBlue": { "File": "menu/menu_tapes.png", "Rect": "1,157,272,14", "Center": "0,0" },
 	
 	
 	

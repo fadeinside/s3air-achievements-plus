@@ -76,7 +76,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel(s16 px, s16 py)
 	}
 	
 	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
-	Renderer.drawCustomSprite("menu_detailPanel_optionsDescription", px, py, 0x00, 0x00, 0xf000)
+	Renderer.drawCustomSprite("menu_background_tapeBlue", px, py, 0x00, 0x00, 0xf000)
 }
 
 
