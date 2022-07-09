@@ -11,6 +11,9 @@ function void AchievementsPlus.Objects.WallUnlocked.update()
 // Spawn the wall with the specified parameters
 function void AchievementsPlus.Objects.WallUnlocked.spawn(u16 px, u16 py, u16 width, u16 height, u8 wallID, u8 paidValue)
 {
+	width /= 0x02
+	height /= 0x02
+	
 	if (allocDynamicObjectStd())
 	{
 		objA1.update_address = 0x2000aa
