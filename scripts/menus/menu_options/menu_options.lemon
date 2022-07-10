@@ -14,7 +14,7 @@ function void AchievementsPlus.Menu.options.setup()
 	achievementsplus.achievements.nextButton = 0x00
 	
 	// Play music
-	Audio.playAudio("music_OriginsMainMenuOST", AudioContext.CONTEXT_MUSIC)
+	AchievementsPlus.playMenuMusic()
 	
 	// Clear some VRAM stuff
 	VDP.fillVRAMbyDMA(0x00, 0x0000, 0x40)

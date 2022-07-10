@@ -11,7 +11,7 @@ function void AchievementsPlus.Menu.popup.updateControl()
 		// Perform an action
 		if (control.pad1.pressed & CONTROL_START)
 		{
-			playSound(0x63)
+			playSound(0x68)
 			
 			if (achievementsplus.options.tempValue1 == 0x00)
 			{
@@ -89,6 +89,8 @@ function void AchievementsPlus.Menu.popup.updateControl()
 			
 			if (tempValue0)
 			{
+				playSound(0x68)
+				
 				tempValue0
 				u8 tempValue1 = u8[achievementsplus.sharedMemory.wallsAddress + 0x101]
 				u8 tempValue2 = u8[achievementsplus.sharedMemory.wallsAddress + tempValue1]

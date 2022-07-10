@@ -40,6 +40,9 @@ global u8 achievementsplus.tabsPanel.tempValue11	// Used in the animation of the
 global u8 achievementsplus.tabsPanel.tempValue12	// Used in the animation of the trace of the tab button
 global u8 achievementsplus.tabsPanel.tempValue13	// Sets the ID of the previous button
 
+// Music
+global u8 achievementsplus.menuMusic.tempValue0	// Set when music in the menu needs to be restarted
+
 // List panel
 global u16 achievementsplus.listPanel.tempValue0	// Sets the start ID for the category of achievements in the menu
 global u16 achievementsplus.listPanel.tempValue1	// Sets the last ID for the category of achievements in the menu

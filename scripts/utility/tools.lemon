@@ -1,3 +1,28 @@
+function void AchievementsPlus.playMenuMusic()
+{
+	if (SETTING_ACHIEVEPLUS_ORIGINS_MUSIC)
+	{
+		u64 soundKey = "music_OriginsMainMenuOST"
+		
+		if (Audio.isPlayingAudio(soundKey) || !achievementsplus.menuMusic.tempValue0)
+		{
+			// Do not restart music if already playing
+			// -> But make sure it gets played at full volume (in case it's fading out)
+			Audio.fadeInChannel(0x00, 0x40)
+			return
+		}
+		
+		// Play Origins menu theme
+		Audio.playAudio(soundKey, AudioContext.CONTEXT_MUSIC)
+		achievementsplus.menuMusic.tempValue0 = 0x00
+	}
+	else
+	{
+		// Play Data Select menu theme
+		playMusic(0x2f)
+	}
+}
+
 function void AchievementsPlus.GameObjectsUpdate()
 {
 	AchievementsPlus.GameObjectsUpdate_renderOnly()
@@ -163,4 +188,5 @@ function void AchievementsPlus.Init()
 @EntryPoint:
 	AchievementsPlus.resetVars()
 	achievementsplus.popupMenu.tempValue4 = 0x00
+	achievementsplus.menuMusic.tempValue0 = 0x00
 }

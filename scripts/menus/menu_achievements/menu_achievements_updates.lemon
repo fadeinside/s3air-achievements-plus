@@ -7,11 +7,15 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	
 	// Open options menu
 	if (Input.buttonDown(BUTTON_X))
+	{
+		playSound(0x63)
 		global.game_mode = 0x9b
+	}
 	
 	// Back to main menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
+		playSound(0xad)
 		if (achievementsplus.game_mode.tempValue0)
 			global.game_mode = achievementsplus.game_mode.tempValue0
 		else

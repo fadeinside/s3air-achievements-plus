@@ -8,11 +8,8 @@ function void AchievementsPlus.Menu.achievements.setup()
 	level.framecounter = 0x00
 	achievementsplus.achievements.sortNeedUpdate = true
 	
-	// Stop any music
-	playMusic(MUSIC_CTRL_STOP)
-	
 	// Play music
-	Audio.playAudio("music_OriginsMainMenuOST", AudioContext.CONTEXT_MUSIC)
+	AchievementsPlus.playMenuMusic()
 	
 	// Clear some VRAM stuff
 	VDP.fillVRAMbyDMA(0x00, 0x0000, 0x40)

@@ -4,6 +4,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 	// Back to achievements menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
+		playSound(0xad)
 		if (achievementsplus.options.tempValue2)
 		{
 			// Reset some animations for buttons
@@ -54,6 +55,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		// Go to detail panel control
 		if (!achievementsplus.options.tempValue2)
 		{
+			playSound(0x63)
 			achievementsplus.options.tempValue2 = true
 			
 			achievementsplus.options.tempValue1 = 0x00

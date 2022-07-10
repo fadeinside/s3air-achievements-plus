@@ -60,6 +60,7 @@ function void fn00d7c0()
 	{
 		// Go to Achievements menu
 		achievementsplus.game_mode.tempValue0 = 0x4c
+		achievementsplus.menuMusic.tempValue0 |= 0x01
 		global.game_mode = 0x9a
 	}
 	

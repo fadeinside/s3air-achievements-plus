@@ -50,6 +50,18 @@
 			},
 			{
 				"Category": "Menu appearance",
+				"InternalName": "SETTING_ACHIEVEPLUS_ORIGINS_MUSIC",
+				"DisplayName": "\"Origins\" menu music:",
+				"Variable": "SETTING_ACHIEVEPLUS_ORIGINS_MUSIC",
+				"DefaultValue": "1",
+				"Options":
+				{
+					"0": "Disable (Data Select)",
+					"1": "Enable (Default)"
+				}
+			},
+			{
+				"Category": "Menu appearance",
 				"InternalName": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
 				"DisplayName": "Show Warning messages:",
 				"Variable": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
