@@ -19,8 +19,6 @@ function void AchievementsPlus.Menu.options.updateControl()
 			global.game_mode = 0x9a
 	}
 	
-	//debugLog(stringformat("%d, %d, %d", achievementsplus.options.tempValue0, achievementsplus.options.tempValue1, achievementsplus.options.tempValue3))
-	
 	// Simple implementation of fast scrolling
 	if (control.pad1.state & CONTROL_DPAD)
 	{
@@ -32,13 +30,16 @@ function void AchievementsPlus.Menu.options.updateControl()
 		++achievementsplus.scrollList.tempValue2
 		if (achievementsplus.scrollList.tempValue2 >= 30)
 		{
-			control.pad1.pressed = control.pad1.state
-			
-			// Reset some animations for buttons
-			achievementsplus.buttons.tempValue0 = 136
-			achievementsplus.buttons.tempValue1 = 0x04
-			achievementsplus.buttons.tempValue2 = 136
-			achievementsplus.buttons.tempValue3 = 0x00
+			if ((control.pad1.state == CONTROL_UP || control.pad1.state & CONTROL_DOWN) || (achievementsplus.options.tempValue5 > 0x00 && control.pad1.state & (CONTROL_LEFT | CONTROL_RIGHT)))
+			{
+				control.pad1.pressed = control.pad1.state
+				
+				// Reset some animations for buttons
+				achievementsplus.buttons.tempValue0 = 136
+				achievementsplus.buttons.tempValue1 = 0x04
+				achievementsplus.buttons.tempValue2 = 136
+				achievementsplus.buttons.tempValue3 = 0x00
+			}
 			
 			achievementsplus.scrollList.tempValue2 = 24
 		}
@@ -58,7 +59,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 			achievementsplus.options.tempValue1 = 0x00
 			achievementsplus.options.tempValue4 = 0x00
 			
-			// Setup datail panel total buttons
+			// Setup detail panel total buttons
 			if (achievementsplus.options.tempValue0 == 0x00)
 				achievementsplus.options.tempValue4 = 0x01
 			
@@ -76,7 +77,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		
 		if (achievementsplus.options.tempValue0 == 0x00)
 		{
-			if (achievementsplus.options.tempValue1 == 0x00 || achievementsplus.options.tempValue1 == 0x01)
+			if (achievementsplus.options.tempValue1 >= 0x00 && achievementsplus.options.tempValue1 <= 0x01)
 				AchievementsPlus.Menu.popup.show(POPUP_OPTIONS_YOU_ARE_SURE, "One moment...")
 		}
 	}
@@ -85,13 +86,13 @@ function void AchievementsPlus.Menu.options.updateControl()
 	if (achievementsplus.options.tempValue2)
 	{
 		// Button selection
-		if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN) && achievementsplus.options.tempValue4 > 0x00)
+		if ((control.pad1.pressed == CONTROL_UP || control.pad1.pressed & CONTROL_DOWN) && achievementsplus.options.tempValue4 > 0x00)
 		{
 			playSound(0x5b)
 			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
 			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
 			
-			if (control.pad1.pressed & CONTROL_UP)
+			if (control.pad1.pressed == CONTROL_UP)
 			{
 				if (achievementsplus.options.tempValue1 != 0x00)
 					--achievementsplus.options.tempValue1

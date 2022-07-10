@@ -31,13 +31,13 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 		if (objA0.update_address == 0x20009a)
 		{
 			py -= 10
-			Renderer.drawCustomSprite("menu_icon_originsCoin_small", px, py, 0x00, SPRITE_FLAG_PRIO, 0x90ff)
-			Renderer.drawCustomSprite("menu_icon_glow", px, py, 0x00, SPRITE_FLAG_PRIO, 0x90ff)
+			Renderer.drawCustomSprite("menu_icon_originsCoin_small", px, py, 0x00, SPRITE_FLAG_PRIO, 0xe000)
+			Renderer.drawCustomSprite("menu_icon_glow", px, py, 0x00, SPRITE_FLAG_PRIO, 0xe000)
 			
 			py += 10
-			AchievementsPlus.TextManager.drawTextWithShadow(px, py, stringformat("Paid %d Coins", objA0.value3a), FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x90ff)
+			AchievementsPlus.TextManager.drawTextWithShadow(px, py, stringformat("Paid %d Coins", objA0.value3a), FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xe000)
 			py += 0x08
-			AchievementsPlus.TextManager.drawTextWithShadow(px, py, "to unlock this way.", FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x90ff)
+			AchievementsPlus.TextManager.drawTextWithShadow(px, py, "to unlock this way.", FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xe000)
 		}
 		
 		return true

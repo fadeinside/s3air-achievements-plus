@@ -90,8 +90,10 @@ function void AchievementsPlus.Menu.achievements.items.tabsPanel(s16 px, s16 py)
 	}
 	
 	// Render animated control arrows
-	Renderer.drawCustomSprite("menu_tabsPanel_control_arrow", px - 36 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)	// Left arrow
-	Renderer.drawCustomSprite("menu_tabsPanel_control_arrow", px + 36 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, SPRITE_FLAG_FLIP_X, 0xf001)	/// Right arrow
+	string tempValue2 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_tabsPanel_control_arrow_ps4_" : "menu_tabsPanel_control_arrow_"
+	
+	Renderer.drawCustomSprite(tempValue2 + "dpadLeft", px - 36 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
+	Renderer.drawCustomSprite(tempValue2 + "dpadRight", px + 36 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
 	
 	// Tab's background
 	Renderer.drawCustomSprite("menu_tabsPanel_background", px, py, 0x00, 0x00, 0xf000)

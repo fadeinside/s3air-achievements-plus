@@ -68,7 +68,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		return
 	
 	// Simple implementation of fast scrolling
-	if (control.pad1.state & CONTROL_DPAD)
+	if ((control.pad1.state == CONTROL_UP || control.pad1.state & CONTROL_DOWN) && achievementsplus.achievements.totalButtons > 0x01)
 	{
 		++achievementsplus.scrollList.tempValue2
 		if (achievementsplus.scrollList.tempValue2 >= 30)

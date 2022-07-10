@@ -38,6 +38,18 @@
 			},
 			{
 				"Category": "Menu appearance",
+				"InternalName": "SETTING_ACHIEVEPLUS_PS4_HOTKEYS",
+				"DisplayName": "PS4 Hot-keys style:",
+				"Variable": "SETTING_ACHIEVEPLUS_PS4_HOTKEYS",
+				"DefaultValue": "0",
+				"Options":
+				{
+					"0": "Disable (Default)",
+					"1": "Enable"
+				}
+			},
+			{
+				"Category": "Menu appearance",
 				"InternalName": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
 				"DisplayName": "Show Warning messages:",
 				"Variable": "SETTING_ACHIEVEPLUS_WARNING_MESSAGES",
