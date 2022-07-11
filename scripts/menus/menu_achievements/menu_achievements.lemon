@@ -32,6 +32,9 @@ function void AchievementsPlus.Menu.achievements.setup()
 		
 		// Update rewards
 		AchievementsPlus.RewardsManager.update()
+
+		// Update Discord RPC
+		AchievementsPlus.RPCManager.update()
 		
 		// Update control
 		AchievementsPlus.Menu.achievements.updateControl()

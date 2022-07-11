@@ -50,6 +50,10 @@ function void AchievementsPlus.Menu.toast.update()
 // Overlay achievement toast rendering function.
 function void AchievementsPlus.Menu.toast.overlay()
 {
+	// Discord RPC
+	string tempValue0 = stringformat("%s %d⭐", achievementsplus.toast.tempValue0, AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.toast.tempValue1))
+	Game.setDiscordDetails(stringformat("%s - Complete!", tempValue0))
+	
 	s16 px = (getScreenWidth() + 190) - (achievementsplus.toast.tempValue3 * 0x07)
 	s16 py = 18
 	

@@ -1,0 +1,41 @@
+// Основная функция обновления Discord RPC.
+function void AchievementsPlus.RPCManager.update()
+{
+	Game.setDiscordLargeImage("menus")
+	Game.setDiscordSmallImage("character_unknown")
+
+	Game.setDiscordDetails(AchievementsPlus.RPCManager.getDiscordDetail())
+	Game.setDiscordState(AchievementsPlus.RPCManager.getDiscordState())
+}
+
+
+// The function returns a RPC Detail.
+function string AchievementsPlus.RPCManager.getDiscordDetail()
+{
+	if (global.game_mode == 0x9a || global.game_mode == 0x9b)
+	{
+		u16 tempValue0 = achievementsplus.tabsPanel.tempValue0 + achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2
+		u16 tempValue1 = achievementsplus.tabsPanel.tempValue3 + achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5
+
+		return stringformat("Achievements: (%d / %d) | Coins: %d", tempValue0, tempValue1, achievementsplus.sharedMemory.coinsSaved)
+	}
+		
+	// Failsave value
+	return ""
+}
+
+// The function returns a RPC State.
+function string AchievementsPlus.RPCManager.getDiscordState()
+{
+	if (global.game_mode == 0x9a)
+	{
+		string tempValue0 = stringformat("%s %d⭐ %s", achievementsplus.infoPanel.tempValue0, AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected),achievementsplus.infoPanel.tempValue5 ? "✔" : "➖")
+
+		return stringformat("%s | %s", tempValue0, "In the Achievemets menu")
+	}
+	else if (global.game_mode == 0x9b)
+		return "In the Options menu"
+	
+	// Failsave value
+	return ""
+}
