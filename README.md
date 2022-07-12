@@ -12,7 +12,9 @@ New achievements to complete, Rewards for completing, and, Your achievements mad
 
 * The player's Coins reward system for completing achievements.
 
-* Mod options for costuming the menu background, Coins HUD, and more.
+* Discord RPC Support.
+
+* Mod options for costuming the menu hot-keys, Coins HUD, and more.
 
 * The Achievements system allows other mods to use it to create their own unique and incredibly exciting achievements to complete.
 
@@ -34,6 +36,16 @@ In addition to achievements, here is a player reward system - Coins, which you c
 
 You can use your Coins to buy unlockable items in supported mods.
 
+## Discord RPC:
+
+Let everyone know how many achievements you have completed and how many Coins you have now.
+
+The Achievements menu in RPC will show the total value of completed / all achievements, and the current value of Coins. In addition, it will show which achievement you have currently selected in the menu, and will show its stars and completion status.
+
+During the main gameplay, when completing an achievement, the RPC will show which achievement you have completed and how many stars it has.
+
+<img src="https://cdn.discordapp.com/attachments/863732761349455922/996171175900225618/83_20220712004442.png" />
+
 ## Modding:
 
 Also, despite all the basic features of the mod, we provide opportunities for other modders to use our functions in their mods. This means that other mods can create their own custom achievements, add them to the list in the menu, and set their own conditions for completion.
@@ -43,6 +55,16 @@ Achievements Plus is happy to provide all the tools and documentation for using 
 Any mod that provides Community achievements should be installed above.
 
 For other useful information, check out the <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki">GitHub Wiki</a> page. If you have any questions, please contact the #modding discussion or a separate official thread #achievements-plus on the Discord Sonic 3 A.I.R. Community server.
+
+## Compatibility notes:
+
+This mod makes changes to some parts of the script of various objects and loading scenes, but always calls the base function. Therefore, in order to avoid compatibility issues, use this mod in priority to most mods.
+
+1. Accurate Sonic 2 HUD can be installed in any order.
+
+2. Any mod that provides Community achievements should be installed above this mod.
+
+3. <a href="https://gamebanana.com/mods/362325">Blue Sphere Time Attack</a>, <a href="https://gamebanana.com/mods/151029">Sonic 3: D.A. Garden Edition</a>, <a href="https://gamebanana.com/mods/366547">Save Zone Act</a>, or any script mod should be installed below this mod so as to avoid compatibility issues.
 
 ## FAQ:
 
