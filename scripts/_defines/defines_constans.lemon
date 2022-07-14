@@ -34,19 +34,10 @@ constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
 // Popups
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-// Confirmation
 constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x11
-
-// Debug mode is enabled
 constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15
-
-// Game loaded via Level select
 constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18
-
-// Wall unlock
 constant u8 POPUP_WALL_UNLOCK	= 0x20
-
-// Not Enough Coins
 constant u8 POPUP_NOT_ENOUGH_COINS	= 0x35
 
 
@@ -57,3 +48,15 @@ constant u8 POPUP_NOT_ENOUGH_COINS	= 0x35
 constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER	= 0x22070700
 constant string ACHIEVEMENTS_PLUS_BUILD_STRING	= "v22.07.07.0"
 constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "PRE RELEASE"
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Audio
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+constant string MUSIC_MENU_ORIGINSTHEME	= "music_origins_menuMainTheme"
+constant string SFX_MENU_BACKBUTTON	= "sfx_2013_menuBackButton"
+constant string SFX_MENU_RESUME	= "sfx_2013_menuResume"
+constant string SFX_MENU_SELECT2	= "sfx_2013_menuSelect"
+constant string SFX_MENU_SELECT	= "sfx_origins_menuSelect"
+constant string SFX_MENU_ACCEPT	= "sfx_mania_menuAccept"

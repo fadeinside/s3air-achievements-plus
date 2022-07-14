@@ -12,7 +12,7 @@
 	{
 		"List":
 		[
-		{
+			{
 				"Category": "Rendering",
 				"InternalName": "SETTING_ACHIEVEPLUS_RENDER_METHOD",
 				"DisplayName": "Render mode:",

@@ -2,9 +2,7 @@ function void AchievementsPlus.playMenuMusic()
 {
 	if (SETTING_ACHIEVEPLUS_ORIGINS_MUSIC)
 	{
-		u64 soundKey = "music_OriginsMainMenuOST"
-		
-		if (Audio.isPlayingAudio(soundKey) || !achievementsplus.menuMusic.tempValue0)
+		if (Audio.isPlayingAudio(MUSIC_MENU_ORIGINSTHEME) || !achievementsplus.menuMusic.tempValue0)
 		{
 			// Do not restart music if already playing
 			// -> But make sure it gets played at full volume (in case it's fading out)
@@ -13,7 +11,7 @@ function void AchievementsPlus.playMenuMusic()
 		}
 		
 		// Play Origins menu theme
-		Audio.playAudio(soundKey, AudioContext.CONTEXT_MUSIC)
+		Audio.playAudio(MUSIC_MENU_ORIGINSTHEME, AudioContext.CONTEXT_MUSIC)
 		achievementsplus.menuMusic.tempValue0 = 0x00
 	}
 	else

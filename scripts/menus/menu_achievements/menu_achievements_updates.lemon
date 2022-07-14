@@ -8,14 +8,15 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	// Open options menu
 	if (Input.buttonDown(BUTTON_X))
 	{
-		playSound(0x63)
+		Audio.playAudio(SFX_MENU_ACCEPT, AudioContext.CONTEXT_SOUND)
 		global.game_mode = 0x9b
 	}
 	
 	// Back to main menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
-		playSound(0xad)
+		Audio.playAudio(SFX_MENU_SELECT2, AudioContext.CONTEXT_SOUND)
+		
 		if (achievementsplus.game_mode.tempValue0)
 			global.game_mode = achievementsplus.game_mode.tempValue0
 		else
@@ -41,7 +42,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	u8 maxTabs = achievementsplus.tabsPanel.tempValue5 > 0x00 ? 0x02 : 0x01
 	if (control.pad1.pressed == CONTROL_LEFT || control.pad1.pressed == CONTROL_RIGHT)
 	{
-		playSound(0x5b)
+		Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 		achievementsplus.tabsPanel.tempValue13 = achievementsplus.achievements.tabselected
 		
 		achievementsplus.tabsPanel.tempValue11 = 0x00
@@ -96,7 +97,7 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 	// Select an button (achievement) in a sorted list
 	if ((control.pad1.pressed == CONTROL_UP || control.pad1.pressed & CONTROL_DOWN) && achievementsplus.achievements.totalButtons > 0x01)
 	{
-		playSound(0x5b)
+		Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 		
 		if (control.pad1.pressed == CONTROL_UP)
 		{

@@ -3,21 +3,23 @@ function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text,
 {
 	// The "menu_hotkey_Start" sprite is larger than the rest, so additional offset is required to render the text
 	s16 tempValue0 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? ((key == "dpadLeft" || key == "dpadRight") ? 0x04 : 0x00) : ((key == "Start") ? 15 : 0x00)
-	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, renderQueue)
+	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, renderQueue)
 	
 	// Draw hot-key
 	string tempValue8 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_hotkey_ps4_" : "menu_hotkey_"
 	Renderer.drawCustomSprite(tempValue8 + key, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 	
 	u16 tempValue1 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? ((key == "dpadLeft" || key == "dpadRight") ? 10 : 0x06) : (tempValue0 ? 21 : 0x07)
-	s32 tempValue2 = AchievementsPlus.TextManager.getTextWidth(text, FONT_SMALLFONT, FORMAT_NONE, 0x01) + 0x05
+	s32 tempValue2 = AchievementsPlus.TextManager.getTextWidth(text, FONT_SMALLFONT, FORMAT_UPPERCASE, 0x01) + 0x05
 	
 	// Draw background
 	if (SETTING_ACHIEVEPLUS_RENDER_METHOD)
 	{
+		Renderer.drawCustomSpriteWithTransform("menu_hotkey_backgroundHold_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00ffffff + s32(min(achievementsplus.buttons.tempValue4 * 0x08, 255)) * 0x1000000, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
 		Renderer.drawCustomSpriteWithTransform("menu_hotkey_background_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0xffffffff, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
 		
 		px += tempValue2
+		Renderer.drawCustomSprite("menu_hotkey_backgroundHold_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
 		Renderer.drawCustomSprite("menu_hotkey_background_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 		
 		// Return hot-key width
@@ -25,6 +27,7 @@ function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text,
 	}
 	else
 	{
+		Renderer.drawCustomSprite("menu_hotkey_backgroundHold", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
 		Renderer.drawCustomSprite("menu_hotkey_background", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 		
 		// Return hot-key width

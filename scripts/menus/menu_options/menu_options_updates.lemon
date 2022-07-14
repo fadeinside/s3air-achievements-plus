@@ -4,7 +4,8 @@ function void AchievementsPlus.Menu.options.updateControl()
 	// Back to achievements menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
-		playSound(0xad)
+		Audio.playAudio(SFX_MENU_SELECT2, AudioContext.CONTEXT_SOUND) 
+		
 		if (achievementsplus.options.tempValue2)
 		{
 			// Reset some animations for buttons
@@ -55,7 +56,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		// Go to detail panel control
 		if (!achievementsplus.options.tempValue2)
 		{
-			playSound(0x63)
+			Audio.playAudio(SFX_MENU_ACCEPT, AudioContext.CONTEXT_SOUND)
 			achievementsplus.options.tempValue2 = true
 			
 			achievementsplus.options.tempValue1 = 0x00
@@ -90,7 +91,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		// Button selection
 		if ((control.pad1.pressed == CONTROL_UP || control.pad1.pressed & CONTROL_DOWN) && achievementsplus.options.tempValue4 > 0x00)
 		{
-			playSound(0x5b)
+			Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
 			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
 			
@@ -123,7 +124,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		// Carusel selection
 		if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.options.tempValue5 > 0x00)
 		{
-			playSound(0x5b)
+			Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
 			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
 			
@@ -155,7 +156,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 	// Button selection
 	if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN))
 	{
-		playSound(0x5b)
+		Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 		achievementsplus.achievements.preButton = achievementsplus.options.tempValue0
 		achievementsplus.achievements.nextButton = achievementsplus.options.tempValue0
 		

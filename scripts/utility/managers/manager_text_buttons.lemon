@@ -104,7 +104,7 @@ function void AchievementsPlus.TextManager.drawCenterMenuButton(s16 px, s16 py, 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Simplified AchievementsPlus.TextManager.drawLeftMenuButton() function without configurable tint color.
-function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue, string key, u8 selected, u8 target)
+function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u16 renderQueue, string key, u16 selected, u16 target)
 {
 	u32 tintColor = (achievementsplus.coinRewards.tempValue2 && selected == target) ? 0xb0b0b0ff : 0xffffffff
 	AchievementsPlus.TextManager.drawLeftMenuButton(px, py, text, font, format, alignment, spacing, tintColor, renderQueue, key, selected, target)
@@ -123,7 +123,7 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 	{
 		keyArrow = "menu_button_icon_arrow_unactive"
 		keySelected = keyButton + "_unactive"
-		keySelectedTint = keyButton + "_unactive" 
+		keySelectedTint = keyButton + "_unactive"
 	}
 	
 	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)

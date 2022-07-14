@@ -163,7 +163,7 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 	achievementsplus.popupMenu.tempValue0 = title
 	achievementsplus.popupMenu.tempValue1 = id
 	
-	Audio.playAudio("sfx_Resume", AudioContext.CONTEXT_SOUND)
+	Audio.playAudio(SFX_MENU_RESUME, AudioContext.CONTEXT_SOUND)
 	achievementsplus.popupMenu.tempValue4 = 0x01
 }
 
@@ -171,6 +171,6 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 // The function resets some variables and closes popup.
 function void AchievementsPlus.Menu.popup.close()
 {
-	Audio.playAudio("sfx_BackButton", AudioContext.CONTEXT_SOUND)
+	Audio.playAudio(SFX_MENU_BACKBUTTON, AudioContext.CONTEXT_SOUND)
 	achievementsplus.popupMenu.tempValue4 = 0x00
 }

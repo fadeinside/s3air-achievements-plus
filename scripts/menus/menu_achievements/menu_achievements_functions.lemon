@@ -140,7 +140,7 @@ function void AchievementsPlus.Menu.achievements.items.tabs.drawTab(string icon,
 				achievementsplus.tabsPanel.tempValue12 -= 51
 		}
 		
-		Renderer.drawCustomSprite("menu_tabsPanel_tab_selected_arrow", px, py + 11, 0x00, 0x00, renderQueue, 0x00, achievementsplus.tabsPanel.tempValue11)
+		Renderer.drawCustomSprite("menu_tabsPanel_tab_selected_arrow", px, py + 10 +  (achievementsplus.tabsPanel.tempValue9 / 0x06), 0x00, 0x00, renderQueue, 0x00, achievementsplus.tabsPanel.tempValue11)
 		Renderer.drawCustomSprite("menu_tabsPanel_tab" + tempValue0 + "_selected", px, py, 0x00, 0x00, renderQueue, 0x00, achievementsplus.tabsPanel.tempValue11)
 	}
 	else
@@ -413,6 +413,5 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 function void AchievementsPlus.Menu.achievements.background()
 {
 	Renderer.drawCustomSprite("menu_background_tape", -0x07 + ((global.framecounter >> 0x01) % 0x07), 46, 0x00, 0x00, 0xf000)
-	
 	Renderer.drawCustomSprite("menu_background_0", getScreenWidth() / 0x02, 0x00, 0x00, 0x00, 0xf000)
 }

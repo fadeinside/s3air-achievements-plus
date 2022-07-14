@@ -87,6 +87,13 @@
 	"menu_hotkey_background_middle": { "File": "menu/menu_hotkeys.png", "Rect": "1,31,1,12", "Center": "0,6" },
 	"menu_hotkey_background_end": { "File": "menu/menu_hotkeys.png", "Rect": "45,31,4,12", "Center": "0,6" },
 	
+	// Hot-keys background (Hold)
+	"menu_hotkey_backgroundHold": { "File": "menu/menu_hotkeys.png", "Rect": "1,81,48,12", "Center": "0,6" },
+	
+	// Hot-keys opengl background (Hold)
+	"menu_hotkey_backgroundHold_middle": { "File": "menu/menu_hotkeys.png", "Rect": "1,81,1,12", "Center": "0,6" },
+	"menu_hotkey_backgroundHold_end": { "File": "menu/menu_hotkeys.png", "Rect": "45,81,4,12", "Center": "0,6" },
+	
 	
 	
 	// ----- MENU ICONS ----- //

@@ -44,7 +44,7 @@ function void fn00d1fa()
 		px += 16
 	}
 	
-	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("X", "Achievements", px, py, 0xfffe)
+	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("X", Mods.isModActive("Save the Second Act of Current Zone") ? "(Hold) Achievements" : "Achievements", px, py, 0xfffe)
 	tempValue1
 	px += tempValue1
 	
@@ -56,12 +56,36 @@ function void fn00d1fa()
 //# address-hook(0x00d7c0) end(0x00d7e6)
 function void fn00d7c0()
 {
-	if (Input.buttonDown(BUTTON_B))
+	if (Mods.isModActive("Save the Second Act of Current Zone"))
 	{
-		// Go to Achievements menu
-		achievementsplus.game_mode.tempValue0 = 0x4c
-		achievementsplus.menuMusic.tempValue0 |= 0x01
-		global.game_mode = 0x9a
+		if (Input.buttonDown(BUTTON_B))
+		{
+			++achievementsplus.buttons.tempValue4
+			if (achievementsplus.buttons.tempValue4 >= 30)
+			{
+				achievementsplus.game_mode.tempValue0 = 0x4c
+				achievementsplus.menuMusic.tempValue0 |= 0x01
+			
+				// Go to Achievements menu
+				global.game_mode = 0x9a
+				achievementsplus.buttons.tempValue4 = 0x00
+			}
+		}
+		else
+		{
+			achievementsplus.buttons.tempValue4 = 0x00
+		}
+	}
+	else
+	{
+		if (Input.buttonPressed(BUTTON_B))
+		{
+			achievementsplus.game_mode.tempValue0 = 0x4c
+			achievementsplus.menuMusic.tempValue0 |= 0x01
+			
+			// Go to Achievements menu
+			global.game_mode = 0x9a
+		}
 	}
 	
 	// Call the base function

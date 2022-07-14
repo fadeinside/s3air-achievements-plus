@@ -186,11 +186,9 @@ function s32 AchievementsPlus.TextManager.getTextWidth(string text, u8 font, u8 
 			 textWidth = 0x00
 		
 		character = AchievementsPlus.TextManager.getFormated(character, font, format)
-		
 		string key = AchievementsPlus.TextManager.getFont(font) + "." + character
 		
-		if (Renderer.hasCustomSprite(key))
-			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
+		textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
 	}
 	
 	// Return the value
@@ -219,7 +217,9 @@ function string AchievementsPlus.TextManager.getFormated(string character, u8 fo
 	// - 0x10 - Upper case
 	// - 0x15 - Lower case
 	
-	if (format == FORMAT_UPPERCASE || font == FONT_SMALLFONT)
+	string key = AchievementsPlus.TextManager.getFont(font) + "." + character
+	
+	if (format == FORMAT_UPPERCASE || !Renderer.hasCustomSprite(key))
 	{
 		if (character == "a")
 			return "A"
@@ -372,7 +372,7 @@ function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
 	{
 		if (char == "." || char == "I" || char == ":")
 			return 0x01
-		else if (char == " ")
+		else if (char == " " || char == "(" || char == ")")
 			return 0x02
 		else if (char == "M" || char == "W")
 			return 0x05

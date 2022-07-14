@@ -1,13 +1,16 @@
 {
 	// ----- MUSIC ----- //
 	
-	// Achievements menu music
-	// - Source: Sonic Origins
-	"music_OriginsMainMenuOST": { "File": "music/music_OriginsMainMenuOST.ogg", "LoopStart": 2723229, "Type": "Music" },
+	"music_origins_menuMainTheme": { "File": "music/music_origins_menuMainTheme.ogg", "LoopStart": 2723229, "Type": "Music" },
+	
 	
 	// ----- SOUNDS ----- //
 	
-	// - Source: Sonic 1 / Sonic 2 (2013)
-	"sfx_BackButton": { "File": "sfx/BackButton.ogg", "Type": "Sound" },
-	"sfx_Resume": { "File": "sfx/Resume.ogg", "Type": "Sound" }
+	"sfx_2013_menuBackButton": { "File": "sfx/sfx_2013_menuBackButton.ogg", "Type": "Sound" },
+	"sfx_2013_menuResume": { "File": "sfx/sfx_2013_menuResume.ogg", "Type": "Sound" },
+	
+	"sfx_2013_menuSelect": { "File": "sfx/sfx_2013_menuSelect.ogg", "Type": "Sound" },
+	
+	"sfx_origins_menuSelect": { "File": "sfx/sfx_origins_menuSelect.ogg", "Type": "Sound" },
+	"sfx_mania_menuAccept": { "File": "sfx/sfx_mania_menuAccept.ogg", "Type": "Sound" }
 }
