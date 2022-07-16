@@ -14,111 +14,125 @@ function void AchievementsPlus.Menu.popup.items()
 // The main function of rendering the hot-keys panel.
 function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 {
-	px -= 110
-	py += 50
+	px -= 92
+	py += 28
 	
-	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "OK", px, py, 0xffff)
-	tempValue0
-	px += tempValue0
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
+	{
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Delete", px, py, 0xffff)
+		tempValue0
+		px += tempValue0
+		
+		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Cancel", px, py, 0xffff)
+		tempValue2
+		px += tempValue2
+	}
 	
-	if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT || achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
-		return
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
+	{
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Continue", px, py, 0xffff)
+		tempValue0
+		px += tempValue0
+		
+		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Main menu", px, py, 0xffff)
+		tempValue2
+		px += tempValue2
+	}
 	
-	string tempValue1= achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED ? "Main menu" : (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE ? "Cancel" : "Close")
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
+	{
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Continue", px, py, 0xffff)
+		tempValue0
+		px += tempValue0
+	}
 	
-	u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", tempValue1, px, py, 0xffff)
-	tempValue2
-	px += tempValue2
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
+	{
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Yes", px, py, 0xffff)
+		tempValue0
+		px += tempValue0
+		
+		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "No", px, py, 0xffff)
+		tempValue2
+		px += tempValue2
+	}
+	
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
+	{
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Go back", px, py, 0xffff)
+		tempValue0
+		px += tempValue0
+	}
 }
 
 
 // The main function of rendering the title.
 function void AchievementsPlus.Menu.popup.items.title(s16 px, s16 py)
 {
-	py -= 50
-	AchievementsPlus.TextManager.drawTextWithOutline(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_CENTER, 0x01, 0xffffffff, 0x0041aaff, 0xffff)
+	px -= 92
+	py -= 28
+	
+	AchievementsPlus.TextManager.drawText(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, 0x00, ALIGN_RIGHT, 0x01, 0x002964ff, 0xffff)
 }
 
 
 // The function renders popup content based on the current ID.
 function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 {
-	py -= 32
+	px -= 92
+	py -= 16
 	
 	// Content for the confirmation menu
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "You are sure?", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-		py += 16
-		AchievementsPlus.TextManager.drawText(px, py, "This action cannot be undone!", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
+		u16 tempValue0 = achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2
+		u16 tempValue1 = achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5
+		
+		if (achievementsplus.options.tempValue1 == 0x00)
+		{
+			if (achievementsplus.options.tempValue3 == 0x01)
+			{
+				tempValue0 = achievementsplus.tabsPanel.tempValue1
+				tempValue1 = achievementsplus.tabsPanel.tempValue4
+			}
+			else if (achievementsplus.options.tempValue3 == 0x02)
+			{
+				tempValue0 = achievementsplus.tabsPanel.tempValue2
+				tempValue1 = achievementsplus.tabsPanel.tempValue5
+			}
+		}
+		
+		string tempValue2 = stringformat("This will permanently delete your data. You will lose: ^Achievements: %d / %d ^Coins: %d", tempValue0, tempValue1, achievementsplus.sharedMemory.coinsSaved)
+		string tempValue3 = stringformat("This will permanently delete your data. You will lose: ^Achievements: %d / %d", tempValue0, tempValue1)
+		
+		string tempValue4 = achievementsplus.options.tempValue1 == 0x01 ? tempValue2 : tempValue3
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 	
 	// Content for the Debug enabled menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "until you disable the Debug mode", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "in the settings of Sonic 3 A.I.R.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 24
-		
-		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements. Turn off Debug mode.", FONT_OXYTINY, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 	
 	// Content for the Game via Level select menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "You cannot receive achievements", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "in game via Level or Act select.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 38
-		
-		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements, since it's loaded through Level select.", FONT_OXYTINY, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 	
 	// Content for the Wall unlock menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "You're going to buy a this wall", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "to unlock a new path.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-		
-		py += 24
-		AchievementsPlus.TextManager.drawText(px, py, stringformat("You will have lose %d Coins", u8[achievementsplus.sharedMemory.wallsAddress + 0x100]), FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "Press START to continue", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
+		string tempValue4 = stringformat("Would you like to spend Coins to unlock this item? ^Coins needed: %d ^Coins owned: %d", u8[achievementsplus.sharedMemory.wallsAddress + 0x100], achievementsplus.sharedMemory.coinsSaved)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 	
 	// Content for the Not Enough Coins menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "You don't have enough Coins", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "to afford this item.", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xfe4e4eff, 0xffff)
-		
-		py += 24
-		AchievementsPlus.TextManager.drawText(px, py, stringformat("You need (+%d) more Coins.", achievementsplus.popupMenu.tempValue8), FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-		py += 14
-		AchievementsPlus.TextManager.drawText(px, py, "Press START to go back", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0x000000ff, 0xffff)
-	}
-}
-
-
-// Support option rendering function.
-function void AchievementsPlus.Menu.popup.items.content.drawOption(s16 px, s16 py, string text, string option, bool carousel, u16 renderQueue, u8 selected, u8 target)
-{
-	u32 tempValue0 = selected == target ? 0x0041aaff : 0x000000ff
-	
-	AchievementsPlus.TextManager.drawText(px - 110, py, text, FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, tempValue0, renderQueue)
-	
-	if (carousel)
-	{
-		AchievementsPlus.TextManager.drawText(px + 110, py, "< " + option + " >", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, tempValue0, renderQueue)
-	}
-	else
-	{
-		AchievementsPlus.TextManager.drawText(px + 110, py, ">", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, tempValue0, renderQueue)
+		string tempValue4 = stringformat("You don't have enough Coins to purchase this item. ^^More Coins needed: +%d", achievementsplus.popupMenu.tempValue8)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 }
 
@@ -140,7 +154,7 @@ function void AchievementsPlus.Menu.popup.background()
 		}
 	}
 	
-	Renderer.drawCustomSpriteTinted("menu_popup_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2)) 
+	Renderer.drawCustomSpriteTinted("menu_popupSmall_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2))
 	
 	// Render achievement menu items in the background for popup menu
 	if (global.game_mode == 0x9a)

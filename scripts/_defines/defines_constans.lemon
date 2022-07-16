@@ -3,19 +3,19 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Fonts
-constant u8 FONT_OXYTINY	= 0x00
+constant u8 FONT_OXYTINY	= 0x01
 constant u8 FONT_OXYSMALL	= 0x02
 constant u8 FONT_SMALLFONT	= 0x04
 
 // Text formating
-constant u8 FORMAT_NONE	= 0x00
-constant u8 FORMAT_UPPERCASE	= 0x10
-constant u8 FORMAT_LOWERCASE	= 0x15
+constant u8 FORMAT_NONE	= 0x01
+constant u8 FORMAT_UPPERCASE	= 0x02
+constant u8 FORMAT_LOWERCASE	= 0x04
 
 // Text alignment
-constant u8 ALIGN_LEFT	= 0x00
-constant u8 ALIGN_CENTER	= 0x10
-constant u8 ALIGN_RIGHT	= 0x15
+constant u8 ALIGN_LEFT	= 0x01
+constant u8 ALIGN_CENTER	= 0x02
+constant u8 ALIGN_RIGHT	= 0x04
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -34,21 +34,22 @@ constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
 // Popups
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x11
-constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x15
-constant u8 POPUP_VIA_LEVEL_SELECT	= 0x18
-constant u8 POPUP_WALL_UNLOCK	= 0x20
-constant u8 POPUP_NOT_ENOUGH_COINS	= 0x35
+constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x01
+constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x02
+constant u8 POPUP_VIA_LEVEL_SELECT	= 0x04
+constant u8 POPUP_WALL_UNLOCK	= 0x08
+constant u8 POPUP_NOT_ENOUGH_COINS	= 0x10
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER	= 0x22070700
-constant string ACHIEVEMENTS_PLUS_BUILD_STRING	= "v22.07.07.0"
-constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "PRE RELEASE"
+constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER	= 0x22071700
+constant string ACHIEVEMENTS_PLUS_BUILD_STRING	= "v22.07.17.0"
 
+constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "RELEASE CANDIDATE"
+// Variants	-> "DEV", "BETA", "PRE RELEASE", "RELEASE CANDIDATE", "RELEASE"
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Audio

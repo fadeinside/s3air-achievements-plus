@@ -56,7 +56,7 @@ function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 
 		px += tempValue0
 	}
 	
-	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Back", px, py, 0xf000)
+	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Data Select", px, py, 0xf000)
 	tempValue1
 	px += tempValue1
 	

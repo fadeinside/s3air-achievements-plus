@@ -241,16 +241,13 @@ function bool AchievementsPlus.AchivementsManager.isAchievementsEnabled()
 	if (competition_mode.active || global.game_mode == 0x38 || global.game_mode == 0x44 || global.game_mode == 0x50)
 		return true
 	
-	if (true)	// Forbid completion of achievements in Debug mode and Level select
-	{
-		// Game loaded from Level select
-		if (achievementsplus.level_select.tempValue0 & 0x01)
-			return false
+	// Game loaded from Level select
+	if (achievementsplus.level_select.tempValue0 & 0x01)
+		return false
 	
-		// Debug mode active
-		if (Game.getSetting(SETTING_DEBUG_MODE))
-			return false
-	}
+	// Debug mode active
+	if (Game.getSetting(SETTING_DEBUG_MODE))
+		return false
 	
 	// Sonic 3 & Knuckles lock-on state
 	if (global.lock_on_state == 0x00)

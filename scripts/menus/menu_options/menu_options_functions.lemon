@@ -38,11 +38,11 @@ function void AchievementsPlus.Menu.options.items.hotkeysPanel(s16 px, s16 py)
 	px = 16
 	py = getScreenHeight() - 12
 	
-	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("B", !achievementsplus.options.tempValue2 ? "Back to achievements menu" : "Category selection", px, py, 0xf000)
+	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("B", !achievementsplus.options.tempValue2 ? "Achievements menu" : "Category selection", px, py, 0xf000)
 	tempValue0
 	px += tempValue0
 	
-	if (!achievementsplus.options.tempValue2 || achievementsplus.options.tempValue1 != 0xa0)
+	if (!achievementsplus.options.tempValue2 || !achievementsplus.options.tempValue2 && achievementsplus.options.tempValue1 != 0xa0 || achievementsplus.options.tempValue2 && achievementsplus.options.tempValue4 > 0x00)
 	{
 		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("Start", !achievementsplus.options.tempValue2 ? "Go to category" : "Select", px, py, 0xf000)
 		tempValue1
@@ -75,7 +75,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel(s16 px, s16 py)
 		"Manage your saved data.", "Everyone who was involved in the development."
 	}
 	
-	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
+	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0xf000)
 	Renderer.drawCustomSprite("menu_background_tapeBlue", px, py, 0x00, 0x00, 0xf000)
 }
 

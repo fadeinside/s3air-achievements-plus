@@ -14,7 +14,7 @@ function void AchievementsPlus.Objects.WallLocked.update()
 		u8[achievementsplus.sharedMemory.wallsAddress + 0x101] = objA0.value3b	// Sets the ID of the wall at which the player stands
 		
 		if (Input.buttonPressed(BUTTON_Y) && (u8[achievementsplus.sharedMemory.wallsAddress + objA0.value3b] < 0xff) && !debug_mode.state)
-			AchievementsPlus.Menu.popup.show(POPUP_WALL_UNLOCK, "Unlock this wall?")
+			AchievementsPlus.Menu.popup.show(POPUP_WALL_UNLOCK, "Unlock wall")
 	}
 	
 	DrawObject()
