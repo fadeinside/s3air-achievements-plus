@@ -64,7 +64,7 @@ function void AchievementsPlus.Menu.toast.overlay()
 	AchievementsPlus.Menu.achievements.items.drawRating(px - 85, py + 19, achievementsplus.toast.tempValue1, 0xffff)
 	
 	// Achievement title
-	AchievementsPlus.TextManager.drawText(px - 40, py + 0x08, achievementsplus.toast.tempValue0, FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffff)
+	AchievementsPlus.TextManager.drawText(px - 40, py + 0x08, achievementsplus.toast.tempValue0, FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xffff)
 	
 	// Toast background
 	Renderer.drawCustomSprite("menu_button_large_craked", px + 60, py, 0x00, SPRITE_FLAG_PRIO | SPRITE_FLAG_FLIP_X, 0xffff)

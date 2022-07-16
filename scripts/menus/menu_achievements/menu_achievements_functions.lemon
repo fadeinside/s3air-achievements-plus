@@ -1,7 +1,7 @@
 // The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
 function void AchievementsPlus.Menu.achievements.items()
 {
-	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "Achievements", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "Achievements", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
 	
 	s16 px = getScreenExtend() - 40
 	s16 py = 46
@@ -38,7 +38,7 @@ function void AchievementsPlus.Menu.achievements.items.build(s16 px, s16 py)
 	py = getScreenHeight() - 0x05
 	
 	string tempValue0 = stringformat("%s %s", ACHIEVEMENTS_PLUS_BUILD_STRING, ACHIEVEMENTS_PLUS_BUILD_VARIANT)
-	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xffffff80, 0xf000) 
+	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xffffff80, 0xf000) 
 }
 
 
@@ -195,11 +195,11 @@ function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
 		
 		// Text "Coins" and stored value
 		posX += 12
-		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Coins", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x02, 0xfadd00ff, 0x000000ff, 0xf000)
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Coins", FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x02, 0xfadd00ff, 0x000000ff, 0xf000)
 		
 		// Stored value
 		posX += 0x03
-		AchievementsPlus.TextManager.drawTextWithShadow(posX, py + 0x03, stringformat("x %d", achievementsplus.sharedMemory.coinsSaved), FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000)
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py + 0x03, stringformat("x %d", achievementsplus.sharedMemory.coinsSaved), FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000)
 	}
 	
 	// Background for Coins stats
@@ -223,7 +223,7 @@ function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
 		
 		// Text "Competition"
 		posX -= 74
-		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Completion:", FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xfadd00ff, 0x000000ff, 0xf000)
+		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x04, "Completion:", FONT_SMALLFONT, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xfadd00ff, 0x000000ff, 0xf000)
 	}
 	
 	// Background for Competition stats
@@ -318,7 +318,7 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	if (achievementsplus.infoPanel.tempValue2 != "")
 	{
 		py += 10
-		AchievementsPlus.TextManager.drawText(px, py, achievementsplus.infoPanel.tempValue2, FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x002964ff, 0xf001)
+		AchievementsPlus.TextManager.drawText(px, py, achievementsplus.infoPanel.tempValue2, FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, 0x002964ff, 0xf001)
 	}
 	
 	// Achievement description
@@ -327,12 +327,12 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	
 	// Claim button
 	py += 34
-	AchievementsPlus.TextManager.drawText(px, py, "Claim Reward:", FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x002964ff, 0xf001)
+	AchievementsPlus.TextManager.drawText(px, py, "Claim Reward:", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0x002964ff, 0xf001)
 	
 	Renderer.drawCustomSprite("menu_icon_originsCoin_small", px + 119, py, 0x00, 0x00, 0xf002)
 	
 	s32 tempValue0 = achievementsplus.coinRewards.tempValue0 == 0x00 ? achievementsplus.coinRewards.tempValue1 : achievementsplus.coinRewards.tempValue0
-	AchievementsPlus.TextManager.drawText(px + 127, py, stringformat("x%d", tempValue0), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x002964ff, 0xf002)
+	AchievementsPlus.TextManager.drawText(px + 127, py, stringformat("x%d", tempValue0), FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0x002964ff, 0xf002)
 	
 	py += 0x06
 	u32 tintColor = achievementsplus.infoPanel.tempValue5 ? 0xfc992eff : 0xb0b0b0ff
@@ -364,7 +364,7 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 			if (!(py > 178 || py < 52))
 			{
 				// Achievement button
-				AchievementsPlus.TextManager.drawLeftMenuButton(px, py, AchievementsPlus.AchivementsManager.getAchievementDetail(A, 0x00), FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, "large", achievementsplus.achievements.buttonselected, A)
+				AchievementsPlus.TextManager.drawLeftMenuButton(px, py, AchievementsPlus.AchivementsManager.getAchievementDetail(A, 0x00), FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000, "large", achievementsplus.achievements.buttonselected, A)
 				
 				// Lift the next items when the button is selected
 				if (achievementsplus.achievements.buttonselected == A)

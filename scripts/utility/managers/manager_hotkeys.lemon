@@ -3,7 +3,7 @@ function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text,
 {
 	// The "menu_hotkey_Start" sprite is larger than the rest, so additional offset is required to render the text
 	s16 tempValue0 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? ((key == "dpadLeft" || key == "dpadRight") ? 0x04 : 0x00) : ((key == "Start") ? 15 : 0x00)
-	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, renderQueue)
+	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, renderQueue)
 	
 	// Draw hot-key
 	string tempValue8 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_hotkey_ps4_" : "menu_hotkey_"

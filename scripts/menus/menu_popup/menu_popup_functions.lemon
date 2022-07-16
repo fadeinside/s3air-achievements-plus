@@ -72,7 +72,7 @@ function void AchievementsPlus.Menu.popup.items.title(s16 px, s16 py)
 	px -= 92
 	py -= 28
 	
-	AchievementsPlus.TextManager.drawText(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, 0x00, ALIGN_RIGHT, 0x01, 0x002964ff, 0xffff)
+	AchievementsPlus.TextManager.drawText(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, 0x00, ALIGN_LEFT, 0x01, 0x002964ff, 0xffff)
 }
 
 

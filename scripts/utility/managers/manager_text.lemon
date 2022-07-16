@@ -48,7 +48,7 @@ function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, s
 function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u32 outlineColor, u16 renderQueue)
 {
 	s32 tempValue0 = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
-	s32 align = (alignment == ALIGN_LEFT) ? tempValue0 : ((alignment == ALIGN_CENTER) ? tempValue0 / 0x02 : 0x00)
+	s32 align = (alignment == ALIGN_RIGHT) ? tempValue0 : ((alignment == ALIGN_CENTER) ? tempValue0 / 0x02 : 0x00)
 	
 	px -= align
 	
@@ -103,7 +103,7 @@ function void AchievementsPlus.TextManager.drawTextWithShadow(s16 px, s16 py, st
 function void AchievementsPlus.TextManager.drawTextWithShadow(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u32 shadowColor, u16 renderQueue)
 {
 	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
-	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	s32 align = (alignment == ALIGN_RIGHT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
 	
 	px -= align
 	AchievementsPlus.TextManager.basic(px, py, text, font, format, spacing, tintColor, renderQueue)
@@ -125,7 +125,7 @@ function void AchievementsPlus.TextManager.drawText(s16 px, s16 py, string text,
 function void AchievementsPlus.TextManager.drawText(s16 px, s16 py, string text, u8 font, u8 format, u8 alignment, s8 spacing, u32 tintColor, u16 renderQueue)
 {
 	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
-	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	s32 align = (alignment == ALIGN_RIGHT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
 	
 	AchievementsPlus.TextManager.basic(px - align, py, text, font, format, spacing, tintColor, renderQueue)
 }

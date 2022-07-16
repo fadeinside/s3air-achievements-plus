@@ -1,7 +1,7 @@
 // The main function of rendering all items inside the menu, except for the background, since it is called inside the main loop.
 function void AchievementsPlus.Menu.options.items()
 {
-	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "OPTIONS", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
+	AchievementsPlus.TextManager.drawTextWithOutline(16, 10, "OPTIONS", FONT_OXYSMALL, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, 0x003cb4ff, 0xffffffff, 0xf000)
 	
 	s16 px = getScreenExtend() - 40
 	s16 py = 46
@@ -75,7 +75,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel(s16 px, s16 py)
 		"Manage your saved data.", "Everyone who was involved in the development."
 	}
 	
-	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_RIGHT, 0x01, 0xf000)
+	AchievementsPlus.TextManager.drawText(px + 0x08, py + 0x07, OPTIONS_DESCRIPTION[achievementsplus.options.tempValue0], FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, 0xf000)
 	Renderer.drawCustomSprite("menu_background_tapeBlue", px, py, 0x00, 0x00, 0xf000)
 }
 
@@ -85,16 +85,16 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 	// Content for My Data menu
 	if (achievementsplus.options.tempValue0 == 0x00)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "Data management", FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0x002964ff, 0xf000)
+		AchievementsPlus.TextManager.drawText(px, py, "Data management", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0x002964ff, 0xf000)
 		py += 18
 		
 		u16 tempValue0 = 0x08 + (getScreenExtend() - 40) / 0x02
 		
 		string tempValue1 = achievementsplus.options.tempValue3 == 0x00 ? "All achievements" : (achievementsplus.options.tempValue3 == 0x01 ? "Retro only" : "Community only")
-		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete achievements data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_RIGHT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x00, tempValue1)
+		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete achievements data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_LEFT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x00, tempValue1)
 		py += 18
 		
-		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete all saved data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_RIGHT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x01)
+		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete all saved data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_LEFT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x01)
 		py += 18
 	}
 	
@@ -128,7 +128,7 @@ function void AchievementsPlus.Menu.options.items.listPanel(s16 px, s16 py)
 	// Main render loop
 	for (u16 A = 0x00; A <= achievementsplus.achievements.totalButtons; ++A)
 	{
-		AchievementsPlus.TextManager.drawLeftMenuButton(px, py, OPTIONS_ITEMS[A], FONT_OXYTINY, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xf000, "another", achievementsplus.options.tempValue0, A)
+		AchievementsPlus.TextManager.drawLeftMenuButton(px, py, OPTIONS_ITEMS[A], FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000, "another", achievementsplus.options.tempValue0, A)
 		
 		// Offset for the next item
 		py += 18

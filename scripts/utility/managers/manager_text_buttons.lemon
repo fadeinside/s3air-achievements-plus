@@ -25,9 +25,9 @@ function void AchievementsPlus.TextManager.drawCenterMenuButton(s16 px, s16 py, 
 	
 	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
 	s32 textWidth2 = AchievementsPlus.TextManager.getTextWidth(carusel, font, format, spacing)
-	s32 align = carusel ? 100 : ((alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00))
+	s32 align = carusel ? 100 : ((alignment == ALIGN_RIGHT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00))
 	
-	px -= (alignment2 == ALIGN_LEFT) ? 118 : ((alignment2 == ALIGN_CENTER) ? 0x00  : -118)
+	px -= (alignment2 == ALIGN_RIGHT) ? 118 : ((alignment2 == ALIGN_CENTER) ? 0x00  : -118)
 	
 	if (selected == target)
 		py -= 0x01
@@ -127,7 +127,7 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 	}
 	
 	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
-	s32 align = (alignment == ALIGN_LEFT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	s32 align = (alignment == ALIGN_RIGHT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
 	
 	if (selected == target)
 		py -= 0x01
