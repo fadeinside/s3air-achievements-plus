@@ -1,15 +1,15 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-// Text with limit (No align, no formating)
+// Text with limit (No align)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Simplified AchievementsPlus.TextManager.drawTextWithLimit() function without configurable tint color.
-function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, s8 spacing, s32 limit, u16 renderQueue)
+function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, u8 format, s8 spacing, s32 limit, u16 renderQueue)
 {
-	AchievementsPlus.TextManager.drawTextWithLimit(px, py, text, font, spacing, 0xffffffff, limit, renderQueue)
+	AchievementsPlus.TextManager.drawTextWithLimit(px, py, text, font, format, spacing, 0xffffffff, limit, renderQueue)
 }
 
 // The full text rendering code
-function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, s8 spacing, u32 tintColor, s32 limit, u16 renderQueue)
+function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, string text, u8 font, u8 format, s8 spacing, u32 tintColor, s32 limit, u16 renderQueue)
 {
 	s32 textWidth
 	
@@ -20,10 +20,12 @@ function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, str
 		if (character == " " && (textWidth + px) >= limit - 0x16)
 			character = "^"
 		
+		character = AchievementsPlus.TextManager.getFormated(character, font, format)
+		
 		if (character == "^")
 		{
 			textWidth = 0x00
-			py += AchievementsPlus.TextManager.getTextWidth("   ", font, FORMAT_NONE, 0x00)
+			py += AchievementsPlus.TextManager.getTextWidth("   ", font, format, 0x00)
 		}
 		
 		if (character != "^")
@@ -32,6 +34,31 @@ function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, str
 			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
 		}
 	}
+}
+
+function s16 AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(s16 px, string text, u8 font, s8 spacing, s32 limit)
+{
+	s32 textWidth
+	s16 lineBreaks
+	
+	for (s32 A = 0x00; A < strlen(text); ++A)
+	{
+		string character = getStringFromHash(substring(text, A, 0x01))
+		
+		if (character == " " && (textWidth + px) >= limit - 0x16)
+		{
+			character = "^"
+			lineBreaks += 0x01
+		}
+		
+		if (character == "^")
+			textWidth = 0x00
+		
+		if (character != "^")
+			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
+	}
+	
+	return lineBreaks
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //

@@ -295,10 +295,10 @@ function void UpdateCameraBoundsInLevel()
 	if (global.zone == 0x07 && playerY < -0x20)
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_KING_OF_THE_HILL)
 	
-	if (global.zone_act == 0x0501 && (playerY >= 56 && playerY <= 1064) && (playerX >= 16300 && playerX <= 16468))
+	if (global.zone_act == 0x0501 && (playerY >= 56 && playerY <= 1064) && (playerX >= 16300 && playerX <= 16468) && !System.hasExternalRawData("icz2_layout"))
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_ICE_CAP_TREASURE)
 	
-	if (global.zone_act == 0x0100 && (playerY >= 800 && playerY <= 896) && (playerX >= 9584 && playerX <= 10040))
+	if (global.zone_act == 0x0100 && (playerY >= 800 && playerY <= 896) && (playerX >= 9584 && playerX <= 10040) && !System.hasExternalRawData("hcz1_layout"))
 		AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_HYDROPOLIS_TREASURE)
 	
 	if (global.zone == 0x06)

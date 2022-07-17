@@ -323,7 +323,7 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	
 	// Achievement description
 	py += 18
-	AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.infoPanel.tempValue3, FONT_OXYTINY, 0x01, 0x002964ff, getScreenWidth() - (getScreenExtend() - 40), 0xf001)
+	AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.infoPanel.tempValue3, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth() - (getScreenExtend() - 40), 0xf001)
 	
 	// Claim button
 	py += 34

@@ -126,13 +126,21 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 		keySelectedTint = keyButton + "_unactive"
 	}
 	
-	s32 textWidth = AchievementsPlus.TextManager.getTextWidth(text, font, format, spacing)
-	s32 align = (alignment == ALIGN_RIGHT) ? textWidth : ((alignment == ALIGN_CENTER) ? textWidth / 0x02 : 0x00)
+	s16 lineBreaks = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px + 30, text, font, spacing, px + 120)
+	s16 breaksOffset = 0x04 * lineBreaks
+	s16 lineOffset = 0x08
+	
+	if (lineBreaks > 0x00)
+	{
+		font = FONT_SMALLFONT
+		format = FORMAT_UPPERCASE
+		lineOffset = 0x09
+	}
 	
 	if (selected == target)
 		py -= 0x01
 	
-	AchievementsPlus.TextManager.basic((px - align) + 30, py + 0x08, text, font, format, spacing, tintColor, renderQueue)
+	AchievementsPlus.TextManager.drawTextWithLimit(px + 30, py + lineOffset - breaksOffset, text, font, format, spacing, tintColor, px + 120, renderQueue)
 	
 	if ((target == achievementsplus.achievements.nextButton || target == achievementsplus.achievements.preButton) && selected != target && !achievementsplus.options.tempValue2)
 	{
@@ -145,7 +153,7 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 	
 	if (selected == target)
 	{
-		AchievementsPlus.TextManager.basic((px - align) + 31, py + 0x09, text, font, format, spacing, 0x000000ff, renderQueue)
+		AchievementsPlus.TextManager.drawTextWithLimit(px + 31, py + (lineOffset + 0x01) - breaksOffset, text, font, format, spacing, 0x000000ff, px + 120, renderQueue)
 		
 		py += 0x01
 		
