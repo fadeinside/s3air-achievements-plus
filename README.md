@@ -60,7 +60,7 @@ For other useful information, check out the <a href="https://github.com/fadeinsi
 
 This mod makes changes to some parts of the script of various objects and loading scenes, but always calls the base function. Therefore, in order to avoid compatibility issues, use this mod in priority to most mods.
 
-1. Accurate Sonic 2 HUD can be installed in any order.
+1. <a href="https://gamebanana.com/skins/173571">Accurate Sonic 2 HUD</a> can be installed in any order.
 
 2. Any mod that provides Community achievements should be installed above this mod.
 
