@@ -24,7 +24,7 @@ New achievements to complete, Rewards for completing, and, Your achievements mad
 
 This mod improves your gaming experience by introducing as many as 53 new exciting achievements into the game. Go to the Achievements menu by pressing the [X] button in the Data Select menu, and go to the RETROACHIEVEMENTS tab to track your progress.
 
-<img src="https://cdn.discordapp.com/attachments/863732761349455922/988544036287688815/ocr_screenshot_16557574892.png" />
+<img src="https://cdn.discordapp.com/attachments/863732761349455922/998347530624577576/img_20220717205125.png" />
 
 All these achievements are unique and interesting in their own way. Some of them you will get as you progress through the levels, and for some you will have to do level research, or hone your skills to complete them.
 
@@ -32,7 +32,7 @@ All these achievements are unique and interesting in their own way. Some of them
 
 In addition to achievements, here is a player reward system - Coins, which you can get by completing and claim achievements. The amount of reward varies depending on the difficulty of the achievement.
 
-<img src="https://cdn.discordapp.com/attachments/863732761349455922/988544036077989938/ocr_screenshot_16557574032.png" />
+<img src="https://cdn.discordapp.com/attachments/863732761349455922/998347530427433061/img_20220717205018.png" />
 
 You can use your Coins to buy unlockable items in supported mods.
 
