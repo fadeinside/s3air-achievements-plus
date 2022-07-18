@@ -85,7 +85,8 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 	// Content for My Data menu
 	if (achievementsplus.options.tempValue0 == 0x00)
 	{
-		AchievementsPlus.TextManager.drawText(px, py, "Data management", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0x002964ff, 0xf000)
+		AchievementsPlus.TextManager.drawText(px, py, "Data management", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000)
+		Renderer.drawCustomSprite("menu_background_tapeBlue2", px, py, 0x00, 0x00, 0xf000)
 		py += 18
 		
 		u16 tempValue0 = 0x08 + (getScreenExtend() - 40) / 0x02
@@ -101,16 +102,36 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 	// Content for Credits menu
 	if (achievementsplus.options.tempValue0 == 0x01)
 	{
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "SPECIAL THANKS", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+		AchievementsPlus.TextManager.drawText(px, py, "Special thanks", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000)
+		Renderer.drawCustomSprite("menu_background_tapeBlue2", px, py, 0x00, 0x00, 0xf000)
 		py += 20
 		
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
-		py += 18 + 0x08
+		// Thanks to GFX
+		{
+			string text1 = " * Thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code."
+			s16 lineBreaks1 = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px, text1, FONT_OXYTINY, 0x01, getScreenWidth())
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, text1, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+			py += 18 + 0x08 * lineBreaks1
+		}
 		
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thanks to everyone who joined the beta testing and followed the thread on the Sonic 3 A.I.R Community server in Discord.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
-		py += 18 + 0x08 * 0x02
+		// Thanks to beta testers
+		{
+			string text2 = " * Thanks to everyone who joined the beta testing and followed the thread on the Sonic 3 A.I.R Community server in Discord."
+			s16 lineBreaks2 = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px, text2, FONT_OXYTINY, 0x01, getScreenWidth())
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, text2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+			py += 18 + 0x08 * lineBreaks2
+		}
 		
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, " -> Thank you for downloading and using this mod!", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+		// Thanks to You
+		{
+			string text3 = " * Thank you for downloading and using this mod!"
+			s16 lineBreaks3 = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px, text3, FONT_OXYTINY, 0x01, getScreenWidth())
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, text3, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)
+			py += 18 + 0x08 * lineBreaks3
+		}
 	}
 }
 

@@ -199,8 +199,9 @@
 	// Background tape
 	"menu_background_tape": { "File": "menu/menu_tapes.png", "Rect": "1,1,516,155", "Center": "0,0" },
 	
-	// Blue tape
+	// Blue tapes
 	"menu_background_tapeBlue": { "File": "menu/menu_tapes.png", "Rect": "1,157,272,14", "Center": "0,0" },
+	"menu_background_tapeBlue2": { "File": "menu/menu_tapes.png", "Rect": "176,157,100,8", "Center": "4,4" },
 	
 	
 	
