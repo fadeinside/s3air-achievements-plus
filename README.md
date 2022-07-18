@@ -50,11 +50,11 @@ During the main gameplay, when completing an achievement, the RPC will show whic
 
 Also, despite all the basic features of the mod, we provide opportunities for other modders to use our functions in their mods. This means that other mods can create their own custom achievements, add them to the list in the menu, and set their own conditions for completion.
 
-Achievements Plus is happy to provide all the tools and documentation for using our features and functions. Check out the tutorials of <a href="#">How to use Coins</a> and <a href="#">How to create custom Achievements</a> right now on gamebanana!
+Achievements Plus is happy to provide all the tools and documentation for using our features and functions. Check out the tutorials of <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki/(Tutorial)-How-do-use-Coins-system#conclusion">How to use Coins system</a> and <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki/(Tutorial)-How-to-create-Community-achievements">How to create custom Achievements</a> right now on GitHub Wiki!
 
 Any mod that provides Community achievements should be installed above.
 
-For other useful information, check out the <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki">GitHub Wiki</a> page. If you have any questions, please contact the #modding discussion or a separate official thread #achievements-plus on the Discord Sonic 3 A.I.R. Community server.
+For other useful information, check out the <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki">GitHub Wiki</a> page. If you have any questions, please contact the *#modding-discussion* or a separate official thread *#achievements-plus* on the Discord Sonic 3 A.I.R. Community server.
 
 ## Compatibility notes:
 
