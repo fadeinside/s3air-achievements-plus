@@ -35,10 +35,16 @@ function void AchievementsPlus.Menu.achievements.items()
 function void AchievementsPlus.Menu.achievements.items.build(s16 px, s16 py)
 {
 	px = getScreenWidth() - 0x04
-	py = getScreenHeight() - 0x05
+	py = getScreenHeight() - 0x04
 	
 	string tempValue0 = stringformat("%s %s", ACHIEVEMENTS_PLUS_BUILD_STRING, ACHIEVEMENTS_PLUS_BUILD_VARIANT)
-	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xffffff80, 0xf000) 
+	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xffffff80, 0xf000)
+	
+	if (Mods.isModActive("Achievements Plus - Tools"))
+	{
+		px -= AchievementsPlus.TextManager.getTextWidth(tempValue0, FONT_SMALLFONT, FORMAT_NONE, 0x01) + 0x08
+		AchievementsPlus.TextManager.drawText(px, py, "(Tools)", FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xd64c3380, 0xf000)
+	}
 }
 
 

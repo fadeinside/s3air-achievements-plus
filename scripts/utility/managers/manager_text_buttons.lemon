@@ -127,13 +127,14 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 	}
 	
 	s16 lineBreaks = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px + 30, text, font, spacing, px + 120)
-	s16 breaksOffset = 0x04 * lineBreaks
+	s16 breaksOffset = 0x00
 	s16 lineOffset = 0x08
 	
 	if (lineBreaks > 0x00)
 	{
 		font = FONT_SMALLFONT
 		format = FORMAT_UPPERCASE
+		breaksOffset = 0x04 * lineBreaks
 		lineOffset = 0x09
 	}
 	
@@ -153,7 +154,7 @@ function void AchievementsPlus.TextManager.drawLeftMenuButton(s16 px, s16 py, st
 	
 	if (selected == target)
 	{
-		AchievementsPlus.TextManager.drawTextWithLimit(px + 31, py + (lineOffset + 0x01) - breaksOffset, text, font, format, spacing, 0x000000ff, px + 120, renderQueue)
+		AchievementsPlus.TextManager.drawTextWithLimit(px + 31, py + (lineOffset + 0x01) - breaksOffset, text, font, format, spacing, 0x000000ff, px + 121, renderQueue)
 		
 		py += 0x01
 		
