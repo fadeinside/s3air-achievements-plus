@@ -108,7 +108,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 		
 		// Thanks to GFX
 		{
-			string text1 = " * Thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code."
+			string text1 = " * A lot of thanks to GFX32 for the tutorial on creating custom objects, recommendations and improvements for wall code, and for allowing me using his \"More Monitors\" script."
 			s16 lineBreaks1 = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px, text1, FONT_OXYTINY, 0x01, getScreenWidth())
 			
 			AchievementsPlus.TextManager.drawTextWithLimit(px, py, text1, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, getScreenWidth(), 0xf000)

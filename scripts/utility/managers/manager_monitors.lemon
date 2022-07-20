@@ -1,0 +1,80 @@
+// The function handles the monitor's icon.
+//@ Function taken from sonic3air_dev/scripts/objects/basics/monitor.lemon
+function u64 Monitor.getIconSpriteKey(u8 type)
+{
+	// Coins monitor
+	if (type == 0x26)
+		return "game_monitor_icon_originsCoin_retro"
+	
+	// Return the base function
+	return base.Monitor.getIconSpriteKey(type)
+}
+
+
+// The function randomizes the types of monitor's.
+//@ Function taken from sonic3air_dev/scripts/objects/basics/monitor.lemon
+function u8 Monitor.getRandomizedType(u8 type, bool hiddenMonitor)
+{
+	// Coins monitor
+	if (type == 0x26)
+		return type
+	
+	// Return the base function
+	return base.Monitor.getRandomizedType(type, hiddenMonitor)
+}
+
+
+//@ Function taken from sonic3air_dev/scripts/objects/basics/monitor.lemon
+//# address-hook(0x01d5dc) end(0x01d616)
+function void MonitorIntact.UpdateDefault()
+{
+	// Call the base function
+	base.MonitorIntact.UpdateDefault()
+	
+	// Fix the flickering animations
+	if (objA0.state == 0x26)
+		objA0.state = 0x03
+}
+
+
+//@ Function taken from sonic3air_dev/scripts/objects/basics/monitor.lemon
+//# address-hook(0x01d820) end(0x01d878)
+function void ItemEffect.UpdateDefaultInternal()
+{
+	// Coins monitor
+	if (objA0.state == 0x26)
+	{
+		if ((objA0.render_flags & render_flag.FLIP_Y) == 0x00)
+		{
+			if (objA0.velocity.y < 0x00)
+			{
+				UpdateMovementStraightSimple()
+				objA0.velocity.y += 0x18
+				return
+			}
+		}
+		else
+		{
+			if (objA0.velocity.y >= 0x00)
+			{
+				UpdateMovementStraightSimple()
+				objA0.velocity.y -= 0x18
+				return
+			}
+		}
+		
+		objA0.base_state += 0x02
+		u16[A0 + 0x24] = 0x1d
+
+		A1 = 0xffff0000 + u16[A0 + 0x42]
+		A2 = (A1 == 0xffffb000) ? 0xfffffecc : 0xfffffece
+		
+		if (AchievementsPlus.AchivementsManager.isAchievementsEnabled())
+			AchievementsPlus.RewardsManager.addCoins(0x01)
+	}
+	else
+	{
+		// Call the base function.
+		base.ItemEffect.UpdateDefaultInternal()
+	}
+}

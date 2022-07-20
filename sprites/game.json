@@ -1,4 +1,11 @@
 {
+	// ----- MONITORS ----- //
+	
+	// Coins monitor
+	"game_monitor_icon_originsCoin_retro": { "File": "game/monitors.png", "Rect": "1,1,16,16", "Center": "8,8" },
+	"game_monitor_icon_originsCoin": { "File": "game/monitors.png", "Rect": "18,1,16,16", "Center": "8,8" },
+	
+	
 	// ----- WALL OBJECTS ----- //
 	
 	// Locked wall
