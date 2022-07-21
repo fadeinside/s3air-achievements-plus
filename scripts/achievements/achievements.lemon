@@ -222,28 +222,27 @@ function void gainExtraLife()
 //# address-hook(0x00b9a6) end(0x00b9c6)
 function void fn00b9a6()
 {
-	if (competition_mode.mode != 0x00)
-	{
-		if (competition_mode.stage == 0x00 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 30))
-			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_ALZ)
-			
-		if (competition_mode.stage == 0x01 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 50))
-			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_BPZ)
-			
-		if (competition_mode.stage == 0x02 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 45))
-			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_CGZ)
-			
-		if (competition_mode.stage == 0x03 && (getCompetitionMatchRaceTime(0x00) == 0x00 && getCompetitionMatchRaceTime(0x10) < 40))
-			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_DPZ)
-			
-		if (competition_mode.stage == 0x04 && getCompetitionMatchRaceTime(0x00) < 0x01)
-			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_EMZ)
-	}
-	
 	if (competition_mode.mode == 0x00)
 	{
-		if (getCompetitionGrandPrixTime(0x00) < 0x04 && u32[0xffffee98] != 0x00)
+		if (getCompetitionGrandPrixTime(COMPETITION_MINUTES) < 0x04 && u32[0xffffee98] > 0x00)
 			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_GRAND_PRIX)
+	}
+	else
+	{
+		if (competition_mode.stage == 0x00 && (getCompetitionMatchRaceTime(COMPETITION_MINUTES) == 0x00 && getCompetitionMatchRaceTime(COMPETITION_SECONDS) < 30))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_ALZ)
+			
+		if (competition_mode.stage == 0x01 && (getCompetitionMatchRaceTime(COMPETITION_MINUTES) == 0x00 && getCompetitionMatchRaceTime(COMPETITION_SECONDS) < 50))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_BPZ)
+			
+		if (competition_mode.stage == 0x02 && (getCompetitionMatchRaceTime(COMPETITION_MINUTES) == 0x00 && getCompetitionMatchRaceTime(COMPETITION_SECONDS) < 45))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_CGZ)
+			
+		if (competition_mode.stage == 0x03 && (getCompetitionMatchRaceTime(COMPETITION_MINUTES) == 0x00 && getCompetitionMatchRaceTime(COMPETITION_SECONDS) < 40))
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_DPZ)
+			
+		if (competition_mode.stage == 0x04 && getCompetitionMatchRaceTime(COMPETITION_MINUTES) < 0x01)
+			AchievementsPlus.AchivementsManager.setAchievementComplete(RETROACHIEVEMENTS_COMPETITION_EMZ)
 	}
 	
 	// Call the base function

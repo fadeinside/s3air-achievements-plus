@@ -31,6 +31,16 @@ constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Competition
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+// Competition time
+constant u8 COMPETITION_MINUTES	= 0x01
+constant u8 COMPETITION_SECONDS	= 0x02
+constant u8 COMPETITION_DECIMALS	= 0x04
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Popups
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 

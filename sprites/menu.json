@@ -135,7 +135,14 @@
 	"menu_icon_originsCoin_small": { "File": "menu/menu_icons.png", "Rect": "110,1,11,11", "Center": "5,5" },
 	
 	// Glow
-	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "93,18,17,17", "Center": "8,8" }, 
+	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "93,18,17,17", "Center": "8,8" },
+	
+	
+	
+	// ----- IMAGES ----- //
+	
+	// SHC logo
+	"menu_image_shc2022": { "File": "menu/menu_images.png", "Rect": "1,1,90,50", "Center": "45,25" },
 	
 	
 	

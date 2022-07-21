@@ -50,9 +50,9 @@ function void AchievementsPlus.GameObjectsUpdate_renderOnly()
 function u8 getCompetitionMatchRaceTime(u8 parse)
 {
 	// Parse:
-	// - 0x00 - Minutes
-	// - 0x10 - Seconds
-	// - 0x15 - Decimals
+	// - COMPETITION_MINUTES - Minutes
+	// - COMPETITION_SECONDS - Seconds
+	// - COMPETITION_DECIMALS - Decimals
 	
 	u8 tempValue0 = competition_mode.stage
 	
@@ -69,20 +69,20 @@ function u8 getCompetitionMatchRaceTime(u8 parse)
 	u8 tempValue4 = u16(tempValue2 / 0x100)
 	u8 tempValue5 = u8(tempValue2)
 	
-	if (parse == 0x00)
+	if (parse == COMPETITION_MINUTES)
 		return tempValue3
-	if (parse == 0x10)
+	if (parse == COMPETITION_SECONDS)
 		return tempValue4
-	if (parse == 0x15)
+	if (parse == COMPETITION_DECIMALS)
 		return tempValue5
 }
 
 function u8 getCompetitionGrandPrixTime(u8 parse)
 {
 	// Parse:
-	// - 0x00 - Minutes
-	// - 0x10 - Seconds
-	// - 0x15 - Decimals
+	// - COMPETITION_MINUTES - Minutes
+	// - COMPETITION_SECONDS - Seconds
+	// - COMPETITION_DECIMALS - Decimals
 	
 	u32 tempValue0 = u32[0xffffee98]
 	
@@ -90,11 +90,11 @@ function u8 getCompetitionGrandPrixTime(u8 parse)
 	u8 tempValue2 = u16(tempValue0 / 0x100)
 	u8 tempValue3 = u8(tempValue0)
 	
-	if (parse == 0x00)
+	if (parse == COMPETITION_MINUTES)
 		return tempValue1
-	if (parse == 0x10)
+	if (parse == COMPETITION_SECONDS)
 		return tempValue2
-	if (parse == 0x15)
+	if (parse == COMPETITION_DECIMALS)
 		return tempValue3
 }
 

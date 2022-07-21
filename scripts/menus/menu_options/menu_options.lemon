@@ -4,6 +4,9 @@ function void AchievementsPlus.Menu.options.setup()
 	// Screen fades
 	FadeOutScreenBlocking()
 	
+	// Set LED controller light
+	Input.setControllerLEDs(0x00, 0xfffe35cb)
+	
 	// Global variables setup
 	level.framecounter = 0x00
 	achievementsplus.options.tempValue0 = 0x00

@@ -4,6 +4,9 @@ function void AchievementsPlus.Menu.achievements.setup()
 	// Screen fades
 	FadeOutScreenBlocking()
 	
+	// Set LED controller light
+	Input.setControllerLEDs(0x00, 0xff0fc8ff)
+	
 	// Global variables setup
 	level.framecounter = 0x00
 	achievementsplus.achievements.sortNeedUpdate = true
