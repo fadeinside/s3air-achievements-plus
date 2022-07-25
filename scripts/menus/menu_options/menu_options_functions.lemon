@@ -39,13 +39,11 @@ function void AchievementsPlus.Menu.options.items.hotkeysPanel(s16 px, s16 py)
 	py = getScreenHeight() - 12
 	
 	u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("B", !achievementsplus.options.tempValue2 ? "Achievements menu" : "Category selection", px, py, 0xf000)
-	tempValue0
 	px += tempValue0
 	
 	if (!achievementsplus.options.tempValue2 || !achievementsplus.options.tempValue2 && achievementsplus.options.tempValue1 != 0xa0 || achievementsplus.options.tempValue2 && achievementsplus.options.tempValue4 > 0x00)
 	{
 		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("Start", !achievementsplus.options.tempValue2 ? "Go to category" : "Select", px, py, 0xf000)
-		tempValue1
 		px += tempValue1
 	}
 }
@@ -57,6 +55,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel(s16 px, s16 py)
 	px += 125
 	py /= 0x02
 	
+	// Content
 	{
 		s16 posX = px + 12
 		s16 posY = py + 12 + 0x03

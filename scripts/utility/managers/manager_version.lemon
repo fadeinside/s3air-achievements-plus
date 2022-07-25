@@ -4,6 +4,17 @@ function void AchievementsPlus.ManagerVersion.update()
 	// Load the latest version you are using
 	AchievementsPlus.ManagerVersion.loadVersion()
 	
+	// Show error about using an outdated version
+#if ACHIEVEMENTS_PLUS_ACTIVE < 0x22071700
+#else
+	if (achievementsplus.sharedMemory.versionUsed > ACHIEVEMENTS_PLUS_BUILD_NUMBER)
+#endif
+	{
+		achievementsplus.tempValue0 |= 0x01
+		AchievementsPlus.Menu.popup.show(POPUP_OUTDATED_VERSION, "")
+		return
+	}
+	
 	// Migrate beta data to a new save system
 	if (achievementsplus.sharedMemory.versionUsed < 0x22061700)
 	{
@@ -17,6 +28,7 @@ function void AchievementsPlus.ManagerVersion.update()
 		AchievementsPlus.ManagerVersion.updateVersion()
 	}
 }
+
 
 // The function loads and transfers beta data to the new saving system.
 function void AchievementsPlus.ManagerVersion.transferBetaDataToNewSaveSystem()
@@ -60,16 +72,32 @@ function void AchievementsPlus.ManagerVersion.saveVersion()
 }
 
 
-// Loads data stored in SRAM into Shared Memory
+// Loads data stored in SRAM into Shared Memory.
 function void AchievementsPlus.ManagerVersion.loadVersion()
 {
 	SRAM.load(achievementsplus.sharedMemory.versionAddress, 0x0ff8, 0x04)
 }
 
 
-// Updates the Shared Memory value and saves it in SRAM
+// Updates the Shared Memory value and saves it in SRAM.
 function void AchievementsPlus.ManagerVersion.updateVersion()
 {
 	achievementsplus.sharedMemory.versionUsed = ACHIEVEMENTS_PLUS_BUILD_NUMBER
 	AchievementsPlus.ManagerVersion.saveVersion()
+}
+
+
+// Returns the build number in readable string format.
+function string AchievementsPlus.ManagerVersion.getVersionString(u32 buildNumber)
+{
+	u32 cachedBuildNumber = 0xffffffff
+	string cachedBuildString
+	
+	if (cachedBuildNumber != buildNumber || cachedBuildNumber == 0xffffffff)
+	{
+		cachedBuildNumber = buildNumber
+		cachedBuildString = stringformat("v%02x.%02x.%02x.%x", (buildNumber >> 24) & 0xff, (buildNumber >> 16) & 0xff, (buildNumber >> 8) & 0xff, buildNumber & 0xff)
+	}
+	
+	return cachedBuildString
 }

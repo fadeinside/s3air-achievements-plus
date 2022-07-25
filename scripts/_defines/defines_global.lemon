@@ -78,6 +78,7 @@ global u8 achievementsplus.popupMenu.tempValue5	// Currently selected button in 
 global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel button in Popup menu 
 global u16 achievementsplus.popupMenu.tempValue7	// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
 global u16 achievementsplus.popupMenu.tempValue8	// Sets the required Coins difference to purchase an item
+global u8 achievementsplus.popupMenu.tempValue9	// Sets the value of the current input
 
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast
@@ -98,3 +99,6 @@ global u16 achievementsplus.achievements.lastButton	// Sets the ID of the last b
 global u16 achievementsplus.achievements.nextButton	// Sets the ID of the next button (next achievement) in a sorted achievements list
 global u16 achievementsplus.achievements.preButton	// Sets the ID of the previous button (previous achievement) in a sorted achievements list
 global u16 achievementsplus.achievements.totalButtons	// Sets the total number of available buttons (achievements) in a sorted achievements list
+
+// Mod stuff
+global u8 achievementsplus.tempValue0	// Sets when you are using an outdated version of the mod

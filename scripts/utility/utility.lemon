@@ -45,7 +45,6 @@ function void fn00d1fa()
 	}
 	
 	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("X", Mods.isModActive("Save the Second Act of Current Zone") ? "(Hold) Achievements" : "Achievements", px, py, 0xfffe)
-	tempValue1
 	px += tempValue1
 	
 	// Call the base function
@@ -208,12 +207,6 @@ function void waitForNextFrame()
 {
 	AchievementsPlus.Menu.popup.update()
 	AchievementsPlus.AchivementsManager.update()
-	
-	// - Debuging character position
-	//debugLog(stringformat("X: %d, Y: %d", s16[0xffffb000 + 0x10], s16[0xffffb000 + 0x14]))
-	
-	// - Debuging achievements enable
-	//debugLog(stringformat("Achievements enable: %d", AchievementsPlus.AchivementsManager.isAchievementsEnabled()))
 	
 	// Call the base function
 	base.waitForNextFrame()

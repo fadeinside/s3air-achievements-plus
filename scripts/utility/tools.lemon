@@ -185,6 +185,5 @@ function void AchievementsPlus.Init()
 	
 @EntryPoint:
 	AchievementsPlus.resetVars()
-	achievementsplus.popupMenu.tempValue4 = 0x00
 	achievementsplus.menuMusic.tempValue0 = 0x00
 }

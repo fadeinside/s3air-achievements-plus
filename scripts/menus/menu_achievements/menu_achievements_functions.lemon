@@ -58,16 +58,13 @@ function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 
 	if (achievementsplus.coinRewards.tempValue0 != 0x00)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Claim reward", px, py, 0xf000)
-		tempValue0
 		px += tempValue0
 	}
 	
 	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Data Select", px, py, 0xf000)
-	tempValue1
 	px += tempValue1
 	
 	u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("A", "Options", px, py, 0xf000)
-	tempValue2
 	px += tempValue2
 }
 
@@ -98,31 +95,40 @@ function void AchievementsPlus.Menu.achievements.items.tabsPanel(s16 px, s16 py)
 	// Render animated control arrows
 	string tempValue2 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_tabsPanel_control_arrow_ps4_" : "menu_tabsPanel_control_arrow_"
 	
-	Renderer.drawCustomSprite(tempValue2 + "dpadLeft", px - 36 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
-	Renderer.drawCustomSprite(tempValue2 + "dpadRight", px + 36 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
-	
 	// Tab's background
 	Renderer.drawCustomSprite("menu_tabsPanel_background", px, py, 0x00, 0x00, 0xf000)
 	
 	// Define offsets between tabs
 	u8 tempValue0 = 36
+	
 	if (achievementsplus.tabsPanel.tempValue5 == 0x00)
 	{
 		tempValue0 = 54
 		px += 27
 	}
 	
-	// Render Community Tab
-	else
-	{
-		AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_community", px + tempValue0, py, 0xf001, achievementsplus.achievements.tabselected, 0x02, achievementsplus.tabsPanel.tempValue2, achievementsplus.tabsPanel.tempValue5, achievementsplus.tabsPanel.tempValue8)
-	}
+	u8 tempValue1 = max((tempValue0 - 36) / 0x02, 0x00)
+	
+	// Render control arrow
+	px -= tempValue0
+	Renderer.drawCustomSprite(tempValue2 + "dpadLeft", px - tempValue1 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
 	
 	// Render Sonic 3 A.I.R Tab
-	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_s3air", px - tempValue0, py, 0xf001, achievementsplus.achievements.tabselected, 0x00, achievementsplus.tabsPanel.tempValue0, achievementsplus.tabsPanel.tempValue3, achievementsplus.tabsPanel.tempValue6)
+	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_s3air", px, py, 0xf001, achievementsplus.achievements.tabselected, 0x00, achievementsplus.tabsPanel.tempValue0, achievementsplus.tabsPanel.tempValue3, achievementsplus.tabsPanel.tempValue6)
 	
 	// Render retroachievements.org tab
+	px += tempValue0
 	AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_retro", px, py, 0xf001, achievementsplus.achievements.tabselected, 0x01, achievementsplus.tabsPanel.tempValue1, achievementsplus.tabsPanel.tempValue4, achievementsplus.tabsPanel.tempValue7)
+	
+	// Render Community Tab
+	if (achievementsplus.tabsPanel.tempValue5 > 0x00)
+	{
+		px += tempValue0
+		AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_community", px, py, 0xf001, achievementsplus.achievements.tabselected, 0x02, achievementsplus.tabsPanel.tempValue2, achievementsplus.tabsPanel.tempValue5, achievementsplus.tabsPanel.tempValue8)
+	}
+	
+	// Render control arrow
+	Renderer.drawCustomSprite(tempValue2 + "dpadRight", px + tempValue1 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
 }
 
 

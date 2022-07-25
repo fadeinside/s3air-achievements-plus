@@ -118,6 +118,47 @@ function void AchievementsPlus.Menu.popup.updateControl()
 		// Close popup
 		if (control.pad1.pressed & (CONTROL_START | CONTROL_B))
 			AchievementsPlus.Menu.popup.close()
+		
+		// Finish the function on this
+		return
+	}
+	
+	// Control for the Oudated mod version
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OUTDATED_VERSION)
+	{
+		if (achievementsplus.popupMenu.tempValue9 != 0x07)
+		{
+			if (control.pad1.pressed & CONTROL_UP && achievementsplus.popupMenu.tempValue9 < 0x06)
+			{
+				if (achievementsplus.popupMenu.tempValue9 < 0x03)
+					++achievementsplus.popupMenu.tempValue9
+				else
+					achievementsplus.popupMenu.tempValue9 = 0x00
+			}
+			else if (control.pad1.pressed & CONTROL_DOWN)
+			{
+				if (achievementsplus.popupMenu.tempValue9 >= 0x03 && achievementsplus.popupMenu.tempValue9 < 0x06)
+					++achievementsplus.popupMenu.tempValue9
+				else
+					achievementsplus.popupMenu.tempValue9 = 0x00
+			}
+			else if (control.pad1.pressed & CONTROL_UP)
+			{
+				if (achievementsplus.popupMenu.tempValue9 >= 0x06 && achievementsplus.popupMenu.tempValue9 < 0x07)
+					++achievementsplus.popupMenu.tempValue9
+				else
+					achievementsplus.popupMenu.tempValue9 = 0x00
+			}
+		}
+		else
+		{
+			// Close popup
+			if (control.pad1.pressed & CONTROL_START)
+				AchievementsPlus.Menu.popup.close()
+		}
+		
+		// Finish the function on this
+		return
 	}
 	
 	// Failsave close popup
@@ -129,6 +170,11 @@ function void AchievementsPlus.Menu.popup.updateControl()
 // Shows popup warnings about Debug mode enabled or Game via Level select.
 function void AchievementsPlus.Menu.popup.updateWarnings()
 {
+	if (achievementsplus.tempValue0)
+		return
+	
+	achievementsplus.popupMenu.tempValue4 = false
+	
 	if (!AchievementsPlus.AchivementsManager.isAchievementsEnabled() && SETTING_ACHIEVEPLUS_WARNING_MESSAGES)
 	{
 		if (achievementsplus.level_select.tempValue0 & 0x01 && !(achievementsplus.popupMenu.tempValue7 & 0x100))
@@ -150,7 +196,7 @@ function void AchievementsPlus.Menu.popup.update()
 	AchievementsPlus.Menu.popup.setup()
 	syncZ80_variantB(0x80)
 	
-	achievementsplus.popupMenu.tempValue4 = 0x00
+	achievementsplus.popupMenu.tempValue4 = false
 }
 
 
@@ -164,7 +210,7 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 	achievementsplus.popupMenu.tempValue1 = id
 	
 	Audio.playAudio(SFX_MENU_RESUME, AudioContext.CONTEXT_SOUND)
-	achievementsplus.popupMenu.tempValue4 = 0x01
+	achievementsplus.popupMenu.tempValue4 = true
 }
 
 
@@ -172,5 +218,5 @@ function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 function void AchievementsPlus.Menu.popup.close()
 {
 	Audio.playAudio(SFX_MENU_BACKBUTTON, AudioContext.CONTEXT_SOUND)
-	achievementsplus.popupMenu.tempValue4 = 0x00
+	achievementsplus.popupMenu.tempValue4 = false
 }

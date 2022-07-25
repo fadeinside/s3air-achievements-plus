@@ -20,47 +20,39 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Delete", px, py, 0xffff)
-		tempValue0
 		px += tempValue0
 		
 		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Cancel", px, py, 0xffff)
-		tempValue2
 		px += tempValue2
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Continue", px, py, 0xffff)
-		tempValue0
 		px += tempValue0
 		
 		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Main menu", px, py, 0xffff)
-		tempValue2
 		px += tempValue2
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Continue", px, py, 0xffff)
-		tempValue0
 		px += tempValue0
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Yes", px, py, 0xffff)
-		tempValue0
 		px += tempValue0
 		
 		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "No", px, py, 0xffff)
-		tempValue2
 		px += tempValue2
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Go back", px, py, 0xffff)
-		tempValue0
 		px += tempValue0
 	}
 }
@@ -133,6 +125,15 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 	{
 		string tempValue4 = stringformat("You don't have enough Coins to purchase this item. ^^More Coins needed: +%d", achievementsplus.popupMenu.tempValue8)
 		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+	}
+	
+	// Content for the Oudated mod version
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OUTDATED_VERSION)
+	{
+		py -= 12
+		//string tempValue4 = stringformat("The latest used version does not match the mod version that you are using now. Update your mod.^^Latest used: %s^Currently used: %s", AchievementsPlus.ManagerVersion.getVersionString(achievementsplus.sharedMemory.versionUsed), ACHIEVEMENTS_PLUS_BUILD_STRING)
+		
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "The latest used version does not match the mod version that you are using now. Update your mod.^^https://github.com/fadeinside/^s3air-achievements-plus", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
 	}
 }
 
