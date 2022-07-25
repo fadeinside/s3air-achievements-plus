@@ -4,6 +4,8 @@ declare function bool AchievementsPlus.RewardsManager.addCoins(u16 value)
 
 declare function bool AchievementsPlus.RewardsManager.paidCoins(u16 value)
 
+declare function u8 AchievementsPlus.RewardsManager.getAdditionalCoins(u16 achievementID)
+
 declare function void AchievementsPlus.RewardsManager.loadPersistendData()
 
 declare function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 achievementID, u8 parse)

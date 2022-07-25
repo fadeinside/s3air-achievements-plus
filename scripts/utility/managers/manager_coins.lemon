@@ -113,6 +113,14 @@ function void AchievementsPlus.RewardsManager.cleanPersistendData()
 }
 
 
+// The function adds a returns value to the reward of the specified achievement.
+function u8 AchievementsPlus.RewardsManager.getAdditionalCoins(u16 achievementID)
+{
+	// Returns 0 by default
+	return 0x00
+}
+
+
 // Sets the reward for the selected achievement from the list.
 function void AchievementsPlus.RewardsManager.setupForCoinRewards()
 {
@@ -121,6 +129,7 @@ function void AchievementsPlus.RewardsManager.setupForCoinRewards()
 	
 	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
 	s32 tempValue3 = (!tempValue2 ? 0x02 : 0x00) + tempValue2 * 12 / 0x03
+	tempValue3 += min(abs(AchievementsPlus.RewardsManager.getAdditionalCoins(achievementsplus.achievements.buttonselected)), 20)
 	
 	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
 	
