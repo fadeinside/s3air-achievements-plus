@@ -91,6 +91,7 @@ global s16 achievementsplus.toast.tempValue4	// Sets the waiting frames of the c
 global s32 achievementsplus.coinRewards.tempValue0	// Reward amount for the currently selected Achievement ID
 global s32 achievementsplus.coinRewards.tempValue1	// Backup value of achievementsplus.coinRewards.tempValue0
 global u8 achievementsplus.coinRewards.tempValue2	// Set to true when a reward is claimed
+global u8 achievementsplus.coinRewards.tempValue3	// Bonus reward amount for the currently selected Achievement ID
 
 // Achievement sort
 global bool achievementsplus.achievements.sortNeedUpdate	// Sets to true when sorted achievements list data needs to be updated

@@ -210,6 +210,9 @@
 	"menu_background_tapeBlue": { "File": "menu/menu_tapes.png", "Rect": "1,157,272,14", "Center": "0,0" },
 	"menu_background_tapeBlue2": { "File": "menu/menu_tapes.png", "Rect": "176,157,100,8", "Center": "4,4" },
 	
+	// Orange tape
+	"menu_background_tapeOrange": { "File": "menu/menu_tapes.png", "Rect": "277,157,96,8", "Center": "96,4" },
+	
 	
 	
 	// ----- MENU THUMBS ----- //

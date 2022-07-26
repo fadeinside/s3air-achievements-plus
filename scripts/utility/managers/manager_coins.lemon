@@ -116,6 +116,9 @@ function void AchievementsPlus.RewardsManager.cleanPersistendData()
 // The function adds a returns value to the reward of the specified achievement.
 function u8 AchievementsPlus.RewardsManager.getAdditionalCoins(u16 achievementID)
 {
+	//if (achievementID == RETROACHIEVEMENTS_JUST_IN_TIME)
+	//	return 0x03
+	
 	// Returns 0 by default
 	return 0x00
 }
@@ -129,11 +132,14 @@ function void AchievementsPlus.RewardsManager.setupForCoinRewards()
 	
 	u8 tempValue2 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
 	s32 tempValue3 = (!tempValue2 ? 0x02 : 0x00) + tempValue2 * 12 / 0x03
-	tempValue3 += min(abs(AchievementsPlus.RewardsManager.getAdditionalCoins(achievementsplus.achievements.buttonselected)), 20)
 	
-	bool tempValue4 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
+	s32 tempValue4 = min(abs(AchievementsPlus.RewardsManager.getAdditionalCoins(achievementsplus.achievements.buttonselected)), 20)
+	achievementsplus.coinRewards.tempValue3 = tempValue4
+	tempValue3 += tempValue4
 	
-	if (tempValue0 == tempValue1 || !tempValue4 || achievementsplus.achievements.totalButtons == 0x00)
+	bool tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)	// Achievement complete
+	
+	if (tempValue0 == tempValue1 || !tempValue5 || achievementsplus.achievements.totalButtons == 0x00)
 	{
 		achievementsplus.coinRewards.tempValue0 = 0x00
 		achievementsplus.coinRewards.tempValue1 = tempValue3
