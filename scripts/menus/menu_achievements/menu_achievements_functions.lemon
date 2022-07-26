@@ -40,7 +40,7 @@ function void AchievementsPlus.Menu.achievements.items.build(s16 px, s16 py)
 	string tempValue0 = stringformat("%s %s", ACHIEVEMENTS_PLUS_BUILD_STRING, ACHIEVEMENTS_PLUS_BUILD_VARIANT)
 	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xffffff80, 0xf000)
 	
-	if (Mods.isModActive("Achievements Plus - Tools"))
+	if (achievementsplus.tempValue1)
 	{
 		px -= AchievementsPlus.TextManager.getTextWidth(tempValue0, FONT_SMALLFONT, FORMAT_NONE, 0x01) + 0x08
 		AchievementsPlus.TextManager.drawText(px, py, "(Tools)", FONT_SMALLFONT, FORMAT_NONE, ALIGN_RIGHT, 0x01, 0xd64c3380, 0xf000)
@@ -101,7 +101,7 @@ function void AchievementsPlus.Menu.achievements.items.tabsPanel(s16 px, s16 py)
 	// Define offsets between tabs
 	u8 tempValue0 = 36
 	
-	if (achievementsplus.tabsPanel.tempValue5 == 0x00)
+	if (!(achievementsplus.tabsPanel.tempValue5 > 0x00 && achievementsplus.tempValue2))
 	{
 		tempValue0 = 54
 		px += 27
@@ -127,6 +127,16 @@ function void AchievementsPlus.Menu.achievements.items.tabsPanel(s16 px, s16 py)
 		AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_community", px, py, 0xf001, achievementsplus.achievements.tabselected, 0x02, achievementsplus.tabsPanel.tempValue2, achievementsplus.tabsPanel.tempValue5, achievementsplus.tabsPanel.tempValue8)
 	}
 	
+	// Render Premium Tab
+	if (achievementsplus.tempValue2)
+	{
+		px += tempValue0
+		AchievementsPlus.Menu.achievements.items.tabs.drawTab("menu_thumb_tabsPanel_premium", px, py, 0xf001, achievementsplus.achievements.tabselected, 14, achievementsplus.tabsPanel.tempValue14, achievementsplus.tabsPanel.tempValue17, achievementsplus.tabsPanel.tempValue20)
+	}
+	
+	// Additional Tab's background
+	Renderer.drawCustomSprite("menu_tabsPanel_background", px - 36 + tempValue1, py, 0x00, 0x00, 0xf000)
+	
 	// Render control arrow
 	Renderer.drawCustomSprite(tempValue2 + "dpadRight", px + tempValue1 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xf001)
 }
@@ -138,7 +148,7 @@ function void AchievementsPlus.Menu.achievements.items.tabs.drawTab(string icon,
 	py -= 0x02
 	
 	// Define the size of the tab
-	string tempValue0 = (achievementsplus.tabsPanel.tempValue5 == 0x00) ? "Large" : ""
+	string tempValue0 = (achievementsplus.tabsPanel.tempValue5 > 0x00 && achievementsplus.tempValue2) ? "" : "Large"
 	
 	// Tab frame
 	if (selected == target)
@@ -174,14 +184,14 @@ function void AchievementsPlus.Menu.achievements.items.tabs.drawTab(string icon,
 	
 	// Progress tab
 	py += 0x08
-	string tempValue1 = totalCompleted == totalAchievements ? "100%" : stringformat("%d/%d", totalCompleted, totalAchievements)
+	string tempValue1 = totalCompleted == 0x00 ? "0%" : (totalCompleted == totalAchievements ? "100%" : stringformat("%d/%d", totalCompleted, totalAchievements))
 	AchievementsPlus.TextManager.drawTextWithShadow(px, py, tempValue1, FONT_SMALLFONT, FORMAT_NONE, ALIGN_CENTER, 0x01, renderQueue + 0x01)
 	
 	// Coins icon if the reward in one of the achievements of the selected tab is not claimed
 	if (totalNonClaimed > 0x00)
 	{
 		renderQueue += 0x02
-		px -= (achievementsplus.tabsPanel.tempValue5 == 0x00) ? 22 : 13
+		px -= (tempValue0 == "") ? 13 : 22
 		py -= 16
 		
 		Renderer.drawCustomSprite("menu_icon_originsCoin_small", px, py, 0x00, 0x00, renderQueue)
@@ -226,10 +236,10 @@ function void AchievementsPlus.Menu.achievements.items.userStats(s16 px, s16 py)
 		s16 posX = px - 46
 		posX += 16
 		
-		u16 tempValue0 = System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected))
-		u16 tempValue1 = System.getGlobalVariableValueByName(stringformat("achievementsplus.tabsPanel.tempValue%d", achievementsplus.achievements.tabselected + 0x03))
+		u16 tempValue0 = achievementsplus.tabsPanel.tempValue0 + achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2 + achievementsplus.tabsPanel.tempValue14
+		u16 tempValue1 = achievementsplus.tabsPanel.tempValue3 + achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5 + achievementsplus.tabsPanel.tempValue17
 		
-		string tempValue2 = tempValue0 == tempValue1 ? "100%" : stringformat("%d/%d", tempValue0, tempValue1)
+		string tempValue2 = tempValue0 == 0x00 ? "0%" : (tempValue0 == tempValue1 ? "100%" : stringformat("%d/%d", tempValue0, tempValue1))
 		
 		AchievementsPlus.TextManager.drawTextWithShadow(posX, py - 0x01, tempValue2, FONT_OXYSMALL, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xf000)
 		

@@ -21,11 +21,13 @@ function void AchievementsPlus.Menu.popup.updateControl()
 					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x01], ACHIEVEMENTS_LAST_ID[0x01], false)
 				else if (achievementsplus.options.tempValue3 == 0x02)
 					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
+				else if (achievementsplus.options.tempValue3 == 0x03)
+					AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x03], ACHIEVEMENTS_LAST_ID[0x03], false)
 			}
 			else if (achievementsplus.options.tempValue1 == 0x01)
 			{
 				AchievementsPlus.RewardsManager.cleanPersistendData()
-				AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x02], true)
+				AchievementsPlus.AchivementsManager.cleanPersistentDataByRange(ACHIEVEMENTS_START_ID[0x00], ACHIEVEMENTS_LAST_ID[0x03], true)
 			}
 			
 			// Go to Data Select menu

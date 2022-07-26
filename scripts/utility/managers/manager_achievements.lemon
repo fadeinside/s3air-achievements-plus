@@ -47,7 +47,7 @@ function string AchievementsPlus.AchivementsManager.getAchievementDetail(u16 ach
 function void AchievementsPlus.AchivementsManager.update()
 {
 	u16 startID = ACHIEVEMENTS_START_ID[0x01]
-	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x03]
 	
 	for (u16 A = startID; A <= lastID; ++A)
 	{
@@ -98,16 +98,16 @@ function void AchievementsPlus.AchivementsManager.showToast(u16 achievementID)
 // Saves data stored in Shared Memory into Persistent Data.
 function void AchievementsPlus.AchivementsManager.savePersistentData()
 {
-	SRAM.save(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
-	System.savePersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
+	SRAM.save(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x03] * 0x04)
+	System.savePersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x03] * 0x04)
 }
 
 
 // Loads data stored in Persistent Data into Shared Memory.
 function void AchievementsPlus.AchivementsManager.loadPersistentData()
 {
-	SRAM.load(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
-	System.loadPersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x02] * 0x04)
+	SRAM.load(achievementsplus.sharedMemory.achivementsAddress, 0x1000, ACHIEVEMENTS_LAST_ID[0x03] * 0x04)
+	System.loadPersistentData(achievementsplus.sharedMemory.achivementsAddress, "AchievementsPlus_AchievementsData", ACHIEVEMENTS_LAST_ID[0x03] * 0x04)
 }
 
 
@@ -203,7 +203,8 @@ constant array<u16> ACHIEVEMENTS_START_ID =
 	// 0x0000 must be empty
 	0x0001,	// Start ID for Sonic 3 A.I.R achievements
 	0x0018,	// Start ID for retroachievements.org achievements
-	0x004d	// Start ID for Community achievements
+	0x004d,	// Start ID for Community achievements
+	0x0401	// Start ID for Premium achievements
 }
 
 
@@ -212,7 +213,8 @@ constant array<u16> ACHIEVEMENTS_LAST_ID =
 {
 	0x0012,	// Last ID for Sonic 3 A.I.R achievements (0x0013 ... 0x0017 free space, in case Eukaryot adds new achievements to AIR.)
 	0x004c,	// Last ID for retroachievements.org achievements
-	0x0400	// Last ID for Community achievements
+	0x0400,	// Last ID for Community achievements
+	0x041c	// Last ID for Premium achievements
 }
 
 
@@ -351,7 +353,7 @@ function u8 AchievementsPlus.AchivementsManager.getDecimalStars(u16 achievementI
 function void AchievementsPlus.AchivementsManager.setToastShowFlag()
 {
 	u16 startID = ACHIEVEMENTS_START_ID[0x01]
-	u16 lastID = ACHIEVEMENTS_LAST_ID[0x02]
+	u16 lastID = ACHIEVEMENTS_LAST_ID[0x03]
 	
 	for (u16 A = startID; A <= lastID; ++A)
 	{

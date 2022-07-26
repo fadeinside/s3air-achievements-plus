@@ -77,8 +77,8 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 	// Content for the confirmation menu
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
 	{
-		u16 tempValue0 = achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2
-		u16 tempValue1 = achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5
+		u16 tempValue0 = achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2 + achievementsplus.tabsPanel.tempValue14
+		u16 tempValue1 = achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5 + achievementsplus.tabsPanel.tempValue17
 		
 		if (achievementsplus.options.tempValue1 == 0x00)
 		{
@@ -91,6 +91,11 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 			{
 				tempValue0 = achievementsplus.tabsPanel.tempValue2
 				tempValue1 = achievementsplus.tabsPanel.tempValue5
+			}
+			else if (achievementsplus.options.tempValue3 == 0x03)
+			{
+				tempValue0 = achievementsplus.tabsPanel.tempValue14
+				tempValue1 = achievementsplus.tabsPanel.tempValue17
 			}
 		}
 		

@@ -221,15 +221,18 @@
 	"menu_thumb_detailPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "89,1,65,24", "Center": "0,0" },
 	"menu_thumb_detailPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "155,1,64,24", "Center": "0,0" },
 	"menu_thumb_detailPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "89,26,65,24", "Center": "0,0" },
+	"menu_thumb_detailPanel_premium": { "File": "menu/menu_thumbs.png", "Rect": "89,51,65,24", "Center": "0,0" },
 	"menu_thumb_detailPanel_not_provided": { "File": "menu/menu_thumbs.png", "Rect": "155,26,65,24", "Center": "0,0" },
 	
 	// Tabs panel thumbs
 	"menu_thumb_tabsPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "54,1,34,26", "Center": "17,13" },
 	"menu_thumb_tabsPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "54,28,34,26", "Center": "17,13" },
 	"menu_thumb_tabsPanel_community": { "File": "menu/menu_thumbs.png", "Rect": "54,55,34,26", "Center": "17,13" },
+	"menu_thumb_tabsPanel_premium": { "File": "menu/menu_thumbs.png", "Rect": "54,82,34,26", "Center": "17,13" },
 	
 	// Tabs panel thumbs large
 	"menu_thumb_tabsPanel_s3airLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,1,52,26", "Center": "26,13" },
 	"menu_thumb_tabsPanel_retroLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,28,52,26", "Center": "26,13" },
-	"menu_thumb_tabsPanel_communityLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" }	// Unused actually
+	"menu_thumb_tabsPanel_communityLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" },
+	"menu_thumb_tabsPanel_premiumLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" }
 }

@@ -50,7 +50,11 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		
 		if (control.pad1.pressed == CONTROL_LEFT)
 		{
-			if (achievementsplus.achievements.tabselected != 0x00)
+			if (achievementsplus.achievements.tabselected == 14)
+				achievementsplus.achievements.tabselected = maxTabs
+			else if (achievementsplus.achievements.tabselected == 0x00 && achievementsplus.tempValue2)
+				achievementsplus.achievements.tabselected = 14
+			else if (achievementsplus.achievements.tabselected != 0x00)
 				--achievementsplus.achievements.tabselected
 			else
 				achievementsplus.achievements.tabselected = maxTabs
@@ -58,7 +62,11 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		
 		else if (control.pad1.pressed == CONTROL_RIGHT)
 		{
-			if (achievementsplus.achievements.tabselected < maxTabs)
+			if (achievementsplus.achievements.tabselected == 14)
+				achievementsplus.achievements.tabselected = 0x00
+			else if (achievementsplus.achievements.tabselected == maxTabs && achievementsplus.tempValue2)
+				achievementsplus.achievements.tabselected = 14
+			else if (achievementsplus.achievements.tabselected < maxTabs)
 				++achievementsplus.achievements.tabselected
 			else
 				achievementsplus.achievements.tabselected = 0x00
@@ -306,8 +314,10 @@ function void AchievementsPlus.Menu.achievements.updateSort()
 // Sets the start and end ID for the list of achievements in the menu specifically for the selected tabs category.
 function void AchievementsPlus.Menu.achievements.setupForAchievementsList()
 {
-	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[achievementsplus.achievements.tabselected]
-	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[achievementsplus.achievements.tabselected]
+	u16 tempValue0 = achievementsplus.achievements.tabselected >= 14 ? achievementsplus.achievements.tabselected - 11 : achievementsplus.achievements.tabselected
+	
+	achievementsplus.listPanel.tempValue0 = ACHIEVEMENTS_START_ID[tempValue0]
+	achievementsplus.listPanel.tempValue1 = ACHIEVEMENTS_LAST_ID[tempValue0]
 }
 
 
@@ -339,6 +349,10 @@ function void AchievementsPlus.Menu.achievements.setupTabs()
 	// Define the number of completed/all achievements in the third tab
 	achievementsplus.tabsPanel.tempValue2 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], true)
 	achievementsplus.tabsPanel.tempValue5 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02], false)
+	
+	// Define the number of completed/all achievements in the fourth tab
+	achievementsplus.tabsPanel.tempValue14 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x03], ACHIEVEMENTS_LAST_ID[0x03], true)
+	achievementsplus.tabsPanel.tempValue17 = AchievementsPlus.AchivementsManager.getTotalAchievementsByRange(ACHIEVEMENTS_START_ID[0x03], ACHIEVEMENTS_LAST_ID[0x03], false)
 }
 
 
@@ -353,4 +367,7 @@ function void AchievementsPlus.Menu.achievements.setupTabs_rewardsAvailable()
 	
 	// Define the number of achievements from which you need to take the reward in the third tab
 	achievementsplus.tabsPanel.tempValue8 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x02], ACHIEVEMENTS_LAST_ID[0x02])
+	
+	// Define the number of achievements from which you need to take the reward in the third tab
+	achievementsplus.tabsPanel.tempValue20 = AchievementsPlus.AchivementsManager.getTotalNonClaimedByRange(ACHIEVEMENTS_START_ID[0x03], ACHIEVEMENTS_LAST_ID[0x03])
 }

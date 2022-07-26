@@ -27,7 +27,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		// Setup buttons for the carousel
 		achievementsplus.options.tempValue5 = 0x00
 		if (achievementsplus.options.tempValue1 == 0x00 && achievementsplus.options.tempValue0 == 0x00)
-			achievementsplus.options.tempValue5 = 0x02
+			achievementsplus.options.tempValue5 = achievementsplus.tempValue2 ? 0x03 : 0x02
 		
 		++achievementsplus.scrollList.tempValue2
 		if (achievementsplus.scrollList.tempValue2 >= 30)

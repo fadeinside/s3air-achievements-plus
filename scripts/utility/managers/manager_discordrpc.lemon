@@ -14,8 +14,8 @@ function string AchievementsPlus.RPCManager.getDiscordDetail()
 {
 	if (global.game_mode == 0x9a || global.game_mode == 0x9b)
 	{
-		u16 tempValue0 = achievementsplus.tabsPanel.tempValue0 + achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2
-		u16 tempValue1 = achievementsplus.tabsPanel.tempValue3 + achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5
+		u16 tempValue0 = achievementsplus.tabsPanel.tempValue0 + achievementsplus.tabsPanel.tempValue1 + achievementsplus.tabsPanel.tempValue2 + achievementsplus.tabsPanel.tempValue14
+		u16 tempValue1 = achievementsplus.tabsPanel.tempValue3 + achievementsplus.tabsPanel.tempValue4 + achievementsplus.tabsPanel.tempValue5 + achievementsplus.tabsPanel.tempValue17
 
 		return stringformat("Achievements: (%d / %d) | Coins: %d", tempValue0, tempValue1, achievementsplus.sharedMemory.coinsSaved)
 	}

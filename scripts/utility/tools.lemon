@@ -178,6 +178,9 @@ function void AchievementsPlus.waitForNextFrame()
 
 function void AchievementsPlus.Init()
 {
+	achievementsplus.tempValue1 = Mods.isModActive("Achievements Plus - Tools")
+	achievementsplus.tempValue2 = Mods.isModActive("Achievements Plus - Premium")
+	
 	AchievementsPlus.ManagerVersion.update()
 	
 	AchievementsPlus.SharedMemory.loadPersistendData()

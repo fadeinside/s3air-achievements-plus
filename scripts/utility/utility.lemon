@@ -34,7 +34,7 @@ function void fn00d1fa()
 	s16 px = 16
 	s16 py = 12
 	
-	u16 tempValue0 = achievementsplus.tabsPanel.tempValue6 + achievementsplus.tabsPanel.tempValue7 + achievementsplus.tabsPanel.tempValue8
+	u16 tempValue0 = achievementsplus.tabsPanel.tempValue6 + achievementsplus.tabsPanel.tempValue7 + achievementsplus.tabsPanel.tempValue8 + achievementsplus.tabsPanel.tempValue20
 	
 	if (tempValue0 > 0x00)
 	{

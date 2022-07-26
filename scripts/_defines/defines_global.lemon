@@ -41,6 +41,10 @@ global u8 achievementsplus.tabsPanel.tempValue11	// Used in the animation of the
 global u8 achievementsplus.tabsPanel.tempValue12	// Used in the animation of the trace of the tab button
 global u8 achievementsplus.tabsPanel.tempValue13	// Sets the ID of the previous button
 
+global u16 achievementsplus.tabsPanel.tempValue14	// Total number of completed achievements in fourth tab (Premium achievements)
+global u16 achievementsplus.tabsPanel.tempValue17	// Total number of achievements in the fourth tab (Premium achievements)
+global u16 achievementsplus.tabsPanel.tempValue20	// Total number of achievements from which you need to take the reward in the third tab (Premium achievements)
+
 // Music
 global u8 achievementsplus.menuMusic.tempValue0	// Set when music in the menu needs to be restarted
 
@@ -103,3 +107,5 @@ global u16 achievementsplus.achievements.totalButtons	// Sets the total number o
 
 // Mod stuff
 global u8 achievementsplus.tempValue0	// Sets when you are using an outdated version of the mod
+global u8 achievementsplus.tempValue1	// Sets when Tools mod is active
+global u8 achievementsplus.tempValue2	// Sets when Premium mod is active
