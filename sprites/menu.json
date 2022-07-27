@@ -137,6 +137,9 @@
 	// Glow
 	"menu_icon_glow": { "File": "menu/menu_icons.png", "Rect": "93,18,17,17", "Center": "8,8" },
 	
+	// Guide icon
+	"menu_icon_guide": { "File": "menu/menu_icons.png", "Rect": "43,11,12,11", "Center": "6,5" },
+	
 	
 	
 	// ----- IMAGES ----- //
@@ -217,6 +220,11 @@
 	
 	// ----- MENU THUMBS ----- //
 	
+	// Guide placeholdes
+	"menu_thumb_guideMenu_224x90placeholder": { "File": "menu/menu_thumbs.png", "Rect": "221,1,224,90", "Center": "112,0" },
+	"menu_thumb_guideMenu_224x44placeholder": { "File": "menu/menu_thumbs.png", "Rect": "221,92,224,44", "Center": "112,0" },
+	"menu_thumb_guideMenu_90x90placeholder": { "File": "menu/menu_thumbs.png", "Rect": "466,1,90,90", "Center": "45,0" },   
+	
 	// Detail panel thumbs
 	"menu_thumb_detailPanel_s3air": { "File": "menu/menu_thumbs.png", "Rect": "89,1,65,24", "Center": "0,0" },
 	"menu_thumb_detailPanel_retro": { "File": "menu/menu_thumbs.png", "Rect": "155,1,64,24", "Center": "0,0" },
@@ -234,5 +242,5 @@
 	"menu_thumb_tabsPanel_s3airLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,1,52,26", "Center": "26,13" },
 	"menu_thumb_tabsPanel_retroLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,28,52,26", "Center": "26,13" },
 	"menu_thumb_tabsPanel_communityLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" },
-	"menu_thumb_tabsPanel_premiumLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,55,52,26", "Center": "26,13" }
+	"menu_thumb_tabsPanel_premiumLarge": { "File": "menu/menu_thumbs.png", "Rect": "1,82,52,26", "Center": "26,13" }
 }

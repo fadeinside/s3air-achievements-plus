@@ -55,7 +55,7 @@ function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 
 	py = getScreenHeight() - 12
 	
 	// Define if an claiming reward is available for the selected achievement
-	if (achievementsplus.coinRewards.tempValue0 != 0x00)
+	if (achievementsplus.coinRewards.tempValue0 > 0x00)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Claim reward", px, py, 0xf000)
 		px += tempValue0
@@ -63,6 +63,12 @@ function void AchievementsPlus.Menu.achievements.items.hotkeysPanel(s16 px, s16 
 	
 	u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Data Select", px, py, 0xf000)
 	px += tempValue1
+	
+	if (achievementsplus.guideMenu.tempValue1 > 0x00)
+	{
+		u16 tempValue3 = AchievementsPlus.HotkeysManager.drawHotkey("Y", "Open Guide", px, py, 0xf000)
+		px += tempValue3
+	}
 	
 	u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("A", "Options", px, py, 0xf000)
 	px += tempValue2
@@ -333,6 +339,10 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	// Achievement title
 	py += 20
 	AchievementsPlus.TextManager.drawTextWithOutline(px, py, achievementsplus.infoPanel.tempValue0, FONT_OXYTINY, FORMAT_UPPERCASE, ALIGN_CENTER, 0x01, 0xffffffff, 0x003cb4ff, 0xf001)
+	
+	// Guide icon
+	if (achievementsplus.guideMenu.tempValue1 > 0x00)
+		Renderer.drawCustomSprite("menu_icon_guide", px + 60, py, 0x00, 0x00, 0xf002)
 	
 	// Achievement sub-title
 	px -= 71

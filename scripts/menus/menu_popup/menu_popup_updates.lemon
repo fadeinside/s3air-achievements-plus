@@ -163,6 +163,43 @@ function void AchievementsPlus.Menu.popup.updateControl()
 		return
 	}
 	
+	// Control for the Achievements Guide
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENT_GUIDE)
+	{
+		if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.guideMenu.tempValue1 > 0x01)
+		{
+			Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
+			
+			if (control.pad1.pressed & CONTROL_LEFT)
+			{
+				if (achievementsplus.guideMenu.tempValue0 != 0x01)
+					--achievementsplus.guideMenu.tempValue0
+				else
+					achievementsplus.guideMenu.tempValue0 = achievementsplus.guideMenu.tempValue1
+			}
+			
+			else if (control.pad1.pressed & CONTROL_RIGHT)
+			{
+				if (achievementsplus.guideMenu.tempValue0 < achievementsplus.guideMenu.tempValue1)
+					++achievementsplus.guideMenu.tempValue0
+				else
+					achievementsplus.guideMenu.tempValue0 = 0x01
+			}
+			
+			achievementsplus.popupMenu.tempValue2 = 0x00
+			achievementsplus.popupMenu.tempValue3 = 0x00
+			
+			System.setupCallFrame("AchievementsPlus.GuidesManager.setupForGuidePage", "@EntryPoint")
+		}
+		
+		// Close popup
+		if (control.pad1.pressed & CONTROL_B)
+			AchievementsPlus.Menu.popup.close()
+		
+		// Finish the function on this
+		return
+	}
+	
 	// Failsave close popup
 	if (control.pad1.pressed & CONTROL_B)
 		AchievementsPlus.Menu.popup.close()
@@ -205,11 +242,23 @@ function void AchievementsPlus.Menu.popup.update()
 // The function defines the ID and title for the popup and shows it.
 function void AchievementsPlus.Menu.popup.show(u8 id, string title)
 {
+	AchievementsPlus.Menu.popup.show(id, title, false)
+}
+
+
+// The function defines the ID and title for the popup and shows it.
+function void AchievementsPlus.Menu.popup.show(u8 id, string title, bool useLarge)
+{
+	if (title == "@achievementName")
+		title = achievementsplus.infoPanel.tempValue0
+	
 	achievementsplus.popupMenu.tempValue2 = 0x00
 	achievementsplus.popupMenu.tempValue3 = 0x00
 	
 	achievementsplus.popupMenu.tempValue0 = title
 	achievementsplus.popupMenu.tempValue1 = id
+	
+	achievementsplus.popupMenu.tempValue10 = useLarge
 	
 	Audio.playAudio(SFX_MENU_RESUME, AudioContext.CONTEXT_SOUND)
 	achievementsplus.popupMenu.tempValue4 = true

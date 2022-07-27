@@ -12,6 +12,13 @@ function void AchievementsPlus.Menu.achievements.updateControl()
 		global.game_mode = 0x9b
 	}
 	
+	// Open guide window
+	else if (Input.buttonDown(BUTTON_Y))
+	{
+		if (achievementsplus.guideMenu.tempValue1 > 0x00)
+			AchievementsPlus.Menu.popup.show(POPUP_ACHIEVEMENT_GUIDE, "@achievementName", true)
+	}
+	
 	// Back to main menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
@@ -332,6 +339,7 @@ function void AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
 	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
 	
 	AchievementsPlus.RewardsManager.setupForCoinRewards()
+	AchievementsPlus.GuidesManager.setupForGuidePage()
 }
 
 

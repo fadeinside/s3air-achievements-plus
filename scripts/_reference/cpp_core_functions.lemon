@@ -35,3 +35,5 @@ declare function void AchievementsPlus.WallManager.addPurchaseWall(u16 px, u16 p
 declare function void AchievementsPlus.WallManager.addSessionWall(u16 px, u16 py, u8 width, u8 height, u8 wallID, u8 paidValue)
 
 declare function void AchievementsPlus.WallManager.loadPersistentData()
+
+declare string AchievementsPlus.GuidesManager.getGuideDetail(u16 achievementID, u8 page, u8 parse)

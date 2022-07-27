@@ -83,6 +83,14 @@ global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel bu
 global u16 achievementsplus.popupMenu.tempValue7	// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
 global u16 achievementsplus.popupMenu.tempValue8	// Sets the required Coins difference to purchase an item
 global u8 achievementsplus.popupMenu.tempValue9	// Sets the value of the current input
+global u8 achievementsplus.popupMenu.tempValue10	// Sets when a large popup is used
+
+// Guide window
+global u8 achievementsplus.guideMenu.tempValue0	// Page counter
+global u8 achievementsplus.guideMenu.tempValue1	// Sets the maximum number of available pages
+global string achievementsplus.guideMenu.tempValue2	// Sets the text of the currently shown Guide
+global string achievementsplus.guideMenu.tempValue3	// Sets the image of the currently shown Guide
+global string achievementsplus.guideMenu.tempValue4	// Sets the template of the currently shown Guide
 
 // Toast stuff
 global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast

@@ -17,6 +17,12 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 	px -= 92
 	py += 28
 	
+	if (achievementsplus.popupMenu.tempValue10)
+	{
+		px -= 30
+		py += 22
+	}
+	
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
 	{
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Delete", px, py, 0xffff)
@@ -55,16 +61,46 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Go back", px, py, 0xffff)
 		px += tempValue0
 	}
+	
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENT_GUIDE)
+	{
+		AchievementsPlus.TextManager.drawText(px + 190, py - 0x01, stringformat("%d/%d", achievementsplus.guideMenu.tempValue0, achievementsplus.guideMenu.tempValue1), FONT_OXYSMALL, 0x00, ALIGN_CENTER, 0x01, 0x002964ff, 0xffff)
+		
+		string tempValue1 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_tabsPanel_control_arrow_ps4_" : "menu_tabsPanel_control_arrow_"
+		Renderer.drawCustomSprite(tempValue1 + "dpadLeft", px + 190 - (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xffff)
+		Renderer.drawCustomSprite(tempValue1 + "dpadRight", px + 190 + (achievementsplus.tabsPanel.tempValue9 >> 0x02), py, 0x00, 0x00, 0xffff)
+		
+		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Close", px, py, 0xffff)
+		px += tempValue0
+	}
 }
 
 
 // The main function of rendering the title.
 function void AchievementsPlus.Menu.popup.items.title(s16 px, s16 py)
 {
+	string tempValue0 = achievementsplus.popupMenu.tempValue0
+	
+	if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENT_GUIDE)
+	{
+		tempValue0 = achievementsplus.popupMenu.tempValue0 + " - Guide"
+		
+		if (!(achievementsplus.guideMenu.tempValue4 == "TitleImageAndText" || achievementsplus.guideMenu.tempValue4 == "TitleAndText"))
+			return
+	}
+	
 	px -= 92
 	py -= 28
+	u8 alignment = ALIGN_LEFT
 	
-	AchievementsPlus.TextManager.drawText(px, py, achievementsplus.popupMenu.tempValue0, FONT_OXYSMALL, 0x00, ALIGN_LEFT, 0x01, 0x002964ff, 0xffff)
+	if (achievementsplus.popupMenu.tempValue10)
+	{
+		px +=  92
+		py -= 22
+		alignment = ALIGN_CENTER
+	}
+	
+	AchievementsPlus.TextManager.drawText(px, py, tempValue0, FONT_OXYSMALL, 0x00, alignment, 0x01, 0x002964ff, 0xffff)
 }
 
 
@@ -73,6 +109,14 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 {
 	px -= 92
 	py -= 16
+	s16 limit = 190
+	
+	if (achievementsplus.popupMenu.tempValue10)
+	{
+		px -= 30
+		py -= 18
+		limit = 190 + 60
+	}
 	
 	// Content for the confirmation menu
 	if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_YOU_ARE_SURE)
@@ -103,42 +147,96 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 		string tempValue3 = stringformat("This will permanently delete your data. You will lose: ^Achievements: %d / %d", tempValue0, tempValue1)
 		
 		string tempValue4 = achievementsplus.options.tempValue1 == 0x01 ? tempValue2 : tempValue3
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Debug enabled menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
 	{
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements. Turn off Debug mode.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements. Turn off Debug mode.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Game via Level select menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
 	{
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements, since it's loaded through Level select.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "This game session will be disabled from completing achievements, since it's loaded through Level select.", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Wall unlock menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
 	{
 		string tempValue4 = stringformat("Would you like to spend Coins to unlock this item? ^Coins needed: %d ^Coins owned: %d", u8[achievementsplus.sharedMemory.wallsAddress + 0x100], achievementsplus.sharedMemory.coinsSaved)
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Not Enough Coins menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
 	{
 		string tempValue4 = stringformat("You don't have enough Coins to purchase this item. ^^More Coins needed: +%d", achievementsplus.popupMenu.tempValue8)
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Oudated mod version
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OUTDATED_VERSION)
 	{
 		py -= 12
-		//string tempValue4 = stringformat("The latest used version does not match the mod version that you are using now. Update your mod.^^Latest used: %s^Currently used: %s", AchievementsPlus.ManagerVersion.getVersionString(achievementsplus.sharedMemory.versionUsed), ACHIEVEMENTS_PLUS_BUILD_STRING)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "The latest used version does not match the mod version that you are using now. Update your mod.^^https://github.com/fadeinside/^s3air-achievements-plus", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
+	}
+	
+	// Content for the Achievements Guide
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENT_GUIDE)
+	{
+		if (!(achievementsplus.guideMenu.tempValue4 == "TitleImageAndText" || achievementsplus.guideMenu.tempValue4 == "TitleAndText"))
+			py -= 0x06
 		
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "The latest used version does not match the mod version that you are using now. Update your mod.^^https://github.com/fadeinside/^s3air-achievements-plus", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 190, 0xffff)
+		if (achievementsplus.guideMenu.tempValue4 == "TitleImageAndText")
+		{
+			string tempValue4 = "menu_thumb_guideMenu_224x44placeholder"
+			if (Renderer.hasCustomSprite(achievementsplus.guideMenu.tempValue3))
+				tempValue4 = achievementsplus.guideMenu.tempValue3
+			
+			Renderer.drawCustomSprite(tempValue4, px + 120, py - 0x02, 0x00, 0x00, 0xffff)
+			py += 44 + 8
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.guideMenu.tempValue2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
+		}
+		else if (achievementsplus.guideMenu.tempValue4 == "ImageOnLeftAndText")
+		{
+			string tempValue4 = "menu_thumb_guideMenu_90x90placeholder"
+			if (Renderer.hasCustomSprite(achievementsplus.guideMenu.tempValue3))
+				tempValue4 = achievementsplus.guideMenu.tempValue3
+			
+			Renderer.drawCustomSprite(tempValue4, px + 53, py - 16, 0x00, 0x00, 0xffff)
+			px += 100 + 8
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.guideMenu.tempValue2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 140, 0xffff)
+		}
+		else if (achievementsplus.guideMenu.tempValue4 == "FullImageOnly")
+		{
+			string tempValue4 = "menu_thumb_guideMenu_224x90placeholder"
+			if (Renderer.hasCustomSprite(achievementsplus.guideMenu.tempValue3))
+				tempValue4 = achievementsplus.guideMenu.tempValue3
+			
+			Renderer.drawCustomSprite(tempValue4, px + 120, py - 16, 0x00, 0x00, 0xffff)
+		}
+		else if (achievementsplus.guideMenu.tempValue4 == "ImageOnRightAndText")
+		{
+			string tempValue4 = "menu_thumb_guideMenu_90x90placeholder"
+			if (Renderer.hasCustomSprite(achievementsplus.guideMenu.tempValue3))
+				tempValue4 = achievementsplus.guideMenu.tempValue3
+			
+			Renderer.drawCustomSprite(tempValue4, px + 187, py - 16, 0x00, 0x00, 0xffff)
+			
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.guideMenu.tempValue2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 140, 0xffff)
+		}
+		else if (achievementsplus.guideMenu.tempValue4 == "FullTextOnly")
+		{
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.guideMenu.tempValue2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
+		}
+		else if (achievementsplus.guideMenu.tempValue4 == "TitleAndText")
+		{
+			AchievementsPlus.TextManager.drawTextWithLimit(px, py, achievementsplus.guideMenu.tempValue2, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
+		}
 	}
 }
 
@@ -160,10 +258,10 @@ function void AchievementsPlus.Menu.popup.background()
 		}
 	}
 	
-	Renderer.drawCustomSpriteTinted("menu_popupSmall_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2))
+	Renderer.drawCustomSpriteTinted(achievementsplus.popupMenu.tempValue10 ? "menu_popup_background" : "menu_popupSmall_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2))
 	
 	// Render achievement menu items in the background for popup menu
-	if (global.game_mode == 0x9a)
+	if (global.game_mode == 0x9a && achievementsplus.popupMenu.tempValue1 != POPUP_ACHIEVEMENT_GUIDE)
 	{
 		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0x70)
 		
@@ -181,6 +279,20 @@ function void AchievementsPlus.Menu.popup.background()
 	// In other cases, just a black background
 	else
 	{
+		// Ping-pong animation for control arrows
+		if (achievementsplus.tabsPanel.tempValue9 <= 0x10 && !achievementsplus.tabsPanel.tempValue10)
+		{
+			++achievementsplus.tabsPanel.tempValue9
+			if (achievementsplus.tabsPanel.tempValue9 == 0x10)
+				achievementsplus.tabsPanel.tempValue10 |= 0x10
+		}
+		else
+		{
+			--achievementsplus.tabsPanel.tempValue9
+			if (achievementsplus.tabsPanel.tempValue9 == 0x00)
+				achievementsplus.tabsPanel.tempValue10 = 0x00
+		}
+		
 		u8 alpha = global.game_mode == 0x0c ? 0x70 : 255
 		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, alpha)
 	}

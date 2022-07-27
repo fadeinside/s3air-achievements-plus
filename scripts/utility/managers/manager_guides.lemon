@@ -1,0 +1,100 @@
+// Returns data to be used in the achievement Guide page.
+function string AchievementsPlus.GuidesManager.getGuideDetail(u16 achievementID, u8 page, u8 parse)
+{
+	// Pages:
+	// - 0x01 ~ 0x11
+	
+	// Parse:
+	// - 0x00 - Text on page
+	// - 0x01 - Image on page
+	// - 0x02 - Page template
+	
+	// Templates:
+	// - "TitleImageAndText"
+	// - "ImageOnLeftAndText"
+	// - "FullImageOnly"
+	// - "ImageOnRightAndText"
+	// - "FullTextOnly"
+	// - "TitleAndText"
+	
+	// Example:
+	//if (achievementID == RETROACHIEVEMENTS_COMPLETE_AIZ)
+	//{
+	//	if (page == 0x01)	// First page
+	//	{
+	//		if (parse == 0x00)
+	//			return "Sonic the Hedgehog..."
+	//		else if (parse == 0x01)
+	//			return "menu_thumb_guideMenu_224x44placeholder"
+	//		else if (parse == 0x02)
+	//			return "TitleImageAndText"
+	//	}
+	//	else if (page == 0x02)	// Second page
+	//	{
+	//		if (parse == 0x00)
+	//			return "..is a platform game developed by Sonic Team and published by Sega for the Sega Genesis.^^Players control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik,..."
+	//		else if (parse == 0x01)
+	//			return "menu_thumb_guideMenu_90x90placeholder"
+	//		else if (parse == 0x02)
+	//			return "ImageOnRightAndText"
+	//	}
+	//	else if (page == 0x03)	// Third page
+	//	{
+	//		if (parse == 0x00)
+	//			return "...a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds. ^^Players control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik, a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds."
+	//		else if (parse == 0x01)
+	//			return ""
+	//		else if (parse == 0x02)
+	//			return "FullTextOnly"
+	//	}
+	//	else if (page == 0x04)	// Fourth page
+	//	{
+	//		if (parse == 0x00)
+	//			return "The gameplay involves collecting rings as a form of health, and a simple control scheme, with jumping and attacking controlled by a single button."
+	//		else if (parse == 0x01)
+	//			return ""
+	//		else if (parse == 0x02)
+	//			return "FullTextOnly"
+	//	}
+	//	else if (page == 0x05)	// Five page
+	//	{
+	//		if (parse == 0x00)
+	//			return "Image"
+	//		else if (parse == 0x01)
+	//			return "menu_thumb_guideMenu_224x90placeholder"
+	//		else if (parse == 0x02)
+	//			return "FullImageOnly"
+	//	}
+	//}
+	
+	// Failsave value
+	return ""
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Sets the Guide pages for the selected achievement from the list.
+function void AchievementsPlus.GuidesManager.setupForGuidePage()
+{
+	u8 tempValue0	// Total available pages
+	
+	for (u8 A = 0x01; A < 0x11; ++A)
+	{
+		if (AchievementsPlus.GuidesManager.getGuideDetail(achievementsplus.achievements.buttonselected, A, 0x00) != "")
+			++tempValue0
+		else
+			break
+	}
+
+	achievementsplus.guideMenu.tempValue0 = 0x01
+	achievementsplus.guideMenu.tempValue1 = tempValue0
+	
+@EntryPoint:
+	achievementsplus.guideMenu.tempValue2 = AchievementsPlus.GuidesManager.getGuideDetail(achievementsplus.achievements.buttonselected, achievementsplus.guideMenu.tempValue0, 0x00)
+	achievementsplus.guideMenu.tempValue3 = AchievementsPlus.GuidesManager.getGuideDetail(achievementsplus.achievements.buttonselected, achievementsplus.guideMenu.tempValue0, 0x01)
+	achievementsplus.guideMenu.tempValue4 = AchievementsPlus.GuidesManager.getGuideDetail(achievementsplus.achievements.buttonselected, achievementsplus.guideMenu.tempValue0, 0x02)
+}

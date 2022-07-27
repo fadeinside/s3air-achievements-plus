@@ -116,6 +116,7 @@ function void AchievementsPlus.RewardsManager.cleanPersistendData()
 // The function adds a returns value to the reward of the specified achievement.
 function u8 AchievementsPlus.RewardsManager.getAdditionalCoins(u16 achievementID)
 {
+	// Example:
 	//if (achievementID == RETROACHIEVEMENTS_JUST_IN_TIME)
 	//	return 0x03
 	
