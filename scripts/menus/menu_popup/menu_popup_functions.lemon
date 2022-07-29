@@ -143,8 +143,8 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 			}
 		}
 		
-		string tempValue2 = stringformat("This will permanently delete your data. You will lose: ^Achievements: %d / %d ^Coins: %d", tempValue0, tempValue1, achievementsplus.sharedMemory.coinsSaved)
-		string tempValue3 = stringformat("This will permanently delete your data. You will lose: ^Achievements: %d / %d", tempValue0, tempValue1)
+		string tempValue2 = stringformat("This will permanently delete your data. You will lose:\nAchievements: %d / %d\nCoins: %d", tempValue0, tempValue1, achievementsplus.sharedMemory.coinsSaved)
+		string tempValue3 = stringformat("This will permanently delete your data. You will lose:\nAchievements: %d / %d", tempValue0, tempValue1)
 		
 		string tempValue4 = achievementsplus.options.tempValue1 == 0x01 ? tempValue2 : tempValue3
 		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
@@ -165,14 +165,14 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 	// Content for the Wall unlock menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_WALL_UNLOCK)
 	{
-		string tempValue4 = stringformat("Would you like to spend Coins to unlock this item? ^Coins needed: %d ^Coins owned: %d", u8[achievementsplus.sharedMemory.wallsAddress + 0x100], achievementsplus.sharedMemory.coinsSaved)
+		string tempValue4 = stringformat("Would you like to spend Coins to unlock this item?\nCoins needed: %d\nCoins owned: %d", u8[achievementsplus.sharedMemory.wallsAddress + 0x100], achievementsplus.sharedMemory.coinsSaved)
 		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Not Enough Coins menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
 	{
-		string tempValue4 = stringformat("You don't have enough Coins to purchase this item. ^^More Coins needed: +%d", achievementsplus.popupMenu.tempValue8)
+		string tempValue4 = stringformat("You don't have enough Coins to purchase this item.\n\nMore Coins needed: +%d", achievementsplus.popupMenu.tempValue8)
 		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
@@ -180,7 +180,7 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OUTDATED_VERSION)
 	{
 		py -= 12
-		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "The latest used version does not match the mod version that you are using now. Update your mod.^^https://github.com/fadeinside/^s3air-achievements-plus", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
+		AchievementsPlus.TextManager.drawTextWithLimit(px, py, "The latest used version does not match the mod version that you are using now. Update your mod.\n\nhttps://github.com/fadeinside/\ns3air-achievements-plus", FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)
 	}
 	
 	// Content for the Achievements Guide

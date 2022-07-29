@@ -1,16 +1,16 @@
 // Version
-define u32 achievementsplus.sharedMemory.versionAddress	= 0x8512fc
-define u32 achievementsplus.sharedMemory.versionUsed	= u32[achievementsplus.sharedMemory.versionAddress]
+define u32 achievementsplus.sharedMemory.versionAddress			= 0x8512fc
+define u32 achievementsplus.sharedMemory.versionUsed			= u32[achievementsplus.sharedMemory.versionAddress]
 
 // Coins
-define u32 achievementsplus.sharedMemory.coinsAddress	= 0x851300
-define u32 achievementsplus.sharedMemory.coinsSaved	= u32[achievementsplus.sharedMemory.coinsAddress]
+define u32 achievementsplus.sharedMemory.coinsAddress			= 0x851300
+define u32 achievementsplus.sharedMemory.coinsSaved				= u32[achievementsplus.sharedMemory.coinsAddress]
 
 // Achievements
-define u32 achievementsplus.sharedMemory.achivementsAddress	= 0x851304
+define u32 achievementsplus.sharedMemory.achivementsAddress		= 0x851304
 
 // Walls
-define u32 achievementsplus.sharedMemory.wallsAddress	= 0x8510fb
+define u32 achievementsplus.sharedMemory.wallsAddress			= 0x8510fb
 // - 0x8510fb ... 0x8511fa	->	Data of all wall
-// - 0x8511fb 					->	Coins for unlocked nearest wall
-// - 0x8511fc 					->	Nearest wall ID
+// - 0x8511fb 				->	Coins for unlocked nearest wall
+// - 0x8511fc 				->	Nearest wall ID

@@ -18,17 +18,17 @@ function void AchievementsPlus.TextManager.drawTextWithLimit(s16 px, s16 py, str
 		string character = getStringFromHash(substring(text, A, 0x01))
 		
 		if (character == " " && (textWidth + px) >= limit - 0x16)
-			character = "^"
+			character = "\n"
 		
 		character = AchievementsPlus.TextManager.getFormated(character, font, format)
 		
-		if (character == "^")
+		if (character == "\n")
 		{
 			textWidth = 0x00
 			py += AchievementsPlus.TextManager.getTextWidth("   ", font, format, 0x00)
 		}
 		
-		if (character != "^")
+		if (character != "\n")
 		{
 			AchievementsPlus.TextManager.renderCharacter(px, py, character, font, tintColor, renderQueue, textWidth)
 			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
@@ -47,14 +47,14 @@ function s16 AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(s16 px, st
 		
 		if (character == " " && (textWidth + px) >= limit - 0x16)
 		{
-			character = "^"
+			character = "\n"
 			lineBreaks += 0x01
 		}
 		
-		if (character == "^")
+		if (character == "\n")
 			textWidth = 0x00
 		
-		if (character != "^")
+		if (character != "\n")
 			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
 	}
 	
@@ -84,7 +84,7 @@ function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, s
 	{
 		string character = getStringFromHash(substring(text, A, 0x01))
 		
-		if (character == "^")
+		if (character == "\n")
 		{
 			textWidth = 0x00
 			py += AchievementsPlus.TextManager.getTextWidth("   ", font, format, 0x00)
@@ -92,7 +92,7 @@ function void AchievementsPlus.TextManager.drawTextWithOutline(s16 px, s16 py, s
 		
 		character = AchievementsPlus.TextManager.getFormated(character, font, format)
 		
-		if (character != "^")
+		if (character != "\n")
 		{
 			AchievementsPlus.TextManager.renderCharacter(px, py, character, font, tintColor, renderQueue, textWidth)
 			
@@ -170,7 +170,7 @@ function void AchievementsPlus.TextManager.basic(s16 px, s16 py, string text, u8
 	{
 		string character = getStringFromHash(substring(text, A, 0x01))
 		
-		if (character == "^")
+		if (character == "\n")
 		{
 			textWidth = 0x00
 			py += AchievementsPlus.TextManager.getTextWidth("   ", font, format, 0x00)
@@ -178,7 +178,7 @@ function void AchievementsPlus.TextManager.basic(s16 px, s16 py, string text, u8
 		
 		character = AchievementsPlus.TextManager.getFormated(character, font, format)
 		
-		if (character != "^")
+		if (character != "\n")
 		{
 			AchievementsPlus.TextManager.renderCharacter(px, py, character, font, tintColor, renderQueue, textWidth)
 			textWidth += AchievementsPlus.TextManager.getCharacterWidth(character, font) + spacing
@@ -209,7 +209,7 @@ function s32 AchievementsPlus.TextManager.getTextWidth(string text, u8 font, u8 
 	{
 		string character = getStringFromHash(substring(text, A, 0x01))
 		
-		if (character == "^")
+		if (character == "\n")
 			 textWidth = 0x00
 		
 		character = AchievementsPlus.TextManager.getFormated(character, font, format)
@@ -369,7 +369,7 @@ function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
 			return 0x01
 		else if (char == "(" || char == ")" || char == "," || char == ";" || char == "[" || char == "]" || char == "`" || char == "1")
 			return 0x02
-		else if (char == " " || char == "\"" || char == "$" || char == "*" || char == "+" || char == "-" || char == "<" || char == "=" || char == ">" || char == "^" || char == "{" || char == "}" || char == "j" || char == "t")
+		else if (char == " " || char == "\"" || char == "$" || char == "*" || char == "+" || char == "-" || char == "<" || char == "=" || char == ">" || char == "\n" || char == "{" || char == "}" || char == "j" || char == "t")
 			return 0x03
 		else if (char == "#" || char == "@" || char == "M" || char == "O" || char == "Q" || char == "T" || char == "V" || char == "W" || char == "X" || char == "Y" || char == "U" || char == "m" || char == "v" || char == "w" || char == "x")
 			return 0x05
@@ -413,4 +413,4 @@ function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
 	return 0x00
 }
 
-// - Text Manager v3.0
+// - Text Manager v3.1

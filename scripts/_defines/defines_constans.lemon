@@ -3,19 +3,19 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Fonts
-constant u8 FONT_OXYTINY	= 0x01
-constant u8 FONT_OXYSMALL	= 0x02
-constant u8 FONT_SMALLFONT	= 0x04
+constant u8 FONT_OXYTINY					= 0x01
+constant u8 FONT_OXYSMALL					= 0x02
+constant u8 FONT_SMALLFONT					= 0x04
 
 // Text formating
-constant u8 FORMAT_NONE	= 0x01
-constant u8 FORMAT_UPPERCASE	= 0x02
-constant u8 FORMAT_LOWERCASE	= 0x04
+constant u8 FORMAT_NONE						= 0x01
+constant u8 FORMAT_UPPERCASE				= 0x02
+constant u8 FORMAT_LOWERCASE				= 0x04
 
 // Text alignment
-constant u8 ALIGN_LEFT	= 0x01
-constant u8 ALIGN_CENTER	= 0x02
-constant u8 ALIGN_RIGHT	= 0x04
+constant u8 ALIGN_LEFT						= 0x01
+constant u8 ALIGN_CENTER					= 0x02
+constant u8 ALIGN_RIGHT						= 0x04
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -23,11 +23,11 @@ constant u8 ALIGN_RIGHT	= 0x04
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Achievements flags
-constant u32 FLAG_COMPLETE	= 0xa00000
-constant u32 FLAG_TOAST_SHOWN	= 0xf00000
+constant u32 FLAG_COMPLETE					= 0xa00000
+constant u32 FLAG_TOAST_SHOWN				= 0xf00000
 
 // Rewards flags
-constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
+constant u32 FLAG_REWARD_CLAIMED			= 0x0f0000
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -35,32 +35,32 @@ constant u32 FLAG_REWARD_CLAIMED	= 0x0f0000
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 // Competition time
-constant u8 COMPETITION_MINUTES	= 0x01
-constant u8 COMPETITION_SECONDS	= 0x02
-constant u8 COMPETITION_DECIMALS	= 0x04
+constant u8 COMPETITION_MINUTES				= 0x01
+constant u8 COMPETITION_SECONDS				= 0x02
+constant u8 COMPETITION_DECIMALS			= 0x04
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Popups
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u8 POPUP_OPTIONS_YOU_ARE_SURE	= 0x01
-constant u8 POPUP_DEBUG_MODE_ENABLED	= 0x02
-constant u8 POPUP_VIA_LEVEL_SELECT	= 0x03
-constant u8 POPUP_WALL_UNLOCK	= 0x04
-constant u8 POPUP_NOT_ENOUGH_COINS	= 0x05
-constant u8 POPUP_OUTDATED_VERSION	= 0x06
-constant u8 POPUP_ACHIEVEMENT_GUIDE	= 0x07
+constant u8 POPUP_OPTIONS_YOU_ARE_SURE		= 0x01
+constant u8 POPUP_DEBUG_MODE_ENABLED		= 0x02
+constant u8 POPUP_VIA_LEVEL_SELECT			= 0x03
+constant u8 POPUP_WALL_UNLOCK				= 0x04
+constant u8 POPUP_NOT_ENOUGH_COINS			= 0x05
+constant u8 POPUP_OUTDATED_VERSION			= 0x06
+constant u8 POPUP_ACHIEVEMENT_GUIDE			= 0x07
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER	= 0x22071700
-constant string ACHIEVEMENTS_PLUS_BUILD_STRING	= "v22.07.17.0"
+constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER			= 0x22072900
+constant string ACHIEVEMENTS_PLUS_BUILD_STRING		= "v22.07.29.0"
 
-constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "RELEASE CANDIDATE"
+constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT		= "RELEASE CANDIDATE"
 // Variants	-> "DEV", "BETA", "PRE RELEASE", "RELEASE CANDIDATE", "RELEASE"
 
 
@@ -68,9 +68,9 @@ constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT	= "RELEASE CANDIDATE"
 // Audio
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant string MUSIC_MENU_ORIGINSTHEME	= "music_origins_menuMainTheme"
-constant string SFX_MENU_BACKBUTTON	= "sfx_2013_menuBackButton"
-constant string SFX_MENU_RESUME	= "sfx_2013_menuResume"
-constant string SFX_MENU_SELECT2	= "sfx_2013_menuSelect"
-constant string SFX_MENU_SELECT	= "sfx_origins_menuSelect"
-constant string SFX_MENU_ACCEPT	= "sfx_mania_menuAccept"
+constant string MUSIC_MENU_ORIGINSTHEME		= "music_origins_menuMainTheme"
+constant string SFX_MENU_BACKBUTTON			= "sfx_2013_menuBackButton"
+constant string SFX_MENU_RESUME				= "sfx_2013_menuResume"
+constant string SFX_MENU_SELECT2			= "sfx_2013_menuSelect"
+constant string SFX_MENU_SELECT				= "sfx_origins_menuSelect"
+constant string SFX_MENU_ACCEPT				= "sfx_mania_menuAccept"

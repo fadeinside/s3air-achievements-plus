@@ -88,8 +88,7 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 		Renderer.drawCustomSprite("menu_background_tapeBlue2", px, py, 0x00, 0x00, 0xf000)
 		py += 18
 		
-		u16 tempValue0 = 0x08 + (getScreenExtend() - 40) / 0x02
-		
+		u16 tempValue0 = 0x08 + max(s16(getScreenExtend() - 40), 0x00) / 0x02
 		string tempValue1 = achievementsplus.options.tempValue3 == 0x00 ? "All achievements" : (achievementsplus.options.tempValue3 == 0x01 ? "Retro only" : (achievementsplus.options.tempValue3 == 0x02 ? "Community only" : "Premium only"))
 		AchievementsPlus.TextManager.drawCenterMenuButton(px + tempValue0, py, "Delete achievements data", FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, ALIGN_LEFT, 0x01, 0xfffffff0, 0xf000, achievementsplus.options.tempValue1, 0x00, tempValue1)
 		py += 18

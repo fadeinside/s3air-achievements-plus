@@ -32,7 +32,7 @@ function string AchievementsPlus.GuidesManager.getGuideDetail(u16 achievementID,
 	//	else if (page == 0x02)	// Second page
 	//	{
 	//		if (parse == 0x00)
-	//			return "..is a platform game developed by Sonic Team and published by Sega for the Sega Genesis.^^Players control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik,..."
+	//			return "..is a platform game developed by Sonic Team and published by Sega for the Sega Genesis.\n\nPlayers control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik,..."
 	//		else if (parse == 0x01)
 	//			return "menu_thumb_guideMenu_90x90placeholder"
 	//		else if (parse == 0x02)
@@ -41,7 +41,7 @@ function string AchievementsPlus.GuidesManager.getGuideDetail(u16 achievementID,
 	//	else if (page == 0x03)	// Third page
 	//	{
 	//		if (parse == 0x00)
-	//			return "...a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds. ^^Players control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik, a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds."
+	//			return "...a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds.\n\nPlayers control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik, a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds."
 	//		else if (parse == 0x01)
 	//			return ""
 	//		else if (parse == 0x02)

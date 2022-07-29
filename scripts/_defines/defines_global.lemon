@@ -1,119 +1,119 @@
 // Menus buttons
-global u8 achievementsplus.buttons.tempValue0	// Used in the animation of the trace of the achievement button
-global s8 achievementsplus.buttons.tempValue1	// Used in the animation of the achievement button arrow
-global u8 achievementsplus.buttons.tempValue2	// Used in the animation of the trace of the achievement button
-global s8 achievementsplus.buttons.tempValue3	// Used in the animation of the achievement button arrow
-global u8 achievementsplus.buttons.tempValue4	// Sets the current hold position
+global u8 achievementsplus.buttons.tempValue0			// Used in the animation of the trace of the achievement button
+global s8 achievementsplus.buttons.tempValue1			// Used in the animation of the achievement button arrow
+global u8 achievementsplus.buttons.tempValue2			// Used in the animation of the trace of the achievement button
+global s8 achievementsplus.buttons.tempValue3			// Used in the animation of the achievement button arrow
+global u8 achievementsplus.buttons.tempValue4			// Sets the current hold position
 
 // Scrolling stuff	
-global u16 achievementsplus.scrollList.tempValue0	// Sets the current scroll position in a sorted achievements list 
-global u16 achievementsplus.scrollList.tempValue1	// Sets the current offset limit of the selected button (achieevement) in a sorted achievements list 
-global u8 achievementsplus.scrollList.tempValue2	// Timer before moving on to the next button (achievement) in a sorted achievements list 
+global u16 achievementsplus.scrollList.tempValue0		// Sets the current scroll position in a sorted achievements list 
+global u16 achievementsplus.scrollList.tempValue1		// Sets the current offset limit of the selected button (achieevement) in a sorted achievements list 
+global u8 achievementsplus.scrollList.tempValue2		// Timer before moving on to the next button (achievement) in a sorted achievements list 
 
 // Achievements
 global u16 achievementsplus.achievements.buttonselected	// The currently active button in the Achievements menu
-global u8 achievementsplus.achievements.tabselected	// The currently active tab in the Achievements menu
+global u8 achievementsplus.achievements.tabselected		// The currently active tab in the Achievements menu
 
 // Options
-global u16 achievementsplus.options.tempValue0	// The currently active button in the Options menu (List)
-global u16 achievementsplus.options.tempValue1	// The currently active button in the Options menu (Content)
-global u8 achievementsplus.options.tempValue2	// Set when the detail block is currently active
-global u16 achievementsplus.options.tempValue3	// The currently active carusel button in the Options menu (Content)
-global u16 achievementsplus.options.tempValue4	// Sets total buttons for the detail panel in the Options menu
-global u16 achievementsplus.options.tempValue5	// Sets total carusel buttons for the detail panel in the Options menu
+global u16 achievementsplus.options.tempValue0			// The currently active button in the Options menu (List)
+global u16 achievementsplus.options.tempValue1			// The currently active button in the Options menu (Content)
+global u8 achievementsplus.options.tempValue2			// Set when the detail block is currently active
+global u16 achievementsplus.options.tempValue3			// The currently active carusel button in the Options menu (Content)
+global u16 achievementsplus.options.tempValue4			// Sets total buttons for the detail panel in the Options menu
+global u16 achievementsplus.options.tempValue5			// Sets total carusel buttons for the detail panel in the Options menu
 
 // Tabs panel
-global u16 achievementsplus.tabsPanel.tempValue0	// Total number of completed achievements in the first tab (Sonic 3 A.I.R achievements)
-global u16 achievementsplus.tabsPanel.tempValue1	// Total number of completed achievements in the second tab (retroachievements.org achievements)
-global u16 achievementsplus.tabsPanel.tempValue2	// Total number of completed achievements in the third tab (Community achievements)
-global u16 achievementsplus.tabsPanel.tempValue3	// Total number of achievements in the first tab (Sonic 3 A.I.R achievements)
-global u16 achievementsplus.tabsPanel.tempValue4	// Total number of achievements in the second tab (retroachievements.org achievements)
-global u16 achievementsplus.tabsPanel.tempValue5	// Total number of achievements in the third tab (Community achievements)
+global u16 achievementsplus.tabsPanel.tempValue0		// Total number of completed achievements in the first tab (Sonic 3 A.I.R achievements)
+global u16 achievementsplus.tabsPanel.tempValue1		// Total number of completed achievements in the second tab (retroachievements.org achievements)
+global u16 achievementsplus.tabsPanel.tempValue2		// Total number of completed achievements in the third tab (Community achievements)
+global u16 achievementsplus.tabsPanel.tempValue3		// Total number of achievements in the first tab (Sonic 3 A.I.R achievements)
+global u16 achievementsplus.tabsPanel.tempValue4		// Total number of achievements in the second tab (retroachievements.org achievements)
+global u16 achievementsplus.tabsPanel.tempValue5		// Total number of achievements in the third tab (Community achievements)
 
-global u16 achievementsplus.tabsPanel.tempValue6	// Total number of achievements from which you need to take the reward in the first tab (Sonic 3 A.I.R achievements)
-global u16 achievementsplus.tabsPanel.tempValue7	// Total number of achievements from which you need to take the reward in the second tab (retroachievements.org achievements)
-global u16 achievementsplus.tabsPanel.tempValue8	// Total number of achievements from which you need to take the reward in the third tab (Community achievements)
+global u16 achievementsplus.tabsPanel.tempValue6		// Total number of achievements from which you need to take the reward in the first tab (Sonic 3 A.I.R achievements)
+global u16 achievementsplus.tabsPanel.tempValue7		// Total number of achievements from which you need to take the reward in the second tab (retroachievements.org achievements)
+global u16 achievementsplus.tabsPanel.tempValue8		// Total number of achievements from which you need to take the reward in the third tab (Community achievements)
 
-global u16 achievementsplus.tabsPanel.tempValue9	// Limit for arrow control keys animation
-global u8 achievementsplus.tabsPanel.tempValue10	// Used in arrow control keys animation
+global u16 achievementsplus.tabsPanel.tempValue9		// Limit for arrow control keys animation
+global u8 achievementsplus.tabsPanel.tempValue10		// Used in arrow control keys animation
 
-global u8 achievementsplus.tabsPanel.tempValue11	// Used in the animation of the trace of the tab button
-global u8 achievementsplus.tabsPanel.tempValue12	// Used in the animation of the trace of the tab button
-global u8 achievementsplus.tabsPanel.tempValue13	// Sets the ID of the previous button
+global u8 achievementsplus.tabsPanel.tempValue11		// Used in the animation of the trace of the tab button
+global u8 achievementsplus.tabsPanel.tempValue12		// Used in the animation of the trace of the tab button
+global u8 achievementsplus.tabsPanel.tempValue13		// Sets the ID of the previous button
 
-global u16 achievementsplus.tabsPanel.tempValue14	// Total number of completed achievements in fourth tab (Premium achievements)
-global u16 achievementsplus.tabsPanel.tempValue17	// Total number of achievements in the fourth tab (Premium achievements)
-global u16 achievementsplus.tabsPanel.tempValue20	// Total number of achievements from which you need to take the reward in the third tab (Premium achievements)
+global u16 achievementsplus.tabsPanel.tempValue14		// Total number of completed achievements in fourth tab (Premium achievements)
+global u16 achievementsplus.tabsPanel.tempValue17		// Total number of achievements in the fourth tab (Premium achievements)
+global u16 achievementsplus.tabsPanel.tempValue20		// Total number of achievements from which you need to take the reward in the third tab (Premium achievements)
 
 // Music
-global u8 achievementsplus.menuMusic.tempValue0	// Set when music in the menu needs to be restarted
+global u8 achievementsplus.menuMusic.tempValue0			// Set when music in the menu needs to be restarted
 
 // List panel
-global u16 achievementsplus.listPanel.tempValue0	// Sets the start ID for the category of achievements in the menu
-global u16 achievementsplus.listPanel.tempValue1	// Sets the last ID for the category of achievements in the menu
+global u16 achievementsplus.listPanel.tempValue0		// Sets the start ID for the category of achievements in the menu
+global u16 achievementsplus.listPanel.tempValue1		// Sets the last ID for the category of achievements in the menu
 
 // Detail panel
-global string achievementsplus.infoPanel.tempValue0	// Achievement title for the current selected Achievement ID
-global string achievementsplus.infoPanel.tempValue1	// Achievement stars for the current selected Achievement ID
-global string achievementsplus.infoPanel.tempValue2	// Achievement sub-title for the current selected Achievement ID
-global string achievementsplus.infoPanel.tempValue3	// Achievement description for the current selected Achievement ID
-global string achievementsplus.infoPanel.tempValue4	// Achievement thumbnail for the current selected Achievement ID
-global bool achievementsplus.infoPanel.tempValue5	// Sets true when the current selected Achievement ID is complete
-global u8 achievementsplus.infoPanel.tempValue6	// Used for sparkles animation
+global string achievementsplus.infoPanel.tempValue0		// Achievement title for the current selected Achievement ID
+global string achievementsplus.infoPanel.tempValue1		// Achievement stars for the current selected Achievement ID
+global string achievementsplus.infoPanel.tempValue2		// Achievement sub-title for the current selected Achievement ID
+global string achievementsplus.infoPanel.tempValue3		// Achievement description for the current selected Achievement ID
+global string achievementsplus.infoPanel.tempValue4		// Achievement thumbnail for the current selected Achievement ID
+global bool achievementsplus.infoPanel.tempValue5		// Sets true when the current selected Achievement ID is complete
+global u8 achievementsplus.infoPanel.tempValue6			// Used for sparkles animation
 
 // Game stuff
-global u8 achievementsplus.game_mode.tempValue0	// Sets the previous mode ID when navigating to the achievements menu
-global u8 achievementsplus.level_select.tempValue0	// Sets when the game is started via Level select
+global u8 achievementsplus.game_mode.tempValue0			// Sets the previous mode ID when navigating to the achievements menu
+global u8 achievementsplus.level_select.tempValue0		// Sets when the game is started via Level select
 
 // Achievements variables
-global u8 achievementsplus.going_forward.tempValue0	// Check fn00972e() for details
+global u8 achievementsplus.going_forward.tempValue0		// Check fn00972e() for details
 global u8 achievementsplus.gm_shield_counter.tempValue0	// Sets the number of changed shields in the Gumball Machine. Check fn060ece() for details
-global u8 achievementsplus.deathless_dez.tempValue0	// Check InitLevelTiles.DEZBossAct() for details
-global u8 achievementsplus.right_lbz.tempValue0	// Check LevelResults.Update() for details
+global u8 achievementsplus.deathless_dez.tempValue0		// Check InitLevelTiles.DEZBossAct() for details
+global u8 achievementsplus.right_lbz.tempValue0			// Check LevelResults.Update() for details
 global u8 achievementsplus.without_hurt_mgz.tempValue0	// Check LevelResults.Update() for details
 
 // Popup stuff
-global string achievementsplus.popupMenu.tempValue0	// Sets the title for popup
-global u8 achievementsplus.popupMenu.tempValue1	// Sets the ID for popup menu
-global s32 achievementsplus.popupMenu.tempValue2	// Used to animate popup menu
-global s32 achievementsplus.popupMenu.tempValue3	// Used to animate popup menu
-global bool achievementsplus.popupMenu.tempValue4	// Sets true when popup is shown
-global u8 achievementsplus.popupMenu.tempValue5	// Currently selected button in Popup menu 
-global u8 achievementsplus.popupMenu.tempValue6	// Currently selected carusel button in Popup menu 
-global u16 achievementsplus.popupMenu.tempValue7	// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
-global u16 achievementsplus.popupMenu.tempValue8	// Sets the required Coins difference to purchase an item
-global u8 achievementsplus.popupMenu.tempValue9	// Sets the value of the current input
-global u8 achievementsplus.popupMenu.tempValue10	// Sets when a large popup is used
+global string achievementsplus.popupMenu.tempValue0		// Sets the title for popup
+global u8 achievementsplus.popupMenu.tempValue1			// Sets the ID for popup menu
+global s32 achievementsplus.popupMenu.tempValue2		// Used to animate popup menu
+global s32 achievementsplus.popupMenu.tempValue3		// Used to animate popup menu
+global bool achievementsplus.popupMenu.tempValue4		// Sets true when popup is shown
+global u8 achievementsplus.popupMenu.tempValue5			// Currently selected button in Popup menu 
+global u8 achievementsplus.popupMenu.tempValue6			// Currently selected carusel button in Popup menu 
+global u16 achievementsplus.popupMenu.tempValue7		// Sets the flag not to show Debug mode enabled and Game via Level select popup menu
+global u16 achievementsplus.popupMenu.tempValue8		// Sets the required Coins difference to purchase an item
+global u8 achievementsplus.popupMenu.tempValue9			// Sets the value of the current input
+global u8 achievementsplus.popupMenu.tempValue10		// Sets when a large popup is used
 
 // Guide window
-global u8 achievementsplus.guideMenu.tempValue0	// Page counter
-global u8 achievementsplus.guideMenu.tempValue1	// Sets the maximum number of available pages
-global string achievementsplus.guideMenu.tempValue2	// Sets the text of the currently shown Guide
-global string achievementsplus.guideMenu.tempValue3	// Sets the image of the currently shown Guide
-global string achievementsplus.guideMenu.tempValue4	// Sets the template of the currently shown Guide
+global u8 achievementsplus.guideMenu.tempValue0			// Page counter
+global u8 achievementsplus.guideMenu.tempValue1			// Sets the maximum number of available pages
+global string achievementsplus.guideMenu.tempValue2		// Sets the text of the currently shown Guide
+global string achievementsplus.guideMenu.tempValue3		// Sets the image of the currently shown Guide
+global string achievementsplus.guideMenu.tempValue4		// Sets the template of the currently shown Guide
 
 // Toast stuff
-global string achievementsplus.toast.tempValue0	// Sets the title of the achievement of the currently shown toast
-global u16 achievementsplus.toast.tempValue1	// Sets the ID of the achievement of the currently shown toast
-global u8 achievementsplus.toast.tempValue2	// Sets the toast state of the currently shown toast
-global s16 achievementsplus.toast.tempValue3	// Sets the animation frames of the currently shown toast
-global s16 achievementsplus.toast.tempValue4	// Sets the waiting frames of the currently shown toast
+global string achievementsplus.toast.tempValue0			// Sets the title of the achievement of the currently shown toast
+global u16 achievementsplus.toast.tempValue1			// Sets the ID of the achievement of the currently shown toast
+global u8 achievementsplus.toast.tempValue2				// Sets the toast state of the currently shown toast
+global s16 achievementsplus.toast.tempValue3			// Sets the animation frames of the currently shown toast
+global s16 achievementsplus.toast.tempValue4			// Sets the waiting frames of the currently shown toast
 
 // Coin rewards
-global s32 achievementsplus.coinRewards.tempValue0	// Reward amount for the currently selected Achievement ID
-global s32 achievementsplus.coinRewards.tempValue1	// Backup value of achievementsplus.coinRewards.tempValue0
-global u8 achievementsplus.coinRewards.tempValue2	// Set to true when a reward is claimed
-global u8 achievementsplus.coinRewards.tempValue3	// Bonus reward amount for the currently selected Achievement ID
+global s32 achievementsplus.coinRewards.tempValue0		// Reward amount for the currently selected Achievement ID
+global s32 achievementsplus.coinRewards.tempValue1		// Backup value of achievementsplus.coinRewards.tempValue0
+global u8 achievementsplus.coinRewards.tempValue2		// Set to true when a reward is claimed
+global u8 achievementsplus.coinRewards.tempValue3		// Bonus reward amount for the currently selected Achievement ID
 
 // Achievement sort
 global bool achievementsplus.achievements.sortNeedUpdate	// Sets to true when sorted achievements list data needs to be updated
 global u16 achievementsplus.achievements.firstButton	// Sets the ID of the first button (first achievement) in a sorted achievements list
-global u16 achievementsplus.achievements.lastButton	// Sets the ID of the last button (last achievement) in a sorted achievements list
-global u16 achievementsplus.achievements.nextButton	// Sets the ID of the next button (next achievement) in a sorted achievements list
-global u16 achievementsplus.achievements.preButton	// Sets the ID of the previous button (previous achievement) in a sorted achievements list
+global u16 achievementsplus.achievements.lastButton		// Sets the ID of the last button (last achievement) in a sorted achievements list
+global u16 achievementsplus.achievements.nextButton		// Sets the ID of the next button (next achievement) in a sorted achievements list
+global u16 achievementsplus.achievements.preButton		// Sets the ID of the previous button (previous achievement) in a sorted achievements list
 global u16 achievementsplus.achievements.totalButtons	// Sets the total number of available buttons (achievements) in a sorted achievements list
 
 // Mod stuff
-global u8 achievementsplus.tempValue0	// Sets when you are using an outdated version of the mod
-global u8 achievementsplus.tempValue1	// Sets when Tools mod is active
-global u8 achievementsplus.tempValue2	// Sets when Premium mod is active
+global u8 achievementsplus.tempValue0					// Sets when you are using an outdated version of the mod
+global u8 achievementsplus.tempValue1					// Sets when Tools mod is active
+global u8 achievementsplus.tempValue2					// Sets when Premium mod is active
