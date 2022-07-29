@@ -156,6 +156,7 @@ function void AchievementsPlus.resetVars()
 //@ Original function taken from sonic3air_dev/scripts/standalone/standalone.lemon
 function void AchievementsPlus.waitForNextFrame()
 {
+	AchievementsPlus.BlurManager.update()   
 	AchievementsPlus.AchivementsManager.update()
 	
 	// V-Int

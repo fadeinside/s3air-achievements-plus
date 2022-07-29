@@ -1,0 +1,88 @@
+function void AchievementsPlus.BlurManager.update()
+{
+	Renderer.enableDefaultPlane(0x01, false)
+    Renderer.enableDefaultPlane(0x03, false)
+    
+    Renderer.setupPlane(0x00, 0x00, getScreenWidth(), getScreenHeight(), 0x01, 0x01, 0x1000)
+    Renderer.setupPlane(0x00, 0x00, getScreenWidth(), getScreenHeight(), 0x11, 0x03, 0x1000)
+}
+
+// Returns a reduced renderQueue to a blur layer.
+function u16 AchievementsPlus.BlurManager.renderQueueBlur(u16 renderQueue)
+{
+	if (!achievementsplus.popupMenu.tempValue4 || renderQueue >= 0xfff0)
+		return renderQueue
+	
+	renderQueue /= 0x09
+	
+	if (renderQueue >= 0x1800)
+		renderQueue = 0x17ff
+	
+	// Return the value
+	return renderQueue
+}
+
+//@ Function taken from sonic3air_dev/scripts/standalone/rendering/renderhooks.lemon
+function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+}
+
+function void Renderer.drawCustomSprite(u64 key, s16 px, s16 py, u8 atex, u8 flags, u16 renderQueue)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	base.Renderer.drawCustomSprite(key, px, py, atex, flags, renderQueue)
+}
+
+function void Renderer.drawCustomSprite(u64 key, s16 px, s16 py, u8 atex, u8 flags, u16 renderQueue, u8 angle, u8 alpha)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	base.Renderer.drawCustomSprite(key, px, py, atex, flags, renderQueue, angle, alpha)
+}
+
+function void Renderer.drawCustomSpriteTinted(u64 key, s16 px, s16 py, u8 atex, u8 flags, u16 renderQueue, u8 angle, u32 tintColor, s32 scale)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	base.Renderer.drawCustomSpriteTinted(key, px, py, atex, flags, renderQueue, angle, tintColor, scale)
+}
+
+function void Renderer.drawCustomSpriteTransformed(u64 key, s16 px, s16 py, u8 atex, u8 flags, u16 renderQueue, u32 tintColor, s32 transform11, s32 transform12, s32 transform21, s32 transform22)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	base.Renderer.drawCustomSpriteTransformed(key, px, py, atex, flags, renderQueue, tintColor, transform11, transform12, transform21, transform22)
+}
+
+function bool Standalone.onDrawVdpSprite(s16 px, s16 py, u8 size, u16 index, u16 renderQueue)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	return base.Standalone.onDrawVdpSprite(px, py, size, index, renderQueue)
+}
+
+function bool Standalone.onDrawVdpSpriteCompound(s16 px, s16 py, u8 size, u16 index, u16 renderQueue, u8 spriteCounter)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	return base.Standalone.onDrawVdpSpriteCompound(px, py, size, index, renderQueue, spriteCounter)
+}
+
+function void Renderer.drawVdpSprite(s16 px, s16 py, u8 encodedSize, u16 patternIndex, u16 renderQueue)
+{
+	renderQueue = AchievementsPlus.BlurManager.renderQueueBlur(renderQueue)
+	
+	// Call the base function
+	base.Renderer.drawVdpSprite(px, py, encodedSize, patternIndex, renderQueue)
+}
