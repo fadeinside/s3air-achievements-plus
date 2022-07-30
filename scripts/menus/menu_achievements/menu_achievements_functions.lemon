@@ -381,7 +381,7 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	
 	py += 10
 	px += 71
-	string tempValue1 = !achievementsplus.infoPanel.tempValue5 ? "Unavailable" : (achievementsplus.coinRewards.tempValue0 == 0x00 ? "Claimed!" : "Press START to Claim")
+	string tempValue1 = !achievementsplus.infoPanel.tempValue5 ? "Reward unavailable" : (achievementsplus.coinRewards.tempValue0 == 0x00 ? "Claimed!" : "Press START to Claim")
 	if (achievementsplus.coinRewards.tempValue2)
 		tempValue1 = stringformat("Claiming %d..", achievementsplus.coinRewards.tempValue0)
 	AchievementsPlus.TextManager.drawTextWithShadow(px, py, tempValue1, FONT_OXYTINY, FORMAT_NONE, ALIGN_CENTER, 0x01, 0xf002)
