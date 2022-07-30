@@ -369,7 +369,7 @@ function u8 AchievementsPlus.TextManager.getCharacterWidth(string char, u8 font)
 			return 0x01
 		else if (char == "(" || char == ")" || char == "," || char == ";" || char == "[" || char == "]" || char == "`" || char == "1")
 			return 0x02
-		else if (char == " " || char == "\"" || char == "$" || char == "*" || char == "+" || char == "-" || char == "<" || char == "=" || char == ">" || char == "\n" || char == "{" || char == "}" || char == "j" || char == "t")
+		else if (char == " " || char == "\"" || char == "$" || char == "*" || char == "+" || char == "-" || char == "<" || char == "=" || char == ">" || char == "^" || char == "{" || char == "}" || char == "j" || char == "t")
 			return 0x03
 		else if (char == "#" || char == "@" || char == "M" || char == "O" || char == "Q" || char == "T" || char == "V" || char == "W" || char == "X" || char == "Y" || char == "U" || char == "m" || char == "v" || char == "w" || char == "x")
 			return 0x05

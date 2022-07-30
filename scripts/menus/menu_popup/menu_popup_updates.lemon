@@ -200,7 +200,7 @@ function void AchievementsPlus.Menu.popup.updateControl()
 		return
 	}
 	
-	// Content for the hyperlink menu
+	// Control for the hyperlink menu
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_HYPER_LINKS)
 	{
 		// Close popup
