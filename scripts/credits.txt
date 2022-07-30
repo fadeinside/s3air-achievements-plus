@@ -7,6 +7,18 @@ SPECIAL THANKS
  -> Thanks to everyone who joined the beta testing and followed the thread on the Sonic 3 A.I.R Community server in Discord.
 
  -> Thank you for downloading and using this mod!
+ 
+ 
+LINKS
+
+ -> Sonic Hacking Contest: 
+	https://shc.zone/
+
+ -> Gamebanana mod-page:
+	https://gamebanana.com/mods/392594/
+
+ -> GitHub repository:
+	https://github.com/fadeinside/s3air-achievements-plus/
 
 
 MODS LINKS

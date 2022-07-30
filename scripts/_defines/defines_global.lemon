@@ -21,6 +21,8 @@ global u8 achievementsplus.options.tempValue2			// Set when the detail block is 
 global u16 achievementsplus.options.tempValue3			// The currently active carusel button in the Options menu (Content)
 global u16 achievementsplus.options.tempValue4			// Sets total buttons for the detail panel in the Options menu
 global u16 achievementsplus.options.tempValue5			// Sets total carusel buttons for the detail panel in the Options menu
+global u8 achievementsplus.options.tempValue6			// The currently active page in the Options menu (Content)
+global u8 achievementsplus.options.tempValue7			// The total pages in the Options menu (Content)
 
 // Tabs panel
 global u16 achievementsplus.tabsPanel.tempValue0		// Total number of completed achievements in the first tab (Sonic 3 A.I.R achievements)

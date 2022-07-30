@@ -4,7 +4,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 	// Back to achievements menu
 	if (control.pad1.pressed & CONTROL_B)
 	{
-		Audio.playAudio(SFX_MENU_SELECT2, AudioContext.CONTEXT_SOUND) 
+		Audio.playAudio(SFX_MENU_SELECT2, AudioContext.CONTEXT_SOUND)
 		
 		if (achievementsplus.options.tempValue2)
 		{
@@ -18,17 +18,14 @@ function void AchievementsPlus.Menu.options.updateControl()
 			achievementsplus.options.tempValue2 = false
 		}
 		else
+		{
 			global.game_mode = 0x9a
+		}
 	}
 	
 	// Simple implementation of fast scrolling
 	if (control.pad1.state & CONTROL_DPAD)
 	{
-		// Setup buttons for the carousel
-		achievementsplus.options.tempValue5 = 0x00
-		if (achievementsplus.options.tempValue1 == 0x00 && achievementsplus.options.tempValue0 == 0x00)
-			achievementsplus.options.tempValue5 = achievementsplus.tempValue2 ? 0x03 : 0x02
-		
 		++achievementsplus.scrollList.tempValue2
 		if (achievementsplus.scrollList.tempValue2 >= 30)
 		{
@@ -57,14 +54,12 @@ function void AchievementsPlus.Menu.options.updateControl()
 		if (!achievementsplus.options.tempValue2)
 		{
 			Audio.playAudio(SFX_MENU_ACCEPT, AudioContext.CONTEXT_SOUND)
-			achievementsplus.options.tempValue2 = true
 			
 			achievementsplus.options.tempValue1 = 0x00
-			achievementsplus.options.tempValue4 = 0x00
+			achievementsplus.options.tempValue2 = true
 			
-			// Setup detail panel total buttons
-			if (achievementsplus.options.tempValue0 == 0x00)
-				achievementsplus.options.tempValue4 = 0x01
+			AchievementsPlus.Menu.options.setupCarousel()
+			AchievementsPlus.Menu.options.setupTotalButtons()
 			
 			// Reset some animations for buttons
 			achievementsplus.buttons.tempValue0 = 0x00
@@ -78,14 +73,22 @@ function void AchievementsPlus.Menu.options.updateControl()
 			return
 		}
 		
+		// My Data category
 		if (achievementsplus.options.tempValue0 == 0x00)
 		{
 			if (achievementsplus.options.tempValue1 >= 0x00 && achievementsplus.options.tempValue1 <= 0x01)
 				AchievementsPlus.Menu.popup.show(POPUP_OPTIONS_YOU_ARE_SURE, "You sure?")
 		}
+		
+		// Credits category
+		else if (achievementsplus.options.tempValue0 == 0x01)
+		{
+			if (achievementsplus.options.tempValue1 >= 0x00 && achievementsplus.options.tempValue1 <= 0x02)
+				AchievementsPlus.Menu.popup.show(POPUP_OPTIONS_HYPER_LINKS, "Go to the website")
+		}
 	}
 	
-	// Detail panel is active 
+	// Detail panel is active
 	if (achievementsplus.options.tempValue2)
 	{
 		// Button selection
@@ -111,6 +114,8 @@ function void AchievementsPlus.Menu.options.updateControl()
 					achievementsplus.options.tempValue1 = 0x00
 			}
 			
+			AchievementsPlus.Menu.options.setupCarousel()
+			
 			// Reset some animations for buttons
 			if (achievementsplus.scrollList.tempValue2 < 24)
 			{
@@ -118,11 +123,46 @@ function void AchievementsPlus.Menu.options.updateControl()
 				achievementsplus.buttons.tempValue1 = 0x04
 				achievementsplus.buttons.tempValue2 = 0x00
 				achievementsplus.buttons.tempValue3 = 0x00
-			} 
+			}
+		}
+		
+		// Page selection
+		if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.options.tempValue7 > 0x00)
+		{
+			Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
+			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
+			achievementsplus.achievements.nextButton = achievementsplus.options.tempValue1
+			
+			if (control.pad1.pressed & CONTROL_LEFT)
+			{
+				if (achievementsplus.options.tempValue6 != 0x00)
+					--achievementsplus.options.tempValue6
+				else
+					achievementsplus.options.tempValue6 = achievementsplus.options.tempValue7
+			}
+			
+			else if (control.pad1.pressed & CONTROL_RIGHT)
+			{
+				if (achievementsplus.options.tempValue6 < achievementsplus.options.tempValue7)
+					++achievementsplus.options.tempValue6
+				else
+					achievementsplus.options.tempValue6 = 0x00
+			}
+			
+			AchievementsPlus.Menu.options.setupTotalButtons()
+			
+			if (achievementsplus.options.tempValue4 > 0x00)
+				achievementsplus.options.tempValue1 = 0x00
+			else
+				achievementsplus.options.tempValue1 = 0xa0
+			
+			// Reset some animations for buttons
+			if (achievementsplus.scrollList.tempValue2 < 24)
+				achievementsplus.buttons.tempValue2 = 0x00
 		}
 		
 		// Carusel selection
-		if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.options.tempValue5 > 0x00)
+		else if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT) && achievementsplus.options.tempValue5 > 0x00)
 		{
 			Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
 			achievementsplus.achievements.preButton = achievementsplus.options.tempValue1
@@ -153,7 +193,7 @@ function void AchievementsPlus.Menu.options.updateControl()
 		return
 	}
 	
-	// Button selection
+	// Category selection
 	if (control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN))
 	{
 		Audio.playAudio(SFX_MENU_SELECT, AudioContext.CONTEXT_SOUND)
@@ -176,6 +216,11 @@ function void AchievementsPlus.Menu.options.updateControl()
 				achievementsplus.options.tempValue0 = 0x00
 		}
 		
+		achievementsplus.options.tempValue3 = 0x00
+		achievementsplus.options.tempValue6 = 0x00
+		
+		AchievementsPlus.Menu.options.setupPages()
+		
 		// Reset some animations for buttons
 		if (achievementsplus.scrollList.tempValue2 < 24)
 		{
@@ -183,6 +228,56 @@ function void AchievementsPlus.Menu.options.updateControl()
 			achievementsplus.buttons.tempValue1 = 0x04
 			achievementsplus.buttons.tempValue2 = 0x00
 			achievementsplus.buttons.tempValue3 = 0x00
-		} 
+		}
+	}
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// Sets the available number of pages for a category.
+function void AchievementsPlus.Menu.options.setupPages()
+{
+	achievementsplus.options.tempValue7 = 0x00
+	
+	// My Data category
+	if (achievementsplus.options.tempValue0 == 0x01)
+		achievementsplus.options.tempValue7 = 0x01
+}
+
+
+// Sets the available number of buttons for the detail panel of the selected category.
+function void AchievementsPlus.Menu.options.setupTotalButtons()
+{
+	achievementsplus.options.tempValue4 = 0x00
+	
+	// My Data category
+	if (achievementsplus.options.tempValue0 == 0x00)
+		achievementsplus.options.tempValue4 = 0x01
+	
+	// Credits category
+	else if (achievementsplus.options.tempValue0 == 0x01)
+	{
+		// First page
+		if (achievementsplus.options.tempValue6 == 0x00)
+			achievementsplus.options.tempValue4 = 0x02
+	}
+}
+
+
+// Sets the number of available scrolls for the carousel button.
+function void AchievementsPlus.Menu.options.setupCarousel()
+{
+	achievementsplus.options.tempValue5 = 0x00
+	
+	// My Data category
+	if (achievementsplus.options.tempValue1 == 0x00)
+	{
+		// First button
+		if (achievementsplus.options.tempValue0 == 0x00)
+			achievementsplus.options.tempValue5 = achievementsplus.tempValue2 ? 0x03 : 0x02
 	}
 }

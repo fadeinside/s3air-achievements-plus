@@ -67,6 +67,55 @@ function string AchievementsPlus.GuidesManager.getGuideDetail(u16 achievementID,
 	//	}
 	//}
 	
+	if (achievementID == RETROACHIEVEMENTS_COMPLETE_AIZ)
+	{
+		if (page == 0x01)	// First page
+		{
+			if (parse == 0x00)
+				return "Sonic the Hedgehog..."
+			else if (parse == 0x01)
+				return "menu_thumb_guideMenu_224x44placeholder"
+			else if (parse == 0x02)
+				return "TitleImageAndText"
+		}
+		else if (page == 0x02)	// Second page
+		{
+			if (parse == 0x00)
+				return "..is a platform game developed by Sonic Team and published by Sega for the Sega Genesis.\n\nPlayers control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik,..."
+			else if (parse == 0x01)
+				return "menu_thumb_guideMenu_90x90placeholder"
+			else if (parse == 0x02)
+				return "ImageOnRightAndText"
+		}
+		else if (page == 0x03)	// Third page
+		{
+			if (parse == 0x00)
+				return "...a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds.\n\nPlayers control Sonic the Hedgehog, who can run at supersonic speeds; Sonic sets out on a quest to defeat Dr. Robotnik, a scientist who has imprisoned animals in robots and seeks the powerful Chaos Emeralds."
+			else if (parse == 0x01)
+				return ""
+			else if (parse == 0x02)
+				return "FullTextOnly"
+		}
+		else if (page == 0x04)	// Fourth page
+		{
+			if (parse == 0x00)
+				return "The gameplay involves collecting rings as a form of health, and a simple control scheme, with jumping and attacking controlled by a single button."
+			else if (parse == 0x01)
+				return ""
+			else if (parse == 0x02)
+				return "FullTextOnly"
+		}
+		else if (page == 0x05)	// Five page
+		{
+			if (parse == 0x00)
+				return "Image"
+			else if (parse == 0x01)
+				return "menu_thumb_guideMenu_224x90placeholder"
+			else if (parse == 0x02)
+				return "FullImageOnly"
+		}
+	}
+	
 	// Failsave value
 	return ""
 }

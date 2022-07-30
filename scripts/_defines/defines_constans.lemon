@@ -51,6 +51,7 @@ constant u8 POPUP_WALL_UNLOCK				= 0x04
 constant u8 POPUP_NOT_ENOUGH_COINS			= 0x05
 constant u8 POPUP_OUTDATED_VERSION			= 0x06
 constant u8 POPUP_ACHIEVEMENT_GUIDE			= 0x07
+constant u8 POPUP_OPTIONS_HYPER_LINKS			= 0x08
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //

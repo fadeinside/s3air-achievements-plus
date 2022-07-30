@@ -200,6 +200,24 @@ function void AchievementsPlus.Menu.popup.updateControl()
 		return
 	}
 	
+	// Content for the hyperlink menu
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_HYPER_LINKS)
+	{
+		// Close popup
+		if (control.pad1.pressed & CONTROL_START)
+		{
+			SaveZoneAct.SaveIcon.show()
+			AchievementsPlus.Menu.popup.close()
+		}
+		
+		// Close popup
+		if (control.pad1.pressed & CONTROL_B)
+			AchievementsPlus.Menu.popup.close()
+		
+		// Finish the function on this
+		return
+	}
+	
 	// Failsave close popup
 	if (control.pad1.pressed & CONTROL_B)
 		AchievementsPlus.Menu.popup.close()
