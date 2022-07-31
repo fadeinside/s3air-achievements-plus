@@ -1,18 +1,21 @@
 // Main hot-keys rendering function.
 function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text, s16 px, s16 py, u16 renderQueue)
 {
-	// The "menu_hotkey_Start" sprite is larger than the rest, so additional offset is required to render the text
-	s16 tempValue0 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? ((key == "dpadLeft" || key == "dpadRight") ? 0x04 : 0x00) : ((key == "Start") ? 15 : 0x00)
+	// Additional offset to render the text
+	u8 tempValue0 = AchievementsPlus.HotkeysManager.getTextOffset(key)
 	AchievementsPlus.TextManager.drawText(px + 0x0a + tempValue0, py - 0x01, text, FONT_SMALLFONT, FORMAT_UPPERCASE, ALIGN_LEFT, 0x01, renderQueue)
 	
 	// Draw hot-key
-	string tempValue8 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? "menu_hotkey_ps4_" : "menu_hotkey_"
-	Renderer.drawCustomSprite(tempValue8 + key, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	string tempValue8 = AchievementsPlus.HotkeysManager.getHotkeySprite(key)
+	Renderer.drawCustomSprite(tempValue8, px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 	
-	u16 tempValue1 = (SETTING_ACHIEVEPLUS_PS4_HOTKEYS) ? ((key == "dpadLeft" || key == "dpadRight") ? 10 : 0x06) : (tempValue0 ? 21 : 0x07)
+	// Additional offset to render the tape
+	u16 tempValue1 = AchievementsPlus.HotkeysManager.getTapeOffset(key)
+	
+	// Get text width for OpenGL tape rendering
 	s32 tempValue2 = AchievementsPlus.TextManager.getTextWidth(text, FONT_SMALLFONT, FORMAT_UPPERCASE, 0x01) + 0x05
 	
-	// Draw background
+	// Draw OpenGL background
 	if (SETTING_ACHIEVEPLUS_RENDER_METHOD)
 	{
 		Renderer.drawCustomSpriteWithTransform("menu_hotkey_backgroundHold_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00ffffff + s32(min(achievementsplus.buttons.tempValue4 * 0x08, 255)) * 0x1000000, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
@@ -33,4 +36,58 @@ function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text,
 		// Return hot-key width
 		return 60 + max((tempValue2 + 0x08) - 60, 0x00) + tempValue0 + 0x08
 	}
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Support tools
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+
+// The function returns the sprite for the specified key.
+function string AchievementsPlus.HotkeysManager.getHotkeySprite(string key)
+{
+	if (SETTING_ACHIEVEPLUS_PS4_HOTKEYS)
+		return "menu_hotkey_ps4_" + key
+	
+	return "menu_hotkey_" + key
+}
+
+
+// The function returns the text offset for the specified key.
+function u8 AchievementsPlus.HotkeysManager.getTextOffset(string key)
+{
+	if (SETTING_ACHIEVEPLUS_PS4_HOTKEYS)
+	{
+		if (key == "dpadLeft" || key == "dpadRight") 
+			return 0x04
+	}
+	else if (key == "Start")
+		return 15
+	
+	// Fallback value
+	return 0x00
+}
+
+
+// The function returns the tape offset for the specified key.
+function u8 AchievementsPlus.HotkeysManager.getTapeOffset(string key)
+{
+	if (SETTING_ACHIEVEPLUS_PS4_HOTKEYS)
+	{
+		if (key == "dpadLeft" || key == "dpadRight") 
+			return 0x0a
+		else
+			return 0x06
+	}
+	else
+	{
+		if (AchievementsPlus.HotkeysManager.getTextOffset(key) > 0x00)
+			return 21
+		else
+			return 0x07
+	}
+	
+	// Fallback value
+	return 0x00
 }

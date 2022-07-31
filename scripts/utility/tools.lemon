@@ -1,3 +1,17 @@
+// The function returns the transparency of the background of the dimmer for the popup window.
+function u8 AchievementsPlus.getPopupBackgroundAlpha()
+{
+	if (global.game_mode == 0x9a || global.game_mode == 0x9b)
+		return 0x70
+	
+	if (global.game_mode == 0x0c)
+		return 0x70
+	
+	// Not transparent by default
+	return 255
+}
+
+// The function determines what music to play in the menu and when it needs to be restarted.
 function void AchievementsPlus.playMenuMusic()
 {
 	if (SETTING_ACHIEVEPLUS_ORIGINS_MUSIC)

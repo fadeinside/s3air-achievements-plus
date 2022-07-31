@@ -28,8 +28,8 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Delete", px, py, 0xffff)
 		px += tempValue0
 		
-		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Cancel", px, py, 0xffff)
-		px += tempValue2
+		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Cancel", px, py, 0xffff)
+		px += tempValue1
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_DEBUG_MODE_ENABLED)
@@ -37,8 +37,8 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Continue", px, py, 0xffff)
 		px += tempValue0
 		
-		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Main menu", px, py, 0xffff)
-		px += tempValue2
+		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Main menu", px, py, 0xffff)
+		px += tempValue1
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_VIA_LEVEL_SELECT)
@@ -52,8 +52,8 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Yes", px, py, 0xffff)
 		px += tempValue0
 		
-		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "No", px, py, 0xffff)
-		px += tempValue2
+		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "No", px, py, 0xffff)
+		px += tempValue1
 	}
 	
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_NOT_ENOUGH_COINS)
@@ -75,8 +75,8 @@ function void AchievementsPlus.Menu.popup.items.hotkeysPanel(s16 px, s16 py)
 		u16 tempValue0 = AchievementsPlus.HotkeysManager.drawHotkey("Start", "Go", px, py, 0xffff)
 		px += tempValue0
 		
-		u16 tempValue2 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Back", px, py, 0xffff)
-		px += tempValue2
+		u16 tempValue1 = AchievementsPlus.HotkeysManager.drawHotkey("B", "Back", px, py, 0xffff)
+		px += tempValue1
 	}
 }
 
@@ -269,7 +269,7 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 // The function draws the background for the menu.
 function void AchievementsPlus.Menu.popup.background()
 {
-	// Jump-scare animation for background popup
+	// Jump-scare animation for background window
 	{
 		if (achievementsplus.popupMenu.tempValue2 < 0x4700 && !achievementsplus.popupMenu.tempValue3)
 			achievementsplus.popupMenu.tempValue2 += 0x700
@@ -283,26 +283,27 @@ function void AchievementsPlus.Menu.popup.background()
 		}
 	}
 	
-	Renderer.drawCustomSpriteTinted(achievementsplus.popupMenu.tempValue10 ? "menu_popup_background" : "menu_popupSmall_background", getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2))
+	// Draw popup window
+	string tempValue0 = achievementsplus.popupMenu.tempValue10 ? "menu_popup_background" : "menu_popupSmall_background"
+	Renderer.drawCustomSpriteTinted(tempValue0, getScreenWidth() / 0x02, getScreenHeight() / 0x02, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0xffffffff, 0xcc00 + s32(achievementsplus.popupMenu.tempValue2))
+	
+	// Draw background dimmer
+	u8 tempValue1 = AchievementsPlus.getPopupBackgroundAlpha()
+	Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, tempValue1)
 	
 	// Render achievement menu items in the background for popup menu
 	if (global.game_mode == 0x9a && achievementsplus.popupMenu.tempValue1 != POPUP_ACHIEVEMENT_GUIDE)
 	{
-		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0x70)
-		
 		AchievementsPlus.Menu.achievements.items()
 		AchievementsPlus.Menu.achievements.background()
 	}
 	// Render options menu items in the background for popup menu
 	else if (global.game_mode == 0x9b)
 	{
-		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, 0x70)
-		
 		AchievementsPlus.Menu.options.items()
 		AchievementsPlus.Menu.options.background()
 	}
-	// In other cases, just a black background
-	else
+	else if (achievementsplus.popupMenu.tempValue1 == POPUP_ACHIEVEMENT_GUIDE)
 	{
 		// Ping-pong animation for control arrows
 		if (achievementsplus.tabsPanel.tempValue9 <= 0x10 && !achievementsplus.tabsPanel.tempValue10)
@@ -317,8 +318,5 @@ function void AchievementsPlus.Menu.popup.background()
 			if (achievementsplus.tabsPanel.tempValue9 == 0x00)
 				achievementsplus.tabsPanel.tempValue10 = 0x00
 		}
-		
-		u8 alpha = global.game_mode == 0x0c ? 0x70 : 255
-		Renderer.drawCustomSprite("menu_background_5", getScreenWidth() / 0x02, 0x00, 0x00, SPRITE_FLAG_PRIO, 0xffff, 0x00, alpha)
 	}
 }

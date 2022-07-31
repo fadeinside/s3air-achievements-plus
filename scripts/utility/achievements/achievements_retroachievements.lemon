@@ -100,16 +100,16 @@ constant array<string> RETROACHIEVEMENTS_GET_ACHIEVEMENTS_DESCRIPTION =
 	"Win the Jackpot in the Sonic 1 Slot Machine Bonus Game.",
 	"Escape the Pinball Bonus Game.",
 	"Collect five shield gumballs in the Gumball Bonus Stage.",
-	"Get launched off-screen in \nMushroom Hill Zone Act 1.",
-	"While going backwards, get a \nperfect in the first Blue Spheres Special Stage. No pausing!",
-	"Reach Great Eggman Robo without using shields, invincibility and \nsuper forms, and without dying.",
+	"Get launched off-screen in\nMushroom Hill Zone Act 1.",
+	"While going backwards, get a\nperfect in the first Blue Spheres Special Stage. No pausing!",
+	"Reach Great Eggman Robo without using shields, invincibility and\nsuper forms, and without dying.",
 	"Find the ring-filled chasm in Ice Cap Zone Act 2.",
 	"Complete any level with exactly 9 minutes and 59 seconds on the timer.",
 	"Complete Launch Base Zone Act 1 or 2 without pressing left on the d-pad.",
 	"Collect 400 (or more) rings, and keep them until the end of the level.",
 	"Find Hydrocity Zone Act 1's hidden trapezoid of rings.",
-	"Complete Marble Garden Zone Act 1 without taking damage, and \nwithout shields and invincibility.",
-	"Activate cheats. \nNOTE - You cannot obtain other achievements with cheats."
+	"Complete Marble Garden Zone Act 1 without taking damage, and\nwithout shields and invincibility.",
+	"Activate cheats.\nNOTE - You cannot obtain other achievements with cheats."
 }
 
 constant array<string> RETROACHIEVEMENTS_GET_ACHIEVEMENTS_TITLE =
