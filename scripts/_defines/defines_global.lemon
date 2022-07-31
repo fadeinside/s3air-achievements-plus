@@ -88,7 +88,7 @@ global u8 achievementsplus.popupMenu.tempValue9			// Sets the value of the curre
 global u8 achievementsplus.popupMenu.tempValue10		// Sets when a large popup is used
 
 // Guide window
-global u8 achievementsplus.guideMenu.tempValue0			// Page counter
+global u8 achievementsplus.guideMenu.tempValue0			// The currently active page in the Guide window
 global u8 achievementsplus.guideMenu.tempValue1			// Sets the maximum number of available pages
 global string achievementsplus.guideMenu.tempValue2		// Sets the text of the currently shown Guide
 global string achievementsplus.guideMenu.tempValue3		// Sets the image of the currently shown Guide
