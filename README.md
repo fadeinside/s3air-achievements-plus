@@ -6,7 +6,7 @@ New achievements to complete, Rewards for completing, and, Your achievements mad
 
 ## List of features:
 
-* New exciting 53 achievements ported from RETROACHIEVEMENTS.ORG.
+* New exciting 53 achievements ported from <a href="https://retroachievements.org/game/4874/wiki">retroachievements.org</a>.
 
 * Incredibly cool menu, based on the design of the Sonic Origins game collection.
 
@@ -54,7 +54,7 @@ Achievements Plus is happy to provide all the tools and documentation for using 
 
 Any mod that provides Community achievements should be installed above.
 
-For other useful information, check out the <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki">GitHub Wiki</a> page. If you have any questions, please contact the *#modding-discussion* or a separate official thread *#achievements-plus* on the Discord Sonic 3 A.I.R. Community server.
+For other useful information, check out the <a href="https://github.com/fadeinside/s3air-achievements-plus/wiki">GitHub Wiki</a> page. If you have any questions, please contact the *#modding-discussion* or a separate official Achievements Plus thread on the Sonic 3 A.I.R. Community Server.
 
 ## Compatibility notes:
 
@@ -68,5 +68,5 @@ This mod makes changes to some parts of the script of various objects and loadin
 
 ## FAQ:
 
-Q. I noticed a bug, where can I contact?  
+**Q. I noticed a bug, where can I contact?**  
 A. Contact me in the comments of Gamebanana, GitHub issues, or via Discord on the Sonic 3 A.I.R Community server. Try to describe the problem in more detail.
