@@ -58,8 +58,8 @@ constant u8 POPUP_OPTIONS_HYPER_LINKS			= 0x08
 // Mod
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER			= 0x22072900
-constant string ACHIEVEMENTS_PLUS_BUILD_STRING		= "v22.07.29.0"
+constant u32 ACHIEVEMENTS_PLUS_BUILD_NUMBER			= 0x22080700
+constant string ACHIEVEMENTS_PLUS_BUILD_STRING		= "v22.08.07.0"
 
 constant string ACHIEVEMENTS_PLUS_BUILD_VARIANT		= "RELEASE CANDIDATE"
 // Variants	-> "DEV", "BETA", "PRE RELEASE", "RELEASE CANDIDATE", "RELEASE"

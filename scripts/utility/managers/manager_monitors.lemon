@@ -4,7 +4,7 @@ function u64 Monitor.getIconSpriteKey(u8 type)
 {
 	// Coins monitor
 	if (type == 0x26)
-		return "game_monitor_icon_originsCoin_retro"
+		return "game_monitor_icon_originsCoin"
 	
 	// Return the base function
 	return base.Monitor.getIconSpriteKey(type)

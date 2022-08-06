@@ -2,8 +2,7 @@
 	// ----- MONITORS ----- //
 	
 	// Coins monitor
-	"game_monitor_icon_originsCoin_retro": { "File": "game/monitors.png", "Rect": "1,1,16,16", "Center": "8,8" },
-	"game_monitor_icon_originsCoin": { "File": "game/monitors.png", "Rect": "18,1,16,16", "Center": "8,8" },
+	"game_monitor_icon_originsCoin": { "File": "game/monitors.bmp", "Rect": "1,1,16,16", "Center": "8,8" },
 	
 	
 	// ----- WALL OBJECTS ----- //
@@ -11,5 +10,11 @@
 	// Locked wall
 	"game_object_lockedWall": { "File": "game/objects_wall.png", "Rect": "1,1,16,16", "Center": "0,0" },
 	// Unlocked wall
-	"game_object_unlockedWall": { "File": "game/objects_wall.png", "Rect": "18,1,16,16", "Center": "0,0" }
+	"game_object_unlockedWall": { "File": "game/objects_wall.png", "Rect": "18,1,16,16", "Center": "0,0" },
+	
+	
+	// ----- MISSION BLOCK ----- //
+	
+	// Mission block
+	"game_object_missionBlock": { "File": "game/objects_missionBlock.bmp", "Rect": "1,1,32,32", "Center": "16,16" }
 }

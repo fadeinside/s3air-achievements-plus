@@ -56,12 +56,12 @@
 	"menu_hotkey_Start": { "File": "menu/menu_hotkeys.png", "Rect": "57,1,27,14", "Center": "6,7" },
 	
 	// Hot-keys (DPAD)
-	"menu_hotkey_dpadUp": { "File": "menu/menu_hotkeys.png", "Rect": "1,15,13,14", "Center": "6,7" },
+	"menu_hotkey_dpadUp": { "File": "menu/menu_hotkeys.png", "Rect": "1,16,13,14", "Center": "6,7" },
 	"menu_hotkey_dpadRight": { "File": "menu/menu_hotkeys.png", "Rect": "15,16,13,14", "Center": "6,7" },
-	"menu_hotkey_dpadDown": { "File": "menu/menu_hotkeys.png", "Rect": "29,15,13,14", "Center": "6,7" },
-	"menu_hotkey_dpadLeft": { "File": "menu/menu_hotkeys.png", "Rect": "43,15,13,14", "Center": "6,7" },
-	"menu_hotkey_dpadAll": { "File": "menu/menu_hotkeys.png", "Rect": "57,15,13,14", "Center": "6,7" },
-	"menu_hotkey_dpadNone": { "File": "menu/menu_hotkeys.png", "Rect": "71,15,13,14", "Center": "6,7" },
+	"menu_hotkey_dpadDown": { "File": "menu/menu_hotkeys.png", "Rect": "29,16,13,14", "Center": "6,7" },
+	"menu_hotkey_dpadLeft": { "File": "menu/menu_hotkeys.png", "Rect": "43,16,13,14", "Center": "6,7" },
+	"menu_hotkey_dpadAll": { "File": "menu/menu_hotkeys.png", "Rect": "57,16,13,14", "Center": "6,7" },
+	"menu_hotkey_dpadNone": { "File": "menu/menu_hotkeys.png", "Rect": "71,16,13,14", "Center": "6,7" },
 	
 	// Hot-keys ps4 (ABC)
 	"menu_hotkey_ps4_A": { "File": "menu/menu_hotkeys.png", "Rect": "1,44,13,14", "Center": "6,7" },
