@@ -337,6 +337,7 @@ function void AchievementsPlus.Menu.achievements.setupForAchievementsDetail()
 	achievementsplus.infoPanel.tempValue3 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x03)
 	achievementsplus.infoPanel.tempValue4 = AchievementsPlus.AchivementsManager.getAchievementDetail(achievementsplus.achievements.buttonselected, 0x04)
 	achievementsplus.infoPanel.tempValue5 = AchievementsPlus.AchivementsManager.isAchievementComplete(achievementsplus.achievements.buttonselected)
+	achievementsplus.infoPanel.tempValue7 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementsplus.achievements.buttonselected)
 	
 	AchievementsPlus.RewardsManager.setupForCoinRewards()
 	AchievementsPlus.GuidesManager.setupForGuidePage()

@@ -62,6 +62,7 @@ global string achievementsplus.infoPanel.tempValue3		// Achievement description 
 global string achievementsplus.infoPanel.tempValue4		// Achievement thumbnail for the current selected Achievement ID
 global bool achievementsplus.infoPanel.tempValue5		// Sets true when the current selected Achievement ID is complete
 global u8 achievementsplus.infoPanel.tempValue6			// Used for sparkles animation
+global u8 achievementsplus.infoPanel.tempValue7		// Achievement stars for the current selected Achievement ID
 
 // Game stuff
 global u8 achievementsplus.game_mode.tempValue0			// Sets the previous mode ID when navigating to the achievements menu

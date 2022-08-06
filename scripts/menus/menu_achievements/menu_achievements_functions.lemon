@@ -279,11 +279,9 @@ function void AchievementsPlus.Menu.achievements.items.scrollbar(s16 px, s16 py)
 
 
 // The function renders the rating of the specified achievement.
-function void AchievementsPlus.Menu.achievements.items.drawRating(s16 px, s16 py, u16 achievementID, u16 renderQueue)
+function void AchievementsPlus.Menu.achievements.items.drawRating(s16 px, s16 py, u8 value, u16 renderQueue)
 {
-	u8 tempValue0 = AchievementsPlus.AchivementsManager.getDecimalStars(achievementID)
-	
-	for (u8 A = 0x00; A < tempValue0; ++A)
+	for (u8 A = 0x00; A < value; ++A)
 	{
 		Renderer.drawCustomSprite(stringformat("menu_icon_star%d", A + 0x01), px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 		
@@ -291,7 +289,7 @@ function void AchievementsPlus.Menu.achievements.items.drawRating(s16 px, s16 py
 		px += 0x0a
 	}
 	
-	for (u8 A = tempValue0; A < 0x05; ++A)
+	for (u8 A = value; A < 0x05; ++A)
 	{
 		Renderer.drawCustomSprite("menu_icon_star_outline", px, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
 		
@@ -334,7 +332,7 @@ function void AchievementsPlus.Menu.achievements.items.infoPanel(s16 px, s16 py)
 	px -= 77
 	py += 12
 	if (achievementsplus.infoPanel.tempValue0 != "")
-		AchievementsPlus.Menu.achievements.items.drawRating(px, py, achievementsplus.achievements.buttonselected, 0xf001)
+		AchievementsPlus.Menu.achievements.items.drawRating(px, py, achievementsplus.infoPanel.tempValue7, 0xf001)
 	
 	// Achievement title
 	py += 20
@@ -430,7 +428,7 @@ function void AchievementsPlus.Menu.achievements.items.listPanel(s16 px, s16 py)
 				// Achievement rating
 				s16 posX = px + 153
 				s16 posY = py + 0x08
-				AchievementsPlus.Menu.achievements.items.drawRating(posX, posY, A, 0xf001)
+				AchievementsPlus.Menu.achievements.items.drawRating(posX, posY, AchievementsPlus.AchivementsManager.getDecimalStars(A), 0xf001)
 				
 				// Achievement status
 				posY += 0x01
