@@ -258,7 +258,7 @@ function void AchievementsPlus.Menu.popup.items.content(s16 px, s16 py)
 	else if (achievementsplus.popupMenu.tempValue1 == POPUP_OPTIONS_HYPER_LINKS)
 	{
 		string tempValue2 = "Do you really want to go to this website?"
-		string tempValue3 = stringformat("\n\n%s", achievementsplus.options.tempValue1 == 0x00 ? "https://shc.zone/" : (achievementsplus.options.tempValue1 == 0x01 ? "https://gamebanana.com/mods/392594/" : "https://github.com/fadeinside/\ns3air-achievements-plus/" ))
+		string tempValue3 = stringformat("\n\n%s", achievementsplus.options.tempValue1 == 0x00 ? "https://shc.zone/entries/contest2022/623" : (achievementsplus.options.tempValue1 == 0x01 ? "https://gamebanana.com/mods/392594/" : "https://github.com/fadeinside/\ns3air-achievements-plus/" ))
 		
 		string tempValue4 = tempValue2 + tempValue3
 		AchievementsPlus.TextManager.drawTextWithLimit(px, py, tempValue4, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + limit, 0xffff)

@@ -1,0 +1,10 @@
+#if GAMEAPP >= 0x22080600
+
+//@ Original function taken from sonic3air_dev/scripts/standalone/special/shc_splash.lemon
+function bool SHCSplash.shouldShowUpAfterStartup()
+{
+	// The default one just returns false, but this override changes that to true to signal that the SHC splash screen should be shown.
+	return true
+}
+
+#endif

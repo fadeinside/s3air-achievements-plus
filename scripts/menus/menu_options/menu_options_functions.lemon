@@ -107,6 +107,23 @@ function void AchievementsPlus.Menu.options.items.infoPanel.content(s16 px, s16 
 		// First page
 		if (achievementsplus.options.tempValue6 == 0x00)
 		{
+			AchievementsPlus.TextManager.drawText(px, py, "SHC 2022", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000)
+			Renderer.drawCustomSprite("menu_background_tapeBlue2", px, py, 0x00, 0x00, 0xf000)
+			py += 20
+			
+			// SHC field
+			{
+				string text = "Enjoy this event with us! Don't\nforget to leave your feedback :)"
+				s16 lineBreaks = AchievementsPlus.TextManager.drawTextWithLimit_getBreaks(px, text, FONT_OXYTINY, 0x01, px + 160) + 0x01
+				
+				AchievementsPlus.TextManager.drawTextWithLimit(px, py, text, FONT_OXYTINY, FORMAT_NONE, 0x01, 0x002964ff, px + 160, 0xf000)
+				
+				py += 18
+				Renderer.drawCustomSprite("menu_image_shc2022", px + 60 + (getScreenWidth() - px) / 0x02, py - 17, 0x00, 0x00, 0xf000)
+				
+				py += 0x08 * lineBreaks
+			}
+			
 			AchievementsPlus.TextManager.drawText(px, py, "Links", FONT_OXYTINY, FORMAT_NONE, ALIGN_LEFT, 0x01, 0xf000)
 			Renderer.drawCustomSprite("menu_background_tapeBlue2", px, py, 0x00, 0x00, 0xf000)
 			py += 18
