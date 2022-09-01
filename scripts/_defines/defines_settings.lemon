@@ -1,6 +1,4 @@
 // Settings
-global u8 SETTING_ACHIEVEPLUS_RENDER_METHOD		// If set, then hotkeys will use text size to determine the background width, instead of a fixed width if disabled
-
 global u8 SETTING_ACHIEVEPLUS_COINS_HUD			// If set, instead of lives in hud will be shown Coins
 global u8 SETTING_ACHIEVEPLUS_PS4_HOTKEYS		// If set, will use PS4 style for hotkeys
 global u8 SETTING_ACHIEVEPLUS_ORIGINS_MUSIC		// If set, will use origins menu theme, instead of Data Select

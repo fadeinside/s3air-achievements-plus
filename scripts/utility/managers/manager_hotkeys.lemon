@@ -12,30 +12,19 @@ function u16 AchievementsPlus.HotkeysManager.drawHotkey(string key, string text,
 	// Additional offset to render the tape
 	u16 tempValue1 = AchievementsPlus.HotkeysManager.getTapeOffset(key)
 	
-	// Get text width for OpenGL tape rendering
+	// Get text width for tape rendering
 	s32 tempValue2 = AchievementsPlus.TextManager.getTextWidth(text, FONT_SMALLFONT, FORMAT_UPPERCASE, 0x01) + 0x05
 	
-	// Draw OpenGL background
-	if (SETTING_ACHIEVEPLUS_RENDER_METHOD)
-	{
-		Renderer.drawCustomSpriteWithTransform("menu_hotkey_backgroundHold_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00ffffff + s32(min(achievementsplus.buttons.tempValue4 * 0x08, 255)) * 0x1000000, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
-		Renderer.drawCustomSpriteWithTransform("menu_hotkey_background_middle", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0xffffffff, 0x10000 * tempValue2, 0x00, 0x00, 0x10000)
-		
-		px += tempValue2
-		Renderer.drawCustomSprite("menu_hotkey_backgroundHold_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
-		Renderer.drawCustomSprite("menu_hotkey_background_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
-		
-		// Return hot-key width
-		return tempValue2 + 0x08 + tempValue1 + 0x08
-	}
-	else
-	{
-		Renderer.drawCustomSprite("menu_hotkey_backgroundHold", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
-		Renderer.drawCustomSprite("menu_hotkey_background", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
-		
-		// Return hot-key width
-		return 60 + max((tempValue2 + 0x08) - 60, 0x00) + tempValue0 + 0x08
-	}
+	// Draw background
+	Renderer.drawCustomSprite(stringformat("menu_hotkey_backgroundHold_x%d", tempValue2), px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
+	Renderer.drawCustomSprite(stringformat("menu_hotkey_background_x%d", tempValue2), px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	
+	px += tempValue2
+	Renderer.drawCustomSprite("menu_hotkey_backgroundHold_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue, 0x00, min(achievementsplus.buttons.tempValue4 * 0x08, 255))
+	Renderer.drawCustomSprite("menu_hotkey_background_end", px + tempValue1, py, 0x00, SPRITE_FLAG_PRIO, renderQueue)
+	
+	// Return hot-key width
+	return tempValue2 + 0x08 + tempValue1 + 0x08
 }
 
 
@@ -62,8 +51,11 @@ function u8 AchievementsPlus.HotkeysManager.getTextOffset(string key)
 		if (key == "dpadLeft" || key == "dpadRight") 
 			return 0x04
 	}
-	else if (key == "Start")
-		return 15
+	else
+	{
+		if (key == "Start")
+			return 15
+	}
 	
 	// Fallback value
 	return 0x00
@@ -77,15 +69,15 @@ function u8 AchievementsPlus.HotkeysManager.getTapeOffset(string key)
 	{
 		if (key == "dpadLeft" || key == "dpadRight") 
 			return 0x0a
-		else
-			return 0x06
+		
+		return 0x06
 	}
 	else
 	{
 		if (AchievementsPlus.HotkeysManager.getTextOffset(key) > 0x00)
 			return 21
-		else
-			return 0x07
+		
+		return 0x07
 	}
 	
 	// Fallback value
